@@ -13,28 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Windows_App
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Navigation : Page
     {
-        public MainPage()
+        public Navigation()
         {
             this.InitializeComponent();
-        }
-
-        private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavSplitView.IsPaneOpen = !NavSplitView.IsPaneOpen;
-        }
-
-        private void NavPage1StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-
         }
     }
 }
