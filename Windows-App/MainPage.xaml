@@ -8,7 +8,41 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <SplitView x:Name="NavSplitView" IsPaneOpen="True" DisplayMode="CompactOverlay">
+        <SplitView.Pane>
+            <StackPanel Background="Gray">
+                <Button 
+                        x:Name="NavCollapseButton"
+                        FontFamily="Segoe MDL2 Assets" 
+                        Content="&#xE700;" 
+                        Click="navCollapseButton_Click"
+                        Width="50"
+                        Height="50"/>
+                <StackPanel x:Name="NavPage1StackPanel" Orientation="Horizontal" Tapped=""  >
+                    <Button FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE825;"
+                            Width="50"
+                            Height="50"/>
+                    <TextBlock Text="Page 1" FontSize="18" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel  x:Name="NavPage2StackPanel" Orientation="Horizontal" Tapped="NavPage2StackPanel_Tapped"   >
+                    <Button FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE823;"
+                            Width="50"
+                            Height="50"/>
+                    <TextBlock Text="Page 2" FontSize="18" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel  x:Name="NavPage3StackPanel" Orientation="Horizontal" Tapped="NavPage3StackPanel_Tapped"  >
+                    <Button FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE870;"
+                            Width="50"
+                            Height="50"/>
+                    <TextBlock Text="Page 3" FontSize="18" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Frame x:Name="mainFrame"/>
+        </SplitView.Content>
+    </SplitView>
 </Page>

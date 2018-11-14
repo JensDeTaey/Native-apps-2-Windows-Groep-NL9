@@ -26,5 +26,10 @@ namespace Windows_App
         {
             this.InitializeComponent();
         }
+
+        private void navCollapseButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavSplitView.IsPaneOpen = !NavSplitView.IsPaneOpen;
+        }
     }
 }
