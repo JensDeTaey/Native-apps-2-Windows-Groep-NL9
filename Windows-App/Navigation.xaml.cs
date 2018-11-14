@@ -22,9 +22,22 @@ namespace Windows_App
     /// </summary>
     public sealed partial class Navigation : Page
     {
+
+        public SplitView ContainerSplitView { get; set; }
+
         public Navigation()
         {
             this.InitializeComponent();
+        }
+
+        private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContainerSplitView.IsPaneOpen = !ContainerSplitView.IsPaneOpen;
+        }
+
+        private void NavPage1StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }
