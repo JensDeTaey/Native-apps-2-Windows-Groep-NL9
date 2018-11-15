@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -20,20 +21,40 @@ namespace Windows_App
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Navigation : Page
+    public sealed partial class NavigationElement : Page
     {
 
-        public SplitView ContainerSplitView { get; set; }
+        private static SplitView _containerSplitView;
 
-        public Navigation()
+        public static SplitView ContainerSplitView
+        {
+            get { return _containerSplitView; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new Exception("ContainerSplitView mag niet leeg zijn.");
+                }
+                else
+                {
+                    _containerSplitView = value;
+                }
+            }
+        }
+
+        public NavigationElement()
         {
             this.InitializeComponent();
         }
 
+        //Collapsing of parent SplitView
+
         private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
         {
-            ContainerSplitView.IsPaneOpen = !ContainerSplitView.IsPaneOpen;
+            _containerSplitView.IsPaneOpen = !_containerSplitView.IsPaneOpen;
         }
+
+        //Navigation
 
         private void NavPage1StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {

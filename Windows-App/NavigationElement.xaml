@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Windows_App.Navigation"
+    x:Class="Windows_App.NavigationElement"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Windows_App"
