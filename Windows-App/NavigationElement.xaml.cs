@@ -51,6 +51,10 @@ namespace Windows_App
 
         private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
         {
+            if (_containerSplitView == null)
+            {
+                throw new Exception("ContainerSplitView mag niet leeg zijn.");
+            }
             _containerSplitView.IsPaneOpen = !_containerSplitView.IsPaneOpen;
         }
 
