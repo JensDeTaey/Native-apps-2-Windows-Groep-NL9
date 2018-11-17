@@ -6,9 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Name="myWindow"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactOverlay">
+        <SplitView.Pane>
+            <local:NavigationElement />
+        </SplitView.Pane>
+        <SplitView.Content>
+            <StackPanel>
+            </StackPanel>
+        </SplitView.Content>
+    </SplitView>
 </Page>
