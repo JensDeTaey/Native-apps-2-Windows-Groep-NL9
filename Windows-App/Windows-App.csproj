@@ -98,6 +98,11 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Event.cs" />
+    <Compile Include="Model\Company.cs" />
+    <Compile Include="Model\Promotion.cs" />
+    <Compile Include="Model\Establishment.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="NavigationElement.xaml.cs">
       <DependentUpon>NavigationElement.xaml</DependentUpon>
     </Compile>
@@ -139,7 +144,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
     <Folder Include="View\" />
   </ItemGroup>
