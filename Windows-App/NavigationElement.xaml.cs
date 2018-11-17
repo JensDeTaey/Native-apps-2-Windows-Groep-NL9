@@ -24,6 +24,13 @@ namespace Windows_App
     public sealed partial class NavigationElement : Page
     {
 
+        public NavigationElement()
+        {
+            this.InitializeComponent();
+        }
+
+        //Collapsing of parent SplitView
+
         private static SplitView _containerSplitView;
 
         public static SplitView ContainerSplitView
@@ -42,13 +49,6 @@ namespace Windows_App
             }
         }
 
-        public NavigationElement()
-        {
-            this.InitializeComponent();
-        }
-
-        //Collapsing of parent SplitView
-
         private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
         {
             if (_containerSplitView == null)
@@ -60,9 +60,20 @@ namespace Windows_App
 
         //Navigation
 
-        private void NavPage1StackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void NavPageBusinessesStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
         }
+
+        private void NavPagePromotionsStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void NavPageEventsStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
     }
 }
