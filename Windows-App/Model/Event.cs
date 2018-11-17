@@ -8,10 +8,10 @@ namespace Windows_App.Model
 {
     class Event
     {
-        public string Naam { get; set; }
-        public string beschrijving { get; set; }
-        public DateTime BeginDatum { get; set; }
-        public DateTime EindDatum { get; set; }
-        public Image fotoEvenement { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public long PictureEvent { get; set; }
     }
 }

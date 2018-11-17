@@ -15,7 +15,7 @@ namespace Windows_App.Model
         public string PhoneNumber { get; set; }
         public List<Establishment> Establishments { get; set; }
         public string OpeningHours { get; set; }
-        public Image Picture { get; set; }
+        public long Picture { get; set; }
         public List<Promotion> Promotions { get; set; }
         public List<Event> Events { get; set; }
         public int NumberOfSubsribers { get; set; }
