@@ -103,10 +103,20 @@
     <Compile Include="Model\Promotion.cs" />
     <Compile Include="Model\Establishment.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="NavigationElement.xaml.cs">
+    <Compile Include="Navigation\INavigateablePage.cs" />
+    <Compile Include="Navigation\NavigationElement.xaml.cs">
       <DependentUpon>NavigationElement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\BusinessesPage.xaml.cs">
+      <DependentUpon>BusinessesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EventsPage.xaml.cs">
+      <DependentUpon>EventsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PromotionsPage.xaml.cs">
+      <DependentUpon>PromotionsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -133,7 +143,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="NavigationElement.xaml">
+    <Page Include="Navigation\NavigationElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BusinessesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EventsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PromotionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

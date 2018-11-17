@@ -16,21 +16,21 @@
                         Click="NavCollapseButton_Click"
                         Width="50"
                         Height="50"/>
-        <StackPanel x:Name="NavPageBusinessesStackPanel" Orientation="Horizontal"  >
+        <StackPanel x:Name="NavPageBusinessesStackPanel" Orientation="Horizontal" Tapped="NavPageBusinessesStackPanel_Tapped"  >
             <Button FontFamily="Segoe MDL2 Assets" 
                             Content="&#xE913;"
                             Width="50"
                             Height="50"/>
             <TextBlock Text="Ondernemingen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
         </StackPanel>
-        <StackPanel x:Name="NavPagePromotionsStackPanel" Orientation="Horizontal"   >
+        <StackPanel x:Name="NavPagePromotionsStackPanel" Orientation="Horizontal" Tapped="NavPagePromotionsStackPanel_Tapped"   >
             <Button FontFamily="Segoe MDL2 Assets" 
                             Content="&#xE728;"
                             Width="50"
                             Height="50"/>
             <TextBlock Text="Promoties" FontSize="18" VerticalAlignment="Center" Margin="13,0,0,0"/>
         </StackPanel>
-        <StackPanel x:Name="NavPageEventsStackPanel" Orientation="Horizontal"   >
+        <StackPanel x:Name="NavPageEventsStackPanel" Orientation="Horizontal" Tapped="NavPageEventsStackPanel_Tapped"   >
             <Button FontFamily="Segoe MDL2 Assets" 
                             Content="&#xE787;"
                             Width="50"
