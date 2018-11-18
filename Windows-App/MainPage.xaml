@@ -11,7 +11,7 @@
 
     <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
-            <StackPanel Background="Gray">
+            <StackPanel Background="{ThemeResource SystemControlAcrylicWindowBrush}">
                 <Button 
                         x:Name="NavCollapseButton"
                         FontFamily="Segoe MDL2 Assets" 
