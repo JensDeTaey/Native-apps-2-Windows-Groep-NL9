@@ -7,28 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local1="using:Windows_App"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Width="979.5">
 
-                    <StackPanel>
-                        
-        <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel>
-                            <Image Source="../Images/action.jpg" HorizontalAlignment="Left" Width="200" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                        </StackPanel>
+    <StackPanel Margin="0,10,-0.2,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                        <StackPanel Grid.Column = "1" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Stretch">
-                            <TextBlock Text="Action" Margin="0,0,0,20" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
-                            <TextBlock Text="Dit is het adress van de Action" FontSize="16"/>
-                        </StackPanel>
-        </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
@@ -39,35 +21,20 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel>
-                <Image Source="../Images/hema.jpg" HorizontalAlignment="Left" Width="200" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
             </StackPanel>
 
-            <StackPanel Grid.Column = "1" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Stretch">
-                <TextBlock Text="Hema" Margin="0,0,0,20" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
-                <TextBlock Text="Dit is het adress van de Hema" FontSize="16"/>
+            <StackPanel Grid.Column = "1" VerticalAlignment="Center"  >
+                <TextBlock Text="Ikea" Margin="0,0,0,10" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
+                <TextBlock Text="Meubilair" FontSize="16"/>
+                <TextBlock Text="Dit is een korte beschrijving van de Ikea waar je ook lekker kunt gaan eten enzo" FontSize="16" TextAlignment="Left" TextWrapping="Wrap" HorizontalAlignment="Left" Margin="0,0,0,0" Width="562"  />
+                <TextBlock Text="Aantal vestigingen: 1" FontSize="16"  TextWrapping="Wrap" />
             </StackPanel>
         </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel>
-                <Image Source="../Images/xenos.jpeg" HorizontalAlignment="Left" Width="200" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-            </StackPanel>
 
-            <StackPanel Grid.Column = "1" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Stretch">
-                <TextBlock Text="Xenos" Margin="0,0,0,20" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
-                <TextBlock Text="Dit is het adress van de Xenos" FontSize="16"/>
-            </StackPanel>
-        </Grid>
-        
+
     </StackPanel>
-    
 
-                
+
+
 </Page>

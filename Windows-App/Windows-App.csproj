@@ -122,7 +122,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\action.jpg" />
+    <Content Include="Images\gamemania.png" />
     <Content Include="Images\hema.jpg" />
+    <Content Include="Images\ikea.png" />
+    <Content Include="Images\inno.png" />
+    <Content Include="Images\media-markt_logo.jpg" />
     <Content Include="Images\xenos.jpeg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
