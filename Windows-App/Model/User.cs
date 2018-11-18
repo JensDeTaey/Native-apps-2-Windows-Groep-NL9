@@ -9,6 +9,6 @@ namespace Windows_App.Model
     class User
     {
         public string Name { get; set; }
-        public List<Company> Subscription { get; set; }
+        public List<Business> Subscription { get; set; }
     }
 }

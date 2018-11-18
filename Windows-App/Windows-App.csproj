@@ -99,7 +99,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Event.cs" />
-    <Compile Include="Model\Company.cs" />
+    <Compile Include="Model\Business.cs" />
     <Compile Include="Model\Promotion.cs" />
     <Compile Include="Model\Establishment.cs" />
     <Compile Include="Model\User.cs" />
@@ -121,6 +121,9 @@
     <None Include="Windows-App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\action.jpg" />
+    <Content Include="Images\hema.jpg" />
+    <Content Include="Images\xenos.jpeg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

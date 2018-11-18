@@ -9,7 +9,65 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <TextBlock Text="Businesses"/>
+                    <StackPanel>
+                        
+        <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Image Source="../Images/action.jpg" HorizontalAlignment="Left" Width="200" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column = "1" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Stretch">
+                            <TextBlock Text="Action" Margin="0,0,0,20" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
+                            <TextBlock Text="Dit is het adress van de Action" FontSize="16"/>
+                        </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Image Source="../Images/hema.jpg" HorizontalAlignment="Left" Width="200" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column = "1" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Stretch">
+                <TextBlock Text="Hema" Margin="0,0,0,20" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
+                <TextBlock Text="Dit is het adress van de Hema" FontSize="16"/>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <Image Source="../Images/xenos.jpeg" HorizontalAlignment="Left" Width="200" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column = "1" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Stretch">
+                <TextBlock Text="Xenos" Margin="0,0,0,20" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
+                <TextBlock Text="Dit is het adress van de Xenos" FontSize="16"/>
+            </StackPanel>
+        </Grid>
+        
     </StackPanel>
+    
+
+                
 </Page>
