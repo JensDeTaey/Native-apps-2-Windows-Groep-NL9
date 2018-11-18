@@ -9,13 +9,40 @@
     Name="myWindow"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactOverlay">
+    <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
-            <local:NavigationElement />
+            <StackPanel Background="Gray">
+                <Button 
+                        x:Name="NavCollapseButton"
+                        FontFamily="Segoe MDL2 Assets" 
+                        Content="&#xE700;" 
+                        Width="50"
+                        Height="50" Click="NavCollapseButton_Click"/>
+                <StackPanel x:Name="NavPageBusinessesStackPanel" Orientation="Horizontal" Tapped="NavPageBusinessesStackPanel_Tapped"  >
+                    <Button FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE913;"
+                            Width="50"
+                            Height="50"/>
+                    <TextBlock Text="Ondernemingen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel x:Name="NavPagePromotionsStackPanel" Orientation="Horizontal" Tapped="NavPagePromotionsStackPanel_Tapped"   >
+                    <Button FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE728;"
+                            Width="50"
+                            Height="50"/>
+                    <TextBlock Text="Promoties" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+                <StackPanel x:Name="NavPageEventsStackPanel" Orientation="Horizontal" Tapped="NavPageEventsStackPanel_Tapped"   >
+                    <Button FontFamily="Segoe MDL2 Assets" 
+                            Content="&#xE787;"
+                            Width="50"
+                            Height="50"/>
+                    <TextBlock Text="Evenementen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
-            <StackPanel>
-            </StackPanel>
+            <Frame x:Name="mainFrame"/>
         </SplitView.Content>
     </SplitView>
 </Page>

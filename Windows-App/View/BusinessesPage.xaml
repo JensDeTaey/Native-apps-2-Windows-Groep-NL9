@@ -9,15 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <SplitView x:Name="PageSplitView" DisplayMode="CompactOverlay">
-        <SplitView.Pane>
-            <local1:NavigationElement />
-        </SplitView.Pane>
-        <SplitView.Content>
-            <StackPanel>
-                <TextBlock Text="Businesses"/>
-
-            </StackPanel>
-        </SplitView.Content>
-    </SplitView>
+    <StackPanel>
+        <TextBlock Text="Businesses"/>
+    </StackPanel>
 </Page>

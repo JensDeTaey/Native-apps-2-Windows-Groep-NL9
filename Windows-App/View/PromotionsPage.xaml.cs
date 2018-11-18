@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows_App.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -21,15 +20,11 @@ namespace Windows_App.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PromotionsPage : Page, INavigateablePage
+    public sealed partial class PromotionsPage : Page
     {
-        public SplitView ContainerSplitView => PageSplitView;
-
         public PromotionsPage()
         {
             this.InitializeComponent();
-
-            NavigationElement.RegisterCurrentPage(this);
         }
     }
 }
