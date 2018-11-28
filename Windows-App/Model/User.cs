@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Model
 {
-    class User
+    public class User
     {
         public string Name { get; set; }
         public List<Business> Subscription { get; set; }

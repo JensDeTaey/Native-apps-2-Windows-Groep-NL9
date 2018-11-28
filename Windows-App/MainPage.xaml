@@ -9,6 +9,7 @@
     Name="myWindow"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+
     <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
             <StackPanel Background="Gray">

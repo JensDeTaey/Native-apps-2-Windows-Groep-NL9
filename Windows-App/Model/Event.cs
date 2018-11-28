@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Model
 {
-    class Event
+   public class Event
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Model
 {
-    class Promotion
+   public class Promotion
     {
         public string Name { get; set; }
         public string Description { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Model
 {
-    class Business
+    public class Business
     {
         public string Name { get; set; }
         public string Address { get; set; }
