@@ -12,10 +12,15 @@ namespace Windows_App.ViewModel
     public class BusinessesViewModel
     {
         public ObservableCollection<Business> Businesses { get; set; }
+        public ObservableCollection<Establishment> Establishments { get; set; }
         public BusinessesViewModel()
         {
             Businesses = new ObservableCollection<Business>(DummyDataSource.Businesses);
+            Establishments = new ObservableCollection<Establishment>(DummyDataSource.Establishments);
         }
+
+       
+        
     }
 
 }

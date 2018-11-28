@@ -11,7 +11,6 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows_App.ViewModel;
 
@@ -22,17 +21,12 @@ namespace Windows_App.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BusinessesPage : Page
+    public sealed partial class BusinessDetailPage : Page
     {
-        public BusinessesPage()
+        public BusinessDetailPage()
         {
             this.InitializeComponent();
-            this.DataContext = new BusinessesViewModel(); 
-        }
-
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(BusinessDetailPage));
+            this.DataContext = new EstablishementViewModel();
         }
     }
 }

@@ -99,13 +99,19 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Days.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Business.cs" />
+    <Compile Include="Model\OpeningHour.cs" />
     <Compile Include="Model\Promotion.cs" />
     <Compile Include="Model\Establishment.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
+    <Compile Include="ViewModel\EstablishementViewModel.cs" />
+    <Compile Include="View\BusinessDetailPage.xaml.cs">
+      <DependentUpon>BusinessDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BusinessesPage.xaml.cs">
       <DependentUpon>BusinessesPage.xaml</DependentUpon>
     </Compile>
@@ -147,6 +153,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\BusinessDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BusinessesPage.xaml">
       <SubType>Designer</SubType>
