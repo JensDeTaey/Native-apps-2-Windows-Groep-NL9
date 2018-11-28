@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Windows_App.Model
 {
@@ -15,11 +14,10 @@ namespace Windows_App.Model
         public string PhoneNumber { get; set; }
         public List<Establishment> Establishments { get; set; }
         public string OpeningHours { get; set; }
-        public long Picture { get; set; }
+        public BitmapImage Picture { get; set; }
         public List<Promotion> Promotions { get; set; }
         public List<Event> Events { get; set; }
         public int NumberOfSubsribers { get; set; }
         public string LinkWebsite { get; set; }
-
     }
 }

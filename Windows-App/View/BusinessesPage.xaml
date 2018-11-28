@@ -11,12 +11,10 @@
     <Page.Resources>
         <DataTemplate x:Key="SmallScreenTemplate">
             <StackPanel Orientation="Vertical" Margin="2">
-                <StackPanel>
-                    <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                </StackPanel>
+                <Image Grid.Column = "0" Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                 <StackPanel Grid.Column = "1" VerticalAlignment="Center"  >
                     <TextBlock Text="{Binding Name}" Margin="0,0,0,10" HorizontalAlignment="Left" FontSize="24" FontWeight="Bold" VerticalAlignment="Top"/>
-                    <TextBlock Text="Meubilair" FontSize="16"/>
+                    <TextBlock Text="{Binding Category}" FontSize="16"/>
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
@@ -62,6 +60,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
         <ListView x:Name="listViewBusinesses" ItemsSource="{Binding Businesses}" >
         </ListView>
     </Grid>
