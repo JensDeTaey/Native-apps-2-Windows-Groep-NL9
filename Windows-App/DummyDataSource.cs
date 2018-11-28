@@ -17,5 +17,14 @@ namespace Windows_App
             new Business() {Name="Ikea"},
             new Business() {Name="Ikea"}
         };
+        public static List<Establishment> Establishments { get; set; } = new List<Establishment>()
+        {
+            new Establishment() {Name="Ikea Gent"},
+            new Establishment() {Name="Ikea Antwerpen"},
+            new Establishment() {Name="Ikea ergens anders"},
+            new Establishment() {Name="Ikea nog ergens anders"},
+            new Establishment() {Name="Ikea jnezfknzejkf"}
+        };
+
     }
 }

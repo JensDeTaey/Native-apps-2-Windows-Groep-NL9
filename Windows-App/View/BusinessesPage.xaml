@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
     <Page.Resources>
         <DataTemplate x:Key="SmallScreenTemplate">
-            <StackPanel Orientation="Vertical" Margin="2">
+            <StackPanel Tapped="Grid_Tapped" Orientation="Vertical" Margin="0,10,0,40">
                 <StackPanel>
                     <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                 </StackPanel>
@@ -21,7 +21,7 @@
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="DesktopTemplate">
-            <Grid >
+            <Grid  Margin="0,10,0,40" Tapped="Grid_Tapped">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
