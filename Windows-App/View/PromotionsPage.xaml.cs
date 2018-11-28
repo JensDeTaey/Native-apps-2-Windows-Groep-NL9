@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,14 @@ namespace Windows_App.View
         public PromotionsPage()
         {
             this.InitializeComponent();
+            IList<Promotion> list = new List<Promotion>();
+            Promotion promotion = new Promotion("Free booze", "Get free booze when you buy booze", new DateTime(2018, 11, 12), new DateTime(2018, 12, 1), false);
+            Company comp = new Company();
+            comp.Name = "Ikea";
+            promotion.Company = comp;
+            list.Add(promotion);
+            lv.ItemsSource = list;
         }
+
     }
 }

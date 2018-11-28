@@ -10,6 +10,35 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <StackPanel>
-        <TextBlock Text="Promotions"/>
+        <TextBlock Text="Promotions" FontSize="30"/>
+        
+        <ListView x:Name="lv">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image></Image><!--Image of company-->
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"  FontWeight="Bold" FontSize="18"/>
+                                <TextBlock Text=" -  "  FontSize="18"/>
+                                <TextBlock Text="{Binding Company.Name}"  FontSize="18"/>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Description}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Valid between: " FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding TimeValid}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Coupon needed: " FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding NeedCoupon}"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </StackPanel>
+                  
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackPanel>
 </Page>
