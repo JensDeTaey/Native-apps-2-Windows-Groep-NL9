@@ -52,10 +52,28 @@
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
                     <StackPanel Orientation="Vertical">
                         <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="Maaltekouter 2, 9051 Gent"/>
-                        <TextBlock Text="02 719 19 22"/>
-                        <TextBlock Text="openingsuren: woensdag 10:00–20:00"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xEC07;   "/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE707;   "/>
+                            <TextBlock Text="{Binding Address}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE717;   "/>
+                            <TextBlock Text="{Binding PhoneNumber}"/>
+                        </StackPanel> 
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE823;   "/>
+                            <TextBlock Text="openingsuren: woensdag 10:00–20:00"/>
+                        </StackPanel>
+                        
 
                     </StackPanel>
 
@@ -89,9 +107,13 @@
         <TextBlock Text="Ikea" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
         <TextBlock Text="Meubilair" FontSize="9" HorizontalAlignment="Center" Margin="0,-14.3,0,0"/>
         <TextBlock Text="beschrijving van ikea enzo" HorizontalAlignment="Center"/>
+        <TextBlock Text="Alle vestigingen:"/>
         <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Establishments}" HorizontalAlignment="Left" >
         </ListView>
-        <TextBlock Text="Link to our website: www.google.com (jaja wij hebben google gemaakt)" HorizontalAlignment="Center"/>
+
+        <TextBlock  Text="Link to our website: " HorizontalAlignment="Center"><Hyperlink NavigateUri="http://www.google.com">
+            google.com
+        </Hyperlink></TextBlock>
     </StackPanel>
     
 </Page>

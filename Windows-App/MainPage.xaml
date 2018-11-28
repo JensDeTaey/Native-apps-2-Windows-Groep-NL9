@@ -22,7 +22,7 @@
                 <StackPanel x:Name="NavPageBusinessesStackPanel" Orientation="Horizontal" Tapped="NavPageBusinessesStackPanel_Tapped"  >
                     <Button Background="{ThemeResource SystemControlAcrylicWindowBrush}" 
                             FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xE913;"
+                            Content="&#xEC06;"
                             Width="50"
                             Height="50"/>
                     <TextBlock Text="Ondernemingen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
