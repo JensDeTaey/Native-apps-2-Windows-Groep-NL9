@@ -107,11 +107,9 @@ namespace Windows_App
         };
         public static List<Establishment> EstablishmentsIkea { get; set; } = new List<Establishment>()
         {
-            new Establishment() {Name="Ikea Gent"},
-            new Establishment() {Name="Ikea Antwerpen"},
-            new Establishment() {Name="Ikea ergens anders"},
-            new Establishment() {Name="Ikea nog ergens anders"},
-            new Establishment() {Name="Ikea jnezfknzejkf"}
+            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22"},
+            new Establishment() {Name="Ikea Antwerpen",Address="Maaltekouter 2, 2000 Antwerpen",PhoneNumber="02 458 69 69"}
+           
         };
 
     }
