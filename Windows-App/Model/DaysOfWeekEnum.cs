@@ -6,7 +6,7 @@ namespace Windows_App.Model
     {
         public enum DaysOfWeekEnum : short
         {
-            Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+            Saterday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
         }
 
         private static Dictionary<DaysOfWeekEnum, string> translationDictionary = new Dictionary<DaysOfWeekEnum, string>()
@@ -16,7 +16,7 @@ namespace Windows_App.Model
             {DaysOfWeekEnum.Wednesday, "Woensdag"},
             {DaysOfWeekEnum.Thursday, "Donderdag"},
             {DaysOfWeekEnum.Friday, "Vrijdag"},
-            {DaysOfWeekEnum.Saturday, "Zaterdag"},
+            {DaysOfWeekEnum.Saterday, "Zaterdag"},
             {DaysOfWeekEnum.Sunday, "Zondag"}
         };
 

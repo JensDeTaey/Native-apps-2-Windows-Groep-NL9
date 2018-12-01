@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
@@ -26,6 +29,10 @@ namespace Windows_App.View
         public BusinessDetailPage()
         {
             this.InitializeComponent();
+            MCMap.MapServiceToken = "NggniNfkWoAJYWaNrwu7~Ba_YkJv9SvsASrBV280AGQ~AqXz_H8d1GdioVSul1nTHcxPtsQlG3YdjJtPP9csVnPPyDNmc7kUv0G8x-QpQueG";
+            AddPOI2();
+            
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -40,6 +47,40 @@ namespace Windows_App.View
             }
 
         }
+
+        private async void AddPOI2()
+        {
+            BasicGeoposition bg2 = new BasicGeoposition();
+            Geopoint gp2 = new Geopoint(bg2);
+
+            MapLocationFinderResult res =
+                await MapLocationFinder.FindLocationsAsync("Maaltekouter 2, 9051 Gent", gp2);
+
+            MapLocation location = res.Locations.First();
+
+            AddPointToMap(new Geopoint(new BasicGeoposition()
+            {
+                Longitude = location.Point.Position.Longitude,
+                Latitude = location.Point.Position.Latitude
+            })
+                , "Ikea Gent");
+            
+        }
+
+        private void AddPointToMap(Geopoint geoPoint, string title)
+        {
+            MapIcon mapIcon = new MapIcon();
+            mapIcon.Location = geoPoint;
+
+            mapIcon.NormalizedAnchorPoint = new Point(0.5, 1.0);
+            mapIcon.Title = title;
+            mapIcon.ZIndex = 0;
+
+            MCMap.MapElements.Add(mapIcon);
+            MCMap.Center = geoPoint;
+            MCMap.ZoomLevel = 10;
+        }
+
 
     }
 }

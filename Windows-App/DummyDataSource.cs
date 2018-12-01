@@ -31,10 +31,49 @@ namespace Windows_App
             }
         }
 
+        public static List<OpeningHour> OpeningHoursIkea { get; } = new List<OpeningHour>()
+        {
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Monday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Tuesday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Wednesday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Thursday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Friday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Saterday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =DaysOfWeek.DaysOfWeekEnum.Sunday,
+                OpeningsHour ="0:00",
+                ClosingsHour ="0:00"
+            }
+        };
+
         public static List<Establishment> EstablishmentsIkea { get; } = new List<Establishment>()
         {
-            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22"},
-            new Establishment() {Name="Ikea Antwerpen",Address="Maaltekouter 2, 2000 Antwerpen",PhoneNumber="02 458 69 69"}
+            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22",OpeningHours=OpeningHoursIkea},
+            new Establishment() {Name="Ikea Antwerpen",Address="Maaltekouter 2, 2000 Antwerpen",PhoneNumber="02 458 69 69",OpeningHours=OpeningHoursIkea}
         };
 
         public static List<Business> Businesses { get; } = new List<Business>()

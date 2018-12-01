@@ -5,6 +5,7 @@
     xmlns:local="using:Windows_App.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -22,37 +23,12 @@
     <!--maps met meerdere points die verschillende vestigingen laat zien-->
 
     <Page.Resources>
+        
         <DataTemplate x:Key="SmallScreenTemplate">
-            <!--Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Width="300"  Orientation="Horizontal" Margin="0,10,0,40">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                        <TextBlock Text="{Binding Name}"/>
-                    </StackPanel>
-                </StackPanel>
-            </-->
-        </DataTemplate>
-        <DataTemplate x:Key="DesktopTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                        <StackPanel Orientation="Horizontal">
+            
+                    <StackPanel Orientation="Vertical" >
+                        <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="300" Margin="0,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                        <StackPanel Orientation="Horizontal" >
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xEC07;   "/>
                             <TextBlock Text="{Binding Name}"/>
@@ -62,28 +38,95 @@
                         Text="&#xE707;   "/>
                             <TextBlock Text="{Binding Address}"/>
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
-                        Text="&#xE717;   "/>
+                        Text="&#xE717;  "/>
                             <TextBlock Text="{Binding PhoneNumber}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
-                        Text="&#xE823;   "/>
-                            <TextBlock Text="openingsuren: woensdag 10:00–20:00"/>
+                        Text="&#xE823;    "/>
+                            <TextBlock Text="openingsuren:"/>
                         </StackPanel>
-
-
+                <ListView x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                    <ListView.ItemTemplate>
+                                <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Day}"/>
+                                        <TextBlock Grid.Column="1" Text=": "/>
+                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
+                                        <TextBlock Grid.Column="3" Text=" - "/>
+                                <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                            </Grid>
+                        </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
-
-                </StackPanel>
-            </Grid>
+                
         </DataTemplate>
+       
+
+        
+            <DataTemplate x:Key="DesktopTemplate">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
+                <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xEC07;   "/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE707;   "/>
+                        <TextBlock x:Name="AddressEst" Text="{Binding Address}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE717;   "/>
+                        <TextBlock Text="{Binding PhoneNumber}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE823;   "/>
+                        <TextBlock Text="openingsuren:"/>
+                    <ListView x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                        <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Day}"/>
+                                        <TextBlock Text=": "/>
+                                        <TextBlock Text="{Binding OpeningsHour}"/>
+                                        <TextBlock Text=" - "/>
+                                        <TextBlock Text="{Binding ClosingsHour}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                        </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+               
+            </StackPanel>
+            
+        </DataTemplate>
+        
 
     </Page.Resources>
-
-    <StackPanel  Spacing="10" Margin="20,10,0,0">
+    
+    <Grid>
+        
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Small">
@@ -104,18 +147,24 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
+        <ScrollViewer Height="{Binding Path=ActualHeight}"
+         VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+            <StackPanel Spacing="10" Margin="20,10,0,0">
         <TextBlock Text="{Binding Business.Name}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
         <TextBlock Text="{Binding Business.Category}" FontSize="9" HorizontalAlignment="Center" Margin="0,-14.3,0,0"/>
-        <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center"/>
+        <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center" TextWrapping="Wrap"/>
         <TextBlock Text="Alle vestigingen:"/>
         <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left" >
+                
         </ListView>
+        <maps:MapControl Name="MCMap" Height="250" Width="auto"   />
+        <TextBlock  Text="Link naar onze website:" HorizontalAlignment="Center"/>
+        <HyperlinkButton Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-14.3,0,0" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+    
 
-        <TextBlock  Text="Link to our website: " HorizontalAlignment="Center">
-            <Hyperlink NavigateUri="{Binding Business.LinkWebsite}">
-                {Binding Business.LinkWebsite}
-            </Hyperlink>
-        </TextBlock>
-    </StackPanel>
 
 </Page>
