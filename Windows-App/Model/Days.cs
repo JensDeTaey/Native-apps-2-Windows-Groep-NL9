@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Model
 {
-    public class User
+    class Days
     {
-        public string Name { get; set; }
-        public List<Business> Subscription { get; set; }
+        enum Dagen { Saturday, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday };
     }
 }

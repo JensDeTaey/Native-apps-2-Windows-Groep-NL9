@@ -11,10 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Windows_App.Model;
 using Windows_App.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -24,18 +21,25 @@ namespace Windows_App.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class BusinessesPage : Page
+    public sealed partial class BusinessDetailPage : Page
     {
-        public BusinessesPage()
+        public BusinessDetailPage()
         {
             this.InitializeComponent();
-            this.DataContext = new BusinessesViewModel(); 
         }
 
-        private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Business selectedBusiness = e.ClickedItem as Business;
-            Frame.Navigate(typeof(BusinessDetailPage), new BusinessDetailViewModel(selectedBusiness), new DrillInNavigationTransitionInfo());
+            if( e.Parameter is BusinessDetailViewModel)
+            {
+                DataContext = e.Parameter as BusinessDetailViewModel;
+            }
+            else
+            {
+                throw new Exception("Parameter is no BusinessDetailViewModel");
+            }
+
         }
+
     }
 }
