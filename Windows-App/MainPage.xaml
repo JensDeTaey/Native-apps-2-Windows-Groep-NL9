@@ -8,41 +8,122 @@
     mc:Ignorable="d"
     Name="myWindow"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource SystemControlAcrylicWindowBrush}" />
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+            <Setter Property="FocusVisualMargin" Value="-3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="RootGrid" >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
 
 
     <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
-            <StackPanel Background="{ThemeResource SystemControlAcrylicWindowBrush}" >
+            <StackPanel Background="{ThemeResource SystemControlAcrylicWindowBrush}" HorizontalAlignment="Stretch">
                 <Button Background="{ThemeResource SystemControlAcrylicWindowBrush}"
                         x:Name="NavCollapseButton"
                         FontFamily="Segoe MDL2 Assets" 
                         Content="&#xE700;" 
                         Width="50"
                         Height="50" Click="NavCollapseButton_Click"/>
-                <StackPanel x:Name="NavPageBusinessesStackPanel" Orientation="Horizontal" Tapped="NavPageBusinessesStackPanel_Tapped"  >
-                    <Button Background="{ThemeResource SystemControlAcrylicWindowBrush}" 
+                <Button x:Name="NavPageBusinessesContentControl" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" >
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource NavButtonStyle}" 
                             FontFamily="Segoe MDL2 Assets" 
                             Content="&#xEC06;"
                             Width="50"
                             Height="50"/>
-                    <TextBlock Text="Ondernemingen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                </StackPanel>
-                <StackPanel x:Name="NavPagePromotionsStackPanel" Orientation="Horizontal" Tapped="NavPagePromotionsStackPanel_Tapped"   >
-                    <Button Background="{ThemeResource SystemControlAcrylicWindowBrush}" 
+                        <TextBlock Text="Ondernemingen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <ContentControl x:Name="NavPagePromotionsContentControl" HorizontalContentAlignment="Stretch" Tapped="NavigationContentControl_Tapped" PointerEntered="NavigationContentControl_PointerEntered" PointerExited="NavigationContentControl_PointerExited">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource NavButtonStyle}" 
                             FontFamily="Segoe MDL2 Assets" 
                             Content="&#xE728;"
                             Width="50"
                             Height="50"/>
-                    <TextBlock Text="Promoties" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                </StackPanel>
-                <StackPanel x:Name="NavPageEventsStackPanel" Orientation="Horizontal" Tapped="NavPageEventsStackPanel_Tapped"   >
-                    <Button Background="{ThemeResource SystemControlAcrylicWindowBrush}" 
+                        <TextBlock Text="Promoties" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </ContentControl>
+                <ContentControl x:Name="NavPageEventsContentControl" HorizontalContentAlignment="Stretch" Tapped="NavigationContentControl_Tapped" PointerEntered="NavigationContentControl_PointerEntered" PointerExited="NavigationContentControl_PointerExited" >
+                    <StackPanel Orientation="Horizontal" >
+                        <Button Style="{StaticResource NavButtonStyle}" 
                             FontFamily="Segoe MDL2 Assets" 
                             Content="&#xE787;"
                             Width="50"
                             Height="50"/>
-                    <TextBlock Text="Evenementen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                </StackPanel>
+                        <TextBlock Text="Evenementen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </ContentControl>
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
