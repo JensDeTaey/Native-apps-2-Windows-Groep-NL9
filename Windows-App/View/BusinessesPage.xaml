@@ -39,9 +39,6 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Small">
@@ -49,7 +46,7 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="listViewBusinesses.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
+                        <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -57,11 +54,14 @@
                         <AdaptiveTrigger MinWindowWidth="1024" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="listViewBusinesses.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
+                        <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <ListView x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}" IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick" />
     </Grid>
 

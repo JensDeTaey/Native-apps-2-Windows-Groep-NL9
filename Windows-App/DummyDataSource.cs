@@ -31,8 +31,13 @@ namespace Windows_App
             }
         }
 
+        public static List<Establishment> EstablishmentsIkea { get; } = new List<Establishment>()
+        {
+            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22"},
+            new Establishment() {Name="Ikea Antwerpen",Address="Maaltekouter 2, 2000 Antwerpen",PhoneNumber="02 458 69 69"}
+        };
 
-        public static List<Business> Businesses { get; set; } = new List<Business>()
+        public static List<Business> Businesses { get; } = new List<Business>()
         {
             new Business() {
                 Name ="Ikea",
@@ -41,7 +46,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.ikea.com/be/nl/",
                 NumberOfSubscribers = 8,
-                Establishments = new List<Establishment>(),
+                Establishments = new List<Establishment>(EstablishmentsIkea),
                 Promotions = new List<Promotion>()
                 },
             new Business() {
@@ -104,12 +109,6 @@ namespace Windows_App
                 Establishments = new List<Establishment>(),
                 Promotions = new List<Promotion>()
                 }
-        };
-        public static List<Establishment> EstablishmentsIkea { get; set; } = new List<Establishment>()
-        {
-            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22"},
-            new Establishment() {Name="Ikea Antwerpen",Address="Maaltekouter 2, 2000 Antwerpen",PhoneNumber="02 458 69 69"}
-           
         };
 
     }

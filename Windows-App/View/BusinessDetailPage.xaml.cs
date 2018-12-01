@@ -30,8 +30,6 @@ namespace Windows_App.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             if( e.Parameter is BusinessDetailViewModel)
             {
                 DataContext = e.Parameter as BusinessDetailViewModel;

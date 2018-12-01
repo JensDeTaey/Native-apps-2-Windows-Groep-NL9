@@ -9,13 +9,11 @@ namespace Windows_App.ViewModel
 {
     public class BusinessDetailViewModel
     {
-        private Business Business { get; }
-        List<Establishment> Establishments { get; }
+        public Business Business { get; }
 
         public BusinessDetailViewModel(Business business)
         {
             this.Business = business;
-            this.Establishments = business.Establishments;
         }
 
     }
