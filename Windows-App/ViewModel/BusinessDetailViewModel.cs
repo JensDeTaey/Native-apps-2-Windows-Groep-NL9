@@ -16,5 +16,12 @@ namespace Windows_App.ViewModel
             this.Business = business;
         }
 
+        public List<String> getAdresses()
+        {
+            List<String> adresses = new List<string>();
+            Business.Establishments.ForEach(esta => adresses.Add(esta.Address));
+            return adresses;
+        }
+
     }
 }

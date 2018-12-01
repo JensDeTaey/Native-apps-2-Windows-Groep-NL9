@@ -30,7 +30,8 @@ namespace Windows_App.View
         {
             this.InitializeComponent();
             MCMap.MapServiceToken = "NggniNfkWoAJYWaNrwu7~Ba_YkJv9SvsASrBV280AGQ~AqXz_H8d1GdioVSul1nTHcxPtsQlG3YdjJtPP9csVnPPyDNmc7kUv0G8x-QpQueG";
-            AddPOI2();
+            
+            
             
             
         }
@@ -40,6 +41,7 @@ namespace Windows_App.View
             if( e.Parameter is BusinessDetailViewModel)
             {
                 DataContext = e.Parameter as BusinessDetailViewModel;
+                AddPOI2();
             }
             else
             {
@@ -50,20 +52,37 @@ namespace Windows_App.View
 
         private async void AddPOI2()
         {
+           
             BasicGeoposition bg2 = new BasicGeoposition();
             Geopoint gp2 = new Geopoint(bg2);
 
-            MapLocationFinderResult res =
-                await MapLocationFinder.FindLocationsAsync("Maaltekouter 2, 9051 Gent", gp2);
-
-            MapLocation location = res.Locations.First();
-
-            AddPointToMap(new Geopoint(new BasicGeoposition()
+            BusinessDetailViewModel business = this.DataContext as BusinessDetailViewModel;
+            business.getAdresses().ForEach(async address =>
             {
-                Longitude = location.Point.Position.Longitude,
-                Latitude = location.Point.Position.Latitude
-            })
-                , "Ikea Gent");
+                MapLocationFinderResult res =
+                await MapLocationFinder.FindLocationsAsync(address, gp2);
+
+                MapLocation location = res.Locations.First();
+
+                AddPointToMap(new Geopoint(new BasicGeoposition()
+                {
+                    Longitude = location.Point.Position.Longitude,
+                    Latitude = location.Point.Position.Latitude
+                })
+                    , "Ikea Gent");
+            });
+
+            //MapLocationFinderResult res =
+            //    await MapLocationFinder.FindLocationsAsync("Maaltekouter 2, 9051 Gent", gp2);
+
+            //MapLocation location = res.Locations.First();
+
+            //AddPointToMap(new Geopoint(new BasicGeoposition()
+            //{
+            //    Longitude = location.Point.Position.Longitude,
+            //    Latitude = location.Point.Position.Latitude
+            //})
+            //    , "Ikea Gent");
             
         }
 

@@ -9,7 +9,7 @@ namespace Windows_App.Model
 {
    public class OpeningHour
     {
-        public DaysOfWeekEnum Day { get; set; }
+        public string Day { get; set; }
         public string OpeningsHour { get; set; }
         public string ClosingsHour { get; set; }
     }
