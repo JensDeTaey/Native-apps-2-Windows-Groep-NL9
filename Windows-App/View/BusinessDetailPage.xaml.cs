@@ -26,7 +26,20 @@ namespace Windows_App.View
         public BusinessDetailPage()
         {
             this.InitializeComponent();
-            this.DataContext = new EstablishementViewModel();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if( e.Parameter is BusinessDetailViewModel)
+            {
+                DataContext = e.Parameter as BusinessDetailViewModel;
+            }
+            else
+            {
+                throw new Exception("Parameter is no BusinessDetailViewModel");
+            }
+
+        }
+
     }
 }
