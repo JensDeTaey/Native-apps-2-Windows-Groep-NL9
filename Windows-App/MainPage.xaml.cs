@@ -20,7 +20,9 @@ namespace Windows_App
 
             navigationControls = new List<Control>()
             {
-                 
+                 NavPageBusinessesControl,
+                 NavPagePromotionsControl,
+                 NavPageEventsContentControl
             };
         }
 
@@ -51,16 +53,14 @@ namespace Windows_App
         private void NavigationContentControlActivated(object sender)
         {
             //resetting all navigation Controls
+            Style navigationButtonStyle = this.Resources["NavigationButtonStyle"] as Style;
             foreach (ContentControl navigationItem in navigationControls)
             {
-                //navigationItem.IsEnabled = true;
+                navigationItem.Style = navigationButtonStyle;
             }
 
-            //Casting sender to ContentControl
             Control tappedControl = sender as Control;
-            tappedControl.Background = new SolidColorBrush(Color.FromArgb(20, 20, 20, 20));
-
-            //tappedControl.IsEnabled = false;
+            tappedControl.Style = (Style)this.Resources["SelectedNavigationButtonStyle"];
         }
 
     }
