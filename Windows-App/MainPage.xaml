@@ -9,22 +9,24 @@
     Name="myWindow"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
-        <Style x:Key="NavButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{ThemeResource SystemControlAcrylicWindowBrush}" />
+        <Style x:Key="NavigationButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource SystemControlAcrylicWindowBrush}"/>
             <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}"/>
-            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
-            <Setter Property="Padding" Value="8,4,8,4"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
             <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
             <Setter Property="FocusVisualMargin" Value="-3"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid x:Name="RootGrid" >
+                        <Grid x:Name="RootGrid" Background="{ThemeResource SystemControlAcrylicWindowBrush}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal">
@@ -51,9 +53,7 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBackgroundPressed}"/>
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonBorderBrushPressed}"/>
-                                            </ObjectAnimationUsingKeyFrames>
+
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonForegroundPressed}"/>
                                             </ObjectAnimationUsingKeyFrames>
@@ -81,7 +81,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </Page.Resources>
 
 
@@ -94,36 +93,39 @@
                         Content="&#xE700;" 
                         Width="50"
                         Height="50" Click="NavCollapseButton_Click"/>
-                <Button x:Name="NavPageBusinessesContentControl" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" >
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource NavButtonStyle}" 
+                <Button x:Name="NavPageBusinessesControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageBusinessesControl_Click" >
+                    <StackPanel Orientation="Horizontal" Height="50" >
+                        <TextBlock
                             FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xEC06;"
+                            Text="&#xEC06;"
                             Width="50"
-                            Height="50"/>
-                        <TextBlock Text="Ondernemingen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            TextAlignment="Center" 
+                            VerticalAlignment="Center"/>
+                        <TextBlock Text="Ondernemingen" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Button>
-                <ContentControl x:Name="NavPagePromotionsContentControl" HorizontalContentAlignment="Stretch" Tapped="NavigationContentControl_Tapped" PointerEntered="NavigationContentControl_PointerEntered" PointerExited="NavigationContentControl_PointerExited">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource NavButtonStyle}" 
+                <Button x:Name="NavPagePromotionsControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPagePromotionsControl_Click" >
+                    <StackPanel Orientation="Horizontal" Height="50" >
+                        <TextBlock
                             FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xE728;"
+                            Text="&#xE728;"
                             Width="50"
-                            Height="50"/>
-                        <TextBlock Text="Promoties" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            TextAlignment="Center" 
+                            VerticalAlignment="Center"/>
+                        <TextBlock Text="Promoties" VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </StackPanel>
-                </ContentControl>
-                <ContentControl x:Name="NavPageEventsContentControl" HorizontalContentAlignment="Stretch" Tapped="NavigationContentControl_Tapped" PointerEntered="NavigationContentControl_PointerEntered" PointerExited="NavigationContentControl_PointerExited" >
-                    <StackPanel Orientation="Horizontal" >
-                        <Button Style="{StaticResource NavButtonStyle}" 
+                </Button>
+                <Button x:Name="NavPageEventsContentControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageEventsContentControl_Click" >
+                    <StackPanel Orientation="Horizontal" Height="50" >
+                        <TextBlock
                             FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xE787;"
+                            Text="&#xE787;"
                             Width="50"
-                            Height="50"/>
-                        <TextBlock Text="Evenementen" FontSize="18" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                            TextAlignment="Center" 
+                            VerticalAlignment="Center"/>
+                        <TextBlock Text="Evenementen"  VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </StackPanel>
-                </ContentControl>
+                </Button>
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
