@@ -29,11 +29,8 @@ namespace Windows_App.View
         public BusinessDetailPage()
         {
             this.InitializeComponent();
+            //token you need to use maps
             MCMap.MapServiceToken = "NggniNfkWoAJYWaNrwu7~Ba_YkJv9SvsASrBV280AGQ~AqXz_H8d1GdioVSul1nTHcxPtsQlG3YdjJtPP9csVnPPyDNmc7kUv0G8x-QpQueG";
-            
-            
-            
-            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,7 +38,7 @@ namespace Windows_App.View
             if( e.Parameter is BusinessDetailViewModel)
             {
                 DataContext = e.Parameter as BusinessDetailViewModel;
-                AddPOI2();
+                AddEstablishmentsToMap();
             }
             else
             {
@@ -50,9 +47,8 @@ namespace Windows_App.View
 
         }
 
-        private async void AddPOI2()
+        private void AddEstablishmentsToMap()
         {
-           
             BasicGeoposition bg2 = new BasicGeoposition();
             Geopoint gp2 = new Geopoint(bg2);
 
@@ -71,7 +67,7 @@ namespace Windows_App.View
                 })
                     , esta.Name);
             });
-            
+
         }
 
         private void AddPointToMap(Geopoint geoPoint, string title)
