@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Windows_App.View;
 
 namespace Windows_App
@@ -20,9 +12,18 @@ namespace Windows_App
 
     public sealed partial class MainPage : Page
     {
+        private List<Control> navigationControls;
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            navigationControls = new List<Control>()
+            {
+                 NavPageBusinessesControl,
+                 NavPagePromotionsControl,
+                 NavPageEventsContentControl
+            };
         }
 
         //Collapse of the Navigation
@@ -31,28 +32,36 @@ namespace Windows_App
             PageSplitView.IsPaneOpen = !PageSplitView.IsPaneOpen;
         }
 
-        private void NavPageBusinessesStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void NavPageBusinessesControl_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(BusinessesPage));
-            UpdateNavigationItems();
+            NavigationContentControlActivated(sender);
         }
 
-        private void NavPagePromotionsStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void NavPagePromotionsControl_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(PromotionsPage));
-            UpdateNavigationItems();
+            NavigationContentControlActivated(sender);
         }
 
-        private void NavPageEventsStackPanel_Tapped(object sender, TappedRoutedEventArgs e)
+        private void NavPageEventsContentControl_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(EventsPage));
-            UpdateNavigationItems();
+            NavigationContentControlActivated(sender);
         }
 
-        //Enabling en disabling the right navigation item
-        private void UpdateNavigationItems()
+        private void NavigationContentControlActivated(object sender)
         {
-            Debug.WriteLine("Navs are triggered");
+            //resetting all navigation Controls
+            Style navigationButtonStyle = this.Resources["NavigationButtonStyle"] as Style;
+            foreach (ContentControl navigationItem in navigationControls)
+            {
+                navigationItem.Style = navigationButtonStyle;
+            }
+
+            Control tappedControl = sender as Control;
+            tappedControl.Style = (Style)this.Resources["SelectedNavigationButtonStyle"];
         }
+
     }
 }
