@@ -16,11 +16,9 @@ namespace Windows_App.ViewModel
             this.Business = business;
         }
 
-        public List<String> getAdresses()
+        public List<Establishment> getEstablishments()
         {
-            List<String> adresses = new List<string>();
-            Business.Establishments.ForEach(esta => adresses.Add(esta.Address));
-            return adresses;
+            return Business.Establishments;
         }
 
     }

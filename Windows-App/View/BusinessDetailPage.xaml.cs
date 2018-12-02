@@ -57,10 +57,10 @@ namespace Windows_App.View
             Geopoint gp2 = new Geopoint(bg2);
 
             BusinessDetailViewModel business = this.DataContext as BusinessDetailViewModel;
-            business.getAdresses().ForEach(async address =>
+            business.getEstablishments().ForEach(async esta =>
             {
                 MapLocationFinderResult res =
-                await MapLocationFinder.FindLocationsAsync(address, gp2);
+                await MapLocationFinder.FindLocationsAsync(esta.Address, gp2);
 
                 MapLocation location = res.Locations.First();
 
@@ -69,20 +69,8 @@ namespace Windows_App.View
                     Longitude = location.Point.Position.Longitude,
                     Latitude = location.Point.Position.Latitude
                 })
-                    , "Ikea Gent");
+                    , esta.Name);
             });
-
-            //MapLocationFinderResult res =
-            //    await MapLocationFinder.FindLocationsAsync("Maaltekouter 2, 9051 Gent", gp2);
-
-            //MapLocation location = res.Locations.First();
-
-            //AddPointToMap(new Geopoint(new BasicGeoposition()
-            //{
-            //    Longitude = location.Point.Position.Longitude,
-            //    Latitude = location.Point.Position.Latitude
-            //})
-            //    , "Ikea Gent");
             
         }
 

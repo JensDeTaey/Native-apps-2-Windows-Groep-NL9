@@ -43,7 +43,12 @@
                         Text="&#xE717;  "/>
                             <TextBlock Text="{Binding PhoneNumber}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE715;   "/>
+                    <TextBlock Text="{Binding Email}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xE823;  "/>
                             <TextBlock Text="Openingsuren:"/>
@@ -74,10 +79,66 @@
                     </StackPanel>
                 
         </DataTemplate>
-       
 
-        
-            <DataTemplate x:Key="DesktopTemplate">
+        <DataTemplate x:Key="MediumTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
+                <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xEC07;   "/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE707;   "/>
+                        <TextBlock x:Name="AddressEst" Text="{Binding Address}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE717;   "/>
+                        <TextBlock Text="{Binding PhoneNumber}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE715;   "/>
+                        <TextBlock Text="{Binding Email}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE823;   "/>
+                <TextBlock Margin="0,0,0,0" Text="Openingsuren:"/>
+                    </StackPanel>
+                    <ListView x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="16,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Day}"/>
+                                <TextBlock Grid.Column="1" Text=": "/>
+                                <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
+                                <TextBlock Grid.Column="3" Text=" - "/>
+                                <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+
+
+        <DataTemplate x:Key="DesktopTemplate">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
                 <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -95,6 +156,11 @@
                         <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xE717;   "/>
                         <TextBlock Text="{Binding PhoneNumber}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE715;   "/>
+                        <TextBlock Text="{Binding Email}"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="10,0,0,0" Orientation="Horizontal">
@@ -145,9 +211,17 @@
                         <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="Desktop">
+                <VisualState x:Name="Medium">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource MediumTemplate}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1500" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
@@ -170,6 +244,7 @@
         <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left" >
                 
         </ListView>
+                <TextBlock Text="Alle vestigingen op kaart:" FontWeight="Bold" FontSize="16"/>
                 <maps:MapControl Name="MCMap" Height="250" Width="auto" Margin="0,0,20,20"/>
             </StackPanel>
         </ScrollViewer>
