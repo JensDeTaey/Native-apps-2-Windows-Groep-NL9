@@ -30,7 +30,7 @@
                                 <TextBlock Text="{Binding TimeValid}"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Coupon needed: " FontWeight="SemiBold"/>
+                                <TextBlock Text="Coupon needed:  " FontWeight="SemiBold"/>
                                 <TextBlock Text="{Binding NeedCoupon}"/>
                             </StackPanel>
 
