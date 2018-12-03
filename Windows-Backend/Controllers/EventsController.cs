@@ -9,48 +9,47 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Windows_Backend.Models;
-using Windows_Backend.Models.Domain;
 
 namespace Windows_Backend.Controllers
 {
-    public class BusinessesController : ApiController
+    public class EventsController : ApiController
     {
         private Windows_BackendContext db = new Windows_BackendContext();
 
-        // GET: api/Businesses
-        public IQueryable<Business> GetBusinesses()
+        // GET: api/Events
+        public IQueryable<Event> GetEvents()
         {
-            return db.Businesses;
+            return db.Events;
         }
 
-        // GET: api/Businesses/5
-        [ResponseType(typeof(Business))]
-        public IHttpActionResult GetBusiness(int id)
+        // GET: api/Events/5
+        [ResponseType(typeof(Event))]
+        public IHttpActionResult GetEvent(int id)
         {
-            Business business = db.Businesses.Include(b => b.Establishments).ToList().Find(b => b.Id == id);
-            if (business == null)
+            Event @event = db.Events.Find(id);
+            if (@event == null)
             {
                 return NotFound();
             }
 
-            return Ok(business);
+            return Ok(@event);
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Events/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBusiness(int id, Business business)
+        public IHttpActionResult PutEvent(int id, Event @event)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != business.Id)
+            if (id != @event.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(business).State = EntityState.Modified;
+            db.Entry(@event).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +57,7 @@ namespace Windows_Backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!EventExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +70,35 @@ namespace Windows_Backend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Businesses
-        [ResponseType(typeof(Business))]
-        public IHttpActionResult PostBusiness(Business business)
+        // POST: api/Events
+        [ResponseType(typeof(Event))]
+        public IHttpActionResult PostEvent(Event @event)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Businesses.Add(business);
+            db.Events.Add(@event);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = business.Id }, business);
+            return CreatedAtRoute("DefaultApi", new { id = @event.Id }, @event);
         }
 
-        // DELETE: api/Businesses/5
-        [ResponseType(typeof(Business))]
-        public IHttpActionResult DeleteBusiness(int id)
+        // DELETE: api/Events/5
+        [ResponseType(typeof(Event))]
+        public IHttpActionResult DeleteEvent(int id)
         {
-            Business business = db.Businesses.Find(id);
-            if (business == null)
+            Event @event = db.Events.Find(id);
+            if (@event == null)
             {
                 return NotFound();
             }
 
-            db.Businesses.Remove(business);
+            db.Events.Remove(@event);
             db.SaveChanges();
 
-            return Ok(business);
+            return Ok(@event);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +110,9 @@ namespace Windows_Backend.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BusinessExists(int id)
+        private bool EventExists(int id)
         {
-            return db.Businesses.Count(e => e.Id == id) > 0;
+            return db.Events.Count(e => e.Id == id) > 0;
         }
     }
 }

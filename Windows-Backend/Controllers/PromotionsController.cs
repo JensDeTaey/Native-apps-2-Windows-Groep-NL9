@@ -9,48 +9,47 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Windows_Backend.Models;
-using Windows_Backend.Models.Domain;
 
 namespace Windows_Backend.Controllers
 {
-    public class BusinessesController : ApiController
+    public class PromotionsController : ApiController
     {
         private Windows_BackendContext db = new Windows_BackendContext();
 
-        // GET: api/Businesses
-        public IQueryable<Business> GetBusinesses()
+        // GET: api/Promotions
+        public IQueryable<Promotion> GetPromotions()
         {
-            return db.Businesses;
+            return db.Promotions;
         }
 
-        // GET: api/Businesses/5
-        [ResponseType(typeof(Business))]
-        public IHttpActionResult GetBusiness(int id)
+        // GET: api/Promotions/5
+        [ResponseType(typeof(Promotion))]
+        public IHttpActionResult GetPromotion(int id)
         {
-            Business business = db.Businesses.Include(b => b.Establishments).ToList().Find(b => b.Id == id);
-            if (business == null)
+            Promotion promotion = db.Promotions.Find(id);
+            if (promotion == null)
             {
                 return NotFound();
             }
 
-            return Ok(business);
+            return Ok(promotion);
         }
 
-        // PUT: api/Businesses/5
+        // PUT: api/Promotions/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBusiness(int id, Business business)
+        public IHttpActionResult PutPromotion(int id, Promotion promotion)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != business.Id)
+            if (id != promotion.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(business).State = EntityState.Modified;
+            db.Entry(promotion).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +57,7 @@ namespace Windows_Backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BusinessExists(id))
+                if (!PromotionExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +70,35 @@ namespace Windows_Backend.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Businesses
-        [ResponseType(typeof(Business))]
-        public IHttpActionResult PostBusiness(Business business)
+        // POST: api/Promotions
+        [ResponseType(typeof(Promotion))]
+        public IHttpActionResult PostPromotion(Promotion promotion)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Businesses.Add(business);
+            db.Promotions.Add(promotion);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = business.Id }, business);
+            return CreatedAtRoute("DefaultApi", new { id = promotion.Id }, promotion);
         }
 
-        // DELETE: api/Businesses/5
-        [ResponseType(typeof(Business))]
-        public IHttpActionResult DeleteBusiness(int id)
+        // DELETE: api/Promotions/5
+        [ResponseType(typeof(Promotion))]
+        public IHttpActionResult DeletePromotion(int id)
         {
-            Business business = db.Businesses.Find(id);
-            if (business == null)
+            Promotion promotion = db.Promotions.Find(id);
+            if (promotion == null)
             {
                 return NotFound();
             }
 
-            db.Businesses.Remove(business);
+            db.Promotions.Remove(promotion);
             db.SaveChanges();
 
-            return Ok(business);
+            return Ok(promotion);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +110,9 @@ namespace Windows_Backend.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BusinessExists(int id)
+        private bool PromotionExists(int id)
         {
-            return db.Businesses.Count(e => e.Id == id) > 0;
+            return db.Promotions.Count(e => e.Id == id) > 0;
         }
     }
 }

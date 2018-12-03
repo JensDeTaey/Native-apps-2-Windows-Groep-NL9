@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using Windows_App.Model;
+using Windows_Backend.Models.Domain;
 
 namespace Windows_Backend.Models
 {
@@ -21,8 +21,19 @@ namespace Windows_Backend.Models
 
         public Windows_BackendContext() : base("name=Windows_BackendContext")
         {
+            Database.CreateIfNotExists();
+            Database.SetInitializer<Windows_BackendContext>(new Windows_BackendInitializer());
+            
         }
 
+
         
+
+
+    }
+
+    public class Windows_BackendInitializer : CreateDatabaseIfNotExists<Windows_BackendContext>
+    {
+
     }
 }
