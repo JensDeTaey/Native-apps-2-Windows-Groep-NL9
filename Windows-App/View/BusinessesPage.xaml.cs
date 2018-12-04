@@ -29,7 +29,8 @@ namespace Windows_App.View
         public BusinessesPage()
         {
             this.InitializeComponent();
-            this.DataContext = new BusinessesViewModel(); 
+            this.DataContext = new BusinessesViewModel();
+            
         }
 
         private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)

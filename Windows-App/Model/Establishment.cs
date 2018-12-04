@@ -13,7 +13,7 @@ namespace Windows_App.Model
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<OpeningHour> OpeningHours { get; set; }
-        public string Picture { get; set; }
+        //public string Picture { get; set; }
         public List<Event> Events { get; set; }
     }
 }
