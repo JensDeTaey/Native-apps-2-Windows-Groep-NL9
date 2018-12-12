@@ -70,9 +70,32 @@ namespace Windows_App
             }
         };
 
+        public static List<Promotion> PromotionsIkea { get; } = new List<Promotion>()
+        {
+            new Promotion()
+            {
+                Name = "Actie in Ikea",
+                Description = "Deze week grote kortingen tot 70% op alles!",
+                StartDate  = new DateTime(),
+                EndDate = new DateTime(),
+                IsDiscountCoupon = false
+            }
+        };
+
+        public static List<Event> EventsIkea { get; } = new List<Event>()
+        {
+            new Event()
+            {
+                Name = "Evenement in Ikea",
+                Description = "Deze week grote opening tot nieuwe vestiging!",
+                BeginDate = new DateTime(),
+                EndDate = new DateTime()
+            }
+        };
+
         public static List<Establishment> EstablishmentsIkea { get; } = new List<Establishment>()
         {
-            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22",Email="IkeaGent@Ikea.com",OpeningHours=OpeningHoursIkea},
+            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22",Email="IkeaGent@Ikea.com",OpeningHours=OpeningHoursIkea,Promotions=PromotionsIkea,Events=EventsIkea},
             new Establishment() {Name="Ikea Antwerpen",Address="Boomsesteenweg 755, 2610 Antwerpen",PhoneNumber="02 458 69 69",Email="IkeaAntwerpen@Ikea.com",OpeningHours=OpeningHoursIkea}
         };
 
@@ -85,8 +108,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.ikea.com/be/nl/",
                 NumberOfSubscribers = 8,
-                Establishments = new List<Establishment>(EstablishmentsIkea),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>(EstablishmentsIkea)
                 },
             new Business() {
                 Name ="Inno",
@@ -95,8 +117,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.inno.be/nl-be/",
                 NumberOfSubscribers = 69,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="Action",
@@ -105,8 +126,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.action.com/nl-be/",
                 NumberOfSubscribers = 420,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="GameMania",
@@ -115,8 +135,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.gamemania.nl/Winkels",
                 NumberOfSubscribers = 53,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="HEMA",
@@ -125,8 +144,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.hema.be/",
                 NumberOfSubscribers = 1,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="Media Markt",
@@ -135,8 +153,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.mediamarkt.be/",
                 NumberOfSubscribers = 6969,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="Xenos",
@@ -145,8 +162,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.xenos.nl/",
                 NumberOfSubscribers = 156,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 }
         };
 
