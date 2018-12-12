@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Windows_App.Model
 {
@@ -22,7 +23,15 @@ namespace Windows_App.Model
 
         public static string GiveDutchDayOfWeek(DaysOfWeekEnum dayOfWeek)
         {
-            return translationDictionary.GetValueOrDefault(dayOfWeek);
+            string translation = "";
+            if (translationDictionary.TryGetValue(dayOfWeek, out translation))
+            {
+                return translation;
+            }
+            else
+            {
+                 throw new Exception($"No Dutch translation found for {dayOfWeek}");
+            }
         }
     }
 

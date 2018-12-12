@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +18,7 @@ namespace Windows_App
         {
             get
             {
+                return null;/*
                 if (businessPicture == null)
                 {
                     UriBuilder builder = new UriBuilder
@@ -27,7 +27,7 @@ namespace Windows_App
                     };
                     businessPicture = new BitmapImage(builder.Uri);
                 }
-                return businessPicture;
+                return businessPicture;*/
             }
         }
 

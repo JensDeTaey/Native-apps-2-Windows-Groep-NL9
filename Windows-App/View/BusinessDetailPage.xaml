@@ -231,7 +231,7 @@
         </VisualStateManager.VisualStateGroups>
 
         <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
-            <StackPanel Spacing="10" Margin="20,10,0,0">
+            <StackPanel  Margin="20,10,0,0">
         <TextBlock Text="{Binding Business.Name}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
         <TextBlock Text="{Binding Business.Category}" FontSize="9" HorizontalAlignment="Center" Margin="0,-14.3,0,0"/>
         <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center" TextWrapping="Wrap"/>
