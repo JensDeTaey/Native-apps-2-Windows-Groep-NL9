@@ -88,11 +88,84 @@
                         </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
+                        <ListView ItemsSource="{Binding Promotions}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Spacing="5" Grid.Column="0">
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Description}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Geldig van: "/>
+                                            <TextBlock Text="{Binding StartDate}"/>
+                                            <TextBlock Text=" tot "/>
+                                            <TextBlock Text="{Binding EndDate}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding IsDiscountCoupon}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </StackPanel>
-                
+                    <StackPanel Grid.Row="1">
+                        <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
+                        <ListView  ItemsSource="{Binding Events}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Spacing="5" Grid.Column="1">
+                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding Description}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Vindt plaats van: "/>
+                                            <TextBlock Text="{Binding BeginDate}"/>
+                                            <TextBlock Text=" tot "/>
+                                            <TextBlock Text="{Binding EndDate}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            
         </DataTemplate>
 
         <DataTemplate x:Key="MediumTemplate">
+            <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
                 <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -158,11 +231,85 @@
                 </ListView>
                 </StackPanel>
             </StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
+                    <ListView ItemsSource="{Binding Promotions}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Spacing="5" Grid.Column="0">
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Geldig van: "/>
+                                        <TextBlock Text="{Binding StartDate}"/>
+                                        <TextBlock Text=" tot "/>
+                                        <TextBlock Text="{Binding EndDate}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding IsDiscountCoupon}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
+                    <ListView  ItemsSource="{Binding Events}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Spacing="5" Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Vindt plaats van: "/>
+                                        <TextBlock Text="{Binding BeginDate}"/>
+                                        <TextBlock Text=" tot "/>
+                                        <TextBlock Text="{Binding EndDate}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+            </StackPanel>
         </DataTemplate>
 
 
 
         <DataTemplate x:Key="DesktopTemplate">
+            <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
                 <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -229,10 +376,87 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
+                    
+                    
+                    
                 </StackPanel>
                
             </StackPanel>
-            
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0">
+                    <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
+                    <ListView ItemsSource="{Binding Promotions}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Spacing="5" Grid.Column="0">
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Geldig van: "/>
+                                        <TextBlock Text="{Binding StartDate}"/>
+                                        <TextBlock Text=" tot "/>
+                                        <TextBlock Text="{Binding EndDate}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding IsDiscountCoupon}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                    <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
+                    <ListView  ItemsSource="{Binding Events}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Spacing="5" Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Vindt plaats van: "/>
+                                        <TextBlock Text="{Binding BeginDate}"/>
+                                        <TextBlock Text=" tot "/>
+                                        <TextBlock Text="{Binding EndDate}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
         </DataTemplate>
         
 
@@ -280,7 +504,7 @@
                     <HyperlinkButton Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-10,0,0" HorizontalAlignment="Center"/>
                 </StackPanel>
                 <TextBlock Margin="14.3,0,0,0" Text="Alle vestigingen:" FontWeight="Bold" FontSize="16"/>
-        <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
+                <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Template">
@@ -292,7 +516,7 @@
                             </Setter>
                         </Style>
                     </ListView.ItemContainerStyle>
-                </ListView >
+                </ListView>
                 <TextBlock Text="Alle vestigingen op kaart:" FontWeight="Bold" FontSize="16"/>
                 <maps:MapControl Name="MCMap" Height="250" Width="auto" Margin="0,0,20,20"/>
             </StackPanel>
