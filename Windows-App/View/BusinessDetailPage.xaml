@@ -99,6 +99,18 @@
                     <StackPanel Grid.Row="0">
                         <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
                         <ListView ItemsSource="{Binding Promotions}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Spacing="5" Grid.Column="0">
@@ -119,6 +131,18 @@
                     <StackPanel Grid.Row="1">
                         <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
                         <ListView  ItemsSource="{Binding Events}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Spacing="5" Grid.Column="1">
@@ -218,7 +242,19 @@
                 <StackPanel Grid.Column="0">
                     <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
                     <ListView ItemsSource="{Binding Promotions}">
-                        <ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Spacing="5" Grid.Column="0">
                                     <TextBlock Text="{Binding Name}"/>
@@ -238,7 +274,19 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
                     <ListView  ItemsSource="{Binding Events}">
-                        <ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Spacing="5" Grid.Column="1">
                                     <TextBlock Text="{Binding Name}" />
@@ -346,7 +394,19 @@
                     <StackPanel Grid.Column="0">
                     <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
                     <ListView ItemsSource="{Binding Promotions}">
-                        <ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Spacing="5" Grid.Column="0">
                                     <TextBlock Text="{Binding Name}"/>
@@ -366,7 +426,19 @@
                     <StackPanel Grid.Column="1">
                     <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
                     <ListView  ItemsSource="{Binding Events}">
-                        <ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Spacing="5" Grid.Column="1">
                                     <TextBlock Text="{Binding Name}" />
