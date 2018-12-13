@@ -110,6 +110,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BusinessDetailViewModel.cs" />
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
+    <Compile Include="View\AddBusinessPage.xaml.cs">
+      <DependentUpon>AddBusinessPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BusinessDetailPage.xaml.cs">
       <DependentUpon>BusinessDetailPage.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddBusinessPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BusinessDetailPage.xaml">
       <SubType>Designer</SubType>
