@@ -88,7 +88,7 @@ namespace Windows_App
             {
                 Name = "Evenement in Ikea",
                 Description = "Deze week grote opening tot nieuwe vestiging!",
-                BeginDate = new DateTime(2018,11,11),
+                StartDate = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,11,15)
             }
         };

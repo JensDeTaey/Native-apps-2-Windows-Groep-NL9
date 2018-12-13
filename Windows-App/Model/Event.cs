@@ -10,8 +10,16 @@ namespace Windows_App.Model
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime BeginDate { get; set; }
+        public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public long PictureEvent { get; set; }
+
+        public string TimeValid
+        {
+            get
+            {
+                return String.Format("{0} - {1}", StartDate.ToString("MM/dd/yyyy"), EndDate.ToString("MM/dd/yyyy"));
+            }
+        }
     }
 }

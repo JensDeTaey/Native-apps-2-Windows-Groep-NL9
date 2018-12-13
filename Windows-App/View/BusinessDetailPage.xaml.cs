@@ -27,15 +27,12 @@ namespace Windows_App.View
     public sealed partial class BusinessDetailPage : Page
     {
 
-        private List<String> fotos;
         public BusinessDetailPage()
         {
             this.InitializeComponent();
             //token you need to use maps
             MCMap.MapServiceToken = "NggniNfkWoAJYWaNrwu7~Ba_YkJv9SvsASrBV280AGQ~AqXz_H8d1GdioVSul1nTHcxPtsQlG3YdjJtPP9csVnPPyDNmc7kUv0G8x-QpQueG";
 
-            List<String> fotos = new List<string>();
-            fotos.Add("../Images/action.jpg");
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -50,11 +47,6 @@ namespace Windows_App.View
                 throw new Exception("Parameter is no BusinessDetailViewModel");
             }
 
-        }
-
-        public List<String> getFotos()
-        {
-            return fotos;
         }
 
         private void AddEstablishmentsToMap()
