@@ -8,20 +8,6 @@
     xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <!--StackPanel Spacing="10" Margin="20,10,0,0">
-        <TextBlock Text="Ikea" FontSize="24" FontWeight="Bold"/>
-        <TextBlock Text="Meubilair" FontSize="9"/>
-        <TextBlock Text="beschrijving van ikea enzo"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-        </Grid-->
-    <!--maps met meerdere points die verschillende vestigingen laat zien-->
-
     <Page.Resources>
         
         <DataTemplate x:Key="SmallScreenTemplate">
@@ -97,7 +83,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0">
-                        <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
+                        <TextBlock Text="Beschikbare promoties:" FontWeight="Bold" Margin="0,0,0,5"/>
                         <ListView ItemsSource="{Binding Promotions}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -113,7 +99,7 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Spacing="5" Grid.Column="0">
+                                    <StackPanel Grid.Column="0">
                                         <TextBlock Text="{Binding Name}"/>
                                         <TextBlock Text="{Binding Description}"/>
                                         <StackPanel Orientation="Horizontal">
@@ -129,7 +115,7 @@
                         </ListView>
                     </StackPanel>
                     <StackPanel Grid.Row="1">
-                        <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
+                        <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold" Margin="0,0,0,5"/>
                         <ListView  ItemsSource="{Binding Events}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -145,7 +131,7 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Spacing="5" Grid.Column="1">
+                                    <StackPanel Grid.Column="1">
                                         <TextBlock Text="{Binding Name}" />
                                         <TextBlock Text="{Binding Description}"/>
                                         <StackPanel Orientation="Horizontal">
@@ -240,7 +226,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
+                        <TextBlock Text="Beschikbare promoties:" FontWeight="Bold" Margin="0,0,0,5"/>
                     <ListView ItemsSource="{Binding Promotions}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -256,7 +242,7 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Spacing="5" Grid.Column="0">
+                                <StackPanel Grid.Column="0">
                                     <TextBlock Text="{Binding Name}"/>
                                     <TextBlock Text="{Binding Description}"/>
                                     <StackPanel Orientation="Horizontal">
@@ -272,7 +258,7 @@
                     </ListView>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
+                        <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold" Margin="0,0,0,5"/>
                     <ListView  ItemsSource="{Binding Events}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -288,7 +274,7 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Spacing="5" Grid.Column="1">
+                                <StackPanel Grid.Column="1">
                                     <TextBlock Text="{Binding Name}" />
                                     <TextBlock Text="{Binding Description}"/>
                                     <StackPanel Orientation="Horizontal">
@@ -392,7 +378,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Column="0">
-                    <TextBlock Text="Beschikbare promoties:" FontWeight="Bold"/>
+                        <TextBlock Text="Beschikbare promoties:" FontWeight="Bold" Margin="0,0,0,5"/>
                     <ListView ItemsSource="{Binding Promotions}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -408,7 +394,7 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Spacing="5" Grid.Column="0">
+                                <StackPanel Grid.Column="0">
                                     <TextBlock Text="{Binding Name}"/>
                                     <TextBlock Text="{Binding Description}"/>
                                     <StackPanel Orientation="Horizontal">
@@ -424,7 +410,7 @@
                     </ListView>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                    <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold"/>
+                        <TextBlock Text="Beschikbare Evenementen:" FontWeight="Bold" Margin="0,0,0,5"/>
                     <ListView  ItemsSource="{Binding Events}">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -440,7 +426,7 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Spacing="5" Grid.Column="1">
+                                <StackPanel Grid.Column="1">
                                     <TextBlock Text="{Binding Name}" />
                                     <TextBlock Text="{Binding Description}"/>
                                     <StackPanel Orientation="Horizontal">
@@ -494,9 +480,9 @@
         </VisualStateManager.VisualStateGroups>
 
         <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
-            <StackPanel Spacing="10" Margin="20,10,0,0">
-        <TextBlock Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <TextBlock Text="{Binding Business.Category}" FontSize="13" HorizontalAlignment="Center" Margin="0,-14.3,0,0"/>
+            <StackPanel Margin="20,10,0,0">
+        <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <TextBlock Text="{Binding Business.Category}" FontSize="13" HorizontalAlignment="Center" Margin="0,-14.3,0,5"/>
         <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock FontFamily="Segoe MDL2 Assets" 

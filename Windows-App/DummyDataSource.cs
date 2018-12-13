@@ -76,8 +76,8 @@ namespace Windows_App
             {
                 Name = "Actie in Ikea",
                 Description = "Deze week grote kortingen tot 70% op alles!",
-                StartDate  = new DateTime(),
-                EndDate = new DateTime(),
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
                 IsDiscountCoupon = false
             }
         };
@@ -88,8 +88,8 @@ namespace Windows_App
             {
                 Name = "Evenement in Ikea",
                 Description = "Deze week grote opening tot nieuwe vestiging!",
-                BeginDate = new DateTime(),
-                EndDate = new DateTime()
+                BeginDate = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,11,15)
             }
         };
 
