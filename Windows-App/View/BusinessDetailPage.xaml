@@ -5,53 +5,85 @@
     xmlns:local="using:Windows_App.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <!--StackPanel Spacing="10" Margin="20,10,0,0">
-        <TextBlock Text="Ikea" FontSize="24" FontWeight="Bold"/>
-        <TextBlock Text="Meubilair" FontSize="9"/>
-        <TextBlock Text="beschrijving van ikea enzo"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-        </Grid-->
-    <!--maps met meerdere points die verschillende vestigingen laat zien-->
-
     <Page.Resources>
+        
         <DataTemplate x:Key="SmallScreenTemplate">
-            <!--Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Width="300"  Orientation="Horizontal" Margin="0,10,0,40">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                        <TextBlock Text="{Binding Name}"/>
-                    </StackPanel>
+            
+                    <StackPanel Orientation="Vertical" >
+                        <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="auto" Margin="0,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xEC07;  "/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE707;  "/>
+                            <TextBlock Text="{Binding Address}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE717;  "/>
+                            <TextBlock Text="{Binding PhoneNumber}"/>
+                        </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE715;   "/>
+                    <TextBlock Text="{Binding Email}"/>
                 </StackPanel>
-            </-->
+                <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE823;  "/>
+                            <TextBlock Text="Openingsuren:"/>
+                        </StackPanel>
+                <ListView Margin="13,0,0,0" x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="MinHeight" Value="25" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                                <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Day}"/>
+                                        <TextBlock Grid.Column="1" Text=": "/>
+                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
+                                        <TextBlock Grid.Column="3" Text=" - "/>
+                                <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                            </Grid>
+                        </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+            </StackPanel>
+            
         </DataTemplate>
-        <DataTemplate x:Key="DesktopTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
 
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
+        <DataTemplate x:Key="MediumTemplate">
+            <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                    <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xEC07;   "/>
@@ -60,9 +92,8 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xE707;   "/>
-                            <TextBlock Text="{Binding Address}"/>
+                            <TextBlock x:Name="AddressEst" Text="{Binding Address}"/>
                         </StackPanel>
-
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xE717;   "/>
@@ -70,20 +101,141 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
-                        Text="&#xE823;   "/>
-                            <TextBlock Text="openingsuren: woensdag 10:00–20:00"/>
+                        Text="&#xE715;   "/>
+                            <TextBlock Text="{Binding Email}"/>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE823;   "/>
+                            <TextBlock Margin="0,0,0,0" Text="Openingsuren:"/>
+                        </StackPanel>
+                        <ListView x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="16,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Day}"/>
+                                        <TextBlock Grid.Column="1" Text=": "/>
+                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
+                                        <TextBlock Grid.Column="3" Text=" - "/>
+                                        <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+
+
+
+        <DataTemplate x:Key="DesktopTemplate">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
+                    <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xEC07;   "/>
+                            <TextBlock Text="{Binding Name}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE707;   "/>
+                            <TextBlock x:Name="AddressEst" Text="{Binding Address}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE717;   "/>
+                            <TextBlock Text="{Binding PhoneNumber}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE715;   "/>
+                            <TextBlock Text="{Binding Email}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Padding="5,0,5,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE823;   "/>
+                            <TextBlock Margin="0,-4,0,0" Text="openingsuren:"/>
+                        </StackPanel>
+
+                        <ListView x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="MinHeight" Value="25" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Day}"/>
+                                        <TextBlock Grid.Column="1" Text=": "/>
+                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
+                                        <TextBlock Grid.Column="3" Text=" - "/>
+                                        <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
 
 
                     </StackPanel>
 
                 </StackPanel>
-            </Grid>
+            </StackPanel>
+
         </DataTemplate>
+        
 
     </Page.Resources>
 
-    <StackPanel  Spacing="10" Margin="20,10,0,0">
+    
+    <Pivot  Title="{Binding Business.Name}">
+        
+
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Small">
@@ -94,9 +246,17 @@
                         <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="Desktop">
+                <VisualState x:Name="Medium">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource MediumTemplate}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1500" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
@@ -104,18 +264,160 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <TextBlock Text="{Binding Business.Name}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <TextBlock Text="{Binding Business.Category}" FontSize="9" HorizontalAlignment="Center" Margin="0,-14.3,0,0"/>
-        <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center"/>
-        <TextBlock Text="Alle vestigingen:"/>
-        <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left" >
-        </ListView>
 
-        <TextBlock  Text="Link to our website: " HorizontalAlignment="Center">
-            <Hyperlink NavigateUri="{Binding Business.LinkWebsite}">
-                {Binding Business.LinkWebsite}
-            </Hyperlink>
-        </TextBlock>
-    </StackPanel>
 
+
+
+
+
+        <PivotItem Header="Algemeen">
+            <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                <StackPanel Margin="20,10,0,0">
+                    <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Business.Category}" FontSize="13" HorizontalAlignment="Center" Margin="0,-14.3,0,5"/>
+                    <Image Source="../Images/ikea.png" Width="300"/>
+                    <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE774;   "/>
+                        <HyperlinkButton Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-10,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </PivotItem>
+        
+        <PivotItem Header="Vestiging(en)">
+            <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
+                <StackPanel>
+                    <ListView x:Name="listViewEstablishments" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                        
+                </ListView>
+                <TextBlock Text="Op kaart:" FontWeight="Bold" FontSize="16"/>
+                <maps:MapControl Name="MCMap" Height="250" Width="auto" Margin="0,0,20,20"/>
+            </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+        <PivotItem Header="Promotie">
+            <ListView x:Name="listViewEstablishmentsWithPromotions" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackPanel Padding="5">
+
+                            <ListView ItemsSource="{Binding Promotions}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="MinHeight" Value="25" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <ContentPresenter/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border  BorderThickness="2" BorderBrush="Black">
+                                            <StackPanel Padding="10">
+                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Description}"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Geldig van: "/>
+                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Is met kortingsbon:  "/>
+                                                    <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
+                                                </StackPanel>
+                                                
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </PivotItem>
+        <PivotItem Header="Evenement">
+            <ListView x:Name="listViewEstablishmentsWithEvents" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <StackPanel>
+                            <ListView  ItemsSource="{Binding Events}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="MinHeight" Value="25" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <ContentPresenter/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderThickness="2" BorderBrush="Black">
+                                            <StackPanel Padding="10">
+                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Description}"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Vindt plaats van: "/>
+                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </PivotItem>
+    </Pivot>
+ 
 </Page>

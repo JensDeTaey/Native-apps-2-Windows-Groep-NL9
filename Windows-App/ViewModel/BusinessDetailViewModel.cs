@@ -16,5 +16,10 @@ namespace Windows_App.ViewModel
             this.Business = business;
         }
 
+        public List<Establishment> getEstablishments()
+        {
+            return Business.Establishments;
+        }
+
     }
 }
