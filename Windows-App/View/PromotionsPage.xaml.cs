@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +26,12 @@ namespace Windows_App.View
         public PromotionsPage()
         {
             this.InitializeComponent();
+            this.DataContext = new PromotionsViewModel();
+        }
+
+        private void ListViewPromotions_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

@@ -166,5 +166,63 @@ namespace Windows_App
                 }
         };
 
+        public static List<Promotion> Promotions { get; } = new List<Promotion>()
+        {
+            new Promotion()
+            {
+                Name = "Actie in Inno",
+                Description = "Deze week grote kortingen tot 50% op kleding!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = true
+            },
+
+            new Promotion()
+            {
+                Name = "Actie in Action",
+                Description = "Deze week grote kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = false
+            },
+
+            new Promotion()
+            {
+                Name = "Actie in GameMania",
+                Description = "Deze week grote kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = false
+            },
+
+            new Promotion()
+            {
+                Name = "Actie in HEMA",
+                Description = "Deze week grote kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = false
+            },
+            
+            new Promotion()
+            {
+                Name = "Actie in Media Markt",
+                Description = "Deze week 2+1 gratis op het gehele gameassortiment!!",
+                StartDate  = new DateTime(2018,12,12),
+                EndDate = new DateTime(2018,12,16),
+                IsDiscountCoupon = false
+            },
+
+            new Promotion()
+            {
+                Name = "Actie in Xenos",
+                Description = "Deze week grote kortingen tot 50% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = true
+            }
+
+        };
+
     }
 }

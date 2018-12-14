@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BusinessDetailViewModel.cs" />
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
+    <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="View\AddBusinessPage.xaml.cs">
       <DependentUpon>AddBusinessPage.xaml</DependentUpon>
     </Compile>
