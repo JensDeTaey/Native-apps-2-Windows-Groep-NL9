@@ -20,7 +20,7 @@
             <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="FontSize" Value="18"/>
-            <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/>
+            <!--Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}"/-->
             <Setter Property="FocusVisualMargin" Value="-3"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -89,8 +89,8 @@
 
     <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
-            <StackPanel Background="{ThemeResource SystemControlAcrylicWindowBrush}" HorizontalAlignment="Stretch">
-                <Button Background="{ThemeResource SystemControlAcrylicWindowBrush}"
+            <StackPanel HorizontalAlignment="Stretch">
+                <Button 
                         x:Name="NavCollapseButton"
                         FontFamily="Segoe MDL2 Assets" 
                         Content="&#xE700;" 
