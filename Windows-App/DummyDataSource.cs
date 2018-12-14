@@ -78,7 +78,8 @@ namespace Windows_App
                 Description = "Deze week grote kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,12,11),
-                IsDiscountCoupon = false
+                IsDiscountCoupon = false,
+                Business = BusinessIkea
             }
         };
 
@@ -99,9 +100,8 @@ namespace Windows_App
             new Establishment() {Name="Ikea Antwerpen",Address="Boomsesteenweg 755, 2610 Antwerpen",PhoneNumber="02 458 69 69",Email="IkeaAntwerpen@Ikea.com",OpeningHours=OpeningHoursIkea}
         };
 
-        public static List<Business> Businesses { get; } = new List<Business>()
+        public static Business BusinessIkea { get; } = new Business()
         {
-            new Business() {
                 Name ="Ikea",
                 Description = "Dit is een korte beschrijving van de Ikea waar je ook lekker kunt gaan eten enzo",
                 Category = "Interieur",
@@ -109,43 +109,60 @@ namespace Windows_App
                 LinkWebsite = "https://www.ikea.com/be/nl/",
                 NumberOfSubscribers = 8,
                 Establishments = new List<Establishment>(EstablishmentsIkea)
-                },
-            new Business() {
-                Name ="Inno",
-                Description = "Een winkel waar je vriendin je mee naartoe sleept om 'even' 'goedope' kleren te bekijken",
-                Category = "Kleding",
-                Picture = BusinessPicture,
-                LinkWebsite = "https://www.inno.be/nl-be/",
-                NumberOfSubscribers = 69,
-                Establishments = new List<Establishment>()
-                },
-            new Business() {
-                Name ="Action",
-                Description = "De meest goedkope elektronica winkel die er is. Dankje voor de 5 euro muis die nog steeds meegaat.",
-                Category = "Elektronica",
-                Picture = BusinessPicture,
-                LinkWebsite = "https://www.action.com/nl-be/",
-                NumberOfSubscribers = 420,
-                Establishments = new List<Establishment>()
-                },
-            new Business() {
-                Name ="GameMania",
-                Description = "Voor sentimentele waarden en games in te ruilen kan je hier terecht. Wordt gewoon PC masterrace, waarvoor je alles kan torrenten.",
-                Category = "Games",
-                Picture = BusinessPicture,
-                LinkWebsite = "https://www.gamemania.nl/Winkels",
-                NumberOfSubscribers = 53,
-                Establishments = new List<Establishment>()
-                },
-            new Business() {
-                Name ="HEMA",
-                Description = "HEMA maakt gebruik van cookies en daarmee vergelijkbare technieken om jou een optimale bezoekerservaring te bieden, om jou relevante advertenties aan te bieden en om jouw surfgedrag te meten.",
-                Category = "Kleding",
-                Picture = BusinessPicture,
-                LinkWebsite = "https://www.hema.be/",
-                NumberOfSubscribers = 1,
-                Establishments = new List<Establishment>()
-                },
+        };
+
+        public static Business BusinessInno { get; } = new Business()
+        {
+            Name = "Inno",
+            Description = "Een winkel waar je vriendin je mee naartoe sleept om 'even' 'goedope' kleren te bekijken",
+            Category = "Kleding",
+            Picture = BusinessPicture,
+            LinkWebsite = "https://www.inno.be/nl-be/",
+            NumberOfSubscribers = 69,
+            Establishments = new List<Establishment>()
+        };
+
+        public static Business BusinessAction { get; } = new Business()
+        {
+            Name = "Action",
+            Description = "De meest goedkope elektronica winkel die er is. Dankje voor de 5 euro muis die nog steeds meegaat.",
+            Category = "Elektronica",
+            Picture = BusinessPicture,
+            LinkWebsite = "https://www.action.com/nl-be/",
+            NumberOfSubscribers = 420,
+            Establishments = new List<Establishment>()
+        };
+
+        public static Business BusinessGameMania { get; } = new Business()
+        {
+            Name = "GameMania",
+            Description = "Voor sentimentele waarden en games in te ruilen kan je hier terecht. Wordt gewoon PC masterrace, waarvoor je alles kan torrenten.",
+            Category = "Games",
+            Picture = BusinessPicture,
+            LinkWebsite = "https://www.gamemania.nl/Winkels",
+            NumberOfSubscribers = 53,
+            Establishments = new List<Establishment>()
+        };
+
+        public static Business BusinessHema { get; } = new Business()
+        {
+            Name = "HEMA",
+            Description = "HEMA maakt gebruik van cookies en daarmee vergelijkbare technieken om jou een optimale bezoekerservaring te bieden, om jou relevante advertenties aan te bieden en om jouw surfgedrag te meten.",
+            Category = "Kleding",
+            Picture = BusinessPicture,
+            LinkWebsite = "https://www.hema.be/",
+            NumberOfSubscribers = 1,
+            Establishments = new List<Establishment>()
+        };
+
+        public static List<Business> Businesses { get; } = new List<Business>()
+        {
+            BusinessIkea,
+            BusinessInno,
+            BusinessAction,
+            BusinessGameMania,
+            BusinessHema,
+          
             new Business() {
                 Name ="Media Markt",
                 Description = "Wie dit leest is gek.",
@@ -168,6 +185,15 @@ namespace Windows_App
 
         public static List<Promotion> Promotions { get; } = new List<Promotion>()
         {
+            new Promotion()
+            {
+                Name = "Actie in Ikea",
+                Description = "Deze week grote kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = false,
+                Business = BusinessIkea
+            },
             new Promotion()
             {
                 Name = "Actie in Inno",
@@ -224,5 +250,63 @@ namespace Windows_App
 
         };
 
+        public static List<Event> Events { get; } = new List<Event>()
+        {
+            new Event()
+            {
+                Name = "Nieuwe opening in Ikea",
+                Description = "Deze week grote opening nieuwe vestiging in Antwerpen!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                Business = BusinessIkea
+            },
+            new Event()
+            {
+                Name = "Opendeurdag in Inno",
+                Description = "Deze week grote Opendeurdag kortingen tot 50% op kleding!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11)
+            },
+
+            new Event()
+            {
+                Name = "Opendeurdag in Action",
+                Description = "Deze week grote Opendeurdag met kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11)
+            },
+
+            new Event()
+            {
+                Name = "Opendeurdag in GameMania",
+                Description = "Deze week grote Opendeurdag met kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11)
+            },
+
+            new Event()
+            {
+                Name = "Opendeurdag in HEMA",
+                Description = "Deze week grote Opendeurdag met kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11)
+            },
+
+            new Event()
+            {
+                Name = "Opendeurdag in Media Markt",
+                Description = "Deze week Opendeurdag 2+1 gratis op het gehele gameassortiment!!",
+                StartDate  = new DateTime(2018,12,12),
+                EndDate = new DateTime(2018,12,16)
+            },
+
+            new Event()
+            {
+                Name = "Opendeurdag in Xenos",
+                Description = "Deze week grote Opendeurdag tot 50% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11)
+            }
+        };
     }
 }

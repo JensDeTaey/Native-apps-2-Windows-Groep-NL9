@@ -233,7 +233,7 @@
     </Page.Resources>
 
     
-    <Pivot  Title="{Binding Business.Name}">
+    <Pivot x:Name="PivotBusiness"   Title="{Binding Business.Name}">
         
 
         <VisualStateManager.VisualStateGroups>

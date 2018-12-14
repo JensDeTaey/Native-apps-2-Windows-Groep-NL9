@@ -35,7 +35,10 @@ namespace Windows_App.View
         private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
             Business selectedBusiness = e.ClickedItem as Business;
-            Frame.Navigate(typeof(BusinessDetailPage), new BusinessDetailViewModel(selectedBusiness), new DrillInNavigationTransitionInfo());
+            PageLoadWithMultipleParameters pageLoad = new PageLoadWithMultipleParameters();
+            pageLoad.Business = selectedBusiness;
+            pageLoad.pivot = "business";
+            Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
     }
 }

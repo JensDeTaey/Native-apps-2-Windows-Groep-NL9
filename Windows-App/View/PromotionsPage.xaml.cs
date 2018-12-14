@@ -34,8 +34,10 @@ namespace Windows_App.View
         private void ListViewPromotions_ItemClick(object sender, ItemClickEventArgs e)
         {
           Promotion selectedPromotion = e.ClickedItem as Promotion;
-          Frame.Navigate(typeof(BusinessDetailPage), new BusinessDetailViewModel(selectedPromotion), new DrillInNavigationTransitionInfo());
-            
+            PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters();
+            payload.Business = selectedPromotion.Business;
+            payload.pivot = "promotion";
+            Frame.Navigate(typeof(BusinessDetailPage), payload, new DrillInNavigationTransitionInfo());
         }
     }
 }

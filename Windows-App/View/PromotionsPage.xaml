@@ -49,7 +49,7 @@
 
     </Page.Resources>
 
-    <StackPanel>
+    <Grid>
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup>
                 <VisualState x:Name="Small">
@@ -70,8 +70,10 @@
                 </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-
-                <ListView x:Name="ListViewPromotions" ItemsSource="{Binding Promotions}" IsItemClickEnabled="True" ItemClick="ListViewPromotions_ItemClick" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListViewPromotions" ItemsSource="{Binding Promotions}" IsItemClickEnabled="True" ItemClick="ListViewPromotions_ItemClick" >
                 </ListView>
-    </StackPanel>
+    </Grid>
 </Page>

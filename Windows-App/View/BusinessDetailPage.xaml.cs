@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Model;
 using Windows_App.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -37,9 +38,12 @@ namespace Windows_App.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if( e.Parameter is BusinessDetailViewModel)
+            if( e.Parameter is PageLoadWithMultipleParameters)
             {
-                DataContext = e.Parameter as BusinessDetailViewModel;
+                PageLoadWithMultipleParameters pageLoad = e.Parameter as PageLoadWithMultipleParameters;
+                DataContext =  new BusinessDetailViewModel(pageLoad.Business);
+                goToRightPivot(pageLoad.pivot);
+                //DataContext = e.Parameter as BusinessDetailViewModel;
                 AddEstablishmentsToMap();
             }
             else
@@ -70,6 +74,20 @@ namespace Windows_App.View
                     , esta.Name);
             });
 
+        }
+
+        private void goToRightPivot(string pivot)
+        {
+            switch (pivot)
+            {
+                case "promotion": PivotBusiness.SelectedIndex = 2;
+                    break;
+                case "event": PivotBusiness.SelectedIndex = 3;
+                    break;
+                default: PivotBusiness.SelectedIndex = 0;
+                    break;
+            }
+            
         }
 
         private void AddPointToMap(Geopoint geoPoint, string title)
