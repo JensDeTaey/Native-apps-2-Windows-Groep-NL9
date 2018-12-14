@@ -231,9 +231,10 @@
         
 
     </Page.Resources>
-    
 
-    <Pivot Title="{Binding Business.Name}">
+    
+    <Pivot  Title="{Binding Business.Name}">
+        
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -268,7 +269,7 @@
 
 
 
-        
+
         <PivotItem Header="Algemeen">
             <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
                 <StackPanel Margin="20,10,0,0">
@@ -345,15 +346,15 @@
                                     <DataTemplate>
                                         <Border  BorderThickness="2" BorderBrush="Black">
                                             <StackPanel Padding="10">
-                                                <TextBlock Text="{Binding Name}"/>
+                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                                                 <TextBlock Text="{Binding Description}"/>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Geldig van: "/>
-                                                    <TextBlock Text="{Binding TimeValid}"/>
+                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Is met kortingsbon:  "/>
-                                                    <TextBlock Text="{Binding NeedCoupon}"/>
+                                                    <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                                 
                                             </StackPanel>
@@ -400,14 +401,14 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="2" BorderBrush="Black">
-                                        <StackPanel Padding="10">
-                                            <TextBlock Text="{Binding Name}" />
-                                            <TextBlock Text="{Binding Description}"/>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Vindt plaats van: "/>
-                                                <TextBlock Text="{Binding TimeValid}"/>
+                                            <StackPanel Padding="10">
+                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Description}"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Vindt plaats van: "/>
+                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
                                                 </StackPanel>
-                                        </StackPanel>
+                                            </StackPanel>
                                         </Border>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
@@ -416,11 +417,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </PivotItem>
     </Pivot>
-    
-
-
-
+ 
 </Page>
