@@ -14,8 +14,6 @@ namespace Windows_App.Model
         public DateTime EndDate { get; set; }
         public long Picture { get; set; }
         public bool IsDiscountCoupon { get; set; }
-
-
         public Business Business { get; set; }
 
         public string TimeValid
