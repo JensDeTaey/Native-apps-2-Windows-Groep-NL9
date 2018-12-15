@@ -383,7 +383,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
 
-                        <StackPanel>
+                        <StackPanel Padding="5">
                             <ListView  ItemsSource="{Binding Events}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
@@ -401,7 +401,7 @@
                                     <DataTemplate>
                                         <Border BorderThickness="2" BorderBrush="Black">
                                             <StackPanel Padding="10">
-                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
                                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Vindt plaats van: "/>
