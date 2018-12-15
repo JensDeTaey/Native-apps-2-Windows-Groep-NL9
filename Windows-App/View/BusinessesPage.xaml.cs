@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using Windows_App.Model;
 using Windows_App.ViewModel;
+using static Windows_App.Model.PageLoadWithMultipleParameters;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -34,8 +35,11 @@ namespace Windows_App.View
 
         private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Business selectedBusiness = e.ClickedItem as Business;
-            Frame.Navigate(typeof(BusinessDetailPage), new BusinessDetailViewModel(selectedBusiness), new DrillInNavigationTransitionInfo());
+            Business selectedBusiness= e.ClickedItem as Business;
+            PageLoadWithMultipleParameters pageLoad = new PageLoadWithMultipleParameters();
+            pageLoad.EstablishmentId = selectedBusiness.Id;
+            pageLoad.Pivot = PivotOptions.BUSINESS;
+            Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
     }
 }

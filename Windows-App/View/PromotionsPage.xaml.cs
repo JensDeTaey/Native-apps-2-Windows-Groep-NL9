@@ -11,7 +11,11 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Model;
+using Windows_App.ViewModel;
+using static Windows_App.Model.PageLoadWithMultipleParameters;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +29,16 @@ namespace Windows_App.View
         public PromotionsPage()
         {
             this.InitializeComponent();
+            this.DataContext = new PromotionsViewModel();
+        }
+
+        private void ListViewPromotions_ItemClick(object sender, ItemClickEventArgs e)
+        {
+          Promotion selectedPromotion = e.ClickedItem as Promotion;
+            PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters();
+            payload.EstablishmentId = selectedPromotion.EstablishmentId;
+            payload.Pivot = PivotOptions.PROMOTION;
+            Frame.Navigate(typeof(BusinessDetailPage), payload, new DrillInNavigationTransitionInfo());
         }
     }
 }

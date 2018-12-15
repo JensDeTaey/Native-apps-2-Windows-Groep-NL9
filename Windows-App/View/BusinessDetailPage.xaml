@@ -13,7 +13,7 @@
         <DataTemplate x:Key="SmallScreenTemplate">
             
                     <StackPanel Orientation="Vertical" >
-                        <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="auto" Margin="0,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                        <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="auto" Margin="0,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                         <StackPanel Orientation="Horizontal" >
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xEC07;  "/>
@@ -82,7 +82,7 @@
         <DataTemplate x:Key="MediumTemplate">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
-                    <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                    <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
@@ -154,7 +154,7 @@
         <DataTemplate x:Key="DesktopTemplate">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
-                    <Image Source="../Images/ikeaEstablishment.jpg" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                    <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
@@ -233,7 +233,7 @@
     </Page.Resources>
 
     
-    <Pivot  Title="{Binding Business.Name}">
+    <Pivot x:Name="PivotBusiness"   Title="{Binding Business.Name}">
         
 
         <VisualStateManager.VisualStateGroups>
@@ -275,7 +275,7 @@
                 <StackPanel Margin="20,10,0,0">
                     <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
                     <TextBlock Text="{Binding Business.Category}" FontSize="13" HorizontalAlignment="Center" Margin="0,-14.3,0,5"/>
-                    <Image Source="../Images/ikea.png" Width="300"/>
+                    <Image Source="{Binding Business.Picture}" Width="300"/>
                     <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
                     
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -347,7 +347,7 @@
                                         <Border  BorderThickness="2" BorderBrush="Black">
                                             <StackPanel Padding="10">
                                                 <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
-                                                <TextBlock Text="{Binding Description}"/>
+                                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Geldig van: "/>
                                                     <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
@@ -356,7 +356,6 @@
                                                     <TextBlock Text="Is met kortingsbon:  "/>
                                                     <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
                                                 </StackPanel>
-                                                
                                             </StackPanel>
                                         </Border>
                                     </DataTemplate>
@@ -384,7 +383,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
 
-                        <StackPanel>
+                        <StackPanel Padding="5">
                             <ListView  ItemsSource="{Binding Events}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
@@ -402,11 +401,11 @@
                                     <DataTemplate>
                                         <Border BorderThickness="2" BorderBrush="Black">
                                             <StackPanel Padding="10">
-                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
-                                                <TextBlock Text="{Binding Description}"/>
+                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Vindt plaats van: "/>
-                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding TimeValid}" TextWrapping="Wrap" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>
