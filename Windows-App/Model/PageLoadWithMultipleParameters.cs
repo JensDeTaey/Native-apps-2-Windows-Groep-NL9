@@ -9,6 +9,12 @@ namespace Windows_App.Model
     class PageLoadWithMultipleParameters
     {
         public int EstablishmentId { get; set; }
-        public string pivot { get; set; }
+        public PivotOptions Pivot { get; set; }
+
+        public enum PivotOptions
+        {
+            BUSINESS, ESTABLISHMENT, PROMOTION, EVENT
+        }
     }
+
 }

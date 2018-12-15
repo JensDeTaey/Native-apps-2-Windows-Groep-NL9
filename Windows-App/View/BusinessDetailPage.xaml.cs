@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows_App.Model;
 using Windows_App.ViewModel;
+using static Windows_App.Model.PageLoadWithMultipleParameters;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -40,24 +41,26 @@ namespace Windows_App.View
         {
             if( e.Parameter is PageLoadWithMultipleParameters)
             {
-                //very messy coding
+                //Cast pageload
                 PageLoadWithMultipleParameters pageLoad = e.Parameter as PageLoadWithMultipleParameters;
+
                 BusinessDetailViewModel viewModel = new BusinessDetailViewModel();
-                if(pageLoad.pivot == "business")
+                Business business;
+                //check whether the businessID was passed along or the establishmentID
+                if (pageLoad.Pivot == PivotOptions.BUSINESS)
                 {
-                    Business business = viewModel.getRightBusiness(pageLoad.EstablishmentId);
-                    DataContext = new BusinessDetailViewModel(business);
+                    business = viewModel.FindBusiness(pageLoad.EstablishmentId);
                 }
                 else
                 {
-                    Establishment establishment = viewModel.getRightEstablishment(pageLoad.EstablishmentId);
-                    Business business = viewModel.getRightBusiness(establishment.BusinessId);
-                    DataContext = new BusinessDetailViewModel(business);
+                    //Get the establishment, then use the businessID to get Business
+                    Establishment establishment = viewModel.FindEstablishment(pageLoad.EstablishmentId);
+                    business = viewModel.FindBusiness(establishment.BusinessId);
                 }
-                
-                
-                goToRightPivot(pageLoad.pivot);
-                //DataContext = e.Parameter as BusinessDetailViewModel;
+
+                DataContext = new BusinessDetailViewModel(business);
+
+                GoToRightPivot(pageLoad.Pivot);
                 AddEstablishmentsToMap();
             }
             else
@@ -73,7 +76,7 @@ namespace Windows_App.View
             Geopoint gp2 = new Geopoint(bg2);
 
             BusinessDetailViewModel business = this.DataContext as BusinessDetailViewModel;
-            business.getEstablishments().ForEach(async esta =>
+            business.GetEstablishments().ForEach(async esta =>
             {
                 MapLocationFinderResult res =
                 await MapLocationFinder.FindLocationsAsync(esta.Address, gp2);
@@ -90,13 +93,13 @@ namespace Windows_App.View
 
         }
 
-        private void goToRightPivot(string pivot)
+        private void GoToRightPivot(PivotOptions pivot)
         {
             switch (pivot)
             {
-                case "promotion": PivotBusiness.SelectedIndex = 2;
+                case PivotOptions.PROMOTION: PivotBusiness.SelectedIndex = 2;
                     break;
-                case "event": PivotBusiness.SelectedIndex = 3;
+                case PivotOptions.EVENT: PivotBusiness.SelectedIndex = 3;
                     break;
                 default: PivotBusiness.SelectedIndex = 0;
                     break;

@@ -1,36 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows_App.Model;
 
 namespace Windows_App
 {
     public static class DummyDataSource
     {
-        private static BitmapImage businessPicture;
-
-        public static BitmapImage BusinessPicture
-        {
-            get
-            {
-                return null;/*
-                if (businessPicture == null)
-                {
-                    UriBuilder builder = new UriBuilder
-                    {
-                        Path = AppDomain.CurrentDomain.BaseDirectory + @"Images/ikea.png"
-                    };
-                    businessPicture = new BitmapImage(builder.Uri);
-                }
-                return businessPicture;*/
-            }
-        }
-
         public static List<OpeningHour> OpeningHoursIkea { get; } = new List<OpeningHour>()
         {
             new OpeningHour(){
@@ -102,8 +77,6 @@ namespace Windows_App
             EventIkeaAntwerpen1
         };
 
-
-        
         public static Event EventIkeaGent1 { get; } = new Event()
         {
             Id = 1,
@@ -142,6 +115,7 @@ namespace Windows_App
             Name = "Ikea Antwerpen",
             Address = "Boomsesteenweg 755, 2610 Antwerpen",
             PhoneNumber = "02 458 69 69",
+            Picture = "https://i.imgur.com/ODYpLGd.png",
             Email = "IkeaAntwerpen@Ikea.com",
             OpeningHours = OpeningHoursIkea,
             Promotions = PromotionsIkeaAntwerpen,
@@ -154,6 +128,7 @@ namespace Windows_App
             Name = "Ikea Gent",
             Address = "Maaltekouter 2, 9051 Gent",
             PhoneNumber = "02 719 19 22",
+            Picture = "https://i.imgur.com/mrHTchx.jpg?1",
             Email = "IkeaGent@Ikea.com",
             OpeningHours = OpeningHoursIkea,
             Promotions = PromotionsIkeaGent,
@@ -173,13 +148,13 @@ namespace Windows_App
             Name = "Ikea",
             Description = "Dit is een korte beschrijving van de Ikea waar je ook lekker kunt gaan eten enzo",
             Category = "Interieur",
-            Picture = BusinessPicture,
+            Picture = "https://i.imgur.com/eVYhPIx.png",
             LinkWebsite = "https://www.ikea.com/be/nl/",
             NumberOfSubscribers = 8,
             Establishments = EstablishmentsIkea
         };
 
-        
+
 
         public static Establishment EstablishmentInno { get; } = new Establishment()
         {
@@ -187,12 +162,12 @@ namespace Windows_App
             Name = "Inno Waasland",
             Address = "Kapelstraat 100, 9100 Sint-Niklaas",
             PhoneNumber = "03 766 52 20",
+            Picture = "https://i.imgur.com/O5xSNUP.png",
             Email = "InnoWaasland@Inno.com",
             OpeningHours = OpeningHoursIkea,
             Promotions = PromotionsInno,
             Events = EventsInno,
             BusinessId = 2
-
         };
 
         public static Event EventInno { get; } = new Event()
@@ -227,8 +202,8 @@ namespace Windows_App
         };
 
 
-     
-        
+
+
 
         public static List<Establishment> EstablishmentsInno { get; } = new List<Establishment>()
         {
@@ -243,7 +218,7 @@ namespace Windows_App
             Name = "Inno",
             Description = "Een winkel waar je vriendin je mee naartoe sleept om 'even' 'goedope' kleren te bekijken",
             Category = "Kleding",
-            Picture = BusinessPicture,
+            Picture = "https://i.imgur.com/iOAabXU.jpg",
             LinkWebsite = "https://www.inno.be/nl-be/",
             NumberOfSubscribers = 69,
             Establishments = EstablishmentsInno
@@ -255,7 +230,7 @@ namespace Windows_App
             Name = "Action",
             Description = "De meest goedkope elektronica winkel die er is. Dankje voor de 5 euro muis die nog steeds meegaat.",
             Category = "Elektronica",
-            Picture = BusinessPicture,
+            Picture = "https://i.imgur.com/E1IX7uc.png",
             LinkWebsite = "https://www.action.com/nl-be/",
             NumberOfSubscribers = 420,
             Establishments = new List<Establishment>()
@@ -267,7 +242,7 @@ namespace Windows_App
             Name = "GameMania",
             Description = "Voor sentimentele waarden en games in te ruilen kan je hier terecht. Wordt gewoon PC masterrace, waarvoor je alles kan torrenten.",
             Category = "Games",
-            Picture = BusinessPicture,
+            Picture = "https://i.imgur.com/Vmd4U36.png",
             LinkWebsite = "https://www.gamemania.nl/Winkels",
             NumberOfSubscribers = 53,
             Establishments = new List<Establishment>()
@@ -279,7 +254,7 @@ namespace Windows_App
             Name = "HEMA",
             Description = "HEMA maakt gebruik van cookies en daarmee vergelijkbare technieken om jou een optimale bezoekerservaring te bieden, om jou relevante advertenties aan te bieden en om jouw surfgedrag te meten.",
             Category = "Kleding",
-            Picture = BusinessPicture,
+            Picture = "https://i.imgur.com/V9zLpm2.jpg",
             LinkWebsite = "https://www.hema.be/",
             NumberOfSubscribers = 1,
             Establishments = new List<Establishment>()
@@ -292,13 +267,13 @@ namespace Windows_App
             BusinessAction,
             BusinessGameMania,
             BusinessHema,
-          
+
             new Business() {
                 Id = 6,
                 Name ="Media Markt",
                 Description = "Wie dit leest is gek.",
                 Category = "Elektronica",
-                Picture = BusinessPicture,
+                Picture = "https://i.imgur.com/JrJYcJH.png",
                 LinkWebsite = "https://www.mediamarkt.be/",
                 NumberOfSubscribers = 6969,
                 Establishments = new List<Establishment>()
@@ -308,7 +283,7 @@ namespace Windows_App
                 Name ="Xenos",
                 Description = "Nog nooit van deze winkel gehoord. Bezoek de site en zoek het zelf uit x",
                 Category = "Interieur",
-                Picture = BusinessPicture,
+                Picture = "https://i.imgur.com/jpZtT1a.jpg",
                 LinkWebsite = "https://www.xenos.nl/",
                 NumberOfSubscribers = 156,
                 Establishments = new List<Establishment>()
@@ -359,7 +334,7 @@ namespace Windows_App
                 EndDate = new DateTime(2018,12,11),
                 IsDiscountCoupon = false
             },
-            
+
             new Promotion()
             {
                 Id = 8,

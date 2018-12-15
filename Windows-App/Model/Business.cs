@@ -11,7 +11,7 @@ namespace Windows_App.Model
         public string Name { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public BitmapImage Picture { get; set; }
+        public string Picture { get; set; }
         public string LinkWebsite { get; set; }
         public int NumberOfSubscribers { get; set; }
         public List<Establishment> Establishments { get; set; }

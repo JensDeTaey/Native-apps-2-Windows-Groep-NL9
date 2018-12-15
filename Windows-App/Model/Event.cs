@@ -13,7 +13,7 @@ namespace Windows_App.Model
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public long PictureEvent { get; set; }
+        public string Picture { get; set; }
         public int EstablishmentId { get; set; }
 
         public string TimeValid

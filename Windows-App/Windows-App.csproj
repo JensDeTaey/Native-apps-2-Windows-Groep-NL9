@@ -145,6 +145,7 @@
     <Content Include="Images\ikeaEstablishment.jpg" />
     <Content Include="Images\inno.png" />
     <Content Include="Images\media-markt_logo.jpg" />
+    <Content Include="Images\promotie.png" />
     <Content Include="Images\xenos.jpeg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

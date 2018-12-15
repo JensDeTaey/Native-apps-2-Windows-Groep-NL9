@@ -25,19 +25,19 @@ namespace Windows_App.ViewModel
             
         }
 
-        public List<Establishment> getEstablishments()
+        public List<Establishment> GetEstablishments()
         {
             return Business.Establishments;
         }
 
-        public Establishment getRightEstablishment(int id)
+        public Establishment FindEstablishment(int establishmentID)
         {
-            return Establishments.Find(esta => esta.Id == id);
+            return Establishments.Find(esta => esta.Id == establishmentID);
         }
 
-        public Business getRightBusiness(int id)
+        public Business FindBusiness(int businessID)
         {
-            return Businesses.Find(bis => bis.Id == id);
+            return Businesses.Find(bis => bis.Id == businessID);
         }
 
     }
