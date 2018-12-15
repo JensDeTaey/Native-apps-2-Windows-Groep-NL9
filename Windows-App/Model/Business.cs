@@ -14,14 +14,12 @@ namespace Windows_App.Model
         public BitmapImage Picture { get; set; }
         public string LinkWebsite { get; set; }
         public int NumberOfSubscribers { get; set; }
-
         public List<Establishment> Establishments { get; set; }
-        public List<Promotion> Promotions { get; set; }
+        
 
         public Business()
         {
             this.Establishments = new List<Establishment>();
-            this.Promotions = new List<Promotion>();
         }
     }
 }

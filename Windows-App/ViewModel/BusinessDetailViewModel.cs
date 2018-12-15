@@ -23,5 +23,9 @@ namespace Windows_App.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public List<Establishment> getEstablishments()
+        {
+            return Business.Establishments;
+        }
     }
 }

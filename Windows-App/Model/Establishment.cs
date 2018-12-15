@@ -15,5 +15,6 @@ namespace Windows_App.Model
         public List<OpeningHour> OpeningHours { get; set; }
         //public string Picture { get; set; }
         public List<Event> Events { get; set; }
+        public List<Promotion> Promotions { get; set; }
     }
 }

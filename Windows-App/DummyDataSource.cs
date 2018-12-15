@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +18,7 @@ namespace Windows_App
         {
             get
             {
+                return null;/*
                 if (businessPicture == null)
                 {
                     UriBuilder builder = new UriBuilder
@@ -27,14 +27,76 @@ namespace Windows_App
                     };
                     businessPicture = new BitmapImage(builder.Uri);
                 }
-                return businessPicture;
+                return businessPicture;*/
             }
         }
 
+        public static List<OpeningHour> OpeningHoursIkea { get; } = new List<OpeningHour>()
+        {
+            new OpeningHour(){
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Monday),
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Tuesday),
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =   DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Wednesday),
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Thursday),
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Friday),
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Saterday),
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Sunday),
+                OpeningsHour ="0:00",
+                ClosingsHour ="0:00"
+            }
+        };
+
+        public static List<Promotion> PromotionsIkea { get; } = new List<Promotion>()
+        {
+            new Promotion()
+            {
+                Name = "Actie in Ikea",
+                Description = "Deze week grote kortingen tot 70% op alles!",
+                StartDate  = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,12,11),
+                IsDiscountCoupon = false
+            }
+        };
+
+        public static List<Event> EventsIkea { get; } = new List<Event>()
+        {
+            new Event()
+            {
+                Name = "Evenement in Ikea",
+                Description = "Deze week grote opening tot nieuwe vestiging!",
+                StartDate = new DateTime(2018,11,11),
+                EndDate = new DateTime(2018,11,15)
+            }
+        };
+
         public static List<Establishment> EstablishmentsIkea { get; } = new List<Establishment>()
         {
-            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22"},
-            new Establishment() {Name="Ikea Antwerpen",Address="Maaltekouter 2, 2000 Antwerpen",PhoneNumber="02 458 69 69"}
+            new Establishment() {Name="Ikea Gent",Address="Maaltekouter 2, 9051 Gent",PhoneNumber="02 719 19 22",Email="IkeaGent@Ikea.com",OpeningHours=OpeningHoursIkea,Promotions=PromotionsIkea,Events=EventsIkea},
+            new Establishment() {Name="Ikea Antwerpen",Address="Boomsesteenweg 755, 2610 Antwerpen",PhoneNumber="02 458 69 69",Email="IkeaAntwerpen@Ikea.com",OpeningHours=OpeningHoursIkea}
         };
 
         public static List<Business> Businesses { get; } = new List<Business>()
@@ -46,8 +108,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.ikea.com/be/nl/",
                 NumberOfSubscribers = 8,
-                Establishments = new List<Establishment>(EstablishmentsIkea),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>(EstablishmentsIkea)
                 },
             new Business() {
                 Name ="Inno",
@@ -56,8 +117,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.inno.be/nl-be/",
                 NumberOfSubscribers = 69,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="Action",
@@ -66,8 +126,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.action.com/nl-be/",
                 NumberOfSubscribers = 420,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="GameMania",
@@ -76,8 +135,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.gamemania.nl/Winkels",
                 NumberOfSubscribers = 53,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="HEMA",
@@ -86,8 +144,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.hema.be/",
                 NumberOfSubscribers = 1,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="Media Markt",
@@ -96,8 +153,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.mediamarkt.be/",
                 NumberOfSubscribers = 6969,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 },
             new Business() {
                 Name ="Xenos",
@@ -106,8 +162,7 @@ namespace Windows_App
                 Picture = BusinessPicture,
                 LinkWebsite = "https://www.xenos.nl/",
                 NumberOfSubscribers = 156,
-                Establishments = new List<Establishment>(),
-                Promotions = new List<Promotion>()
+                Establishments = new List<Establishment>()
                 }
         };
 

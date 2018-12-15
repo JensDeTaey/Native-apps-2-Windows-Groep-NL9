@@ -11,8 +11,8 @@
     <AssemblyName>Windows-App</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -113,6 +113,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BusinessDetailViewModel.cs" />
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
+    <Compile Include="View\AddBusinessPage.xaml.cs">
+      <DependentUpon>AddBusinessPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\BusinessDetailPage.xaml.cs">
       <DependentUpon>BusinessDetailPage.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,7 @@
     <Content Include="Images\gamemania.png" />
     <Content Include="Images\hema.jpg" />
     <Content Include="Images\ikea.png" />
+    <Content Include="Images\ikeaEstablishment.jpg" />
     <Content Include="Images\inno.png" />
     <Content Include="Images\media-markt_logo.jpg" />
     <Content Include="Images\xenos.jpeg" />
@@ -157,6 +161,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AddBusinessPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BusinessDetailPage.xaml">
       <SubType>Designer</SubType>
