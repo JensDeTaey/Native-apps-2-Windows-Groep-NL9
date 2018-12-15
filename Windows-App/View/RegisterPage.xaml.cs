@@ -20,9 +20,9 @@ namespace Windows_App.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AddBusinessPage : Page
+    public sealed partial class RegisterPage : Page
     {
-        public AddBusinessPage()
+        public RegisterPage()
         {
             this.InitializeComponent();
         }

@@ -22,7 +22,8 @@ namespace Windows_App
             {
                  NavPageBusinessesControl,
                  NavPagePromotionsControl,
-                 NavPageEventsContentControl
+                 NavPageEventsContentControl,
+                 NavRegister
             };
         }
 
@@ -48,6 +49,12 @@ namespace Windows_App
         {
             mainFrame.Navigate(typeof(EventsPage));
             NavigationContentControlActivated(sender);
+        }
+
+        private void NavPageRegisterContentControl_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(RegisterPage));
+            //NavigationContentControlActivated(sender);
         }
 
         private void NavigationContentControlActivated(object sender)

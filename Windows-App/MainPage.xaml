@@ -129,6 +129,9 @@
                         <TextBlock Text="Evenementen"  VerticalAlignment="Center" Margin="10,0,0,0"/>
                     </StackPanel>
                 </Button>
+                <AppBarButton x:Name="NavRegister" Icon="AddFriend" Label="registreer" Click="NavPageRegisterContentControl_Click"  />
+
+
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
