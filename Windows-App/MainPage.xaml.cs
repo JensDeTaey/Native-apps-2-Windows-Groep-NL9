@@ -56,7 +56,10 @@ namespace Windows_App
             mainFrame.Navigate(typeof(RegisterPage));
             //NavigationContentControlActivated(sender);
         }
-
+        private void NavPageLoginContentControl_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(LogInPage));
+        }
         private void NavigationContentControlActivated(object sender)
         {
             //resetting all navigation Controls
@@ -70,5 +73,6 @@ namespace Windows_App
             tappedControl.Style = (Style)this.Resources["SelectedNavigationButtonStyle"];
         }
 
+        
     }
 }

@@ -124,6 +124,9 @@
     <Compile Include="View\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LogInPage.xaml.cs">
+      <DependentUpon>LogInPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PromotionsPage.xaml.cs">
       <DependentUpon>PromotionsPage.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EventsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LogInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
