@@ -8,7 +8,7 @@ namespace Windows_App.Model
 {
     class PageLoadWithMultipleParameters
     {
-        public Business Business { get; set; }
+        public int EstablishmentId { get; set; }
         public string pivot { get; set; }
     }
 }

@@ -35,7 +35,8 @@ namespace Windows_App.View
         {
             Event selectedEvent = e.ClickedItem as Event;
             PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters();
-            payload.Business = selectedEvent.Business;
+
+            payload.EstablishmentId = selectedEvent.EstablishmentId;
             payload.pivot = "event";
             Frame.Navigate(typeof(BusinessDetailPage), payload, new DrillInNavigationTransitionInfo());
         }

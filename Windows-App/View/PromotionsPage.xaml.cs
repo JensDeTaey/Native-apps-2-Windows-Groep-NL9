@@ -35,7 +35,7 @@ namespace Windows_App.View
         {
           Promotion selectedPromotion = e.ClickedItem as Promotion;
             PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters();
-            payload.Business = selectedPromotion.Business;
+            payload.EstablishmentId = selectedPromotion.EstablishmentId;
             payload.pivot = "promotion";
             Frame.Navigate(typeof(BusinessDetailPage), payload, new DrillInNavigationTransitionInfo());
         }

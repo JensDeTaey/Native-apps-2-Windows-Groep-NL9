@@ -38,12 +38,10 @@ namespace Windows_App.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if( e.Parameter is PageLoadWithMultipleParameters)
+            if( e.Parameter is BusinessDetailViewModel)
             {
-                PageLoadWithMultipleParameters pageLoad = e.Parameter as PageLoadWithMultipleParameters;
-                DataContext =  new BusinessDetailViewModel(pageLoad.Business);
-                goToRightPivot(pageLoad.pivot);
-                //DataContext = e.Parameter as BusinessDetailViewModel;
+                
+                DataContext = e.Parameter as BusinessDetailViewModel;
                 AddEstablishmentsToMap();
             }
             else

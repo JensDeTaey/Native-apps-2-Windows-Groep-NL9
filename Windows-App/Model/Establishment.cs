@@ -8,6 +8,7 @@ namespace Windows_App.Model
 {
     public class Establishment
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
@@ -16,5 +17,6 @@ namespace Windows_App.Model
         public string Picture { get; set; }
         public List<Event> Events { get; set; }
         public List<Promotion> Promotions { get; set; }
+        public int BusinessId { get; set; }
     }
 }
