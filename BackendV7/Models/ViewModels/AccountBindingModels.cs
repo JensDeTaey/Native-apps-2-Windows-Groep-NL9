@@ -78,6 +78,10 @@ namespace BackendV7.Models
         [Display(Name = "Business image")]
         [DataType(DataType.Url)]
         public string ImageURL { get; set; }
+
+
+
+
     }
 
     public class RegisterExternalBindingModel

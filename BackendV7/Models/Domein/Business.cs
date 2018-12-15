@@ -1,4 +1,5 @@
 ﻿
+using BackendV7.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace BackendV7
         [JsonIgnore]
         public List<Subscription> Subscriptions { get; set; }
         public List<Establishment> Establishments { get; set; }
+
         
 
     }

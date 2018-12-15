@@ -31,6 +31,7 @@ namespace BackendV7.Controllers
             Business business = db.Businesses
                 .Include(b => b.Establishments)
                 .Include(b => b.Subscriptions)
+                .Include("Establishments.OpeningHours")
                 .SingleOrDefault(b => b.Id == id);
             if (business == null)
             {
@@ -126,22 +127,21 @@ namespace BackendV7.Controllers
             {
                 establishment.BusinessId = id;
                 db.Establishments.Add(establishment);
+                db.SaveChanges();
+                return StatusCode(HttpStatusCode.Created);
+            } else
+            {
+                return StatusCode(HttpStatusCode.NotFound);
             }
-            db.SaveChanges();
-
-            return StatusCode(HttpStatusCode.Created);
         }
 
-        // POST: api/Businesses/{id}/addEstablishment
+
+        // POST: api/Businesses/{id}/Subscribe
         [Route("api/Businesses/{id}/Subscribe")]
         [ResponseType(typeof(void))]
         [Authorize]
         public IHttpActionResult Subscribe(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
 
@@ -174,24 +174,18 @@ namespace BackendV7.Controllers
             }
         }
 
-        // POST: api/Businesses/{id}/addEstablishment
+        // POST: api/Businesses/{id}/Unsubscribe
         [Route("api/Businesses/{id}/Unsubscribe")]
         [ResponseType(typeof(void))]
         [Authorize]
         public IHttpActionResult Unsubscribe(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
 
             if (user == null)
             {
                 return Unauthorized();
             }
-
 
             db.Subscriptions.RemoveRange(db.Subscriptions.Where(s => (s.BusinessId == id) && (s.UserId == user.Id)));
             db.SaveChanges();
