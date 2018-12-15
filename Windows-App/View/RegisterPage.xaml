@@ -8,69 +8,34 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--StackPanel>
-        <TextBlock Text="Registreer als een bedrijf"/>
-        <Grid HorizontalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-             <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            
-            </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Text="E-mailadres: "/>
-            <TextBox x:Name="emailadress" Grid.Row="1"/>
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="Wachtwoord: "/>
-            <PasswordBox x:Name="pasword" Grid.Row="3"/>
-            <TextBlock Grid.Column="0" Grid.Row="4" Text="Herhaal wachtwoord: "/>
-            <PasswordBox x:Name="repeatedPasword"  Grid.Row="5"/>
-            <TextBlock Grid.Column="0" Grid.Row="6" Text="Bedrijfsnaam: "/>
-            <TextBox x:Name="businessName"  Grid.Row="7"/>
-            <TextBlock Grid.Column="0" Grid.Row="8" Text="Beschrijving: "/>
-            <TextBox x:Name="businessDescription" Grid.Column="1" Grid.Row="9"/>
-            <TextBlock Grid.Column="0" Grid.Row="10" Text="Link naar je website: "/>
-            <TextBox x:Name="link" Grid.Row="11"/>
-            <TextBlock Grid.Column="0" Grid.Row="12" Text="Logo toevoegen via een link van je bedrijf: "/>
-            <TextBox x:Name="businessLogo"  Grid.Row="13"/>
-        </Grid-->
-
-
-
     <ScrollViewer>
+    <StackPanel>
+        <TextBlock Text="Registreer" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBox x:Name="LastName" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <TextBox x:Name="FirstName" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <TextBox x:Name="EmailAdress" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <PasswordBox x:Name="PassWord" Header="Wachtwoord" Margin="0,24,0,0" MaxLength="30" Width="400" HorizontalAlignment="Left" InputScope="Password" />
+        <PasswordBox x:Name="RepeatedPassWord" Header="Herhaal wachtwoord" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Password" />
+        <TextBox x:Name="BusinessName" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+        <TextBox x:Name="BusinessDescription" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+        <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
+          ItemsSource="{x:Bind Categories}" />
+            <TextBox x:Name="BusinessLink" Margin="0,24,0,0" Header="Link naar de website van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" />
+        <TextBox x:Name="BusinessPicture" Header= "Link naar logo" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Registreer" Margin="0,24" />
+            <Button Content="Annuleer" Margin="24" />
+        </StackPanel>
+    </StackPanel>
+    </ScrollViewer>
+
+    <!--ScrollViewer>
     <Pivot x:Name="PivotRegistreer"   Title="Registreer" >
 
 
 
         <PivotItem Header="Bedrijfsgegevens">
-            <StackPanel>
-                <TextBox x:Name="LastName" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                <TextBox x:Name="FirstName" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                <TextBox x:Name="EmailAdress" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                <PasswordBox x:Name="PassWord" Header="Wachtwoord" Margin="0,24,0,0" MaxLength="30" Width="400" HorizontalAlignment="Left" InputScope="Password" />
-                <PasswordBox x:Name="RepeatedPassWord" Header="Herhaal wachtwoord" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Password" />
-                <TextBox x:Name="BusinessName" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-                <TextBox x:Name="BusinessDescription" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-                <TextBox x:Name="BusinessLink" Margin="0,24,0,0" Header="Link naar de website van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" />
-                <TextBox x:Name="BusinessPicture" Header= "Link naar logo" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                
-            </StackPanel>
+            
 
         </PivotItem>
 
@@ -87,6 +52,6 @@
             </CommandBar>
         </Pivot.RightHeader>
     </Pivot>
-    </ScrollViewer>
+    </-->
 
 </Page>

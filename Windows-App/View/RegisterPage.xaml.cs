@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,16 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class RegisterPage : Page
     {
+        ObservableCollection<string> Categories = new ObservableCollection<string>();
         public RegisterPage()
         {
             this.InitializeComponent();
+            Categories.Add("Interieur");
+            Categories.Add("Kledingzaak");
+            Categories.Add("Eten");
+            Categories.Add("Meubels");
+            Categories.Add("Supermarkt");
+            Categories.Add("Alleszaak");
         }
     }
 }
