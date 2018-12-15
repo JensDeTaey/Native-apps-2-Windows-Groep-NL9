@@ -169,22 +169,6 @@ namespace Windows_App
             Establishments = EstablishmentsIkea
         };
 
-
-
-        public static Establishment EstablishmentInno { get; } = new Establishment()
-        {
-            Id = 3,
-            Name = "Inno Waasland",
-            Address = "Kapelstraat 100, 9100 Sint-Niklaas",
-            PhoneNumber = "03 766 52 20",
-            Picture = "https://i.imgur.com/O5xSNUP.png",
-            Email = "InnoWaasland@Inno.com",
-            OpeningHours = OpeningHoursIkea,
-            Promotions = PromotionsInno,
-            Events = EventsInno,
-            BusinessId = 2
-        };
-
         public static Promotion PromotionInno { get; } = new Promotion()
         {
             Id = 3,
@@ -211,16 +195,24 @@ namespace Windows_App
             PromotionInno
         };
 
-
-
         public static List<Event> EventsInno { get; } = new List<Event>()
         {
             EventInno
         };
 
-
-
-
+        public static Establishment EstablishmentInno { get; } = new Establishment()
+        {
+            Id = 3,
+            Name = "Inno Waasland",
+            Address = "Kapelstraat 100, 9100 Sint-Niklaas",
+            PhoneNumber = "03 766 52 20",
+            Picture = "https://i.imgur.com/O5xSNUP.png",
+            Email = "InnoWaasland@Inno.com",
+            OpeningHours = OpeningHoursIkea,
+            Promotions = PromotionsInno,
+            Events = EventsInno,
+            BusinessId = 2
+        };
 
         public static List<Establishment> EstablishmentsInno { get; } = new List<Establishment>()
         {
