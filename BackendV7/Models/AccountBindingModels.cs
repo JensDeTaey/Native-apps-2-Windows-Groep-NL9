@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Foolproof;
 using Newtonsoft.Json;
 
 namespace BackendV7.Models
@@ -48,6 +49,30 @@ namespace BackendV7.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+
+        //Vanaf hier specifiek voor business
+        [Required]
+        [Display(Name = "Is this a business acount?")]
+        public bool IsBusinessAccount { get; set; }
+
+        [RequiredIfTrue("IsBusinessAccount")]
+        [Display(Name = "Business Name")]
+        public string BusinessName { get; set; }
+
+        [RequiredIfTrue("IsBusinessAccount")]
+        [Display(Name = "Business Description")]
+        public string Description { get; set; }
+
+        [RequiredIfTrue("IsBusinessAccount")]
+        [Display(Name = "Business Category")]
+        public string Category { get; set; }
+
+        [RequiredIfTrue("IsBusinessAccount")]
+        [Display(Name = "Business Website")]
+        [DataType(DataType.Url)]
+        public string LinkWebsite { get; set; }
     }
 
     public class RegisterExternalBindingModel

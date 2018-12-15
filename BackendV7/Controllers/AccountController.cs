@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using BackendV7.Models;
 using BackendV7.Providers;
 using BackendV7.Results;
+using Windows_App.Model;
 
 namespace BackendV7.Controllers
 {
@@ -328,9 +329,24 @@ namespace BackendV7.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            Business business = null;
+
+            if (model.IsBusinessAccount)
+            {
+                business = new Business();
+                business.Name = model.BusinessName;
+                business.Description = model.Description;
+                business.Category = model.Category;
+                business.LinkWebsite = model.LinkWebsite;
+
+
+            }
+
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Business=business };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+            
 
             if (!result.Succeeded)
             {
@@ -358,6 +374,7 @@ namespace BackendV7.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
