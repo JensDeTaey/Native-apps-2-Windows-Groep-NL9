@@ -23,7 +23,7 @@
             <TextBox x:Name="BusinessLink" Margin="0,24,0,0" Header="Link naar de website van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" />
         <TextBox x:Name="BusinessPicture" Header= "Link naar logo" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
         <StackPanel Orientation="Horizontal">
-            <Button Content="Registreer" Margin="0,24" />
+                <Button x:Name="RegistreerButton" Content="Registreer" Margin="0,24" Click="Registreer_Click" />
             <Button Content="Annuleer" Margin="24" />
         </StackPanel>
     </StackPanel>

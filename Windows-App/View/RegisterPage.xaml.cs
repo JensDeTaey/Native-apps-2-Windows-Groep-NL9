@@ -33,6 +33,16 @@ namespace Windows_App.View
             Categories.Add("Meubels");
             Categories.Add("Supermarkt");
             Categories.Add("Alleszaak");
+
+            if (FirstName.Text.Equals("") || LastName.Text.Equals("") || EmailAdress.Text.Equals("") || BusinessName.Text.Equals("") || BusinessDescription.Text.Equals("") || BusinessLink.Text.Equals("") || BusinessPicture.Text.Equals("") || PassWord.Password.Equals("") || RepeatedPassWord.Password.Equals(""))
+            {
+                RegistreerButton.IsEnabled = false;
+            }
+        }
+
+        private void Registreer_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }
