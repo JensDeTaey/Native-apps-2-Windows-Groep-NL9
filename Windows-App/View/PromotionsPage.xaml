@@ -11,7 +11,7 @@
     <Page.Resources>
         <DataTemplate x:Key="SmallScreenTemplate">
             <StackPanel Padding="10">
-                <Image Source="../Images/ikea.png" HorizontalAlignment="Left" MaxWidth="350" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <Image Source="{Binding Picture}" HorizontalAlignment="Left" MaxWidth="350" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                 <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                     <StackPanel Orientation="Horizontal">
@@ -31,7 +31,7 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" Source="../Images/ikea.png" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                     <StackPanel Grid.Column="1" Padding="10">
                         <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                         <TextBlock Text="{Binding Description}"/>

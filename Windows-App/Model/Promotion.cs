@@ -13,7 +13,13 @@ namespace Windows_App.Model
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public string Picture { get; set; }
+        private string picture;
+        public string Picture
+        {
+            //return default value if Picture is not set
+            get { return (picture is null || picture =="")? "../Images/promotion.png" : picture; }
+            set { picture = value; }
+        }
         public bool IsDiscountCoupon { get; set; }
         public int EstablishmentId { get; set; }
 

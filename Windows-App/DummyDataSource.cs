@@ -52,6 +52,7 @@ namespace Windows_App
             Description = "Deze week grote kortingen tot 70% op alles!",
             StartDate = new DateTime(2018, 11, 11),
             EndDate = new DateTime(2018, 12, 11),
+            Picture = "https://i.imgur.com/G7BsRWu.png",
             IsDiscountCoupon = false,
             EstablishmentId = 2
         };
@@ -60,9 +61,10 @@ namespace Windows_App
         {
             Id = 2,
             Name = "Evenement in Ikea Antwerpen",
-            Description = "Deze week grote opening tot nieuwe vestiging!",
+            Description = "Deze week grote opening voor nieuwe vestiging!",
             StartDate = new DateTime(2018, 11, 11),
             EndDate = new DateTime(2018, 11, 15),
+            Picture = "https://i.imgur.com/H7w1911.png",
             EstablishmentId = 2
         };
 
@@ -77,25 +79,38 @@ namespace Windows_App
             EventIkeaAntwerpen1
         };
 
-        public static Event EventIkeaGent1 { get; } = new Event()
-        {
-            Id = 1,
-            Name = "Evenement in Ikea",
-            Description = "Deze week grote opening tot nieuwe vestiging!",
-            StartDate = new DateTime(2018, 11, 11),
-            EndDate = new DateTime(2018, 11, 15),
-            EstablishmentId = 1
-        };
         public static Promotion PromotionIkeaGent1 { get; } = new Promotion()
         {
             Id = 1,
             Name = "Actie in Ikea",
-            Description = "Deze week grote kortingen tot 70% op alles!",
-            StartDate = new DateTime(2018, 11, 11),
-            EndDate = new DateTime(2018, 12, 11),
+            Description = "20% FAMILY korting op alle BJURSTA tafels",
+            StartDate = new DateTime(2018, 11, 21),
+            EndDate = new DateTime(2018, 12, 27),
+            Picture = "https://i.imgur.com/smt3LaH.png",
             IsDiscountCoupon = false,
             EstablishmentId = 1
         };
+        public static Event EventIkeaGent1 { get; } = new Event()
+        {
+            Id = 1,
+            Name = "Geef je tekening af aan Småland en krijg een leuke verrassing!",
+            Description = "Kom jouw tekening afgeven tussen 8 december en 5 januari aan het kinderparadijs, aan de ingang van de winkel. Onze medewerkers sturen hem dan op naar de kerstman en jij krijgt een leuke verrassing. Vind je alle kerst-kabouters dan krijg je nog iets extra.",
+            StartDate = new DateTime(2018, 12, 8),
+            EndDate = new DateTime(2019, 01, 05),
+            Picture = "https://i.imgur.com/NBqqO9M.png",
+            EstablishmentId = 1
+        };
+        public static Event EventIkeaGent2 { get; } = new Event()
+        {
+            Id = 2,
+            Name = "Kom je verjaardag vieren bij IKEA Gent!",
+            Description = "Bij IKEA Gent kan je elke woensdag van 14u – 16u samen met maximaal 10 vriendjes je verjaardag vieren. We gaan knutselen, leuke spelletjes spelen en allerlei lekkers proeven. Bij afloop gaat elk vriendje naar huis met een klein aandenken aan een leuk verjaardagsfeestje.",
+            StartDate = new DateTime(2018, 11, 08),
+            EndDate = new DateTime(2019, 01, 21),
+            Picture = "https://i.imgur.com/x2UaTs8.png",
+            EstablishmentId = 1
+        };
+
         public static List<Promotion> PromotionsIkeaGent { get; } = new List<Promotion>()
         {
             PromotionIkeaGent1
@@ -170,23 +185,25 @@ namespace Windows_App
             BusinessId = 2
         };
 
-        public static Event EventInno { get; } = new Event()
-        {
-            Id = 3,
-            Name = "Evenement in Inno",
-            Description = "Deze week grote opening tot nieuwe vestiging in Waasland shopping center!",
-            StartDate = new DateTime(2018, 11, 11),
-            EndDate = new DateTime(2018, 11, 15),
-            EstablishmentId = 3
-        };
         public static Promotion PromotionInno { get; } = new Promotion()
         {
             Id = 3,
-            Name = "Actie in Inno",
-            Description = "Deze week grote kortingen tot 70% op alle kleding!",
-            StartDate = new DateTime(2018, 11, 11),
-            EndDate = new DateTime(2018, 12, 11),
+            Name = "So loyalty days",
+            Description = "Geniet van de collectie aan -20%!",
+            StartDate = new DateTime(2018, 09, 26),
+            EndDate = new DateTime(2018, 10, 01),
+            Picture = "https://i.imgur.com/SF81evT.png",
             IsDiscountCoupon = false,
+            EstablishmentId = 3
+        };
+        public static Event EventInno { get; } = new Event()
+        {
+            Id = 3,
+            Name = "Drinken tot we kruipen",
+            Description = "Alle jongeren onder de welvarende leeftijd van 18 mogen niet binnen, maar terug Fortnite spelen. Alle andere krijgen gratis booze.",
+            StartDate = new DateTime(2018, 12, 11),
+            EndDate = new DateTime(2018, 12, 31),
+            Picture = "https://i.imgur.com/fjnQTOE.png",
             EstablishmentId = 3
         };
         public static List<Promotion> PromotionsInno { get; } = new List<Promotion>()
