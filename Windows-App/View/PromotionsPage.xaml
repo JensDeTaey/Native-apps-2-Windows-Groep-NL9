@@ -34,7 +34,7 @@
                 <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
                     <StackPanel Grid.Column="1" Padding="10">
                         <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
-                        <TextBlock Text="{Binding Description}"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Geldig van: "/>
                             <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>

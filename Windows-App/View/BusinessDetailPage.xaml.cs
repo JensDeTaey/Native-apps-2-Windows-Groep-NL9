@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
@@ -61,7 +62,11 @@ namespace Windows_App.View
                 DataContext = new BusinessDetailViewModel(business);
 
                 GoToRightPivot(pageLoad.Pivot);
-                AddEstablishmentsToMap();
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
+                    AddEstablishmentsToMap();
+                }
+                
             }
             else
             {
