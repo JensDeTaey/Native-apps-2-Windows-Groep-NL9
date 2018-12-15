@@ -2,11 +2,9 @@
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using BackendV7.Models.Domein;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using Windows_App.Model;
 
 namespace BackendV7.Models
 {
@@ -38,6 +36,8 @@ namespace BackendV7.Models
         public DbSet<Business> Businesses { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Establishment> Establishments { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {
@@ -47,6 +47,7 @@ namespace BackendV7.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.CreateIfNotExists();
         }
         
         public static ApplicationDbContext Create()

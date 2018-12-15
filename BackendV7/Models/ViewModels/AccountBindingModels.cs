@@ -73,6 +73,11 @@ namespace BackendV7.Models
         [Display(Name = "Business Website")]
         [DataType(DataType.Url)]
         public string LinkWebsite { get; set; }
+
+        [RequiredIfTrue("IsBusinessAccount")]
+        [Display(Name = "Business image")]
+        [DataType(DataType.Url)]
+        public string ImageURL { get; set; }
     }
 
     public class RegisterExternalBindingModel

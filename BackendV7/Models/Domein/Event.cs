@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Windows_App.Model
+namespace BackendV7
 {
    public class Event
     {
         [Key]
-        public int EventId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
@@ -20,6 +20,7 @@ namespace Windows_App.Model
         public string PictureURL { get; set; }
 
         //Assocations
+        
         public int EstablishmentId { get; set; }
         public Establishment Establishment { get; set; }
     }

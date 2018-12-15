@@ -16,7 +16,6 @@ using Microsoft.Owin.Security.OAuth;
 using BackendV7.Models;
 using BackendV7.Providers;
 using BackendV7.Results;
-using Windows_App.Model;
 
 namespace BackendV7.Controllers
 {
@@ -338,8 +337,7 @@ namespace BackendV7.Controllers
                 business.Description = model.Description;
                 business.Category = model.Category;
                 business.LinkWebsite = model.LinkWebsite;
-
-
+                business.PictureURL = model.ImageURL;
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Business=business };
@@ -401,6 +399,10 @@ namespace BackendV7.Controllers
             base.Dispose(disposing);
         }
 
+
+
+
+        
         #region Helpers
 
         private IAuthenticationManager Authentication

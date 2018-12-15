@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Windows_App.Model
+namespace BackendV7
 {
    public class OpeningHour
     {
         [Key]
-        public int OpeningHourId { get; set; }
+        public int Id { get; set; }
 
         public int Day { get; set; }
         public string OpeningsHour { get; set; }

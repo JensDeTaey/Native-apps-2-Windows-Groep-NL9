@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Windows_App.Model
+namespace BackendV7
 {
    public class Promotion
     {
         [Key]
-        public int PromotionId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

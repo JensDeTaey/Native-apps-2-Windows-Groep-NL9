@@ -12,11 +12,11 @@ namespace BackendV7.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                        Category = c.String(),
-                        PictureURL = c.String(),
-                        LinkWebsite = c.String(),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        Category = c.String(nullable: false),
+                        PictureURL = c.String(nullable: false),
+                        LinkWebsite = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -24,15 +24,15 @@ namespace BackendV7.Migrations
                 "dbo.Establishments",
                 c => new
                     {
-                        EstablishmentId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Address = c.String(),
-                        PhoneNumber = c.String(),
-                        Email = c.String(),
-                        PictureURL = c.String(),
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Address = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        Email = c.String(nullable: false),
+                        PictureURL = c.String(nullable: false),
                         Business_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.EstablishmentId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Businesses", t => t.Business_Id)
                 .Index(t => t.Business_Id);
             
@@ -40,7 +40,7 @@ namespace BackendV7.Migrations
                 "dbo.Events",
                 c => new
                     {
-                        EventId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
                         StartDate = c.DateTime(nullable: false),
@@ -48,7 +48,7 @@ namespace BackendV7.Migrations
                         PictureURL = c.String(),
                         EstablishmentId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.EventId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Establishments", t => t.EstablishmentId, cascadeDelete: true)
                 .Index(t => t.EstablishmentId);
             
@@ -56,13 +56,13 @@ namespace BackendV7.Migrations
                 "dbo.OpeningHours",
                 c => new
                     {
-                        OpeningHourId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Day = c.Int(nullable: false),
                         OpeningsHour = c.String(),
                         ClosingsHour = c.String(),
                         EstablishmentId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.OpeningHourId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Establishments", t => t.EstablishmentId, cascadeDelete: true)
                 .Index(t => t.EstablishmentId);
             
@@ -70,7 +70,7 @@ namespace BackendV7.Migrations
                 "dbo.Promotions",
                 c => new
                     {
-                        PromotionId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
                         StartDate = c.DateTime(nullable: false),
@@ -79,7 +79,7 @@ namespace BackendV7.Migrations
                         IsDiscountCoupon = c.Boolean(nullable: false),
                         EstablishmentId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.PromotionId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Establishments", t => t.EstablishmentId, cascadeDelete: true)
                 .Index(t => t.EstablishmentId);
             
@@ -87,12 +87,12 @@ namespace BackendV7.Migrations
                 "dbo.Subscriptions",
                 c => new
                     {
-                        SubscriptionId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         BusinessId = c.Int(nullable: false),
                         UserId = c.Int(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.SubscriptionId)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Businesses", t => t.BusinessId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
                 .Index(t => t.BusinessId)
@@ -105,7 +105,7 @@ namespace BackendV7.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        BusinessId = c.Int(nullable: false),
+                        BusinessId = c.Int(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -119,7 +119,7 @@ namespace BackendV7.Migrations
                         UserName = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Businesses", t => t.BusinessId, cascadeDelete: true)
+                .ForeignKey("dbo.Businesses", t => t.BusinessId)
                 .Index(t => t.BusinessId)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
