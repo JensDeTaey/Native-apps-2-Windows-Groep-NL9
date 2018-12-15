@@ -13,7 +13,7 @@ namespace Windows_Backend.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201812032012225_initial"; }
+            get { return "201812142153077_initial"; }
         }
         
         string IMigrationMetadata.Source

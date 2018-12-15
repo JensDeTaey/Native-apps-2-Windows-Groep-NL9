@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Windows_Backend.Models;
+using Windows_Backend.Models.Domain;
 using Windows_Backend.Providers;
 using Windows_Backend.Results;
 
@@ -329,6 +330,16 @@ namespace Windows_Backend.Controllers
             }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+
+            if(false)
+            {
+                var business = new Business();
+                business.Name = model.BusinessName;
+                business.Description = model.Description;
+                business.Category = model.Category;
+                business.LinkWebsite = model.LinkWebsite;
+                //user.Business = business;
+            }
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

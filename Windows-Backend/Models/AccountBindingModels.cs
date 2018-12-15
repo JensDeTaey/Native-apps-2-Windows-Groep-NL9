@@ -34,6 +34,7 @@ namespace Windows_Backend.Models
 
     public class RegisterBindingModel
     {
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -48,6 +49,25 @@ namespace Windows_Backend.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
+        //Vanaf hier specifiek voor business
+        [Required]
+        [Display(Name ="Is this a business acount?")]
+        public bool IsBusinessAccount { get; set; }
+
+        [Display(Name = "Business Name")]
+        public string BusinessName { get; set; }
+
+        [Display(Name = "Business Description")]
+        public string Description { get; set; }
+
+        [Display(Name = "Business Category")]
+        public string Category { get; set; }
+
+        [Display(Name = "Business Website")]
+        [DataType(DataType.Url)]
+        public string LinkWebsite { get; set; }
     }
 
     public class RegisterExternalBindingModel
