@@ -22,7 +22,8 @@ namespace Windows_App
             {
                  NavPageBusinessesControl,
                  NavPagePromotionsControl,
-                 NavPageEventsContentControl
+                 NavPageEventsContentControl,
+                 NavRegister
             };
         }
 
@@ -50,6 +51,19 @@ namespace Windows_App
             NavigationContentControlActivated(sender);
         }
 
+        private void NavPageRegisterContentControl_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(RegisterPage));
+            //NavigationContentControlActivated(sender);
+        }
+        private void NavPageLoginContentControl_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(LogInPage));
+        }
+        private void NavPageMyBusiness_click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(MyBusinessPage));
+        }
         private void NavigationContentControlActivated(object sender)
         {
             //resetting all navigation Controls
@@ -63,5 +77,6 @@ namespace Windows_App
             tappedControl.Style = (Style)this.Resources["SelectedNavigationButtonStyle"];
         }
 
+        
     }
 }
