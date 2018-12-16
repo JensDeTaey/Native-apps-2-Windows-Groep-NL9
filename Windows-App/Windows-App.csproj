@@ -97,6 +97,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\AuthenticatedStatusEnum.cs" />
+    <Compile Include="Authentication\AuthenticationBearer.cs" />
+    <Compile Include="Authentication\AuthenticationHandler.cs" />
+    <Compile Include="Authentication\IAuthenticationStatusObserver.cs" />
+    <Compile Include="Authentication\AuthenticationSubject.cs" />
     <Compile Include="Data\IDataSource.cs" />
     <Compile Include="Data\MockDataSource.cs" />
     <Compile Include="DummyDataSource.cs" />

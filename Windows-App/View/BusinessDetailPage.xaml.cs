@@ -58,12 +58,7 @@ namespace Windows_App.View
                     {
                         AddEstablishmentsToMap();
                     }
-                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
-
-
-                
-
-                
+                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());              
             }
             else
             {

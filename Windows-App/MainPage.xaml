@@ -84,55 +84,86 @@
         <Style x:Key="SelectedNavigationButtonStyle" TargetType="Button" BasedOn="{StaticResource NavigationButtonStyle}">
             <Setter Property="Foreground" Value="Red"/>
         </Style>
+
+        <Style x:Key="NavigationAppBarButtonStyle" TargetType="AppBarButton">
+        </Style>
+        <Style x:Key="SelectedNavigationAppBarButtonStyle" TargetType="AppBarButton" BasedOn="{StaticResource NavigationAppBarButtonStyle}">
+            <Setter Property="Foreground" Value="Red"/>
+        </Style>
+
+        <Style x:Key="BaseTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="XamlAutoFontFamily"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextTrimming" Value="None"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineStackingStrategy" Value="MaxHeight"/>
+            <Setter Property="TextLineBounds" Value="Full"/>
+        </Style>
+        <Style x:Key="CaptionTextBlockStyle" BasedOn="{StaticResource BaseTextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
     </Page.Resources>
 
 
     <SplitView x:Name="PageSplitView" IsPaneOpen="True" DisplayMode="CompactInline">
         <SplitView.Pane>
-            <StackPanel HorizontalAlignment="Stretch">
-                <Button 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" Grid.Row="0">
+                    <Button 
                         x:Name="NavCollapseButton"
                         FontFamily="Segoe MDL2 Assets" 
                         Content="&#xE700;" 
                         Width="50"
                         Height="50" Click="NavCollapseButton_Click"/>
-                <Button x:Name="NavPageBusinessesControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageBusinessesControl_Click" >
-                    <StackPanel Orientation="Horizontal" Height="50" >
-                        <TextBlock
+                    <Button x:Name="NavPageBusinessesControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageBusinessesControl_Click" >
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock
                             FontFamily="Segoe MDL2 Assets" 
                             Text="&#xEC06;"
                             Width="50"
                             TextAlignment="Center" 
                             VerticalAlignment="Center"/>
-                        <TextBlock Text="Ondernemingen" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="NavPagePromotionsControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPagePromotionsControl_Click" >
-                    <StackPanel Orientation="Horizontal" Height="50" >
-                        <TextBlock
+                            <TextBlock Text="Ondernemingen" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="NavPagePromotionsControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPagePromotionsControl_Click" >
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock
                             FontFamily="Segoe MDL2 Assets" 
                             Text="&#xE728;"
                             Width="50"
                             TextAlignment="Center" 
                             VerticalAlignment="Center"/>
-                        <TextBlock Text="Promoties" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button x:Name="NavPageEventsContentControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageEventsContentControl_Click" >
-                    <StackPanel Orientation="Horizontal" Height="50" >
-                        <TextBlock
+                            <TextBlock Text="Promoties" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="NavPageEventsContentControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageEventsContentControl_Click" >
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock
                             FontFamily="Segoe MDL2 Assets" 
                             Text="&#xE787;"
                             Width="50"
                             TextAlignment="Center" 
                             VerticalAlignment="Center"/>
-                        <TextBlock Text="Evenementen"  VerticalAlignment="Center" Margin="10,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <AppBarButton x:Name="NavRegister" Icon="AddFriend" Label="registreer" Click="NavPageRegisterContentControl_Click"  />
-                <AppBarButton x:Name="NavLogin" Icon="Contact" Label="Log in" Click="NavPageLoginContentControl_Click"  />
-                <AppBarButton x:Name="NavMyBusiness" Icon="Home" Label="Mijn bedrijf" Click="NavPageMyBusiness_click" />
-            </StackPanel>
+                            <TextBlock Text="Evenementen"  VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
+
+                </StackPanel>
+                <StackPanel x:Name="UserControlsStackpanel" Grid.Row="2" Orientation="Horizontal" >
+                    <AppBarButton x:Name="NavMyBusiness" Icon="Home" Label="Mijn bedrijf" Click="NavMyBusiness_Click" />
+                    <AppBarButton x:Name="NavRegister" Icon="AddFriend" Label="registreer" Click="NavRegister_Click"  />
+                    <AppBarButton x:Name="NavLogin" Icon="Contact" Label="Log in" Click="NavLogin_Click"  />
+                    <AppBarButton x:Name="NavLogout" Icon="Contact" Label="Log uit" Click="NavLogout_Click"   />
+                </StackPanel>
+            </Grid>
         </SplitView.Pane>
         <SplitView.Content>
             <Frame x:Name="mainFrame"/>
