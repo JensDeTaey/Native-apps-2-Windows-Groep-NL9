@@ -245,7 +245,7 @@ namespace Windows_App
             Name = "Inno",
             Description = "Een winkel waar je vriendin je mee naartoe sleept om 'even' 'goedope' kleren te bekijken",
             Category = "Kleding",
-            Picture = "https://i.imgur.com/iOAabXU.jpg",
+            Picture = "https://i.imgur.com/iOAabXU.jpg?1",
             LinkWebsite = "https://www.inno.be/nl-be/",
             NumberOfSubscribers = 69,
             Establishments = EstablishmentsInno
@@ -281,7 +281,7 @@ namespace Windows_App
             Name = "HEMA",
             Description = "HEMA maakt gebruik van cookies en daarmee vergelijkbare technieken om jou een optimale bezoekerservaring te bieden, om jou relevante advertenties aan te bieden en om jouw surfgedrag te meten.",
             Category = "Kleding",
-            Picture = "https://i.imgur.com/V9zLpm2.jpg",
+            Picture = "https://i.imgur.com/V9zLpm2.jpg?1",
             LinkWebsite = "https://www.hema.be/",
             NumberOfSubscribers = 1,
             Establishments = new List<Establishment>()
