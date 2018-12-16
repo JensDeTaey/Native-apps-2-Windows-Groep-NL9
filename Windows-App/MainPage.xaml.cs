@@ -12,18 +12,22 @@ namespace Windows_App
 
     public sealed partial class MainPage : Page
     {
-        private List<Control> navigationControls;
+        private List<Control> navigationButtonControls;
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            navigationControls = new List<Control>()
+            navigationButtonControls = new List<Control>()
             {
                  NavPageBusinessesControl,
                  NavPagePromotionsControl,
                  NavPageEventsContentControl,
-                 NavRegister
+                 NavRegister,
+                 NavMyBusiness,
+                 NavRegister,
+                 NavLogin,
+                 NavLogout
             };
         }
 
@@ -31,6 +35,7 @@ namespace Windows_App
         private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
         {
             PageSplitView.IsPaneOpen = !PageSplitView.IsPaneOpen;
+            UserControlsStackpanel.Orientation = PageSplitView.IsPaneOpen ? Orientation.Horizontal : Orientation.Vertical;
         }
 
         private void NavPageBusinessesControl_Click(object sender, RoutedEventArgs e)
@@ -54,29 +59,47 @@ namespace Windows_App
         private void NavPageRegisterContentControl_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(RegisterPage));
-            //NavigationContentControlActivated(sender);
+            NavigationContentControlActivated(sender);
         }
         private void NavPageLoginContentControl_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(LogInPage));
+            NavigationContentControlActivated(sender);
         }
         private void NavPageMyBusiness_click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(MyBusinessPage));
+            NavigationContentControlActivated(sender);
         }
         private void NavigationContentControlActivated(object sender)
         {
             //resetting all navigation Controls
             Style navigationButtonStyle = this.Resources["NavigationButtonStyle"] as Style;
-            foreach (ContentControl navigationItem in navigationControls)
+            Style navigationAppBarButtonStyle = this.Resources["NavigationAppBarButtonStyle"] as Style;
+
+            foreach (ContentControl navigationItem in navigationButtonControls)
             {
-                navigationItem.Style = navigationButtonStyle;
+                //check what type the button is
+                if (!(navigationItem is AppBarButton))
+                {
+                    navigationItem.Style = navigationButtonStyle;
+                }
+                else
+                {
+                    navigationItem.Style = navigationAppBarButtonStyle;
+                }
             }
 
+            //set style of selected button
             Control tappedControl = sender as Control;
-            tappedControl.Style = (Style)this.Resources["SelectedNavigationButtonStyle"];
+            if (!(tappedControl is AppBarButton))
+            {
+                tappedControl.Style = (Style)this.Resources["SelectedNavigationButtonStyle"];
+            }
+            else
+            {
+                tappedControl.Style = (Style)this.Resources["SelectedNavigationAppBarButtonStyle"];
+            }
         }
-
-        
     }
 }
