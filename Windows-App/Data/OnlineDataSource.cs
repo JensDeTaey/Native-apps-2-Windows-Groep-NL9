@@ -34,6 +34,11 @@ namespace Windows_App
             }
         }
 
+        protected override Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public OnlineDataSource()
         {
             HttpClient = new HttpClient();
@@ -41,6 +46,7 @@ namespace Windows_App
         #endregion
         
         #region Main Pages Getters
+
         public override async Task<ObservableCollection<Business>> FetchBusinesses()
         {
             var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "Businesses/"));

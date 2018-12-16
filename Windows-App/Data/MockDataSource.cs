@@ -10,6 +10,23 @@ namespace Windows_App.Data
 {
     class MockDataSource : IDataSource
     {
+        protected override Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password)
+        {
+            return Task<AuthenticationBearer>.Factory.StartNew(() => {
+                if(email.ToLower().Contains("business"))
+                {
+                    return DummyDataSource.BusinessUserAuthenticationBearer;
+                }else if (email.ToLower().Contains("test"))
+                {
+                    //Make a certain user always fail login
+                    return null;
+                }
+                else
+                {
+                    return DummyDataSource.UserAuthenticationBearer;
+                }
+            });
+        }
 
         #region Main Page Getters
         public override Task<ObservableCollection<Business>> FetchBusinesses()

@@ -97,6 +97,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Authentication\AuthenticatedStatusEnum.cs" />
+    <Compile Include="Authentication\AuthenticationBearer.cs" />
+    <Compile Include="Authentication\AuthenticationHandler.cs" />
+    <Compile Include="Authentication\IAuthenticationStatusObserver.cs" />
+    <Compile Include="Authentication\AuthenticationSubject.cs" />
     <Compile Include="Data\IDataSource.cs" />
     <Compile Include="Data\MockDataSource.cs" />
     <Compile Include="DummyDataSource.cs" />
@@ -117,9 +122,7 @@
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
     <Compile Include="ViewModel\EventsViewModel.cs" />
     <Compile Include="ViewModel\PromotionsViewModel.cs" />
-    <Compile Include="View\AddBusinessPage.xaml.cs">
-      <DependentUpon>AddBusinessPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\BusinessDetailPage.xaml.cs">
       <DependentUpon>BusinessDetailPage.xaml</DependentUpon>
     </Compile>
@@ -129,8 +132,17 @@
     <Compile Include="View\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LogInPage.xaml.cs">
+      <DependentUpon>LogInPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyBusinessPage.xaml.cs">
+      <DependentUpon>MyBusinessPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PromotionsPage.xaml.cs">
       <DependentUpon>PromotionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -161,10 +173,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\AddBusinessPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\BusinessDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,7 +185,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\LogInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MyBusinessPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PromotionsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

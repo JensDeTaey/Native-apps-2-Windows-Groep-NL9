@@ -35,10 +35,11 @@ namespace Windows_App.View
         private void ListViewPromotions_ItemClick(object sender, ItemClickEventArgs e)
         {
           Promotion selectedPromotion = e.ClickedItem as Promotion;
-            PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters();
-            payload.EstablishmentId = selectedPromotion.EstablishmentId;
-            payload.BusinessId = selectedPromotion.BusinessId;
-            payload.Pivot = PivotOptions.PROMOTION;
+            PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters
+            {
+                BusinessId = selectedPromotion.BusinessId,
+                Pivot = PivotOptions.PROMOTION
+            };
             Frame.Navigate(typeof(BusinessDetailPage), payload, new DrillInNavigationTransitionInfo());
         }
     }
