@@ -25,7 +25,7 @@ namespace Windows_App.Data
 
         public abstract Task<Boolean> EditEstablishment(Establishment establishment);
 
-        public abstract Task<Boolean> DeleteEstablishment(Establishment establishment)
+        public abstract Task<Boolean> DeleteEstablishment(Establishment establishment);
 
 
 

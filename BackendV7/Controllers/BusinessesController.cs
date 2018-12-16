@@ -53,7 +53,12 @@ namespace BackendV7.Controllers
         [ResponseType(typeof(Business))]
         public IHttpActionResult GetBusiness(int id)
         {
+
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+
             Business business = db.Businesses
+                .Include(b => b.User)
                 .Include(b => b.Establishments)
                 .Include(b => b.Subscriptions)
                 .Include("Establishments.OpeningHours")
@@ -63,6 +68,14 @@ namespace BackendV7.Controllers
             if (business == null)
             {
                 return NotFound();
+            }
+
+            if(user != null)
+            {
+                if (business.User != null && business.User.Id == user.Id)
+                {
+                    business.isSubscribedTo = true;
+                }
             }
 
             return Ok(business);

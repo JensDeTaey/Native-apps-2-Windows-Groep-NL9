@@ -48,6 +48,7 @@ namespace Windows_App
         {
             HttpClient client = new HttpClient();
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(baseUrl + "Businesses/" + businessId + "/AddEstablishment"));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment));
             var json = await client.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
             try
             {
@@ -63,6 +64,7 @@ namespace Windows_App
         {
             HttpClient client = new HttpClient();
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(baseUrl + "Establishments/" + establishment.Id));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment));
             var json = await client.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
             try
             {
