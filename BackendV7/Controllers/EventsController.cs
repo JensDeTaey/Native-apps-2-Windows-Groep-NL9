@@ -73,7 +73,7 @@ namespace BackendV7.Controllers
                     @event.Id = id;
                     @event.Description = model.Description;
                     @event.Name = model.Name;
-                    @event.PictureURL = model.PictureURL;
+                    @event.PictureURL = model.Picture;
                     @event.StartDate = model.StartDate;
                     @event.EndDate = model.EndDate;
 

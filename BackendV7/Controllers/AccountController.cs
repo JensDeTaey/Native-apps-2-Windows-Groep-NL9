@@ -339,7 +339,7 @@ namespace BackendV7.Controllers
                 business.Description = model.Description;
                 business.Category = model.Category;
                 business.LinkWebsite = model.LinkWebsite;
-                business.PictureURL = model.ImageURL;
+                business.PictureURL = model.Picture;
                 business.UserId = user.Id;
             }
 

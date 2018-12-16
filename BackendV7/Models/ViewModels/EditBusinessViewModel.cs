@@ -17,7 +17,7 @@ namespace BackendV7.Models.ViewModels
         [Required]
         public string Category { get; set; }
         [Required]
-        public string PictureURL { get; set; }
+        public string Picture { get; set; }
         [Required]
         public string LinkWebsite { get; set; }
     }

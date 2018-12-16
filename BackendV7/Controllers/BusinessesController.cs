@@ -109,7 +109,7 @@ namespace BackendV7.Controllers
                 dBbusiness.Description = business.Description;
                 dBbusiness.Category = business.Category;
                 dBbusiness.LinkWebsite = business.LinkWebsite;
-                dBbusiness.PictureURL = business.PictureURL;
+                dBbusiness.PictureURL = business.Picture;
 
                 db.SaveChanges();
                 return Ok();
@@ -152,7 +152,7 @@ namespace BackendV7.Controllers
                     Address = model.Address,
                     PhoneNumber = model.PhoneNumber,
                     Email = model.Email,
-                    PictureURL = model.PictureURL,
+                    PictureURL = model.Picture,
                     BusinessId = id,
                     OpeningHours = model.OpeningHours
                     
@@ -197,7 +197,7 @@ namespace BackendV7.Controllers
 
                 db.SaveChanges();
 
-                return StatusCode(HttpStatusCode.Created);
+                return Ok();
             }
             else
             {

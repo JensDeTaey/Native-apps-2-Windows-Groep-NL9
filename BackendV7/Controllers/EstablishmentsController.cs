@@ -75,7 +75,7 @@ namespace BackendV7.Controllers
                     establishment.Address = model.Address;
                     establishment.PhoneNumber = model.PhoneNumber;
                     establishment.Email = model.Email;
-                    establishment.PictureURL = model.PictureURL;
+                    establishment.PictureURL = model.Picture;
                     establishment.OpeningHours = model.OpeningHours;
 
                     db.SaveChanges();
@@ -173,7 +173,7 @@ namespace BackendV7.Controllers
                     Description = model.Description,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    PictureURL = model.PictureURL,
+                    PictureURL = model.Picture,
                     EstablishmentId = establishment.Id
                 };
                 db.Events.Add(createdEvent);
@@ -225,7 +225,7 @@ namespace BackendV7.Controllers
                     Description = model.Description,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    PictureURL = model.PictureURL,
+                    PictureURL = model.Picture,
                     EstablishmentId = establishment.Id
                 };
                 db.Promotions.Add(createdPromotion);

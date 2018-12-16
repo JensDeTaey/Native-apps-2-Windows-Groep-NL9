@@ -73,7 +73,7 @@ namespace BackendV7.Controllers
                     promotion.Id = id;
                     promotion.Description = model.Description;
                     promotion.Name = model.Name;
-                    promotion.PictureURL = model.PictureURL;
+                    promotion.PictureURL = model.Picture;
                     promotion.StartDate = model.StartDate;
                     promotion.EndDate = model.EndDate;
 

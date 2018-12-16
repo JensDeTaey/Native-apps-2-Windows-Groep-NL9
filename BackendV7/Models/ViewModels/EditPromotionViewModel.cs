@@ -17,7 +17,7 @@ namespace BackendV7.Models.ViewModels
         [Required]
         public DateTime EndDate { get; set; }
         [Required]
-        public string PictureURL { get; set; }
+        public string Picture { get; set; }
         [Required]
         public bool IsDiscountCoupon { get; set; }
     }

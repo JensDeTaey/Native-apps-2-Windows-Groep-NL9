@@ -30,7 +30,7 @@ namespace Windows_App
         private AuthenticationHeaderValue token {
             get {
                 //TODO Hier juiste token zetten
-                return new AuthenticationHeaderValue("Bearer", "Token yeees");
+                return new AuthenticationHeaderValue("Bearer", "i01jdAcWUF2r4YGabiSMlpd80ZhPaBAJAT8m6yt2nVi6Ivp2rHbeoMWbeV-KsbFllTWTmEqaU7y0_eLjfZHd9gWKSZnBn4KzTDNc3ZalROqPuLkAqnhb40MeSAGDGZ1NAptnAtxH7AMYw3SIZfARVA87D0_CSf2bYlc1MpvBLf3yfSlTxGXGg6WGgpKj7knomq_hxAmwsXCsEzQH2RzySddBcnL4jTLBx0sMIczj0lwFc_xVRAx66d3xdVKqJstrv2O-bK1kbnPcwdDlA_28s0MsjdY8jRjuK20vM00XmxBMKKyAivtQB9VAsoFJ2yCq8hUwgGwxcMof-2Ip7OWFZBWgedWaoYfm311dZD6O_FwHvLMWeQrwug3AwOnVKXRvy458CHjP81Gp2pjSrG1fgL5TgpITJutcSzx-Nw6p0ysPGH4qb4qkzVdGhztMY2tb1WC4c8EjEn6Xm2sxwhQc8KdL-3v-7SYnElYGiIhvJW83J9cvZ1hoEGZ3eiUkP9gE");
             }
         }
 
@@ -58,9 +58,10 @@ namespace Windows_App
             var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "Events/"));
             return JsonConvert.DeserializeObject<ObservableCollection<Event>>(json);
         }
-        public override Task<ObservableCollection<Business>> FetchSubscribedBusinesses()
+        public override async Task<ObservableCollection<Business>> FetchSubscribedBusinesses()
         {
-            throw new NotImplementedException();
+            var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "SubscribedBusinesses/"));
+            return JsonConvert.DeserializeObject<ObservableCollection<Business>>(json);
         }
         #endregion
 
@@ -71,19 +72,26 @@ namespace Windows_App
             return JsonConvert.DeserializeObject<Business>(json);
         }
 
-        public override Task<bool> EditBusiness(Business business)
+        public override async Task<bool> EditBusiness(Business business)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Businesses/" + business.Id));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(business));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
-        public override Task<bool> SubscribeToBusiness(int businessId)
+        public override async Task<bool> SubscribeToBusiness(int businessId)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Businesses/" + businessId));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
-        public override Task<bool> UnsubscribeFromBusiness(int businessId)
+        public override async Task<bool> UnsubscribeFromBusiness(int businessId)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Businesses/" + businessId));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
 
@@ -92,81 +100,73 @@ namespace Windows_App
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId + "/AddEstablishment"));
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment));
-            var json = await HttpClient.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
-            try
-            {
-                JsonConvert.DeserializeObject<Establishment>(json);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         public override async Task<bool> EditEstablishment(Establishment establishment)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Establishments/" + establishment.Id));
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment));
-            var json = await HttpClient.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
-            try
-            {
-                JsonConvert.DeserializeObject<Establishment>(json);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         public override async Task<bool> DeleteEstablishment(Establishment establishment)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Establishments/" + establishment.Id));
-            var json = await HttpClient.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
-            try
-            {
-                JsonConvert.DeserializeObject<Establishment>(json);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
 
         #region Promotion CRUD
-        public override Task<bool> AddPromotion(int establishmentId, Promotion promotion)
+        public override async Task<bool> AddPromotion(int establishmentId, Promotion promotion)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Establishments/" + establishmentId + "/AddPromotion"));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(promotion));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
-        public override Task<bool> EditPromotion(Promotion promotion)
+        public override async Task<bool> EditPromotion(Promotion promotion)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Promotions/" + promotion.Id));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(promotion));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
-        public override Task<bool> DeletePromotion(Promotion promotion)
+        public override async Task<bool> DeletePromotion(Promotion promotion)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Promotions/" + promotion.Id));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
 
         #region Event CRUD
-        public override Task<bool> AddEvent(int establishmentId, Event @event)
+        public override async Task<bool> AddEvent(int establishmentId, Event @event)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Establishments/" + establishmentId + "/AddEvent"));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
-        public override Task<bool> EditEvent(Event @event)
+        public override async Task<bool> EditEvent(Event @event)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Events/" + @event.Id));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
-        public override Task<bool> DeleteEvent(Event @event)
+        public override async Task<bool> DeleteEvent(Event @event)
         {
-            throw new NotImplementedException();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Events/" + @event.Id));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
 
