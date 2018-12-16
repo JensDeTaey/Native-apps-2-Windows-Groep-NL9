@@ -79,7 +79,7 @@ namespace BackendV7.Controllers
                     establishment.OpeningHours = model.OpeningHours;
 
                     db.SaveChanges();
-                } catch(DbUpdateConcurrencyException e)
+                } catch(DbUpdateConcurrencyException)
                 {
 
                 }
@@ -125,13 +125,120 @@ namespace BackendV7.Controllers
             try
             {
                 db.SaveChanges();
-            } catch (DbUpdateConcurrencyException e)
+            } catch (DbUpdateConcurrencyException)
             {
             }
             return Ok(establishment);
 
 
         }
+
+
+        // POST: api/Establishments/1/AddEvent
+        [ResponseType(typeof(Event))]
+        [Route("api/Establishments/{establishmentId}/AddEvent")]
+        [Authorize]
+        public IHttpActionResult PostEvent(int establishmentId,EditEventViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            if (model == null)
+            {
+                return BadRequest("Give me some data to work with, yo");
+            }
+
+            var establishment = db.Users
+                .Include("Businesses.Establishments.Events")
+                .Where(u => u.Id == user.Id)
+                .SelectMany(u => u.Businesses)
+                .SelectMany(b => b.Establishments)
+                .Where(e => e.Id == establishmentId)
+                .FirstOrDefault();
+
+            if(establishment != null)
+            {
+
+                var createdEvent = new Event()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    PictureURL = model.PictureURL,
+                    EstablishmentId = establishment.Id
+                };
+                db.Events.Add(createdEvent);
+                db.SaveChanges();
+                return Ok(createdEvent);
+            } else
+            {
+                return NotFound();
+            }
+
+        }
+
+        // POST: api/Establishments/1/AddPromotion
+        [ResponseType(typeof(Promotion))]
+        [Route("api/Establishments/{establishmentId}/AddPromotion")]
+        [Authorize]
+        public IHttpActionResult PostPromotion(int establishmentId, EditPromotionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            if (model == null)
+            {
+                return BadRequest("Give me some data to work with, yo");
+            }
+
+            var establishment = db.Users
+                .Include("Businesses.Establishments.Promotions")
+                .Where(u => u.Id == user.Id)
+                .SelectMany(u => u.Businesses)
+                .SelectMany(b => b.Establishments)
+                .Where(e => e.Id == establishmentId)
+                .FirstOrDefault();
+
+            if (establishment != null)
+            {
+
+                var createdPromotion = new Promotion()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    StartDate = model.StartDate,
+                    EndDate = model.EndDate,
+                    PictureURL = model.PictureURL,
+                    EstablishmentId = establishment.Id
+                };
+                db.Promotions.Add(createdPromotion);
+                db.SaveChanges();
+                return Ok(createdPromotion);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+        }
+
 
         protected override void Dispose(bool disposing)
         {

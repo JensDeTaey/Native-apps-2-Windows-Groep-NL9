@@ -23,7 +23,7 @@ namespace BackendV7
 
         public int BusinessId {
             get {
-                return Establishment.BusinessId;
+                return Establishment== null?-1:Establishment.BusinessId;
             }
         }
 

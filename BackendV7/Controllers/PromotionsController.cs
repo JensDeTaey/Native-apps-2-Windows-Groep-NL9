@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BackendV7;
 using BackendV7.Models;
+using BackendV7.Models.ViewModels;
 
 namespace BackendV7.Controllers
 {
@@ -38,68 +39,99 @@ namespace BackendV7.Controllers
 
         // PUT: api/Promotions/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPromotion(int id, Promotion promotion)
+        [Authorize]
+        public IHttpActionResult PutPromotion(int id, EditPromotionViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (model == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != promotion.Id)
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
-            db.Entry(promotion).State = EntityState.Modified;
 
-            try
+            ApplicationUser foundUser = db.Users
+                .Include("Businesses.Establishments.Promotions")
+                .Where(e => e.Id == user.Id).FirstOrDefault();
+
+            Promotion promotion = foundUser.Businesses
+                .SelectMany(b => b.Establishments)
+                .SelectMany(e => e.Promotions)
+                .Where(e => e.Id == id).FirstOrDefault();
+
+
+            if (promotion != null)
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PromotionExists(id))
+                try
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
-            return StatusCode(HttpStatusCode.NoContent);
+                    promotion.Id = id;
+                    promotion.Description = model.Description;
+                    promotion.Name = model.Name;
+                    promotion.PictureURL = model.PictureURL;
+                    promotion.StartDate = model.StartDate;
+                    promotion.EndDate = model.EndDate;
+
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                }
+                return Ok(promotion);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
-        // POST: api/Promotions
-        [ResponseType(typeof(Promotion))]
-        public IHttpActionResult PostPromotion(Promotion promotion)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Promotions.Add(promotion);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = promotion.Id }, promotion);
-        }
-
-        // DELETE: api/Promotions/5
-        [ResponseType(typeof(Promotion))]
+        // DELETE: api/Events/5
+        [ResponseType(typeof(Event))]
+        [Authorize]
         public IHttpActionResult DeletePromotion(int id)
         {
-            Promotion promotion = db.Promotions.Find(id);
+
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+
+            ApplicationUser foundUser = db.Users
+                .Include("Businesses.Establishments.Promotions")
+                .Where(e => e.Id == user.Id).FirstOrDefault();
+
+            Promotion promotion = foundUser.Businesses
+                .SelectMany(b => b.Establishments)
+                .SelectMany(e => e.Promotions)
+                .Where(e => e.Id == id).FirstOrDefault();
+
+
+
             if (promotion == null)
             {
                 return NotFound();
             }
 
             db.Promotions.Remove(promotion);
-            db.SaveChanges();
-
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
             return Ok(promotion);
+
+
         }
 
         protected override void Dispose(bool disposing)

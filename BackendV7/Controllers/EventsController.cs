@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BackendV7;
 using BackendV7.Models;
+using BackendV7.Models.ViewModels;
 
 namespace BackendV7.Controllers
 {
@@ -38,68 +39,99 @@ namespace BackendV7.Controllers
 
         // PUT: api/Events/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEvent(int id, Event @event)
+        [Authorize]
+        public IHttpActionResult PutEvent(int id, EditEventViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (model == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != @event.Id)
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
-            db.Entry(@event).State = EntityState.Modified;
 
-            try
+            ApplicationUser foundUser = db.Users
+                .Include("Businesses.Establishments.Events")
+                .Where(e => e.Id == user.Id).FirstOrDefault();
+
+            Event @event = foundUser.Businesses
+                .SelectMany(b => b.Establishments)
+                .SelectMany(e => e.Events)
+                .Where(e => e.Id == id).FirstOrDefault();
+
+
+            if (@event != null)
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EventExists(id))
+                try
                 {
-                    return NotFound();
+
+                    @event.Id = id;
+                    @event.Description = model.Description;
+                    @event.Name = model.Name;
+                    @event.PictureURL = model.PictureURL;
+                    @event.StartDate = model.StartDate;
+                    @event.EndDate = model.EndDate;
+
+                    db.SaveChanges();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+
                 }
+                return Ok(@event);
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Events
-        [ResponseType(typeof(Event))]
-        public IHttpActionResult PostEvent(Event @event)
-        {
-            if (!ModelState.IsValid)
+            else
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
-
-            db.Events.Add(@event);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = @event.Id }, @event);
         }
 
         // DELETE: api/Events/5
         [ResponseType(typeof(Event))]
+        [Authorize]
         public IHttpActionResult DeleteEvent(int id)
         {
-            Event @event = db.Events.Find(id);
+
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+
+            ApplicationUser foundUser = db.Users
+                .Include("Businesses.Establishments.Events")
+                .Where(e => e.Id == user.Id).FirstOrDefault();
+
+            Event @event = foundUser.Businesses
+                .SelectMany(b => b.Establishments)
+                .SelectMany(e => e.Events)
+                .Where(e => e.Id == id).FirstOrDefault();
+
+
+
             if (@event == null)
             {
                 return NotFound();
             }
 
             db.Events.Remove(@event);
-            db.SaveChanges();
-
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+            }
             return Ok(@event);
+
+
         }
 
         protected override void Dispose(bool disposing)

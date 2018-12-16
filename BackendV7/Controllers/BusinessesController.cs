@@ -31,11 +31,10 @@ namespace BackendV7.Controllers
             } else
             {
                 var businesses = db.Businesses
-                .Include(b => b.Subscriptions)
-                .Include(b => b.User).ToList();
+                .Include(b => b.Subscriptions).ToList();
                 businesses.ForEach(b =>
                 {
-                    if (b.User != null && b.User.Id == user.Id)
+                    if (b.Subscriptions.Count(s => s.UserId == user.Id) > 0)
                     {
                         b.isSubscribedTo = true;
                     }
@@ -72,7 +71,7 @@ namespace BackendV7.Controllers
 
             if(user != null)
             {
-                if (business.User != null && business.User.Id == user.Id)
+                if (business.Subscriptions.Count(s => s.UserId == user.Id) > 0)
                 {
                     business.isSubscribedTo = true;
                 }
@@ -91,7 +90,7 @@ namespace BackendV7.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+            var user = db.Users.Include(u => u.Businesses).Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
             if (user == null)
             {
                 return Unauthorized();
@@ -102,7 +101,7 @@ namespace BackendV7.Controllers
                 return BadRequest("Give me some data to work with, yo");
             }
 
-            var dBbusiness = db.Businesses.Find(id);
+            var dBbusiness = user.Businesses.Where(b => b.Id == id).FirstOrDefault();
 
             if(dBbusiness != null)
             {
@@ -122,7 +121,7 @@ namespace BackendV7.Controllers
 
         // POST: api/Businesses/{id}/AddEstablishment
         [Route("api/Businesses/{id}/AddEstablishment")]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(Establishment))]
         [Authorize]
         public IHttpActionResult AddEstablishment(int id,EditEstablishmentViewModel model)
         {
@@ -131,7 +130,7 @@ namespace BackendV7.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+            var user = db.Users.Include("Businesses.Establishments").Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
 
             if(user ==null)
             {
@@ -143,7 +142,7 @@ namespace BackendV7.Controllers
                 return BadRequest("Give me some data to work with, yo");
             }
 
-            var business = db.Businesses.Include(b => b.Establishments).Where( b => b.Id == id).FirstOrDefault();
+            var business = user.Businesses.Where( b => b.Id == id).FirstOrDefault();
             if (business != null)
             {
 
@@ -220,7 +219,13 @@ namespace BackendV7.Controllers
             }
 
             db.Subscriptions.RemoveRange(db.Subscriptions.Where(s => (s.BusinessId == id) && (s.UserId == user.Id)));
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+            }
             return StatusCode(HttpStatusCode.OK); 
         }
 
@@ -229,16 +234,15 @@ namespace BackendV7.Controllers
         [Authorize]
         public IHttpActionResult GetSubscribedBusinesses()
         {
-            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+            var user = db.Users.Include("Subscriptions.Business.Subscriptions").Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            return Ok(db.Subscriptions
-                .Include(s => s.Business)
-                .Where(s => s.UserId == user.Id)
-                .Select(s => s.Business));
+            var businesses = user.Subscriptions.Select(s => s.Business).ToList();
+            businesses.ForEach(b => b.isSubscribedTo = true);
+            return Ok(businesses);
                
         }
 
