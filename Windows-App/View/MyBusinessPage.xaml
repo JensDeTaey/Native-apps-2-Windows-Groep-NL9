@@ -9,39 +9,22 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
-        <Pivot x:Name="PivotMyBusiness"   Title="Mijn bedrijf">
+        <Pivot x:Name="PivotMyBusiness"   Title="Mijn bedrijf" PivotItemLoading="PivotMyBusiness_PivotItemLoading">
             <PivotItem x:Name="BusinessInfo" Header="Bedrijfsgegevens">
                 <StackPanel>
-                <TextBox x:Name="LastName" IsEnabled="False"  PlaceholderText="De Taey"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                    <TextBox x:Name="FirstName" IsEnabled="False" PlaceholderText="Jens"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                    
-                    
-                    <TextBox x:Name="EmailAdress" IsEnabled="false" PlaceholderText="jens.detaey@telenet.be" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                    
-                    <TextBox x:Name="BusinessName" IsEnabled="False" PlaceholderText="Ikea"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-                    <TextBox x:Name="BusinessDescription" IsEnabled="False" PlaceholderText="JAJA ik ben eigenaar van Ikea" Margin="0,24,0,0" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+                    <TextBox x:Name="LastName" IsEnabled="False" Text="{Binding User.Lastname}"  PlaceholderText="De Taey"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                    <TextBox x:Name="FirstName" IsEnabled="False" Text="{Binding User.Firstname}" PlaceholderText="Jens"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                    <TextBox x:Name="EmailAdress" IsEnabled="false" Text="{Binding User.EmailAdress}" PlaceholderText="jens.detaey@telenet.be" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                    <TextBox x:Name="BusinessName" IsEnabled="False" Text="{Binding Business.Name}"  PlaceholderText="Ikea"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+                    <TextBox x:Name="BusinessDescription" IsEnabled="False" Text="{Binding Business.Description}" PlaceholderText="JAJA ik ben eigenaar van Ikea" Margin="0,24,0,0" MaxLength="150" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
                     <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
                     IsEnabled="False" />
-                    <TextBox x:Name="BusinessLink" IsEnabled="False" Margin="0,24,0,0"  MaxLength="150" Width="400" HorizontalAlignment="Left" />
-                    <TextBox x:Name="BusinessPicture" IsEnabled="False" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                    <TextBox x:Name="BusinessLink" Text="{Binding Business.LinkWebsite}" IsEnabled="False" Margin="0,24,0,0"  MaxLength="150" MinWidth="400" HorizontalAlignment="Left" />
+                    <TextBox x:Name="BusinessPicture" Text="{Binding Business.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                 </StackPanel>
             </PivotItem>
 
-        <PivotItem Header="Vestigingen">            
-        </PivotItem>
-            <PivotItem Header="Promoties">
-
-            </PivotItem>
-            <PivotItem Header="Evenementen">
-
-            </PivotItem>
-            <Pivot.RightHeader>
-            <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
-                    <AppBarButton x:Name="AddButton" Icon="Add"/>
-                    <AppBarSeparator/>
-                    <AppBarButton x:Name="EditButton" Icon="Edit" Click="AppBarButton_Click" />
-                    <AppBarSeparator/>
-                    <AppBarButton x:Name="DeleteButton" Icon="Delete"/>
+            <PivotItem Header="Vestigingen">
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -99,8 +82,8 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="auto"/>
                                             </Grid.RowDefinitions>
-                                          <TextBlock Grid.Column="0" x:Name="EstablishmentDay" Text="{Binding Day}" Margin="0,0,0,0" Width="auto" />
-                                          <TextBox  Grid.Column="1" x:Name="EstablishmentOpeningsHour"  Text="{Binding OpeningsHour}" Margin="10,0,10,0" MaxLength="40" Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <TextBlock Grid.Column="0" x:Name="EstablishmentDay" Text="{Binding Day}" Margin="0,0,0,0" Width="auto" />
+                                            <TextBox  Grid.Column="1" x:Name="EstablishmentOpeningsHour"  Text="{Binding OpeningsHour}" Margin="10,0,10,0" MaxLength="40" Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                             <TextBlock Grid.Column="2" Text="-"/>
                                             <TextBox  Grid.Column="3" x:Name="EstablishmentClosingsHour"  Text="{Binding ClosingsHour}" Margin="10,0,10,0" MaxLength="40"  Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                         </Grid>
@@ -111,7 +94,7 @@
                         </StackPanel>
                     </Grid>
                 </StackPanel>
-        </PivotItem>
+            </PivotItem>
             <PivotItem Header="Promoties">
                 <StackPanel>
 
@@ -243,8 +226,8 @@
                 </StackPanel>
             </PivotItem>
             <Pivot.RightHeader>
-                
-            <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
+
+                <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
                     <AppBarButton x:Name="AddButton" Icon=" Add" Click="AppBarAdd_Click"/>
                     <AppBarSeparator/>
                     <AppBarButton x:Name="EditButton" Icon="Edit" Click="AppBarEdit_Click" />
@@ -259,11 +242,11 @@
                             </Flyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
-                
-                <AppBarSeparator/>
-                <AppBarButton Icon="Save"/>
-            </CommandBar>
-        </Pivot.RightHeader>
-    </Pivot>
+
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Save"/>
+                </CommandBar>
+            </Pivot.RightHeader>
+        </Pivot>
     </ScrollViewer>
 </Page>
