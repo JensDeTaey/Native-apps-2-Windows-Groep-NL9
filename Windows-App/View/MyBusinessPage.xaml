@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
-        <Pivot x:Name="PivotMyBusiness"   Title="Mijn bedrijf">
+        <Pivot x:Name="PivotMyBusiness"   Title="Mijn bedrijf" PivotItemLoading="PivotMyBusiness_PivotItemLoading">
             <PivotItem x:Name="BusinessInfo" Header="Bedrijfsgegevens">
                 <StackPanel>
                 <TextBox x:Name="LastName" IsEnabled="False" Text="{Binding User.Lastname}"  PlaceholderText="De Taey"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
@@ -26,7 +26,6 @@
 
         <PivotItem Header="Vestigingen">
                 <StackPanel>
-
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -153,8 +152,8 @@
                                 <TextBox x:Name="PromotionDescription" IsEnabled="False" Text="{Binding Promotion.Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <TextBox x:Name="PromotionPicture" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
-                                    <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=OneTime}" IsEnabled="False"  x:Name="StartDatePromotionCalendarDatePicker" Header="Start datum"/>
-                                    <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=OneTime}" IsEnabled="False" x:Name="EndDatePromotionCalendarDatePicker" Header="Eind datum"/>
+                                    <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=TwoWay}" IsEnabled="False"  x:Name="StartDatePromotionCalendarDatePicker" Header="Start datum"/>
+                                    <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=TwoWay}" IsEnabled="False" x:Name="EndDatePromotionCalendarDatePicker" Header="Eind datum"/>
                                 </StackPanel>
                                 <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding IsDiscountCoupon}" />
 
@@ -218,8 +217,8 @@
                                 <TextBox x:Name="EventDescription" Text="{Binding Event.Description}" IsEnabled="False" Margin="0,24,0,0" TextWrapping="Wrap" MaxLength="40" Width="400" Height="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <TextBox x:Name="EventPicture" Text="{Binding Event.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
-                                    <CalendarDatePicker  Margin="0,0,50,0" IsEnabled="False" Date="{Binding Event.StartDate, Mode=OneTime}"  x:Name="StartDateEventCalendarDatePicker" Header="Start datum"/>
-                                    <CalendarDatePicker Date="{Binding Event.EndDate, Mode=OneTime}" IsEnabled="False" x:Name="EndDateEventCalendarDatePicker" Header="Eind datum"/>
+                                    <CalendarDatePicker  Margin="0,0,50,0" IsEnabled="False" Date="{Binding Event.StartDate, Mode=TwoWay}"  x:Name="StartDateEventCalendarDatePicker" Header="Start datum"/>
+                                    <CalendarDatePicker Date="{Binding Event.EndDate, Mode=TwoWay}" IsEnabled="False" x:Name="EndDateEventCalendarDatePicker" Header="Eind datum"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
@@ -227,12 +226,23 @@
                 </StackPanel>
             </PivotItem>
             <Pivot.RightHeader>
+                
             <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
                     <AppBarButton x:Name="AddButton" Icon=" Add" Click="AppBarAdd_Click"/>
                     <AppBarSeparator/>
                     <AppBarButton x:Name="EditButton" Icon="Edit" Click="AppBarEdit_Click" />
                     <AppBarSeparator/>
-                    <AppBarButton x:Name="DeleteButton" Icon="Delete" Click="AppBarDelete_Click"/>
+                    <AppBarButton x:Name="DeleteButton" Icon="Delete" >
+                        <AppBarButton.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <TextBlock Style="{ThemeResource BaseTextBlockStyle}" Text="Het item zal verwijderd worden, wilt u zeker doorgaan?" Margin="0,0,0,12" />
+                                    <Button Click="DeleteConfirmation_Click" Content="Ja, verwijder het item" />
+                                </StackPanel>
+                            </Flyout>
+                        </AppBarButton.Flyout>
+                    </AppBarButton>
+                
                 <AppBarSeparator/>
                 <AppBarButton Icon="Save"/>
             </CommandBar>

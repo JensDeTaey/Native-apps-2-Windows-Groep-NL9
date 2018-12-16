@@ -31,10 +31,7 @@ namespace Windows_App.View
             this.DataContext = myBusinessViewModel;
 
 
-            if (PivotMyBusiness.SelectedIndex == 0)
-            {
-                AddButton.IsEnabled = false;
-            }
+            
         }
 
         private void AppBarEdit_Click(object sender, RoutedEventArgs e)
@@ -98,13 +95,21 @@ namespace Windows_App.View
             int index = PivotMyBusiness.SelectedIndex;
             switch (index)
             {
-                //add a business skippen we dit ?
-                case 0:
-                    
-                    break;
+                
                 //add an establishment
                 case 1:
-                    
+                    //EstablishmentName.IsEnabled = true;
+                    //EstablishmentAddress.IsEnabled = true;
+                    //EstablishmentPhoneNumber.IsEnabled = true;
+                    //EstablishmentEmail.IsEnabled = true;
+                    //EstablishmentPicture.IsEnabled = true;
+                    //OpeningsHoursListView.IsEnabled = true;
+                    //EstablishmentName.Text = "";
+                    //EstablishmentAddress.Text = "";
+                    //EstablishmentPhoneNumber.Text = "";
+                    //EstablishmentEmail.Text = "";
+                    //EstablishmentPicture.Text = "";
+                    //OpeningsHoursListView.DataContext = null;
                     break;
                 //add a promotion
                 case 2:
@@ -116,28 +121,40 @@ namespace Windows_App.View
                     break;
             }
         }
-
-        private void AppBarDelete_Click(object sender, RoutedEventArgs e)
+        
+        private void DeleteConfirmation_Click(object sender, RoutedEventArgs e)
         {
             int index = PivotMyBusiness.SelectedIndex;
             switch (index)
             {
                 //delete an business
                 case 0:
-                    
+                    myBusinessViewModel.DeleteBusiness();
                     break;
                 //delete an establishment
                 case 1:
-                    
+                    myBusinessViewModel.DeleteEstablishment();
                     break;
                 //delete a promotion
                 case 2:
-                    
+                    myBusinessViewModel.DeletePromotion();
                     break;
                 //delete an event
                 case 3:
-                    
+                    myBusinessViewModel.DeleteEvent();
                     break;
+            }
+        }
+
+        private void PivotMyBusiness_PivotItemLoading(Pivot sender, PivotItemEventArgs args)
+        {
+            if (PivotMyBusiness.SelectedIndex == 0)
+            {
+                AddButton.IsEnabled = false;
+            }
+            else
+            {
+                AddButton.IsEnabled = true;
             }
         }
     }

@@ -48,5 +48,25 @@ namespace Windows_App.ViewModel
                          select item).FirstOrDefault();
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
         }
+
+        public void DeleteBusiness()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEstablishment()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletePromotion()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEvent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
