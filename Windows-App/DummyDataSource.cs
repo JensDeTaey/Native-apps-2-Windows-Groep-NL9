@@ -7,18 +7,15 @@ namespace Windows_App
 {
     public static class DummyDataSource
     {
-        public static AuthenticationBearer UserAuthenticationBearer { get; } = new AuthenticationBearer() {
-            AccessToken = "TestTokenNormalUser",
-            ExpireDate = DateTime.Now.AddMinutes(1),
-            IsBusinessAccount = false
-        };
+        public static AuthenticationBearer UserAuthenticationBearer { get; } = new AuthenticationBearer(
+            "TestTokenNormalUser",
+             DateTime.Now.AddMinutes(1),
+            false);
 
-        public static AuthenticationBearer BusinessUserAuthenticationBearer { get; } = new AuthenticationBearer()
-        {
-            AccessToken = "TestTokenBusinessUser",
-            ExpireDate = DateTime.Now.AddMinutes(1),
-            IsBusinessAccount = true
-        };
+        public static AuthenticationBearer BusinessUserAuthenticationBearer { get; } = new AuthenticationBearer(
+             "TestTokenBusinessUser",
+             DateTime.Now.AddMinutes(1),
+             true);
 
         public static List<OpeningHour> OpeningHoursIkea { get; } = new List<OpeningHour>()
         {

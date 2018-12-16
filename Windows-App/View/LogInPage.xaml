@@ -12,6 +12,7 @@
         <TextBlock Text="Log in" Style="{StaticResource TitleTextBlockStyle}"/>
         <TextBox x:Name="EmailAdress" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
         <PasswordBox x:Name="Password" Header= "Wachtwoord" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="Password"/>
-        <Button x:Name="LoginButton" Content="Log in" Margin="0,24,0,0"/>
+        <Button x:Name="LoginButton" Content="Log in" Margin="0,24,0,0" Click="LoginButton_Click" />
+        <TextBlock x:Name="LoginErrorLabel" Text="Foutief wachtwoord of gebruikersnaam" Foreground="Red" Visibility="Collapsed" />
     </StackPanel>
 </Page>

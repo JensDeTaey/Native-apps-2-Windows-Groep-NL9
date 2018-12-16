@@ -14,15 +14,15 @@ namespace Windows_App.Data
         //SINGLETON
         public static IDataSource singleton = new MockDataSource();
 
-        protected AuthenticationBearer authenticationBearer;
+        public AuthenticationBearer authenticationBearer;
 
-        public Task<bool> LogIn(string username, string password)
+        public Task<bool> LogIn(string email, string password)
         {
             //Call the authenticationBearer with username and password
-            return GetAuthenticationBearer(username, password).ContinueWith(t =>
+            return GetAuthenticationBearer(email, password).ContinueWith(t =>
                            {
                                //If something went wrong the response will be null
-                               if(t != null)
+                               if(t != null && t.Result != null)
                                {
                                    //store the authenticationBearer
                                    authenticationBearer = t.Result;
@@ -32,7 +32,7 @@ namespace Windows_App.Data
                            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        protected abstract Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password);
+        protected abstract Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password);
 
         public abstract Task<ObservableCollection<Business>> FetchBusinesses();
 
