@@ -59,7 +59,7 @@
                             <TextBox x:Name="EstablishmentEmail" IsEnabled="False" Text="{Binding Establishment.Email}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                             <TextBox x:Name="EstablishmentPicture" IsEnabled="False" Text="{Binding Establishment.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                             <TextBlock Padding="0,24,0,10" Text="Openingsuren:"/>
-                            <ListView ItemsSource="{Binding Establishment.OpeningHours}">
+                            <ListView x:Name="OpeningsHoursListView" IsEnabled="False" ItemsSource="{Binding Establishment.OpeningHours}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="Template">
@@ -84,9 +84,9 @@
                                                 <RowDefinition Height="auto"/>
                                             </Grid.RowDefinitions>
                                           <TextBlock Grid.Column="0" x:Name="EstablishmentDay" Text="{Binding Day}" Margin="0,0,0,0" Width="auto" />
-                                          <TextBox  Grid.Column="1" x:Name="EstablishmentOpeningsHour" IsEnabled="False" Text="{Binding OpeningsHour}" Margin="10,0,10,0" MaxLength="40" Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                          <TextBox  Grid.Column="1" x:Name="EstablishmentOpeningsHour"  Text="{Binding OpeningsHour}" Margin="10,0,10,0" MaxLength="40" Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                             <TextBlock Grid.Column="2" Text="-"/>
-                                            <TextBox  Grid.Column="3" x:Name="EstablishmentClosingsHour" IsEnabled="False" Text="{Binding ClosingsHour}" Margin="10,0,10,0" MaxLength="40"  Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <TextBox  Grid.Column="3" x:Name="EstablishmentClosingsHour"  Text="{Binding ClosingsHour}" Margin="10,0,10,0" MaxLength="40"  Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                         </Grid>
 
                                     </DataTemplate>
@@ -119,43 +119,46 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Grid.Column="0">
-                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" />
+                                        <TextBlock Margin="0,10,0,10" Width="auto" Tag="{Binding Id}" Text="{Binding Name}" />
+                                        <ListView ItemsSource="{Binding Promotions}">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <ContentPresenter/>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <Button Width="auto" Tag="{Binding Id}" Click="Promotion_click" >
+                                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                         <StackPanel Grid.Column="1">
-                            <ListView ItemsSource="{Binding Establishment.Promotions}">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate>
-                                                    <ContentPresenter/>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <TextBox x:Name="PromotionName" IsEnabled="False" Text="{Binding Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <TextBox x:Name="PromotionDescription" IsEnabled="False" Text="{Binding Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <TextBox x:Name="PromotionPicture" IsEnabled="False" Text="{Binding Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
-                                                <CalendarDatePicker IsEnabled="False" Margin="0,0,50,0" Date="{Binding StartDate, Mode=TwoWay}"  x:Name="StartDateCalendarDatePicker" Header="Start datum"/>
 
-                                                <CalendarDatePicker IsEnabled="False" Date="{Binding EndDate, Mode=TwoWay}" x:Name="EndDateCalendarDatePicker" Header="Eind datum"/>
-                                            </StackPanel>
-                                            <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding IsDiscountCoupon}" />
+                            <StackPanel>
+                                <TextBox x:Name="PromotionName" IsEnabled="False" Text="{Binding Promotion.Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="PromotionDescription" IsEnabled="False" Text="{Binding Promotion.Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="PromotionPicture" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
+                                    <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=OneTime}" IsEnabled="False"  x:Name="StartDateCalendarDatePicker" Header="Start datum"/>
+                                    <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=OneTime}" IsEnabled="False" x:Name="EndDateCalendarDatePicker" Header="Eind datum"/>
+                                </StackPanel>
+                                <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding IsDiscountCoupon}" />
 
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                           
-                            
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -181,43 +184,44 @@
                             </ListView.ItemContainerStyle>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Grid.Column="0">
-                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" />
+                                    <StackPanel HorizontalAlignment="Left" Grid.Column="0">
+                                        <TextBlock TextAlignment="Left" Width="auto" Margin="0,10,0,10" Height="auto" Tag="{Binding Id}" Text="{Binding Name}" />
+                                        <ListView ItemsSource="{Binding Events}">
+                                            <ListView.ItemContainerStyle>
+                                                <Style TargetType="ListViewItem">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate>
+                                                                <ContentPresenter/>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ListView.ItemContainerStyle>
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel>
+                                                        <Button Width="auto" Tag="{Binding Id}" Height="auto"   Click="Event_click">
+                                                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                         <StackPanel Grid.Column="1">
-                            <ListView ItemsSource="{Binding Establishment.Events}">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate>
-                                                    <ContentPresenter/>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel>
-                                            <TextBox x:Name="EventName" IsEnabled="False" Text="{Binding Name}" Margin="0,24,0,0" MaxLength="40"  TextWrapping="Wrap" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <TextBox x:Name="EventDescription" IsEnabled="False" Text="{Binding Description}" Margin="0,24,0,0" TextWrapping="Wrap" MaxLength="40" Width="400" Height="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <TextBox x:Name="EventPicture" IsEnabled="False" Text="{Binding Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
-                                                <CalendarDatePicker IsEnabled="False" Margin="0,0,50,0" Date="{Binding StartDate, Mode=TwoWay}"  x:Name="StartDateEventCalendarDatePicker" Header="Start datum"/>
-                                                <CalendarDatePicker IsEnabled="False" Date="{Binding EndDate, Mode=TwoWay}" x:Name="EndDateEventCalendarDatePicker" Header="Eind datum"/>
-                                            </StackPanel>
-                                           
-
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-
-
+                            <StackPanel>
+                                <TextBox x:Name="EventName" Text="{Binding Event.Name}" IsEnabled="False" Margin="0,24,0,0" MaxLength="40"  TextWrapping="Wrap" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="EventDescription" Text="{Binding Event.Description}" IsEnabled="False" Margin="0,24,0,0" TextWrapping="Wrap" MaxLength="40" Width="400" Height="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="EventPicture" Text="{Binding Event.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
+                                    <CalendarDatePicker  Margin="0,0,50,0" IsEnabled="False" Date="{Binding Event.StartDate, Mode=OneTime}"  x:Name="StartDateEventCalendarDatePicker" Header="Start datum"/>
+                                    <CalendarDatePicker Date="{Binding Event.EndDate, Mode=OneTime}" IsEnabled="False" x:Name="EndDateEventCalendarDatePicker" Header="Eind datum"/>
+                                </StackPanel>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

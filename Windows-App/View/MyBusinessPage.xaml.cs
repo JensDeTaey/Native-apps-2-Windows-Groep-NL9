@@ -39,23 +39,49 @@ namespace Windows_App.View
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (PivotMyBusiness.SelectedIndex == 0)
+            int index = PivotMyBusiness.SelectedIndex;
+            switch (index)
             {
-                FirstName.IsEnabled = !FirstName.IsEnabled;
-                LastName.IsEnabled = !LastName.IsEnabled;
-                EmailAdress.IsEnabled = !EmailAdress.IsEnabled;
-                BusinessName.IsEnabled = !BusinessName.IsEnabled;
-                BusinessDescription.IsEnabled = !BusinessDescription.IsEnabled;
-                BusinessLink.IsEnabled = !BusinessLink.IsEnabled;
-                BusinessPicture.IsEnabled = !BusinessPicture.IsEnabled;
-                CategoriesCombo.IsEnabled = !CategoriesCombo.IsEnabled;
-                
+                case 0:
+                    FirstName.IsEnabled = !FirstName.IsEnabled;
+                    LastName.IsEnabled = !LastName.IsEnabled;
+                    EmailAdress.IsEnabled = !EmailAdress.IsEnabled;
+                    BusinessName.IsEnabled = !BusinessName.IsEnabled;
+                    BusinessDescription.IsEnabled = !BusinessDescription.IsEnabled;
+                    BusinessLink.IsEnabled = !BusinessLink.IsEnabled;
+                    BusinessPicture.IsEnabled = !BusinessPicture.IsEnabled;
+                    CategoriesCombo.IsEnabled = !CategoriesCombo.IsEnabled;
+                    break;
+                case 1:
+                    EstablishmentName.IsEnabled = !EstablishmentName.IsEnabled;
+                    EstablishmentAddress.IsEnabled = !EstablishmentAddress.IsEnabled;
+                    EstablishmentPhoneNumber.IsEnabled = !EstablishmentPhoneNumber.IsEnabled;
+                    EstablishmentEmail.IsEnabled = !EstablishmentEmail.IsEnabled;
+                    EstablishmentPicture.IsEnabled = !EstablishmentPicture.IsEnabled;
+                    OpeningsHoursListView.IsEnabled = !OpeningsHoursListView.IsEnabled;
+                    break;
+                case 2:
+                    //PromotionsListView.IsEnabled = !PromotionsListView.IsEnabled;
+                    break;
+                case 3:
+                    //EventsListView.IsEnabled = !EventsListView.IsEnabled;
+                    break;
             }
         }
 
         private void Establishment_click(object sender, RoutedEventArgs e)
         {
            myBusinessViewModel.fillRightEstablishment(((Button)sender).Tag);
+        }
+
+        private void Promotion_click(object sender, RoutedEventArgs e)
+        {
+            myBusinessViewModel.FillRightPromotion(((Button)sender).Tag);
+        }
+
+        private void Event_click(object sender, RoutedEventArgs e)
+        {
+            myBusinessViewModel.FillRightEvent(((Button)sender).Tag);
         }
     }
 }

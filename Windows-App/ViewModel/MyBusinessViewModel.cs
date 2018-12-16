@@ -14,6 +14,8 @@ namespace Windows_App.ViewModel
         public User User { get; set; }
        
         public Establishment Establishment { get; set; }
+        public Promotion Promotion { get; set; }
+        public Event Event { get; set; }
         public MyBusinessViewModel()
         {
             Business = DummyDataSource.BusinessIkea;
@@ -25,8 +27,26 @@ namespace Windows_App.ViewModel
 
         public void fillRightEstablishment (object tag)
         {
-            Establishment = Business.Establishments.Find(esta => esta.Id == (int)tag);
+            Establishment = Business.Establishments.FirstOrDefault(esta => esta.Id == (int)tag);
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
+        }
+
+        public void FillRightPromotion(object tag)
+        {
+            Promotion = (from sublist in Business.Establishments
+                           from item in sublist.Promotions
+                           where item.Id == (int)tag
+                           select item).FirstOrDefault();
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+        }
+
+        public void FillRightEvent(object tag)
+        {
+            Event = (from sublist in Business.Establishments
+                         from item in sublist.Events
+                     where item.Id == (int)tag
+                         select item).FirstOrDefault();
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
         }
     }
 }
