@@ -118,7 +118,6 @@ namespace Windows_App
         private void NavLogout_Click(object sender, RoutedEventArgs e)
         {
             AuthenticationHandler.Instance.LogOut();
-            NavigationContentControlActivated(null);
         }
         #endregion
 
