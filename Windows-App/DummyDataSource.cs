@@ -1,11 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows_App.Data;
 using Windows_App.Model;
 
 namespace Windows_App
 {
     public static class DummyDataSource
     {
+        public static AuthenticationBearer UserAuthenticationBearer { get; } = new AuthenticationBearer() {
+            AccessToken = "TestTokenNormalUser",
+            ExpireDate = DateTime.Now.AddMinutes(1),
+            IsBusinessAccount = false
+        };
+
+        public static AuthenticationBearer BusinessUserAuthenticationBearer { get; } = new AuthenticationBearer()
+        {
+            AccessToken = "TestTokenBusinessUser",
+            ExpireDate = DateTime.Now.AddMinutes(1),
+            IsBusinessAccount = true
+        };
+
         public static List<OpeningHour> OpeningHoursIkea { get; } = new List<OpeningHour>()
         {
             new OpeningHour(){

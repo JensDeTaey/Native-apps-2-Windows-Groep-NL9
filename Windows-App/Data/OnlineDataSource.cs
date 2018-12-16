@@ -16,6 +16,11 @@ namespace Windows_App
 
         private string baseUrl = "http://localhost:52420/api/";
 
+        protected override Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public override async Task<ObservableCollection<Business>> FetchBusinesses()
         {
             HttpClient client = new HttpClient();

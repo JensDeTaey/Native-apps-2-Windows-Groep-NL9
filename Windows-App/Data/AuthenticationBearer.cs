@@ -15,7 +15,7 @@ namespace Windows_App.Data
             set { expireDate = value; }
         }
         //Check if expire time lies before the current time
-        public Boolean IsExpired() => DateTime.Compare(expireDate, DateTime.Now) < 0; 
-        public Boolean IsBusinessAccount { get; set; }
+        public bool IsExpired() => DateTime.Compare(expireDate, DateTime.Now) < 0; 
+        public bool IsBusinessAccount { get; set; }
     }
 }

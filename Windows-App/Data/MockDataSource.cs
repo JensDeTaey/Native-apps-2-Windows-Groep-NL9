@@ -10,6 +10,20 @@ namespace Windows_App.Data
 {
     class MockDataSource : IDataSource
     {
+        protected override Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
+        {
+            return Task<AuthenticationBearer>.Factory.StartNew(() => {
+                if(username.Contains("businessOwner"))
+                {
+                    return DummyDataSource.BusinessUserAuthenticationBearer;
+                }
+                else
+                {
+                    return DummyDataSource.UserAuthenticationBearer;
+                }
+            });
+        }
+
         public override Task<ObservableCollection<Business>> FetchBusinesses()
         {
             return Task<ObservableCollection<Business>>.Factory.StartNew(() => {
