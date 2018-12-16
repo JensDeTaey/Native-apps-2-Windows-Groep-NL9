@@ -37,11 +37,9 @@ namespace Windows_App.View
         private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
             Business selectedBusiness= e.ClickedItem as Business;
-            PageLoadWithMultipleParameters pageLoad = new PageLoadWithMultipleParameters
-            {
-                BusinessId = selectedBusiness.Id,
-                Pivot = PivotOptions.BUSINESS
-            };
+            PageLoadWithMultipleParameters pageLoad = new PageLoadWithMultipleParameters();
+            pageLoad.BusinessId = selectedBusiness.Id;
+            pageLoad.Pivot = PivotOptions.BUSINESS;
             Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
     }

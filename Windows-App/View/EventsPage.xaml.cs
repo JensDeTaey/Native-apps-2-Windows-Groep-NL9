@@ -37,6 +37,7 @@ namespace Windows_App.View
             Event selectedEvent = e.ClickedItem as Event;
             PageLoadWithMultipleParameters payload = new PageLoadWithMultipleParameters
             {
+                EstablishmentId = selectedEvent.EstablishmentId,
                 BusinessId = selectedEvent.BusinessId,
                 Pivot = PivotOptions.EVENT
             };
