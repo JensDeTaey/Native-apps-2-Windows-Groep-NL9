@@ -432,5 +432,12 @@ namespace Windows_App
             EstablishmentIkeaGent,
             EstablishmentInno
         };
+
+        public static User user1 { get; } = new User
+        {
+            Lastname = "Peeters",
+            Firstname = "Marcel",
+            EmailAdress = "marcel.peeters@gmail.com"
+        };
     }
 }
