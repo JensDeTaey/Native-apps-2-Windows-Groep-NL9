@@ -11,8 +11,8 @@ namespace Windows_App.Model
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset EndDate { get; set; }
         private string picture;
         public string Picture
         {

@@ -97,10 +97,130 @@
                 </StackPanel>
         </PivotItem>
             <PivotItem Header="Promoties">
+                <StackPanel>
 
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListView ItemsSource="{Binding Business.Establishments}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Grid.Column="0">
+                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <StackPanel Grid.Column="1">
+                            <ListView ItemsSource="{Binding Establishment.Promotions}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <ContentPresenter/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBox x:Name="PromotionName" IsEnabled="False" Text="{Binding Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <TextBox x:Name="PromotionDescription" IsEnabled="False" Text="{Binding Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <TextBox x:Name="PromotionPicture" IsEnabled="False" Text="{Binding Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
+                                                <CalendarDatePicker IsEnabled="False" Margin="0,0,50,0" Date="{Binding StartDate, Mode=TwoWay}"  x:Name="StartDateCalendarDatePicker" Header="Start datum"/>
+
+                                                <CalendarDatePicker IsEnabled="False" Date="{Binding EndDate, Mode=TwoWay}" x:Name="EndDateCalendarDatePicker" Header="Eind datum"/>
+                                            </StackPanel>
+                                            <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding IsDiscountCoupon}" />
+
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                           
+                            
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
             </PivotItem>
             <PivotItem Header="Evenementen">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <ListView ItemsSource="{Binding Business.Establishments}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <ContentPresenter/>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Grid.Column="0">
+                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <StackPanel Grid.Column="1">
+                            <ListView ItemsSource="{Binding Establishment.Events}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <ContentPresenter/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <TextBox x:Name="EventName" IsEnabled="False" Text="{Binding Name}" Margin="0,24,0,0" MaxLength="40"  TextWrapping="Wrap" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <TextBox x:Name="EventDescription" IsEnabled="False" Text="{Binding Description}" Margin="0,24,0,0" TextWrapping="Wrap" MaxLength="40" Width="400" Height="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <TextBox x:Name="EventPicture" IsEnabled="False" Text="{Binding Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                            <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
+                                                <CalendarDatePicker IsEnabled="False" Margin="0,0,50,0" Date="{Binding StartDate, Mode=TwoWay}"  x:Name="StartDateEventCalendarDatePicker" Header="Start datum"/>
+                                                <CalendarDatePicker IsEnabled="False" Date="{Binding EndDate, Mode=TwoWay}" x:Name="EndDateEventCalendarDatePicker" Header="Eind datum"/>
+                                            </StackPanel>
+                                           
 
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
             </PivotItem>
             <Pivot.RightHeader>
             <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
