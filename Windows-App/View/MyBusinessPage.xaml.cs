@@ -37,7 +37,7 @@ namespace Windows_App.View
             }
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private void AppBarEdit_Click(object sender, RoutedEventArgs e)
         {
             int index = PivotMyBusiness.SelectedIndex;
             switch (index)
@@ -61,10 +61,19 @@ namespace Windows_App.View
                     OpeningsHoursListView.IsEnabled = !OpeningsHoursListView.IsEnabled;
                     break;
                 case 2:
-                    //PromotionsListView.IsEnabled = !PromotionsListView.IsEnabled;
+                    PromotionName.IsEnabled = !PromotionName.IsEnabled;
+                    PromotionDescription.IsEnabled = !PromotionDescription.IsEnabled;
+                    PromotionPicture.IsEnabled = !PromotionPicture.IsEnabled;
+                    StartDatePromotionCalendarDatePicker.IsEnabled = !StartDatePromotionCalendarDatePicker.IsEnabled;
+                    EndDatePromotionCalendarDatePicker.IsEnabled = !EndDatePromotionCalendarDatePicker.IsEnabled;
+                    CouponSwitch.IsEnabled = !CouponSwitch.IsEnabled;
                     break;
                 case 3:
-                    //EventsListView.IsEnabled = !EventsListView.IsEnabled;
+                    EventName.IsEnabled = !EventName.IsEnabled;
+                    EventDescription.IsEnabled = !EventDescription.IsEnabled;
+                    EventPicture.IsEnabled = !EventPicture.IsEnabled;
+                    StartDateEventCalendarDatePicker.IsEnabled = !StartDateEventCalendarDatePicker.IsEnabled;
+                    EndDateEventCalendarDatePicker.IsEnabled = !EndDateEventCalendarDatePicker.IsEnabled;
                     break;
             }
         }
@@ -82,6 +91,54 @@ namespace Windows_App.View
         private void Event_click(object sender, RoutedEventArgs e)
         {
             myBusinessViewModel.FillRightEvent(((Button)sender).Tag);
+        }
+
+        private void AppBarAdd_Click(object sender, RoutedEventArgs e)
+        {
+            int index = PivotMyBusiness.SelectedIndex;
+            switch (index)
+            {
+                //add a business skippen we dit ?
+                case 0:
+                    
+                    break;
+                //add an establishment
+                case 1:
+                    
+                    break;
+                //add a promotion
+                case 2:
+                    
+                    break;
+                //add an event
+                case 3:
+                    
+                    break;
+            }
+        }
+
+        private void AppBarDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int index = PivotMyBusiness.SelectedIndex;
+            switch (index)
+            {
+                //delete an business
+                case 0:
+                    
+                    break;
+                //delete an establishment
+                case 1:
+                    
+                    break;
+                //delete a promotion
+                case 2:
+                    
+                    break;
+                //delete an event
+                case 3:
+                    
+                    break;
+            }
         }
     }
 }

@@ -153,8 +153,8 @@
                                 <TextBox x:Name="PromotionDescription" IsEnabled="False" Text="{Binding Promotion.Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <TextBox x:Name="PromotionPicture" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
-                                    <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=OneTime}" IsEnabled="False"  x:Name="StartDateCalendarDatePicker" Header="Start datum"/>
-                                    <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=OneTime}" IsEnabled="False" x:Name="EndDateCalendarDatePicker" Header="Eind datum"/>
+                                    <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=OneTime}" IsEnabled="False"  x:Name="StartDatePromotionCalendarDatePicker" Header="Start datum"/>
+                                    <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=OneTime}" IsEnabled="False" x:Name="EndDatePromotionCalendarDatePicker" Header="Eind datum"/>
                                 </StackPanel>
                                 <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding IsDiscountCoupon}" />
 
@@ -228,11 +228,11 @@
             </PivotItem>
             <Pivot.RightHeader>
             <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
-                    <AppBarButton x:Name="AddButton" Icon="Add"/>
+                    <AppBarButton x:Name="AddButton" Icon=" Add" Click="AppBarAdd_Click"/>
                     <AppBarSeparator/>
-                    <AppBarButton x:Name="EditButton" Icon="Edit" Click="AppBarButton_Click" />
+                    <AppBarButton x:Name="EditButton" Icon="Edit" Click="AppBarEdit_Click" />
                     <AppBarSeparator/>
-                    <AppBarButton x:Name="DeleteButton" Icon="Delete"/>
+                    <AppBarButton x:Name="DeleteButton" Icon="Delete" Click="AppBarDelete_Click"/>
                 <AppBarSeparator/>
                 <AppBarButton Icon="Save"/>
             </CommandBar>
