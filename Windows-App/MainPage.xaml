@@ -131,7 +131,7 @@
                 </Button>
                 <AppBarButton x:Name="NavRegister" Icon="AddFriend" Label="registreer" Click="NavPageRegisterContentControl_Click"  />
                 <AppBarButton x:Name="NavLogin" Icon="Contact" Label="Log in" Click="NavPageLoginContentControl_Click"  />
-
+                <AppBarButton x:Name="NavMyBusiness" Icon="Home" Label="Mijn bedrijf" Click="NavPageMyBusiness_click" />
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>

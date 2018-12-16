@@ -60,6 +60,10 @@ namespace Windows_App
         {
             mainFrame.Navigate(typeof(LogInPage));
         }
+        private void NavPageMyBusiness_click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(MyBusinessPage));
+        }
         private void NavigationContentControlActivated(object sender)
         {
             //resetting all navigation Controls
