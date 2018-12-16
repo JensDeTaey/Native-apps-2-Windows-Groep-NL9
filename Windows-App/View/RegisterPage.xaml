@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="Windows_App.View.RegisterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Windows_App.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer>
+    <StackPanel>
+        <TextBlock Text="Registreer" Style="{StaticResource TitleTextBlockStyle}"/>
+        <TextBox x:Name="LastName" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <TextBox x:Name="FirstName" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <TextBox x:Name="EmailAdress" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <PasswordBox x:Name="PassWord" Header="Wachtwoord" Margin="0,24,0,0" MaxLength="30" Width="400" HorizontalAlignment="Left" InputScope="Password" />
+        <PasswordBox x:Name="RepeatedPassWord" Header="Herhaal wachtwoord" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Password" />
+        <TextBox x:Name="BusinessName" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+        <TextBox x:Name="BusinessDescription" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+        <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
+          ItemsSource="{x:Bind Categories}" />
+            <TextBox x:Name="BusinessLink" Margin="0,24,0,0" Header="Link naar de website van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" />
+        <TextBox x:Name="BusinessPicture" Header= "Link naar logo" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+        <StackPanel Orientation="Horizontal">
+                <Button x:Name="RegistreerButton" Content="Registreer" Margin="0,24" Click="Registreer_Click" />
+            <Button Content="Annuleer" Margin="24" />
+        </StackPanel>
+    </StackPanel>
+    </ScrollViewer>
+
+    <!--ScrollViewer>
+    <Pivot x:Name="PivotRegistreer"   Title="Registreer" >
+
+
+
+        <PivotItem Header="Bedrijfsgegevens">
+            
+
+        </PivotItem>
+
+        <PivotItem Header="Vestiging toevoegen">
+            
+        </PivotItem>
+        <Pivot.RightHeader>
+            <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
+                
+                
+                <AppBarButton Icon="Delete"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Save"/>
+            </CommandBar>
+        </Pivot.RightHeader>
+    </Pivot>
+    </-->
+
+</Page>
