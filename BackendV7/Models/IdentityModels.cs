@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,8 +17,8 @@ namespace BackendV7.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public int? BusinessId { get; set; }
-        public Business Business { get; set; }
+    
+        public List<Business> Businesses { get; set; }
 
         public List<Subscription> Subscriptions { get; set; }
 
@@ -38,6 +40,7 @@ namespace BackendV7.Models
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Establishment> Establishments { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<OpeningHour> OpeningHours { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {

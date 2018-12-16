@@ -6,19 +6,19 @@ using System.Web;
 
 namespace BackendV7.Models.ViewModels
 {
-    public class EditBusinessViewModel
+    public class EditPromotionViewModel
     {
-
-
         [Required]
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
-        public string Category { get; set; }
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
         [Required]
         public string Picture { get; set; }
         [Required]
-        public string LinkWebsite { get; set; }
+        public bool IsDiscountCoupon { get; set; }
     }
 }

@@ -86,7 +86,7 @@ namespace BackendV7.Models
         [RequiredIfTrue("IsBusinessAccount")]
         [Display(Name = "Business image")]
         [DataType(DataType.Url)]
-        public string ImageURL { get; set; }
+        public string Picture { get; set; }
 
 
 
