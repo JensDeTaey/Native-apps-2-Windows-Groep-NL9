@@ -43,5 +43,52 @@ namespace Windows_App
             var json = await client.GetStringAsync(new Uri(baseUrl + "Events/"));
             return JsonConvert.DeserializeObject<ObservableCollection<Event>>(json);
         }
+
+        public override async Task<bool> AddEstablishment(int businessId,Establishment establishment)
+        {
+            HttpClient client = new HttpClient();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(baseUrl + "Businesses/" + businessId + "/AddEstablishment"));
+            var json = await client.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
+            try
+            {
+                JsonConvert.DeserializeObject<Establishment>(json);
+                return true;
+            } catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public override async Task<bool> EditEstablishment(Establishment establishment)
+        {
+            HttpClient client = new HttpClient();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(baseUrl + "Establishments/" + establishment.Id));
+            var json = await client.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
+            try
+            {
+                JsonConvert.DeserializeObject<Establishment>(json);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public override async Task<bool> DeleteEstablishment(Establishment establishment)
+        {
+            HttpClient client = new HttpClient();
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(baseUrl + "Establishments/" + establishment.Id));
+            var json = await client.SendAsync(requestMessage).Result.Content.ReadAsStringAsync();
+            try
+            {
+                JsonConvert.DeserializeObject<Establishment>(json);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

@@ -13,7 +13,6 @@ namespace Windows_App.Data
         //SINGLETON
         public static IDataSource singleton = new OnlineDataSource();
 
-
         public abstract Task<ObservableCollection<Business>> FetchBusinesses();
 
         public abstract Task<Business> FetchBusinessWithId(int id);
@@ -21,5 +20,14 @@ namespace Windows_App.Data
         public abstract Task<ObservableCollection<Promotion>> FetchPromotions();
 
         public abstract Task<ObservableCollection<Event>> FetchEvents();
+
+        public abstract Task<Boolean> AddEstablishment(int businessId, Establishment establishment);
+
+        public abstract Task<Boolean> EditEstablishment(Establishment establishment);
+
+        public abstract Task<Boolean> DeleteEstablishment(Establishment establishment)
+
+
+
     }
 }

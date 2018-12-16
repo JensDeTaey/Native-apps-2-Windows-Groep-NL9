@@ -10,6 +10,21 @@ namespace Windows_App.Data
 {
     class MockDataSource : IDataSource
     {
+        public override Task<bool> AddEstablishment(int businessId, Establishment establishment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> DeleteEstablishment(Establishment establishment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> EditEstablishment(Establishment establishment)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Task<ObservableCollection<Business>> FetchBusinesses()
         {
             return Task<ObservableCollection<Business>>.Factory.StartNew(() => {

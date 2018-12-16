@@ -33,13 +33,15 @@ namespace BackendV7.Providers
             
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-            var businesses = ApplicationDbContext.Create().Businesses.Where(u => u.UserId == user.Id).Count();
+            
 
             if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
                 return;
             }
+
+            var businesses = ApplicationDbContext.Create().Businesses.Where(u => u.UserId == user.Id).Count();
 
             ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
                OAuthDefaults.AuthenticationType);
