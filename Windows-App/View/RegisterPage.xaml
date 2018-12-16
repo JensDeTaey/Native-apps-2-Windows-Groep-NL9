@@ -16,7 +16,9 @@
         <TextBox x:Name="EmailAdress" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
         <PasswordBox x:Name="PassWord" Header="Wachtwoord" Margin="0,24,0,0" MaxLength="30" Width="400" HorizontalAlignment="Left" InputScope="Password" />
         <PasswordBox x:Name="RepeatedPassWord" Header="Herhaal wachtwoord" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Password" />
-        <TextBox x:Name="BusinessName" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+            <ToggleSwitch x:Name="UserSwitch" Margin="0,24,0,0" Header="Soort gebruiker" OffContent="Registreren als gebruiker" OnContent="Registreren voor bedrijf" IsOn="True" Toggled="UserSwitch_Toggled" />
+
+            <TextBox x:Name="BusinessName" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
         <TextBox x:Name="BusinessDescription" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
         <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
           ItemsSource="{x:Bind Categories}" />
