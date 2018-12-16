@@ -158,10 +158,10 @@
 
                 </StackPanel>
                 <StackPanel x:Name="UserControlsStackpanel" Grid.Row="2" Orientation="Horizontal" >
-                    <AppBarButton x:Name="NavMyBusiness" Icon="Home" Label="Mijn bedrijf" Click="NavPageMyBusiness_click" />
-                    <AppBarButton x:Name="NavRegister" Icon="AddFriend" Label="registreer" Click="NavPageRegisterContentControl_Click"  />
-                    <AppBarButton x:Name="NavLogin" Icon="Contact" Label="Log in" Click="NavPageLoginContentControl_Click"  />
-                    <AppBarButton Style="{StaticResource NavigationAppBarButtonStyle}" x:Name="NavLogout" Icon="Contact" Label="Log uit" Click="NavPageLoginContentControl_Click"  />
+                    <AppBarButton x:Name="NavMyBusiness" Icon="Home" Label="Mijn bedrijf" Click="NavMyBusiness_Click" />
+                    <AppBarButton x:Name="NavRegister" Icon="AddFriend" Label="registreer" Click="NavRegister_Click"  />
+                    <AppBarButton x:Name="NavLogin" Icon="Contact" Label="Log in" Click="NavLogin_Click"  />
+                    <AppBarButton x:Name="NavLogout" Icon="Contact" Label="Log uit" Click="NavLogout_Click"   />
                 </StackPanel>
             </Grid>
         </SplitView.Pane>

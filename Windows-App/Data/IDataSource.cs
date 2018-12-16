@@ -32,6 +32,11 @@ namespace Windows_App.Data
                            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
+        public void LogOut()
+        {
+            this.authenticationBearer = null;
+        }
+
         protected abstract Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password);
 
         public abstract Task<ObservableCollection<Business>> FetchBusinesses();

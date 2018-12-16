@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Data
 {
-    public class AuthenticationBearer
+    public class AuthenticationBearer 
     {
         public string AccessToken { get; private set; }
         private readonly DateTime expireDate;
