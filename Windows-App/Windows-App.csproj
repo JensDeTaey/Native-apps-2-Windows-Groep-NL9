@@ -97,22 +97,26 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\IDataSource.cs" />
+    <Compile Include="Data\MockDataSource.cs" />
     <Compile Include="DummyDataSource.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Days.cs" />
     <Compile Include="Model\DaysOfWeekEnum.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Business.cs" />
     <Compile Include="Model\OpeningHour.cs" />
+    <Compile Include="Model\PageLoadWithMultipleParameters.cs" />
     <Compile Include="Model\Promotion.cs" />
     <Compile Include="Model\Establishment.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="OnlineDataSource.cs" />
+    <Compile Include="Data\OnlineDataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\BusinessDetailViewModel.cs" />
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
+    <Compile Include="ViewModel\EventsViewModel.cs" />
+    <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="View\AddBusinessPage.xaml.cs">
       <DependentUpon>AddBusinessPage.xaml</DependentUpon>
     </Compile>
@@ -136,14 +140,9 @@
     <None Include="Windows-App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\action.jpg" />
-    <Content Include="Images\gamemania.png" />
-    <Content Include="Images\hema.jpg" />
+    <Content Include="Images\event.png" />
     <Content Include="Images\ikea.png" />
-    <Content Include="Images\ikeaEstablishment.jpg" />
-    <Content Include="Images\inno.png" />
-    <Content Include="Images\media-markt_logo.jpg" />
-    <Content Include="Images\xenos.jpeg" />
+    <Content Include="Images\promotion.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

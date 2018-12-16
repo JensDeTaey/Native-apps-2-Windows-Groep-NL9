@@ -20,7 +20,7 @@ namespace BackendV7.Controllers
         // GET: api/Promotions
         public IQueryable<Promotion> GetPromotions()
         {
-            return db.Promotions;
+            return db.Promotions.Include(p => p.Establishment);
         }
 
         // GET: api/Promotions/5

@@ -10,13 +10,30 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Core;
+using Windows_App.Data;
 using Windows_App.Model;
 
 namespace Windows_App.ViewModel
 {
     public class BusinessesViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Business> Businesses { get; set; }
+
+            public ObservableCollection<Business> Businesses { get; set; }
+            public BusinessesViewModel()
+            {
+            //Businesses = new ObservableCollection<Business>(DummyDataSource.Businesses);
+            Businesses = new ObservableCollection<Business>();
+            IDataSource.singleton.FetchBusinesses().ContinueWith(t =>
+            {
+                Businesses = t.Result;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /*public ObservableCollection<Business> Businesses { get; set; }
         public BusinessesViewModel()
         {
             Businesses = new ObservableCollection<Business>();
@@ -28,9 +45,9 @@ namespace Windows_App.ViewModel
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        */
 
-        
+
 
 
     }

@@ -8,8 +8,64 @@
     xmlns:local1="using:Windows_App"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <DataTemplate x:Key="SmallScreenTemplate">
+            <StackPanel Padding="10">
+                <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" MaxWidth="350" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Vindt plaats van: "/>
+                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                </StackPanel>
+            </StackPanel>
 
-    <StackPanel>
-        <TextBlock Text="Events"/>
-    </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="DesktopTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                <StackPanel  Grid.Column="1" Padding="10">
+                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Vindt plaats van: "/>
+                        <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Small">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ListViewEvents.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ListViewEvents.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListViewEvents" ItemsSource="{Binding Events}" IsItemClickEnabled="True" ItemClick="ListViewEvents_ItemClick" >
+        </ListView>
+    </Grid>
 </Page>

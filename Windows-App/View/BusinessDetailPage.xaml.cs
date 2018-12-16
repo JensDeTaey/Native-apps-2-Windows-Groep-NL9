@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -15,7 +18,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Model;
 using Windows_App.ViewModel;
+using static Windows_App.Model.PageLoadWithMultipleParameters;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -37,10 +42,28 @@ namespace Windows_App.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if( e.Parameter is BusinessDetailViewModel)
+            if( e.Parameter is PageLoadWithMultipleParameters)
             {
-                DataContext = e.Parameter as BusinessDetailViewModel;
-                AddEstablishmentsToMap();
+                //Cast pageload
+                PageLoadWithMultipleParameters pageLoad = e.Parameter as PageLoadWithMultipleParameters;
+
+                int businessId = pageLoad.BusinessId;
+
+                GoToRightPivot(pageLoad.Pivot);
+                OnlineDataSource.singleton.FetchBusinessWithId(businessId).ContinueWith(t =>
+                {
+                    DataContext = new BusinessDetailViewModel(t.Result);
+                    
+                    if (NetworkInterface.GetIsNetworkAvailable())
+                    {
+                        AddEstablishmentsToMap();
+                    }
+                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+
+
+                
+
+                
             }
             else
             {
@@ -55,7 +78,7 @@ namespace Windows_App.View
             Geopoint gp2 = new Geopoint(bg2);
 
             BusinessDetailViewModel business = this.DataContext as BusinessDetailViewModel;
-            business.getEstablishments().ForEach(async esta =>
+            business.GetEstablishments().ForEach(async esta =>
             {
                 MapLocationFinderResult res =
                 await MapLocationFinder.FindLocationsAsync(esta.Address, gp2);
@@ -70,6 +93,20 @@ namespace Windows_App.View
                     , esta.Name);
             });
 
+        }
+
+        private void GoToRightPivot(PivotOptions pivot)
+        {
+            switch (pivot)
+            {
+                case PivotOptions.PROMOTION: PivotBusiness.SelectedIndex = 2;
+                    break;
+                case PivotOptions.EVENT: PivotBusiness.SelectedIndex = 3;
+                    break;
+                default: PivotBusiness.SelectedIndex = 0;
+                    break;
+            }
+            
         }
 
         private void AddPointToMap(Geopoint geoPoint, string title)

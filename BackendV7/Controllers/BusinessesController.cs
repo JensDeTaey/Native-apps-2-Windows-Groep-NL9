@@ -32,6 +32,8 @@ namespace BackendV7.Controllers
                 .Include(b => b.Establishments)
                 .Include(b => b.Subscriptions)
                 .Include("Establishments.OpeningHours")
+                .Include("Establishments.Events")
+                .Include("Establishments.Promotions")
                 .SingleOrDefault(b => b.Id == id);
             if (business == null)
             {
@@ -73,8 +75,8 @@ namespace BackendV7.Controllers
             
 
             db.Entry(business).State = EntityState.Modified;
-            db.Entry(business).Property(x => x.Establishments).IsModified = false;
-            db.Entry(business).Property(x => x.Subscriptions).IsModified = false;
+            //db.Entry(business).Property(x => x.Establishments).IsModified = false;
+           // db.Entry(business).Property(x => x.Subscriptions).IsModified = false;
 
             try
             {

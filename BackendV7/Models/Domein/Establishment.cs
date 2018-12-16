@@ -22,8 +22,10 @@ namespace BackendV7
         [Required]
         public string Email { get; set; }
         [Required]
+        [JsonProperty("Picture")]
         public string PictureURL { get; set; }
 
+        
         public int BusinessId { get; set; }
         [JsonIgnore]
         public Business Business { get; set; }

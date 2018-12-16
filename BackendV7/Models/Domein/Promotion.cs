@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,11 +17,19 @@ namespace BackendV7
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        [JsonProperty("Picture")]
         public string PictureURL { get; set; }
         public bool IsDiscountCoupon { get; set; }
 
+        public int BusinessId {
+            get {
+                return Establishment.BusinessId;
+            }
+        }
+
         //Assocations
         public int EstablishmentId { get; set; }
+        [JsonIgnore]
         public Establishment Establishment { get; set; }
     }
 

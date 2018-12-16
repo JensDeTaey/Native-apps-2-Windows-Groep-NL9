@@ -20,7 +20,7 @@ namespace BackendV7.Controllers
         // GET: api/Events
         public IQueryable<Event> GetEvents()
         {
-            return db.Events;
+            return db.Events.Include(p => p.Establishment);
         }
 
         // GET: api/Events/5

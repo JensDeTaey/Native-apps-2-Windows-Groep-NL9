@@ -21,6 +21,7 @@ namespace BackendV7
         [Required]
         public string Category { get; set; }
         [Required]
+        [JsonProperty("Picture")]
         public string PictureURL { get; set; }
         [Required]
         public string LinkWebsite { get; set; }

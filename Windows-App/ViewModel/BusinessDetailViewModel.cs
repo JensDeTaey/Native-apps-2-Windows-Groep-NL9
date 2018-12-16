@@ -12,20 +12,37 @@ namespace Windows_App.ViewModel
     public class BusinessDetailViewModel : INotifyPropertyChanged
     {
         public Business Business { get; set; }
+        public List<Establishment> Establishments { get; set; }
+        public List<Business> Businesses { get; set; }
 
         public BusinessDetailViewModel(Business business)
         {
-            OnlineDataSource.singleton.fetchBusinessWithId(business.Id).ContinueWith(t =>
-            {
-                this.Business = t.Result;
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
-            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            this.Business = business;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public List<Establishment> getEstablishments()
+
+        public List<Establishment> GetEstablishments()
         {
             return Business.Establishments;
         }
+
+        public Establishment FindEstablishment(int establishmentID)
+        {
+            return Establishments.Find(esta => esta.Id == establishmentID);
+        }
+
+        public Business FindBusiness(int businessID)
+        {
+            return Businesses.Find(bis => bis.Id == businessID);
+        }
+
     }
 }
+
+
+/*OnlineDataSource.singleton.fetchBusinessWithId(business.Id).ContinueWith(t =>
+            {
+                this.Business = t.Result;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());*/
