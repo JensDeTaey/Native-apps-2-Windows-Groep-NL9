@@ -34,7 +34,7 @@ namespace Windows_App
                 ClosingsHour ="20:00"
             },
             new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Saterday),
+                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Saturday),
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },

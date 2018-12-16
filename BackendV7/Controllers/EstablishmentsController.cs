@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BackendV7;
 using BackendV7.Models;
+using BackendV7.Models.ViewModels;
 
 namespace BackendV7.Controllers
 {
@@ -38,37 +39,49 @@ namespace BackendV7.Controllers
 
         // PUT: api/Establishments/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEstablishment(int id, Establishment establishment)
+        [Authorize]
+        public IHttpActionResult PutEstablishment(int id, EditEstablishmentViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (model == null || !ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != establishment.Id)
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
-            db.Entry(establishment).State = EntityState.Modified;
 
-            try
+            ApplicationUser foundUser = db.Users
+                .Include(e => e.Business.Establishments)
+                .Where(e => e.Id == user.Id).FirstOrDefault();
+
+            Establishment establishment = foundUser.Business
+                .Establishments.Find(e => e.Id == id);
+
+
+            if(establishment != null )
             {
+                establishment.Id = establishment.Id;
+                establishment.Name = model.Name;
+                establishment.Address = model.Address;
+                establishment.PhoneNumber = model.PhoneNumber;
+                establishment.Email = model.Email;
+                establishment.PictureURL = model.PictureURL;
+                establishment.OpeningHours = model.OpeningHours;
+
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
+                return Ok(establishment);
+            } else
             {
-                if (!EstablishmentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+
+            
         }
 
         // DELETE: api/Establishments/5

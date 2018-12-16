@@ -340,7 +340,7 @@ namespace BackendV7.Controllers
                 business.PictureURL = model.ImageURL;
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Business=business };
+            var user = new ApplicationUser() { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email, Business=business };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

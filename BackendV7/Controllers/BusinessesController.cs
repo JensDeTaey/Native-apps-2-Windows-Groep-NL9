@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using BackendV7;
 using BackendV7.Authorization;
 using BackendV7.Models;
+using BackendV7.Models.ViewModels;
 
 namespace BackendV7.Controllers
 {
@@ -46,7 +47,7 @@ namespace BackendV7.Controllers
         // PUT: api/Businesses/5
         [Authorize]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBusiness(int id, Business business)
+        public IHttpActionResult PutBusiness(int id, EditBusinessViewModel business)
         {
             if (!ModelState.IsValid)
             {
@@ -58,50 +59,35 @@ namespace BackendV7.Controllers
             {
                 return Unauthorized();
             }
-            if (user.BusinessId != id)
-            {
-                return Unauthorized();
-            }
 
             if(business == null)
             {
                 return BadRequest("Give me some data to work with, yo");
             }
 
-            if (id != business.Id)
-            {
-                return BadRequest();
-            }
-            
+            var dBbusiness = db.Businesses.Find(id);
 
-            db.Entry(business).State = EntityState.Modified;
-            //db.Entry(business).Property(x => x.Establishments).IsModified = false;
-           // db.Entry(business).Property(x => x.Subscriptions).IsModified = false;
-
-            try
+            if(dBbusiness != null)
             {
+                dBbusiness.Name = business.Name;
+                dBbusiness.Description = business.Description;
+                dBbusiness.Category = business.Category;
+                dBbusiness.LinkWebsite = business.LinkWebsite;
+                dBbusiness.PictureURL = business.PictureURL;
+
                 db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
+                return Ok();
+            } else
             {
-                if (!BusinessExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Businesses/{id}/AddEstablishment
         [Route("api/Businesses/{id}/AddEstablishment")]
         [ResponseType(typeof(void))]
         [Authorize]
-        public IHttpActionResult AddEstablishment(int id,Establishment establishment)
+        public IHttpActionResult AddEstablishment(int id,EditEstablishmentViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -114,12 +100,8 @@ namespace BackendV7.Controllers
             {
                 return Unauthorized();
             }
-            if (user.BusinessId != id)
-            {
-                return Unauthorized();
-            }
 
-            if (establishment == null)
+            if (model == null)
             {
                 return BadRequest("Give me some data to work with, yo");
             }
@@ -127,10 +109,22 @@ namespace BackendV7.Controllers
 
             if(db.Businesses.Find(id) != null)
             {
-                establishment.BusinessId = id;
+
+                Establishment establishment = new Establishment()
+                {
+                    Name = model.Name,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber,
+                    Email = model.Email,
+                    PictureURL = model.PictureURL,
+                    BusinessId = id,
+                    OpeningHours = model.OpeningHours
+                    
+                };
+
                 db.Establishments.Add(establishment);
                 db.SaveChanges();
-                return StatusCode(HttpStatusCode.Created);
+                return Ok(establishment);
             } else
             {
                 return StatusCode(HttpStatusCode.NotFound);

@@ -14,8 +14,11 @@ namespace BackendV7
         [JsonIgnore]
         public int Id { get; set; }
 
+        [Required]
         public int Day { get; set; }
+        [Required]
         public string OpeningsHour { get; set; }
+        [Required]
         public string ClosingsHour { get; set; }
 
         //Assocations
