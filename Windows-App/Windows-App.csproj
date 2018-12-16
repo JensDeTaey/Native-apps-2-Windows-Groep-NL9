@@ -121,6 +121,7 @@
     <Compile Include="ViewModel\BusinessDetailViewModel.cs" />
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
     <Compile Include="ViewModel\EventsViewModel.cs" />
+    <Compile Include="ViewModel\MyBusinessViewModel.cs" />
     <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\BusinessDetailPage.xaml.cs">

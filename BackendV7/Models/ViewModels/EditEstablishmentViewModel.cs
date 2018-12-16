@@ -18,7 +18,7 @@ namespace BackendV7.Models.ViewModels
         [Required]
         public string Email { get; set; }
         [Required]
-        public string PictureURL { get; set; }
+        public string Picture { get; set; }
         [Required]
         public List<OpeningHour> OpeningHours { get; set; }
     }

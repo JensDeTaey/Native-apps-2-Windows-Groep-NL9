@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackendV7
 {
@@ -30,6 +31,17 @@ namespace BackendV7
                 return Subscriptions == null ? 0: Subscriptions.Count;
             }
         }
+
+        [NotMapped]
+        public bool isSubscribedTo {
+            get; set;
+        } = false;
+
+        [JsonIgnore]
+        public ApplicationUser User { get; set; }
+        [ForeignKey("User")]
+        [JsonIgnore]
+        public string UserId { get; set; }
 
         //Associations
         [JsonIgnore]

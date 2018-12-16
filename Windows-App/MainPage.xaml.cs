@@ -121,6 +121,7 @@ namespace Windows_App
         }
         #endregion
 
+
         #region navigation controls update
         private void NavigationContentControlActivated(object sender)
         {
