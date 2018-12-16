@@ -20,9 +20,33 @@ namespace BackendV7.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/Businesses
-        public IQueryable<Business> GetBusinesses()
+        public List<Business> GetBusinesses()
         {
-            return db.Businesses.Include(b => b.Subscriptions);
+
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            if (user == null)
+            {
+                return db.Businesses.Include(b => b.Subscriptions).ToList();
+            } else
+            {
+                var businesses = db.Businesses
+                .Include(b => b.Subscriptions)
+                .Include(b => b.User).ToList();
+                businesses.ForEach(b =>
+                {
+                    if (b.User != null && b.User.Id == user.Id)
+                    {
+                        b.isSubscribedTo = true;
+                    }
+                });
+
+                return businesses;
+
+
+            
+            }
+
         }
 
         // GET: api/Businesses/5
@@ -106,8 +130,8 @@ namespace BackendV7.Controllers
                 return BadRequest("Give me some data to work with, yo");
             }
 
-
-            if(db.Businesses.Find(id) != null)
+            var business = db.Businesses.Include(b => b.Establishments).Where( b => b.Id == id).FirstOrDefault();
+            if (business != null)
             {
 
                 Establishment establishment = new Establishment()
@@ -121,8 +145,7 @@ namespace BackendV7.Controllers
                     OpeningHours = model.OpeningHours
                     
                 };
-
-                db.Establishments.Add(establishment);
+                business.Establishments.Add(establishment);
                 db.SaveChanges();
                 return Ok(establishment);
             } else

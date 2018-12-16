@@ -265,6 +265,10 @@
     <Compile Include="Migrations\201812160122386_initial4.Designer.cs">
       <DependentUpon>201812160122386_initial4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812161142155_initial5.cs" />
+    <Compile Include="Migrations\201812161142155_initial5.Designer.cs">
+      <DependentUpon>201812161142155_initial5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domein\DummyData.cs" />
     <Compile Include="Models\ViewModels\AccountBindingModels.cs" />
@@ -394,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812160122386_initial4.resx">
       <DependentUpon>201812160122386_initial4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812161142155_initial5.resx">
+      <DependentUpon>201812161142155_initial5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,8 +30,10 @@ namespace BackendV7.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            var businesses = ApplicationDbContext.Create().Businesses.Where(u => u.UserId == user.Id).Count();
 
             if (user == null)
             {
@@ -51,7 +53,7 @@ namespace BackendV7.Providers
 
             var props = new AuthenticationProperties(new Dictionary<string, string> {
                 {
-                    "isBusinessAccount", user.BusinessId == null ? "false" : "true"
+                    "isBusinessAccount", businesses == 0 ? "false" : "true"
                 }
             });
 

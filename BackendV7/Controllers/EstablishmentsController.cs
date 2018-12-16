@@ -56,24 +56,33 @@ namespace BackendV7.Controllers
 
 
             ApplicationUser foundUser = db.Users
-                .Include(e => e.Business.Establishments)
+                .Include("Businesses.Establishments.OpeningHours")
                 .Where(e => e.Id == user.Id).FirstOrDefault();
 
-            Establishment establishment = foundUser.Business
-                .Establishments.Find(e => e.Id == id);
+            Establishment establishment = foundUser.Businesses.SelectMany(b => b.Establishments).Where(e => e.Id == id).FirstOrDefault();
 
 
             if(establishment != null )
             {
-                establishment.Id = establishment.Id;
-                establishment.Name = model.Name;
-                establishment.Address = model.Address;
-                establishment.PhoneNumber = model.PhoneNumber;
-                establishment.Email = model.Email;
-                establishment.PictureURL = model.PictureURL;
-                establishment.OpeningHours = model.OpeningHours;
+                try
+                {
+                    db.OpeningHours.RemoveRange(establishment.OpeningHours);
 
-                db.SaveChanges();
+
+
+                    establishment.Id = establishment.Id;
+                    establishment.Name = model.Name;
+                    establishment.Address = model.Address;
+                    establishment.PhoneNumber = model.PhoneNumber;
+                    establishment.Email = model.Email;
+                    establishment.PictureURL = model.PictureURL;
+                    establishment.OpeningHours = model.OpeningHours;
+
+                    db.SaveChanges();
+                } catch(DbUpdateConcurrencyException e)
+                {
+
+                }
                 return Ok(establishment);
             } else
             {
@@ -99,10 +108,10 @@ namespace BackendV7.Controllers
 
 
             ApplicationUser foundUser = db.Users
-                .Include(e => e.Business.Establishments)
+                .Include("Businesses.Establishments")
                 .Where(e => e.Id == user.Id).FirstOrDefault();
 
-            Establishment establishment = foundUser.Business
+            Establishment establishment = foundUser.Businesses.Where(e => e.UserId == user.Id).FirstOrDefault()
                 .Establishments.Where(e => e.Id == id).FirstOrDefault();
 
 
@@ -113,9 +122,15 @@ namespace BackendV7.Controllers
             }
 
             db.Establishments.Remove(establishment);
-            db.SaveChanges();
-
+            try
+            {
+                db.SaveChanges();
+            } catch (DbUpdateConcurrencyException e)
+            {
+            }
             return Ok(establishment);
+
+
         }
 
         protected override void Dispose(bool disposing)

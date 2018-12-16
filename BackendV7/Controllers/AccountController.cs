@@ -328,6 +328,8 @@ namespace BackendV7.Controllers
                 return BadRequest(ModelState);
             }
 
+            var user = new ApplicationUser() { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
+            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
             Business business = null;
 
             if (model.IsBusinessAccount)
@@ -338,11 +340,12 @@ namespace BackendV7.Controllers
                 business.Category = model.Category;
                 business.LinkWebsite = model.LinkWebsite;
                 business.PictureURL = model.ImageURL;
+                business.UserId = user.Id;
             }
 
-            var user = new ApplicationUser() { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email, Business=business };
+            
 
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            
 
             
 
