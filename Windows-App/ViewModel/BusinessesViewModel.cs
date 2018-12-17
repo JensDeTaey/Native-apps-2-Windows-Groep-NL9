@@ -21,7 +21,6 @@ namespace Windows_App.ViewModel
             public ObservableCollection<Business> Businesses { get; set; }
             public BusinessesViewModel()
             {
-            //Businesses = new ObservableCollection<Business>(DummyDataSource.Businesses);
             Businesses = new ObservableCollection<Business>();
             IDataSource.singleton.FetchBusinesses().ContinueWith(t =>
             {
@@ -37,22 +36,16 @@ namespace Windows_App.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /*public ObservableCollection<Business> Businesses { get; set; }
-        public BusinessesViewModel()
+        public void FilterBusinesses(string filter)
         {
-            Businesses = new ObservableCollection<Business>();
-            OnlineDataSource.singleton.fetchBusinesses().ContinueWith(t =>
-            {
-                Businesses = t.Result;
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
+            //Filter on business name and on category
+            Businesses = new ObservableCollection<Business>(Businesses.Where(business => 
+            business.Name.ToLower().Contains(filter.ToLower()) ||
+            business.Category.ToLower().Contains(filter.ToLower())
+            ));
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
 
-            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
-
-        */
-
-
-
 
     }
 

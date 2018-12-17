@@ -60,9 +60,18 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}" IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MaxWidth="500"/>
+            </Grid.ColumnDefinitions>
+            <SearchBox x:Name="SearchBox" PlaceholderText="Zoeken op naam of categorie" FocusOnKeyboardInput="True" Height="35" Margin="20,10,20,0" QuerySubmitted="SearchBox_QuerySubmitted"/>
+        </Grid>
+        <TextBlock Grid.Row="1" Text="Er zijn geen ondernemingen gevonden" Visibility="{x:Bind NoBusinessesVisibility}"/>
+        <ListView Grid.Row="2" x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}"   IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick"  />
     </Grid>
 
 </Page>

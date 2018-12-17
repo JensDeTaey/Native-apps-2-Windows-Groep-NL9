@@ -27,12 +27,16 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class BusinessesPage : Page
     {
+        private BusinessesViewModel businessViewModel;
         public BusinessesPage()
         {
             this.InitializeComponent();
-            this.DataContext = new BusinessesViewModel();
-            
+            businessViewModel = new BusinessesViewModel();
+            this.DataContext = businessViewModel;
         }
+
+        public Visibility NoBusinessesVisibility { get => businessViewModel.Businesses.Count <= 0? Visibility.Visible:Visibility.Collapsed; }
+
 
         private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -43,6 +47,11 @@ namespace Windows_App.View
                 Pivot = PivotOptions.BUSINESS
             };
             Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
+        }
+
+        private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            businessViewModel.FilterBusinesses(args.QueryText);
         }
     }
 }
