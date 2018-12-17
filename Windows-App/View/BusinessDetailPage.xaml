@@ -343,6 +343,7 @@
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Is met kortingsbon:  "/>
                                                     <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
+                                                    <Button Content="Druk bon af" Click="Button_ClickAsync"/>
                                                 </StackPanel>
                                             </StackPanel>
                                         </Border>

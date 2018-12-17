@@ -124,6 +124,7 @@
     <Compile Include="ViewModel\MyBusinessViewModel.cs" />
     <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\SubsribedBusinessesViewModel.cs" />
     <Compile Include="View\BusinessDetailPage.xaml.cs">
       <DependentUpon>BusinessDetailPage.xaml</DependentUpon>
     </Compile>
@@ -145,6 +146,9 @@
     <Compile Include="View\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SubscribedBusinessesPage.xaml.cs">
+      <DependentUpon>SubscribedBusinessesPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -156,6 +160,7 @@
     <Content Include="Images\event.png" />
     <Content Include="Images\ikea.png" />
     <Content Include="Images\promotion.png" />
+    <Content Include="Images\qrcode.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -202,6 +207,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SubscribedBusinessesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -209,6 +218,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Pdf.UWP">
+      <Version>16.3.0.36</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

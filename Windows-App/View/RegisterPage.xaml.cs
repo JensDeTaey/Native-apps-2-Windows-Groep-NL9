@@ -44,5 +44,26 @@ namespace Windows_App.View
         {
            
         }
+
+
+        private void UserSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!UserSwitch.IsOn)
+            {
+                BusinessName.Visibility = Visibility.Collapsed;
+                BusinessDescription.Visibility = Visibility.Collapsed;
+                CategoriesCombo.Visibility = Visibility.Collapsed;
+                BusinessLink.Visibility = Visibility.Collapsed;
+                BusinessPicture.Visibility = Visibility.Collapsed;
+            }
+            else if(BusinessName != null)
+            {
+                BusinessName.Visibility = Visibility.Visible;
+                BusinessDescription.Visibility = Visibility.Visible;
+                CategoriesCombo.Visibility = Visibility.Visible;
+                BusinessLink.Visibility = Visibility.Visible;
+                BusinessPicture.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
