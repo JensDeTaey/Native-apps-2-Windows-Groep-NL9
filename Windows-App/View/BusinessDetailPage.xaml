@@ -260,18 +260,24 @@
 
         <PivotItem Header="Algemeen">
             <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
-                <StackPanel Margin="20,10,0,0">
-                    <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
-                    <TextBlock Text="{Binding Business.Category}" FontSize="13" HorizontalAlignment="Center" Margin="0,-14.3,0,5"/>
-                    <Image Source="{Binding Business.Picture}" Width="300"/>
-                    <TextBlock Text="{Binding Business.Description}" HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="15"/>
+                <StackPanel HorizontalAlignment="Center" Margin="20,10,0,0">
                     
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock FontFamily="Segoe MDL2 Assets" 
-                        Text="&#xE774;   "/>
-                        <HyperlinkButton Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-10,0,0" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        <Button Background="White" FontFamily="Segoe MDL2 Assets" Content="&#xEB51;" />
+                        <TextBlock Text="Volg dit bedrijf"/>
                     </StackPanel>
+                    
+                    
+                    <TextBlock Text="{Binding Business.Category}" FontSize="13" Margin="0,-14.3,0,5"/>
+                    <Image Source="{Binding Business.Picture}" Width="300"/>
+                    <TextBlock Text="{Binding Business.Description}"  TextWrapping="Wrap" FontSize="15"/>
 
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+                        Text="&#xE774;"/>
+                        <HyperlinkButton Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-10,0,0"/>
+                    </StackPanel>
                 </StackPanel>
             </ScrollViewer>
 
