@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -40,6 +42,7 @@ namespace Windows_App.View
             Categories.Add("Alleszaak");
 
             CheckRequirements();
+            UserSwitch_Toggled(null, null);
         }
 
         private void Registreer_Click(object sender, RoutedEventArgs e)
@@ -59,20 +62,41 @@ namespace Windows_App.View
                 Picture = BusinessPicture.Text
             };
 
+            DisableInput(false);
+
             IDataSource.singleton.Register(model).ContinueWith(async t =>
             {
                 if (t.Result)
                 {
+                    
                     await ShowNotificationAsync("Gebruiker aangemaakt, je kan je nu inloggen!", true);
                 }
                 else
                 {
+                    DisableInput(true);
                     await ShowNotificationAsync("Er ging iets fout bij het registreren!", false);
                     
                 }
             });
         }
 
+        private void DisableInput(bool v)
+        {
+            FirstName.IsEnabled = v;
+            LastName.IsEnabled = v;
+            EmailAdress.IsEnabled = v;
+            PassWord.IsEnabled = v;
+            RepeatedPassWord.IsEnabled = v;
+            UserSwitch.IsEnabled = v;
+            BusinessName.IsEnabled = v;
+            BusinessDescription.IsEnabled = v;
+            CategoriesCombo.IsEnabled = v;
+            BusinessLink.IsEnabled = v;
+            BusinessPicture.IsEnabled = v;
+
+            RegistreerButton.IsEnabled = v;
+            
+        }
 
         private void UserSwitch_Toggled(object sender, RoutedEventArgs e)
         {
@@ -92,6 +116,7 @@ namespace Windows_App.View
                 BusinessLink.Visibility = Visibility.Visible;
                 BusinessPicture.Visibility = Visibility.Visible;
             }
+            CheckRequirements();
         }
         public void CheckRequirements()
         {
@@ -99,7 +124,10 @@ namespace Windows_App.View
                 || LastName.Text.Equals("")
                 || EmailAdress.Text.Equals("")
                 || PassWord.Password.Equals("")
+                || !IsValidEmail(EmailAdress.Text)
                 || RepeatedPassWord.Password.Equals("")
+                || !PassWord.Password.Equals(RepeatedPassWord.Password)
+                || PassWord.Password.Length <6
                 || (UserSwitch.IsOn && (
                     BusinessName.Text.Equals("")
                     || BusinessDescription.Text.Equals("")
@@ -116,20 +144,34 @@ namespace Windows_App.View
             }
         }
 
+        bool IsValidEmail(string email)
+        {
+
+            return new EmailAddressAttribute().IsValid(email);
+
+        }
+
         private async System.Threading.Tasks.Task ShowNotificationAsync(string text, bool hasRedirectAction) => await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             async () =>
             {
                 MessageDialog dialog = new MessageDialog(text);
-                dialog.Commands.Add(new UICommand("Sluit", null));
-                dialog.Commands.Add(new UICommand("Naar inlogscherm", null));
+                if (hasRedirectAction)
+                {
+                    dialog.Commands.Add(new UICommand("Naar inlogscherm", null));
+                } else
+                {
+                    dialog.Commands.Add(new UICommand("Sluit", null));
+                }
+                
+                
                 dialog.DefaultCommandIndex = 1;
 
                 var cmd = await dialog.ShowAsync();
-
+                
                 if (cmd.Label == "Naar inlogscherm")
                 {
-                    // do something
-                }
+                    Frame.Navigate(typeof(LogInPage));
+                } 
             });
 
         private void TextChanged(object sender, TextChangedEventArgs e)

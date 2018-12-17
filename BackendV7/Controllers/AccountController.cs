@@ -330,18 +330,26 @@ namespace BackendV7.Controllers
 
             var user = new ApplicationUser() { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-            Business business = null;
 
             if (model.IsBusinessAccount)
             {
-                business = new Business();
-                business.Name = model.BusinessName;
-                business.Description = model.Description;
-                business.Category = model.Category;
-                business.LinkWebsite = model.LinkWebsite;
-                business.PictureURL = model.Picture;
-                business.UserId = user.Id;
+                Business business = new Business
+                {
+                    Name = model.BusinessName,
+                    Description = model.Description,
+                    Category = model.Category,
+                    LinkWebsite = model.LinkWebsite,
+                    PictureURL = model.Picture,
+                    UserId = user.Id
+                };
+
+                var db = ApplicationDbContext.Create();
+                db.Businesses.Add(business);
+                db.SaveChanges();
+
             }
+
+            
 
             
 
