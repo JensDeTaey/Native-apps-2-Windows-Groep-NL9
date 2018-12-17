@@ -23,6 +23,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Authentication;
+using Windows_App.Data;
 using Windows_App.Model;
 using Windows_App.ViewModel;
 using static Windows_App.Model.PageLoadWithMultipleParameters;
@@ -36,13 +38,13 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class BusinessDetailPage : Page
     {
-
+        private BusinessDetailViewModel viewModel;
         public BusinessDetailPage()
         {
             this.InitializeComponent();
             //token you need to use maps
             MCMap.MapServiceToken = "NggniNfkWoAJYWaNrwu7~Ba_YkJv9SvsASrBV280AGQ~AqXz_H8d1GdioVSul1nTHcxPtsQlG3YdjJtPP9csVnPPyDNmc7kUv0G8x-QpQueG";
-
+             
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -55,13 +57,15 @@ namespace Windows_App.View
                 int businessId = pageLoad.BusinessId;
 
                 GoToRightPivot(pageLoad.Pivot);
-                OnlineDataSource.singleton.FetchBusinessWithId(businessId).ContinueWith(t =>
-                {
-                    DataContext = new BusinessDetailViewModel(t.Result);
 
+                viewModel = new BusinessDetailViewModel(businessId);
+                DataContext = viewModel;
+                viewModel.LoadData().ContinueWith(t =>
+                {
                     if (NetworkInterface.GetIsNetworkAvailable())
                     {
                         AddEstablishmentsToMap();
+                        ShowRightSubscriptionRate();
                     }
                 }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -78,7 +82,7 @@ namespace Windows_App.View
             Geopoint gp2 = new Geopoint(bg2);
 
             BusinessDetailViewModel business = this.DataContext as BusinessDetailViewModel;
-            business.GetEstablishments().ForEach(async esta =>
+            business.Business.Establishments.ForEach(async esta =>
             {
                 MapLocationFinderResult res =
                 await MapLocationFinder.FindLocationsAsync(esta.Address, gp2);
@@ -194,6 +198,45 @@ namespace Windows_App.View
                 st.Flush();
                 st.Dispose();
                 fileStream.Dispose();
+            }
+        }
+
+        private void ButtonSubscribe_Click(object sender, RoutedEventArgs e)
+        {
+
+            if(AuthenticationHandler.Instance.AuthenticatedStatus == AuthenticatedStatusEnum.UNREGISTERED)
+            {
+                Frame.Navigate(typeof(LogInPage));
+                return;
+            }
+
+
+           viewModel.SubscribeClicked().ContinueWith(t =>
+           {
+               if(t.Result)
+               {
+                   ShowRightSubscriptionRate();
+               }
+           }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            
+        }
+
+        private void ShowRightSubscriptionRate()
+        {
+            if (viewModel.Business.IsSubscribedTo)
+            {
+                FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                SubscribeButton.FontFamily = font;
+                SubscribeButton.Content = "\uEB52";
+                SubsribeText.Text = "Onvolg dit bedrijf";
+
+            }
+            else
+            {
+                FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                SubscribeButton.FontFamily = font;
+                SubscribeButton.Content = "\uEB51";
+                SubsribeText.Text = "Volg dit bedrijf";
             }
         }
     }
