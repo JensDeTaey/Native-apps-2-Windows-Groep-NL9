@@ -137,14 +137,14 @@ namespace Windows_App
 
         public override async Task<bool> SubscribeToBusiness(int businessId)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId + "/Subscribe"));
             var response = await HttpClient.SendAsync(requestMessage);
-            return response.StatusCode == System.Net.HttpStatusCode.Created;
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         public override async Task<bool> UnsubscribeFromBusiness(int businessId)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId + "/Unsubscribe"));
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }

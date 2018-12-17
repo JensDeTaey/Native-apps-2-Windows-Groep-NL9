@@ -23,6 +23,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Authentication;
+using Windows_App.Data;
 using Windows_App.Model;
 using Windows_App.ViewModel;
 using static Windows_App.Model.PageLoadWithMultipleParameters;
@@ -79,7 +81,7 @@ namespace Windows_App.View
             Geopoint gp2 = new Geopoint(bg2);
 
             BusinessDetailViewModel business = this.DataContext as BusinessDetailViewModel;
-            business.GetEstablishments().ForEach(async esta =>
+            business.Business.Establishments.ForEach(async esta =>
             {
                 MapLocationFinderResult res =
                 await MapLocationFinder.FindLocationsAsync(esta.Address, gp2);
@@ -200,23 +202,35 @@ namespace Windows_App.View
 
         private void ButtonSubscribe_Click(object sender, RoutedEventArgs e)
         {
-            if (!viewModel.isSubscribedTo())
+
+            if(AuthenticationHandler.Instance.AuthenticatedStatus == AuthenticatedStatusEnum.UNREGISTERED)
             {
-                FontFamily font = new FontFamily("Segoe MDL2 Assets");
-                SubscribeButton.FontFamily = font;
-                SubscribeButton.Content = "\uEB52";
-                
-                //SubscribeButton.Foreground = "OrangeRed";
-                SubsribeText.Text = "ontvolg bedrijf";
+                Frame.Navigate(typeof(LogInPage));
+                return;
             }
-            else
-            {
-                FontFamily font = new FontFamily("Segoe MDL2 Assets");
-                SubscribeButton.FontFamily = font;
-                SubscribeButton.Content = "\uEB51";
-                //SubscribeButton.Foreground = "OrangeRed";
-                SubsribeText.Text = "Volg bedrijf";
-            }
+
+
+           viewModel.SubscribeClicked().ContinueWith(t =>
+           {
+               if(t.Result)
+               {
+                   if (viewModel.Business.IsSubscribedTo)
+                   {
+                       FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                       SubscribeButton.FontFamily = font;
+                       SubscribeButton.Content = "\uEB52";
+                       SubsribeText.Text = "ontvolg bedrijf";
+
+                   }
+                   else
+                   {
+                       FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                       SubscribeButton.FontFamily = font;
+                       SubscribeButton.Content = "\uEB51";
+                       SubsribeText.Text = "Volg bedrijf";
+                   }
+               }
+           }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
             
         }
     }

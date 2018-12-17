@@ -14,9 +14,15 @@ namespace Windows_App.Data
         public static AuthenticationHandler Instance = new AuthenticationHandler();
 
         //observable property
-        private AuthenticatedStatusEnum authenticatedStatusEnum = AuthenticatedStatusEnum.UNREGISTERED;
+        private  AuthenticatedStatusEnum authenticatedStatusEnum = AuthenticatedStatusEnum.UNREGISTERED;
 
-        public AuthenticatedStatusEnum AuthenticatedStatus { get; private set; }
+        public AuthenticatedStatusEnum AuthenticatedStatus { get {
+                return authenticatedStatusEnum;
+            }
+            private set {
+                authenticatedStatusEnum = value;
+            }
+        }
 
         private void CheckForInternetConnection()
         {
