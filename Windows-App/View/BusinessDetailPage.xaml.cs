@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Parsing;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +13,8 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
@@ -42,7 +47,7 @@ namespace Windows_App.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if( e.Parameter is PageLoadWithMultipleParameters)
+            if (e.Parameter is PageLoadWithMultipleParameters)
             {
                 //Cast pageload
                 PageLoadWithMultipleParameters pageLoad = e.Parameter as PageLoadWithMultipleParameters;
@@ -53,12 +58,12 @@ namespace Windows_App.View
                 OnlineDataSource.singleton.FetchBusinessWithId(businessId).ContinueWith(t =>
                 {
                     DataContext = new BusinessDetailViewModel(t.Result);
-                    
+
                     if (NetworkInterface.GetIsNetworkAvailable())
                     {
                         AddEstablishmentsToMap();
                     }
-                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());              
+                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
             }
             else
             {
@@ -94,14 +99,17 @@ namespace Windows_App.View
         {
             switch (pivot)
             {
-                case PivotOptions.PROMOTION: PivotBusiness.SelectedIndex = 2;
+                case PivotOptions.PROMOTION:
+                    PivotBusiness.SelectedIndex = 2;
                     break;
-                case PivotOptions.EVENT: PivotBusiness.SelectedIndex = 3;
+                case PivotOptions.EVENT:
+                    PivotBusiness.SelectedIndex = 3;
                     break;
-                default: PivotBusiness.SelectedIndex = 0;
+                default:
+                    PivotBusiness.SelectedIndex = 0;
                     break;
             }
-            
+
         }
 
         private void AddPointToMap(Geopoint geoPoint, string title)
@@ -118,6 +126,75 @@ namespace Windows_App.View
             MCMap.ZoomLevel = 10;
         }
 
+        private async void Button_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            //Creates an empty PDF document instance
+            PdfDocument document = new PdfDocument();
 
+            //Adding new page to the PDF document
+            PdfPage page = document.Pages.Add();
+
+            //Creates new PDF font
+            PdfStandardFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 12);
+
+            //Drawing text to the PDF document
+            page.Graphics.DrawString("Kortingsbon", font, PdfBrushes.Black, 10, 10);
+
+            //Create PDF graphics for the page
+
+            PdfGraphics graphics = page.Graphics;
+
+            //Load the image from the disk.
+           
+
+            //PdfBitmap image = new PdfBitmap("qrcode.png");
+
+            //Draw the image
+
+            //graphics.DrawImage(image, 0, 0);
+
+            MemoryStream stream = new MemoryStream();
+            
+            //Saves the PDF document to stream
+            await document.SaveAsync(stream);
+
+            //Close the document
+
+            document.Close(true);
+
+            //Save the stream as PDF document file in local machine
+
+            Save(stream, "KortingsBon.pdf");
+        }
+
+        async void Save(Stream stream, string filename)
+        {
+
+            stream.Position = 0;
+
+            StorageFile stFile;
+            if (!(Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")))
+            {
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.DefaultFileExtension = ".pdf";
+                savePicker.SuggestedFileName = "Kortingsbon";
+                savePicker.FileTypeChoices.Add("Adobe PDF Document", new List<string>() { ".pdf" });
+                stFile = await savePicker.PickSaveFileAsync();
+            }
+            else
+            {
+                StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+                stFile = await local.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            }
+            if (stFile != null)
+            {
+                Windows.Storage.Streams.IRandomAccessStream fileStream = await stFile.OpenAsync(FileAccessMode.ReadWrite);
+                Stream st = fileStream.AsStreamForWrite();
+                st.Write((stream as MemoryStream).ToArray(), 0, (int)stream.Length);
+                st.Flush();
+                st.Dispose();
+                fileStream.Dispose();
+            }
+        }
     }
 }

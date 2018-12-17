@@ -160,6 +160,7 @@
     <Content Include="Images\event.png" />
     <Content Include="Images\ikea.png" />
     <Content Include="Images\promotion.png" />
+    <Content Include="Images\qrcode.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -217,6 +218,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Pdf.UWP">
+      <Version>16.3.0.36</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
