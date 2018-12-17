@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows_App.Data;
 using Windows_App.Model;
+using Windows_App.ViewModel;
 
 namespace Windows_App
 {
@@ -64,8 +65,25 @@ namespace Windows_App
         {
             HttpClient = new HttpClient();
         }
+
+
+        public override async Task<bool> Register(RegisterViewModel registerViewModel)
+        {
+            if (registerViewModel == null)
+            {
+                return false;
+            }
+
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Account/Register"));
+            var test = JsonConvert.SerializeObject(registerViewModel);
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(registerViewModel),
+                                    Encoding.UTF8,
+                                    "application/json");
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
         #endregion
-        
+
         #region Main Pages Getters
 
         public override async Task<ObservableCollection<Business>> FetchBusinesses()

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows_App.Model;
+using Windows_App.ViewModel;
 
 namespace Windows_App.Data
 {
@@ -26,6 +27,11 @@ namespace Windows_App.Data
                     return DummyDataSource.UserAuthenticationBearer;
                 }
             });
+        }
+
+        public override Task<bool> Register(RegisterViewModel registerViewModel)
+        {
+            throw new NotImplementedException();
         }
 
 

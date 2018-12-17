@@ -11,19 +11,19 @@
     <ScrollViewer>
     <StackPanel>
         <TextBlock Text="Registreer" Style="{StaticResource TitleTextBlockStyle}"/>
-        <TextBox x:Name="LastName" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-        <TextBox x:Name="FirstName" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-        <TextBox x:Name="EmailAdress" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-        <PasswordBox x:Name="PassWord" Header="Wachtwoord" Margin="0,24,0,0" MaxLength="30" Width="400" HorizontalAlignment="Left" InputScope="Password" />
-        <PasswordBox x:Name="RepeatedPassWord" Header="Herhaal wachtwoord" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Password" />
-            <ToggleSwitch x:Name="UserSwitch" Margin="0,24,0,0" Header="Soort gebruiker" OffContent="Registreren als gebruiker" OnContent="Registreren voor bedrijf" IsOn="True" Toggled="UserSwitch_Toggled" />
+            <TextBox x:Name="LastName" TextChanged="TextChanged" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+            <TextBox x:Name="FirstName" TextChanged="TextChanged" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+            <TextBox x:Name="EmailAdress" TextChanged="TextChanged" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+            <PasswordBox x:Name="PassWord" PasswordChanged="PasswordChanged" Header="Wachtwoord" Margin="0,24,0,0" MaxLength="30" Width="400" HorizontalAlignment="Left" InputScope="Password" />
+            <PasswordBox x:Name="RepeatedPassWord" PasswordChanged="PasswordChanged" Header="Herhaal wachtwoord" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="Password" />
+            <ToggleSwitch x:Name="UserSwitch" IsEnabledChanged="SwitchChanged" Margin="0,24,0,0" Header="Soort gebruiker" OffContent="Registreren als gebruiker" OnContent="Registreren voor bedrijf" IsOn="True" Toggled="UserSwitch_Toggled" />
 
-            <TextBox x:Name="BusinessName" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-        <TextBox x:Name="BusinessDescription" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-        <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
+            <TextBox x:Name="BusinessName" TextChanged="TextChanged" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+            <TextBox x:Name="BusinessDescription"  TextChanged="TextChanged" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+        <ComboBox x:Name="CategoriesCombo" SelectionChanged="SelectionChanged" Header="Categorie"  Margin="0,24,0,0" Width="296" 
           ItemsSource="{x:Bind Categories}" />
             <TextBox x:Name="BusinessLink" Margin="0,24,0,0" Header="Link naar de website van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" />
-        <TextBox x:Name="BusinessPicture" Header= "Link naar logo" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+            <TextBox x:Name="BusinessPicture" TextChanged="TextChanged" Header= "Link naar logo" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
         <StackPanel Orientation="Horizontal">
                 <Button x:Name="RegistreerButton" Content="Registreer" Margin="0,24" Click="Registreer_Click" />
             <Button Content="Annuleer" Margin="24" />
