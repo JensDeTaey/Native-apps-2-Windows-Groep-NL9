@@ -57,14 +57,15 @@ namespace Windows_App.View
                 int businessId = pageLoad.BusinessId;
 
                 GoToRightPivot(pageLoad.Pivot);
-                OnlineDataSource.singleton.FetchBusinessWithId(businessId).ContinueWith(t =>
-                {
-                    viewModel = new BusinessDetailViewModel(t.Result);
-                    DataContext = viewModel;
 
+                viewModel = new BusinessDetailViewModel(businessId);
+                DataContext = viewModel;
+                viewModel.LoadData().ContinueWith(t =>
+                {
                     if (NetworkInterface.GetIsNetworkAvailable())
                     {
                         AddEstablishmentsToMap();
+                        ShowRightSubscriptionRate();
                     }
                 }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
             }
@@ -214,24 +215,29 @@ namespace Windows_App.View
            {
                if(t.Result)
                {
-                   if (viewModel.Business.IsSubscribedTo)
-                   {
-                       FontFamily font = new FontFamily("Segoe MDL2 Assets");
-                       SubscribeButton.FontFamily = font;
-                       SubscribeButton.Content = "\uEB52";
-                       SubsribeText.Text = "ontvolg bedrijf";
-
-                   }
-                   else
-                   {
-                       FontFamily font = new FontFamily("Segoe MDL2 Assets");
-                       SubscribeButton.FontFamily = font;
-                       SubscribeButton.Content = "\uEB51";
-                       SubsribeText.Text = "Volg bedrijf";
-                   }
+                   ShowRightSubscriptionRate();
                }
            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
             
+        }
+
+        private void ShowRightSubscriptionRate()
+        {
+            if (viewModel.Business.IsSubscribedTo)
+            {
+                FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                SubscribeButton.FontFamily = font;
+                SubscribeButton.Content = "\uEB52";
+                SubsribeText.Text = "Onvolg dit bedrijf";
+
+            }
+            else
+            {
+                FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                SubscribeButton.FontFamily = font;
+                SubscribeButton.Content = "\uEB51";
+                SubsribeText.Text = "Volg dit bedrijf";
+            }
         }
     }
 }

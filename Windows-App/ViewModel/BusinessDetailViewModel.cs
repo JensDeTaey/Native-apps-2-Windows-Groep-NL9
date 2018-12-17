@@ -12,13 +12,25 @@ namespace Windows_App.ViewModel
 {
     public class BusinessDetailViewModel : INotifyPropertyChanged
     {
+        public int BusinessId { get; set; }
         public Business Business { get; set; }
         public List<Establishment> Establishments { get; set; }
         //public List<Business> Businesses { get; set; }
 
-        public BusinessDetailViewModel(Business business)
+        public BusinessDetailViewModel(int businessId)
         {
-            this.Business = business;
+            this.BusinessId = businessId;
+        }
+
+        public async Task LoadData()
+        {
+            await OnlineDataSource.singleton.FetchBusinessWithId(BusinessId).ContinueWith(t =>
+            {
+                this.Business = t.Result;
+                TriggerBusinessChanged();
+                return;
+
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,8 +53,7 @@ namespace Windows_App.ViewModel
                 {
                     if(t.Result)
                     {
-                        this.Business.IsSubscribedTo = true;
-                        TriggerSubscribedToChanged();
+                        this.Business.IsSubscribedTo = false;
                     }
                     return t.Result;
                 }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
@@ -52,8 +63,7 @@ namespace Windows_App.ViewModel
                 {
                     if (t.Result)
                     {
-                        this.Business.IsSubscribedTo = false;
-                        TriggerSubscribedToChanged();
+                        this.Business.IsSubscribedTo = true;
                     }
                     
                     return t.Result;
@@ -62,7 +72,7 @@ namespace Windows_App.ViewModel
                 
         }
 
-        public void TriggerSubscribedToChanged()
+        public void TriggerBusinessChanged()
         {
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
         }
