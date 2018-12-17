@@ -59,17 +59,13 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding Day}"/>
-                                        <TextBlock Grid.Column="1" Text=": "/>
-                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
-                                        <TextBlock Grid.Column="3" Text=" - "/>
-                                <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                                <TextBlock Grid.Column="0" Text="{Binding DayInDutch}"/>
+                                <TextBlock Grid.Column="1" Margin="0,0,10,0" Text=":"/>
+                                <TextBlock Grid.Column="2" Text="{Binding OpeningsHours}"/>
                             </Grid>
                         </DataTemplate>
                             </ListView.ItemTemplate>
@@ -129,17 +125,13 @@
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Day}"/>
-                                        <TextBlock Grid.Column="1" Text=": "/>
-                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
-                                        <TextBlock Grid.Column="3" Text=" - "/>
-                                        <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding DayInDutch}"/>
+                                        <TextBlock Grid.Column="1" Margin="0,0,10,0" Text=":"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHours}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -177,7 +169,7 @@
                             <TextBlock Text="{Binding Email}"/>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Padding="5,0,5,0">
+                    <StackPanel Orientation="Vertical" Margin="50,0,0,0" Padding="5,0,5,0">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontFamily="Segoe MDL2 Assets" 
                         Text="&#xE823;   "/>
@@ -203,18 +195,14 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" Text="{Binding Day}"/>
-                                        <TextBlock Grid.Column="1" Text=": "/>
-                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHour}"/>
-                                        <TextBlock Grid.Column="3" Text=" - "/>
-                                        <TextBlock Grid.Column="4" Text="{Binding ClosingsHour}"/>
+                                        <TextBlock Grid.Column="0" Text="{Binding DayInDutch}"/>
+                                        <TextBlock Grid.Column="1" Margin="0,0,10,0" Text=":"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding OpeningsHours}"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
