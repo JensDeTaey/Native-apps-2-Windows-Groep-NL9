@@ -20,40 +20,35 @@ namespace Windows_App
         public static List<OpeningHour> OpeningHoursIkea { get; } = new List<OpeningHour>()
         {
             new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Monday),
+                Day = DaysOfWeek.DaysOfWeekEnum.Monday,
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },
             new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Tuesday),
+                Day = DaysOfWeek.DaysOfWeekEnum.Tuesday,
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },
             new OpeningHour(){
-                Day =   DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Wednesday),
+                Day =   DaysOfWeek.DaysOfWeekEnum.Wednesday,
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },
             new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Thursday),
+                Day = DaysOfWeek.DaysOfWeekEnum.Thursday,
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },
             new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Friday),
+                Day = DaysOfWeek.DaysOfWeekEnum.Friday,
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },
             new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Saturday),
+                Day = DaysOfWeek.DaysOfWeekEnum.Saturday,
                 OpeningsHour ="9:00",
                 ClosingsHour ="20:00"
             },
-            new OpeningHour(){
-                Day = DaysOfWeek.GiveDutchDayOfWeek(DaysOfWeek.DaysOfWeekEnum.Sunday),
-                OpeningsHour ="0:00",
-                ClosingsHour ="0:00"
-            }
         };
 
         public static Promotion PromotionIkeaAntwerpen1 { get; } = new Promotion()
@@ -218,6 +213,35 @@ namespace Windows_App
             EventInno
         };
 
+        public static List<OpeningHour> OpeningHoursInno { get; } = new List<OpeningHour>()
+        {
+            new OpeningHour(){
+                Day = DaysOfWeek.DaysOfWeekEnum.Monday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.DaysOfWeekEnum.Tuesday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day =   DaysOfWeek.DaysOfWeekEnum.Wednesday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.DaysOfWeekEnum.Friday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+            new OpeningHour(){
+                Day = DaysOfWeek.DaysOfWeekEnum.Saturday,
+                OpeningsHour ="9:00",
+                ClosingsHour ="20:00"
+            },
+        };
+
         public static Establishment EstablishmentInno { get; } = new Establishment()
         {
             Id = 3,
@@ -226,7 +250,7 @@ namespace Windows_App
             PhoneNumber = "03 766 52 20",
             Picture = "https://i.imgur.com/O5xSNUP.png",
             Email = "InnoWaasland@Inno.com",
-            OpeningHours = OpeningHoursIkea,
+            OpeningHours = OpeningHoursInno,
             Promotions = PromotionsInno,
             Events = EventsInno,
             BusinessId = 2
