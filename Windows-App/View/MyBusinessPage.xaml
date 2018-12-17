@@ -210,6 +210,12 @@
                                                 </DataTemplate>
                                             </ListView.ItemTemplate>
                                         </ListView>
+                                        <Button Background="Transparent" Tag="{Binding Id}" Click="EventAdd_Click">
+                                            <StackPanel>
+                                                <SymbolIcon Symbol="Add" />
+                                                <TextBlock>Voeg Event toe</TextBlock>
+                                            </StackPanel>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

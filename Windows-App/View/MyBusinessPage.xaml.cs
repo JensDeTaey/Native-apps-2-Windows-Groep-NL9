@@ -207,19 +207,23 @@ namespace Windows_App.View
                             }
                         }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     }
+                    else
+                    {
+                        myBusinessViewModel.SavePromotion(promotion).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetPromotionFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
 
 
-                    myBusinessViewModel.SavePromotion(promotion).ContinueWith(t => {
-                        if (t.Result)
-                        {
-                            //Request was succes
-                            SetPromotionFieldsEnabled(false);
-                        }
-                        else
-                        {
-                            //Request failed
-                        }
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    
                     break;
                 case 3:
                     //We are editing an event
@@ -231,17 +235,38 @@ namespace Windows_App.View
                         StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
                     };
-                    myBusinessViewModel.SaveEvent(@event).ContinueWith(t => {
-                        if (t.Result)
-                        {
-                            //Request was succes
-                            SetEventFieldsEnabled(false);
-                        }
-                        else
-                        {
-                            //Request failed
-                        }
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+
+                    //adding a new event
+                    if (myBusinessViewModel.Event == null)
+                    {
+                        myBusinessViewModel.AddEvent(@event).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetPromotionFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else
+                    {
+                        //edit an event
+                        myBusinessViewModel.SaveEvent(@event).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetEventFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    
                     break;
             }
         }
@@ -342,6 +367,14 @@ namespace Windows_App.View
             SetPromotionFieldsEnabled(true);
             myBusinessViewModel.Promotion = null;
             myBusinessViewModel.TriggerPromotionUpdate();
+            myBusinessViewModel.fillRightEstablishment(((Button)sender).Tag);
+        }
+
+        private void EventAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SetEventFieldsEnabled(true);
+            myBusinessViewModel.Event = null;
+            myBusinessViewModel.TriggerEventUpdate();
             myBusinessViewModel.fillRightEstablishment(((Button)sender).Tag);
         }
 
