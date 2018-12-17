@@ -277,6 +277,14 @@
     <Compile Include="Migrations\201812161519354_initial7.Designer.cs">
       <DependentUpon>201812161519354_initial7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812170144536_initial8.cs" />
+    <Compile Include="Migrations\201812170144536_initial8.Designer.cs">
+      <DependentUpon>201812170144536_initial8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812170147337_initial9.cs" />
+    <Compile Include="Migrations\201812170147337_initial9.Designer.cs">
+      <DependentUpon>201812170147337_initial9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domein\DummyData.cs" />
     <Compile Include="Models\ViewModels\AccountBindingModels.cs" />
@@ -417,6 +425,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812161519354_initial7.resx">
       <DependentUpon>201812161519354_initial7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812170144536_initial8.resx">
+      <DependentUpon>201812170144536_initial8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812170147337_initial9.resx">
+      <DependentUpon>201812170147337_initial9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

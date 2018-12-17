@@ -66,9 +66,8 @@ namespace BackendV7.Controllers
             {
                 try
                 {
-                    db.OpeningHours.RemoveRange(establishment.OpeningHours);
-
-
+                    db.OpeningHours.RemoveRange(db.OpeningHours.Where(o => o.EstablishmentId == establishment.Id));
+                    db.SaveChanges();
 
                     establishment.Id = establishment.Id;
                     establishment.Name = model.Name;
@@ -226,7 +225,8 @@ namespace BackendV7.Controllers
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     PictureURL = model.Picture,
-                    EstablishmentId = establishment.Id
+                    EstablishmentId = establishment.Id,
+                    IsDiscountCoupon = model.IsDiscountCoupon
                 };
                 db.Promotions.Add(createdPromotion);
                 db.SaveChanges();

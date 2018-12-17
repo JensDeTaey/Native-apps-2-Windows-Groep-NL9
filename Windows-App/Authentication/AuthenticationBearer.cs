@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Windows_App.Data
 {
     public class AuthenticationBearer 
     {
+        [JsonProperty("access_token")]
         public string AccessToken { get; private set; }
         private readonly DateTime expireDate;
         //Check if expire time lies before the current time

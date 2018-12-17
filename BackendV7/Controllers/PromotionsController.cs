@@ -76,6 +76,7 @@ namespace BackendV7.Controllers
                     promotion.PictureURL = model.Picture;
                     promotion.StartDate = model.StartDate;
                     promotion.EndDate = model.EndDate;
+                    promotion.IsDiscountCoupon = model.IsDiscountCoupon;
 
                     db.SaveChanges();
                 }

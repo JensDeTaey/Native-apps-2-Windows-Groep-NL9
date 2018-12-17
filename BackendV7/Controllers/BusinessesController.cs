@@ -246,6 +246,33 @@ namespace BackendV7.Controllers
                
         }
 
+        // GET: api/Businesses
+        [Route("api/MyBusiness")]
+        [Authorize]
+        public IHttpActionResult GetMyBusiness()
+        {
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+            
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+
+
+            Business business = db.Businesses
+                .Include(b => b.User)
+                .Include(b => b.Establishments)
+                .Include(b => b.Subscriptions)
+                .Include("Establishments.OpeningHours")
+                .Include("Establishments.Events")
+                .Include("Establishments.Promotions")
+                .SingleOrDefault(b => b.UserId == user.Id);
+            return Ok(business);
+
+        }
+
         /*// DELETE: api/Businesses/5
         [ResponseType(typeof(Business))]
         public IHttpActionResult DeleteBusiness(int id)

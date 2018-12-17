@@ -12,9 +12,6 @@
         <Pivot x:Name="PivotMyBusiness"   Title="Mijn bedrijf" PivotItemLoading="PivotMyBusiness_PivotItemLoading">
             <PivotItem x:Name="BusinessInfo" Header="Bedrijfsgegevens">
                 <StackPanel>
-                    <TextBox x:Name="LastName" IsEnabled="False" Text="{Binding User.Lastname}"  PlaceholderText="De Taey"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                    <TextBox x:Name="FirstName" IsEnabled="False" Text="{Binding User.Firstname}" PlaceholderText="Jens"  Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                    <TextBox x:Name="EmailAdress" IsEnabled="false" Text="{Binding User.EmailAdress}" PlaceholderText="jens.detaey@telenet.be" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                     <TextBox x:Name="BusinessName" IsEnabled="False" Text="{Binding Business.Name}"  PlaceholderText="Ikea"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
                     <TextBox x:Name="BusinessDescription" IsEnabled="False" Text="{Binding Business.Description}" PlaceholderText="JAJA ik ben eigenaar van Ikea" Margin="0,24,0,0" MaxLength="150" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
                     <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
@@ -58,7 +55,7 @@
                             <TextBox x:Name="EstablishmentEmail" IsEnabled="False" Text="{Binding Establishment.Email}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                             <TextBox x:Name="EstablishmentPicture" IsEnabled="False" Text="{Binding Establishment.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                             <TextBlock Padding="0,24,0,10" Text="Openingsuren:"/>
-                            <ListView x:Name="OpeningsHoursListView" IsEnabled="False" ItemsSource="{Binding Establishment.OpeningHours}">
+                            <ListView x:Name="OpeningsHoursListView" IsEnabled="False" ItemsSource="{Binding Establishment.AllOpeningHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="Template">
@@ -155,7 +152,7 @@
                                     <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=TwoWay}" IsEnabled="False"  x:Name="StartDatePromotionCalendarDatePicker" Header="Start datum"/>
                                     <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=TwoWay}" IsEnabled="False" x:Name="EndDatePromotionCalendarDatePicker" Header="Eind datum"/>
                                 </StackPanel>
-                                <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding IsDiscountCoupon}" />
+                                <ToggleSwitch x:Name="CouponSwitch" IsEnabled="False" Margin="0,24,0,0" Header="Is met kortingsbon" IsOn="{Binding Promotion.IsDiscountCoupon}" />
 
                             </StackPanel>
                         </StackPanel>
@@ -244,7 +241,7 @@
                     </AppBarButton>
 
                     <AppBarSeparator/>
-                    <AppBarButton Icon="Save"/>
+                    <AppBarButton Icon="Save" Click="AppBarSave_click"/>
                 </CommandBar>
             </Pivot.RightHeader>
         </Pivot>

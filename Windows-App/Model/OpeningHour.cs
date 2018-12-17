@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Windows_App.Model
                 return DaysOfWeek.GiveDutchDayOfWeek(Day);
             }
         }
+        [JsonIgnore]
         public bool IsClosed { get; set; }
         public string OpeningsHours
         {
