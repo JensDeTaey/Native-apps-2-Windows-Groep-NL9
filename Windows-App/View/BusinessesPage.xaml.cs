@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,10 +34,10 @@ namespace Windows_App.View
             this.InitializeComponent();
             businessViewModel = new BusinessesViewModel();
             this.DataContext = businessViewModel;
+           
         }
 
-        public Visibility NoBusinessesVisibility { get => businessViewModel.Businesses.Count <= 0? Visibility.Visible:Visibility.Collapsed; }
-
+        //public Visibility NoBusinessesVisibility { get => businessViewModel.Businesses.Count <= 0? Visibility.Visible:Visibility.Collapsed; }
 
         private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -54,4 +55,5 @@ namespace Windows_App.View
             businessViewModel.FilterBusinesses(args.QueryText);
         }
     }
+
 }
