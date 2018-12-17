@@ -80,6 +80,15 @@ namespace Windows_App.View
             EndDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
             CouponSwitch.IsEnabled = isEnabled;
         }
+        private void SetPromotionFieldsEmpty()
+        {
+            PromotionName.Text = "";
+            PromotionDescription.Text = "";
+            PromotionPicture.Text = "";
+            //StartDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
+            //EndDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
+            //CouponSwitch.IsEnabled = isEnabled;
+        }
 
         private void SetEstablishmentFieldsEnabled(bool isEnabled)
         {
@@ -89,6 +98,16 @@ namespace Windows_App.View
             EstablishmentEmail.IsEnabled = isEnabled;
             EstablishmentPicture.IsEnabled = isEnabled;
             OpeningsHoursListView.IsEnabled = isEnabled;
+        }
+
+        private void SetEstablishmentFieldsEmpty()
+        {
+            EstablishmentName.Text = "";
+            EstablishmentAddress.Text = "";
+            EstablishmentPhoneNumber.Text = "";
+            EstablishmentEmail.Text = "";
+            EstablishmentPicture.Text = "";
+            //OpeningsHoursListView.IsEnabled = isEnabled;
         }
 
         private void SetBusinessFieldsEnabled(bool isEnabled)
@@ -162,6 +181,7 @@ namespace Windows_App.View
                     }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
                 case 2:
+                    
                     //We are editing a promotion
                     Promotion promotion = new Promotion()
                     {
@@ -172,6 +192,23 @@ namespace Windows_App.View
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
                         IsDiscountCoupon = CouponSwitch.IsOn
                     };
+                    //adding a new promotion
+                    if (myBusinessViewModel.Promotion == null)
+                    {
+                        myBusinessViewModel.AddPromotion(promotion).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetPromotionFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+
+
                     myBusinessViewModel.SavePromotion(promotion).ContinueWith(t => {
                         if (t.Result)
                         {
@@ -232,21 +269,13 @@ namespace Windows_App.View
                 
                 //add an establishment
                 case 1:
-                    //EstablishmentName.IsEnabled = true;
-                    //EstablishmentAddress.IsEnabled = true;
-                    //EstablishmentPhoneNumber.IsEnabled = true;
-                    //EstablishmentEmail.IsEnabled = true;
-                    //EstablishmentPicture.IsEnabled = true;
-                    //OpeningsHoursListView.IsEnabled = true;
-                    //EstablishmentName.Text = "";
-                    //EstablishmentAddress.Text = "";
-                    //EstablishmentPhoneNumber.Text = "";
-                    //EstablishmentEmail.Text = "";
-                    //EstablishmentPicture.Text = "";
-                    //OpeningsHoursListView.DataContext = null;
+                    SetEstablishmentFieldsEnabled(true);
+                    SetEstablishmentFieldsEmpty();
+
                     break;
                 //add a promotion
                 case 2:
+                    
                     
                     break;
                 //add an event
@@ -306,6 +335,14 @@ namespace Windows_App.View
                     });
                     break;
             }
+        }
+
+        private void PromotionAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SetPromotionFieldsEnabled(true);
+            myBusinessViewModel.Promotion = null;
+            myBusinessViewModel.TriggerPromotionUpdate();
+            myBusinessViewModel.fillRightEstablishment(((Button)sender).Tag);
         }
 
         private void PivotMyBusiness_PivotItemLoading(Pivot sender, PivotItemEventArgs args)

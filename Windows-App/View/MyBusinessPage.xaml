@@ -138,6 +138,12 @@
                                                 </DataTemplate>
                                             </ListView.ItemTemplate>
                                         </ListView>
+                                        <Button Background="Transparent" Tag="{Binding Id}" Click="PromotionAdd_Click">
+                                            <StackPanel>
+                                                <SymbolIcon Symbol="Add" />
+                                                <TextBlock>Voeg promotie toe</TextBlock>
+                                            </StackPanel>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -145,9 +151,9 @@
                         <StackPanel Grid.Column="1">
 
                             <StackPanel>
-                                <TextBox x:Name="PromotionName" IsEnabled="False" Text="{Binding Promotion.Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                <TextBox x:Name="PromotionDescription" IsEnabled="False" Text="{Binding Promotion.Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                <TextBox x:Name="PromotionPicture" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="PromotionName" PlaceholderText="Naam promotie" IsEnabled="False" Text="{Binding Promotion.Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="PromotionDescription" PlaceholderText="Beschrijving van de promotie" IsEnabled="False" Text="{Binding Promotion.Description}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="PromotionPicture" PlaceholderText="Eventuele foto van een promotie" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
                                     <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=TwoWay}" IsEnabled="False"  x:Name="StartDatePromotionCalendarDatePicker" Header="Start datum"/>
                                     <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=TwoWay}" IsEnabled="False" x:Name="EndDatePromotionCalendarDatePicker" Header="Eind datum"/>
