@@ -37,6 +37,11 @@ namespace Windows_App.ViewModel
             return Businesses.Find(bis => bis.Id == businessID);
         }
 
+        public bool isSubscribedTo()
+        {
+            return Business.IsSubscribedTo;
+        }
+
     }
 }
 

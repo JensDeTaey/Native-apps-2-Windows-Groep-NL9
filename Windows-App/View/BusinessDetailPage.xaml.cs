@@ -36,13 +36,13 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class BusinessDetailPage : Page
     {
-
+        private BusinessDetailViewModel viewModel;
         public BusinessDetailPage()
         {
             this.InitializeComponent();
             //token you need to use maps
             MCMap.MapServiceToken = "NggniNfkWoAJYWaNrwu7~Ba_YkJv9SvsASrBV280AGQ~AqXz_H8d1GdioVSul1nTHcxPtsQlG3YdjJtPP9csVnPPyDNmc7kUv0G8x-QpQueG";
-
+             
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -57,7 +57,8 @@ namespace Windows_App.View
                 GoToRightPivot(pageLoad.Pivot);
                 OnlineDataSource.singleton.FetchBusinessWithId(businessId).ContinueWith(t =>
                 {
-                    DataContext = new BusinessDetailViewModel(t.Result);
+                    viewModel = new BusinessDetailViewModel(t.Result);
+                    DataContext = viewModel;
 
                     if (NetworkInterface.GetIsNetworkAvailable())
                     {
@@ -195,6 +196,28 @@ namespace Windows_App.View
                 st.Dispose();
                 fileStream.Dispose();
             }
+        }
+
+        private void ButtonSubscribe_Click(object sender, RoutedEventArgs e)
+        {
+            if (!viewModel.isSubscribedTo())
+            {
+                FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                SubscribeButton.FontFamily = font;
+                SubscribeButton.Content = "\uEB52";
+                
+                //SubscribeButton.Foreground = "OrangeRed";
+                SubsribeText.Text = "ontvolg bedrijf";
+            }
+            else
+            {
+                FontFamily font = new FontFamily("Segoe MDL2 Assets");
+                SubscribeButton.FontFamily = font;
+                SubscribeButton.Content = "\uEB51";
+                //SubscribeButton.Foreground = "OrangeRed";
+                SubsribeText.Text = "Volg bedrijf";
+            }
+            
         }
     }
 }
