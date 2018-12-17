@@ -12,24 +12,27 @@ namespace Windows_App.Data
     abstract class IDataSource
     {
         //SINGLETON
-        public static IDataSource singleton = new MockDataSource();
+        public static IDataSource singleton = new OnlineDataSource();
 
         public AuthenticationBearer authenticationBearer;
 
+        protected abstract Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password);
+
+        #region User Actions
         public Task<bool> LogIn(string email, string password)
         {
             //Call the authenticationBearer with username and password
             return GetAuthenticationBearer(email, password).ContinueWith(t =>
-                           {
-                               //If something went wrong the response will be null
-                               if(t != null && t.Result != null)
-                               {
-                                   //store the authenticationBearer
-                                   authenticationBearer = t.Result;
-                                   return true;
-                               }
-                                   return false;
-                           }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            {
+                //If something went wrong the response will be null
+                if (t != null && t.Result != null && t.Result.AccessToken != null)
+                {
+                    //store the authenticationBearer
+                    authenticationBearer = t.Result;
+                    return true;
+                }
+                return false;
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public void LogOut()
@@ -37,12 +40,7 @@ namespace Windows_App.Data
             this.authenticationBearer = null;
         }
 
-        protected abstract Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password);
-
-        #region User Actions
-        //Robin's methods should come here, Login and Register
         #endregion
-
 
         #region Main Pages Getters
         public abstract Task<ObservableCollection<Business>> FetchBusinesses();
@@ -53,6 +51,7 @@ namespace Windows_App.Data
 
         #region Business Actions
         public abstract Task<Business> FetchBusinessWithId(int businessId);
+        public abstract Task<Business> FetchMyBusiness();
         public abstract Task<Boolean> EditBusiness(Business business);
         public abstract Task<Boolean> SubscribeToBusiness(int businessId);
         public abstract Task<Boolean> UnsubscribeFromBusiness(int businessId);

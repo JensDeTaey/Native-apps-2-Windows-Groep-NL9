@@ -30,14 +30,33 @@ namespace Windows_App
         private AuthenticationHeaderValue token {
             get {
                 //TODO Hier juiste token zetten
-                return new AuthenticationHeaderValue("Bearer", "i01jdAcWUF2r4YGabiSMlpd80ZhPaBAJAT8m6yt2nVi6Ivp2rHbeoMWbeV-KsbFllTWTmEqaU7y0_eLjfZHd9gWKSZnBn4KzTDNc3ZalROqPuLkAqnhb40MeSAGDGZ1NAptnAtxH7AMYw3SIZfARVA87D0_CSf2bYlc1MpvBLf3yfSlTxGXGg6WGgpKj7knomq_hxAmwsXCsEzQH2RzySddBcnL4jTLBx0sMIczj0lwFc_xVRAx66d3xdVKqJstrv2O-bK1kbnPcwdDlA_28s0MsjdY8jRjuK20vM00XmxBMKKyAivtQB9VAsoFJ2yCq8hUwgGwxcMof-2Ip7OWFZBWgedWaoYfm311dZD6O_FwHvLMWeQrwug3AwOnVKXRvy458CHjP81Gp2pjSrG1fgL5TgpITJutcSzx-Nw6p0ysPGH4qb4qkzVdGhztMY2tb1WC4c8EjEn6Xm2sxwhQc8KdL-3v-7SYnElYGiIhvJW83J9cvZ1hoEGZ3eiUkP9gE");
+                return authenticationBearer == null? null:  new AuthenticationHeaderValue("Bearer", authenticationBearer.AccessToken);
             }
         }
 
 
-        protected override Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
+        protected override async Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
         {
-            throw new NotImplementedException();
+            
+            using (var httpClient = new HttpClient())
+            {
+                Collection<KeyValuePair<string, string>> postData = new Collection<KeyValuePair<string, string>>();
+                postData.Add(new KeyValuePair<string, string>("grant_type", "password"));
+                postData.Add(new KeyValuePair<string, string>("username", username));
+                postData.Add(new KeyValuePair<string, string>("password", password));
+
+                using (var content = new FormUrlEncodedContent(postData))
+                {
+                    content.Headers.Clear();
+                    content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+                    HttpResponseMessage response = await httpClient.PostAsync(new Uri(BaseUrl + "Login"), content);
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<AuthenticationBearer>(json);
+                }
+            }
+            
         }
 
 
@@ -52,7 +71,9 @@ namespace Windows_App
         public override async Task<ObservableCollection<Business>> FetchBusinesses()
         {
             var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "Businesses/"));
-            return JsonConvert.DeserializeObject<ObservableCollection<Business>>(json);
+            var res = JsonConvert.DeserializeObject<ObservableCollection<Business>>(json);
+
+            return res;
         }
 
         public override async Task<ObservableCollection<Promotion>> FetchPromotions()
@@ -80,24 +101,32 @@ namespace Windows_App
             return JsonConvert.DeserializeObject<Business>(json);
         }
 
+        public override async Task<Business> FetchMyBusiness()
+        {
+            var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "MyBusiness"));
+            return JsonConvert.DeserializeObject<Business>(json);
+        }
+
         public override async Task<bool> EditBusiness(Business business)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Businesses/" + business.Id));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(business));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Businesses/" + business.Id));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(business),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         public override async Task<bool> SubscribeToBusiness(int businessId)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Businesses/" + businessId));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId));
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.Created;
         }
 
         public override async Task<bool> UnsubscribeFromBusiness(int businessId)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Businesses/" + businessId));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId));
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -107,7 +136,9 @@ namespace Windows_App
         public override async Task<bool> AddEstablishment(int businessId, Establishment establishment)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId + "/AddEstablishment"));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -115,7 +146,9 @@ namespace Windows_App
         public override async Task<bool> EditEstablishment(Establishment establishment)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Establishments/" + establishment.Id));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(establishment),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -132,7 +165,9 @@ namespace Windows_App
         public override async Task<bool> AddPromotion(int establishmentId, Promotion promotion)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Establishments/" + establishmentId + "/AddPromotion"));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(promotion));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(promotion),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -140,7 +175,9 @@ namespace Windows_App
         public override async Task<bool> EditPromotion(Promotion promotion)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Promotions/" + promotion.Id));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(promotion));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(promotion),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -157,7 +194,9 @@ namespace Windows_App
         public override async Task<bool> AddEvent(int establishmentId, Event @event)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Establishments/" + establishmentId + "/AddEvent"));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -165,7 +204,9 @@ namespace Windows_App
         public override async Task<bool> EditEvent(Event @event)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Put, new Uri(BaseUrl + "Events/" + @event.Id));
-            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event));
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(@event),
+                                    Encoding.UTF8,
+                                    "application/json");
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }

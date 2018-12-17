@@ -65,6 +65,11 @@ namespace Windows_App.Data
             });
         }
 
+        public override Task<Business> FetchMyBusiness()
+        {
+            throw new NotImplementedException();
+        }
+
         public override Task<bool> EditBusiness(Business business)
         {
             throw new NotImplementedException();
@@ -130,6 +135,7 @@ namespace Windows_App.Data
         {
             throw new NotImplementedException();
         }
+
         #endregion
 
     }

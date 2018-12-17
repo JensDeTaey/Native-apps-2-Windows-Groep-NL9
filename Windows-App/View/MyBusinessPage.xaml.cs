@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows_App.Model;
 using Windows_App.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -71,6 +72,62 @@ namespace Windows_App.View
                     EventPicture.IsEnabled = !EventPicture.IsEnabled;
                     StartDateEventCalendarDatePicker.IsEnabled = !StartDateEventCalendarDatePicker.IsEnabled;
                     EndDateEventCalendarDatePicker.IsEnabled = !EndDateEventCalendarDatePicker.IsEnabled;
+                    break;
+            }
+        }
+
+        private void AppBarSave_click(object sender, RoutedEventArgs e)
+        {
+            int index = PivotMyBusiness.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    Business business = new Business()
+                    {
+                        Name = BusinessName.Text,
+                        Description = BusinessDescription.Text,
+                        Picture = BusinessPicture.Text,
+                        Category = "haha yes", //Todo
+                        LinkWebsite = BusinessLink.Text,
+
+                    };
+                    myBusinessViewModel.SaveBusiness(business);
+                    break;
+                case 1:
+                    Establishment establishment = new Establishment()
+                    {
+                        Name = EstablishmentName.Text,
+                        Address = EstablishmentAddress.Text,
+                        PhoneNumber = EstablishmentPhoneNumber.Text,
+                        Email = EstablishmentEmail.Text,
+                        Picture = EstablishmentPicture.Text,
+                        OpeningHours = new List<OpeningHour>()
+                        //TODO: opening hours
+                    };
+                    myBusinessViewModel.SaveEstablishment(establishment);
+                    break;
+                case 2:
+                    Promotion promotion = new Promotion()
+                    {
+                        Name = PromotionName.Text,
+                        Description = PromotionDescription.Text,
+                        Picture = PromotionPicture.Text,
+                        StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
+                        EndDate = EndDateEventCalendarDatePicker.Date.Value,
+                        IsDiscountCoupon = CouponSwitch.IsEnabled
+                    };
+                    myBusinessViewModel.SavePromotion(promotion);
+                    break;
+                case 3:
+                    Event @event = new Event()
+                    {
+                        Name = PromotionName.Text,
+                        Description = PromotionDescription.Text,
+                        Picture = PromotionPicture.Text,
+                        StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
+                        EndDate = EndDateEventCalendarDatePicker.Date.Value,
+                    };
+                    myBusinessViewModel.SaveEvent(@event);
                     break;
             }
         }

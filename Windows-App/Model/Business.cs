@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -15,6 +16,8 @@ namespace Windows_App.Model
         public string Picture { get; set; }
         public string LinkWebsite { get; set; }
         public int NumberOfSubscribers { get; set; }
+        [JsonProperty("isSubscribedTo")]
+        public bool IsSubscribedTo { get; set; }
         public List<Establishment> Establishments { get; set; }
         
 

@@ -244,7 +244,7 @@
                     </AppBarButton>
 
                     <AppBarSeparator/>
-                    <AppBarButton Icon="Save"/>
+                    <AppBarButton Icon="Save" Click="AppBarSave_click"/>
                 </CommandBar>
             </Pivot.RightHeader>
         </Pivot>

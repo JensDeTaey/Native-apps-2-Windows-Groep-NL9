@@ -25,8 +25,12 @@ namespace Windows_App.ViewModel
             Businesses = new ObservableCollection<Business>();
             IDataSource.singleton.FetchBusinesses().ContinueWith(t =>
             {
-                Businesses = t.Result;
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
+                if(t.Result != null)
+                {
+                    Businesses = t.Result;
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
+                }
+                
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
