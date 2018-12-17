@@ -39,7 +39,7 @@
                         Text="&#xE823;  "/>
                             <TextBlock Text="Openingsuren:"/>
                         </StackPanel>
-                <ListView Margin="13,0,0,0" x:Name="listViewOpeningHours" ItemsSource="{Binding OpeningHours}" HorizontalAlignment="Left" >
+                <ListView Margin="13,0,0,0" x:Name="listViewOpeningHours" ItemsSource="{Binding AllOpeningHours}" HorizontalAlignment="Left" >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="MinHeight" Value="25" />

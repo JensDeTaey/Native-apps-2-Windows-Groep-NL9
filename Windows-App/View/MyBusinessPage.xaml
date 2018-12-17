@@ -58,7 +58,7 @@
                             <TextBox x:Name="EstablishmentEmail" IsEnabled="False" Text="{Binding Establishment.Email}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                             <TextBox x:Name="EstablishmentPicture" IsEnabled="False" Text="{Binding Establishment.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                             <TextBlock Padding="0,24,0,10" Text="Openingsuren:"/>
-                            <ListView x:Name="OpeningsHoursListView" IsEnabled="False" ItemsSource="{Binding Establishment.OpeningHours}">
+                            <ListView x:Name="OpeningsHoursListView" IsEnabled="False" ItemsSource="{Binding Establishment.AllOpeningHours}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="Template">

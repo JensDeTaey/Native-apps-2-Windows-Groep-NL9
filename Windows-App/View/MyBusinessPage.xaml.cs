@@ -94,6 +94,11 @@ namespace Windows_App.View
                     myBusinessViewModel.SaveBusiness(business);
                     break;
                 case 1:
+
+                    List<OpeningHour> hours = new List<OpeningHour>();
+                    var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
+
+
                     Establishment establishment = new Establishment()
                     {
                         Name = EstablishmentName.Text,
@@ -101,7 +106,7 @@ namespace Windows_App.View
                         PhoneNumber = EstablishmentPhoneNumber.Text,
                         Email = EstablishmentEmail.Text,
                         Picture = EstablishmentPicture.Text,
-                        OpeningHours = new List<OpeningHour>()
+                        AllOpeningHours = new List<OpeningHour>()
                         //TODO: opening hours
                     };
                     myBusinessViewModel.SaveEstablishment(establishment);

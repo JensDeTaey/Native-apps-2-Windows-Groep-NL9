@@ -143,7 +143,7 @@ namespace Windows_App
             PhoneNumber = "02 458 69 69",
             Picture = "https://i.imgur.com/ODYpLGd.png",
             Email = "IkeaAntwerpen@Ikea.com",
-            OpeningHours = OpeningHoursIkea,
+            AllOpeningHours = OpeningHoursIkea,
             Promotions = PromotionsIkeaAntwerpen,
             Events = EventsIkeaAntwerpen,
             BusinessId = 1
@@ -156,7 +156,7 @@ namespace Windows_App
             PhoneNumber = "02 719 19 22",
             Picture = "https://i.imgur.com/mrHTchx.jpg?1",
             Email = "IkeaGent@Ikea.com",
-            OpeningHours = OpeningHoursIkea,
+            AllOpeningHours = OpeningHoursIkea,
             Promotions = PromotionsIkeaGent,
             Events = EventsIkeaGent,
             BusinessId = 1
@@ -250,7 +250,7 @@ namespace Windows_App
             PhoneNumber = "03 766 52 20",
             Picture = "https://i.imgur.com/O5xSNUP.png",
             Email = "InnoWaasland@Inno.com",
-            OpeningHours = OpeningHoursInno,
+            AllOpeningHours = OpeningHoursInno,
             Promotions = PromotionsInno,
             Events = EventsInno,
             BusinessId = 2
