@@ -234,7 +234,11 @@ namespace BackendV7.Controllers
         [Authorize]
         public IHttpActionResult GetSubscribedBusinesses()
         {
-            var user = db.Users.Include("Subscriptions.Business.Subscriptions").Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+            var user = db.Users
+                .Include("Subscriptions.Business.Subscriptions")
+                .Include("Subscriptions.Business.Establishments.Events")
+                .Include("Subscriptions.Business.Establishments.Promotions")
+                .FirstOrDefault();
             if (user == null)
             {
                 return Unauthorized();
