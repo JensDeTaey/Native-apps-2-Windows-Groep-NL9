@@ -124,6 +124,7 @@
     <Compile Include="ViewModel\MyBusinessViewModel.cs" />
     <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\SubsribedBusinessesViewModel.cs" />
     <Compile Include="View\BusinessDetailPage.xaml.cs">
       <DependentUpon>BusinessDetailPage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +145,9 @@
     </Compile>
     <Compile Include="View\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubscribedBusinessesPage.xaml.cs">
+      <DependentUpon>SubscribedBusinessesPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SubscribedBusinessesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
