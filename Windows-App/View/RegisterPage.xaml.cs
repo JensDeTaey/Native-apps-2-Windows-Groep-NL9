@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -77,7 +79,7 @@ namespace Windows_App.View
                     await ShowNotificationAsync("Er ging iets fout bij het registreren!", false);
                     
                 }
-            });
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         private void DisableInput(bool v)
@@ -171,7 +173,10 @@ namespace Windows_App.View
                 if (cmd.Label == "Naar inlogscherm")
                 {
                     Frame.Navigate(typeof(LogInPage));
-                } 
+                } else
+                {
+                    DisableInput(true);
+                }
             });
 
         private void TextChanged(object sender, TextChangedEventArgs e)
