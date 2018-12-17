@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,8 +36,6 @@ namespace Windows_App.View
             myBusinessViewModel = new MyBusinessViewModel();
             this.DataContext = myBusinessViewModel;
 
-
-            
         }
 
         private void AppBarEdit_Click(object sender, RoutedEventArgs e)
@@ -41,39 +44,60 @@ namespace Windows_App.View
             switch (index)
             {
                 case 0:
-                    FirstName.IsEnabled = !FirstName.IsEnabled;
-                    LastName.IsEnabled = !LastName.IsEnabled;
-                    EmailAdress.IsEnabled = !EmailAdress.IsEnabled;
-                    BusinessName.IsEnabled = !BusinessName.IsEnabled;
-                    BusinessDescription.IsEnabled = !BusinessDescription.IsEnabled;
-                    BusinessLink.IsEnabled = !BusinessLink.IsEnabled;
-                    BusinessPicture.IsEnabled = !BusinessPicture.IsEnabled;
-                    CategoriesCombo.IsEnabled = !CategoriesCombo.IsEnabled;
+                    myBusinessViewModel.TriggerBusinessUpdate();
+                    SetBusinessFieldsEnabled(!BusinessName.IsEnabled);
                     break;
                 case 1:
-                    EstablishmentName.IsEnabled = !EstablishmentName.IsEnabled;
-                    EstablishmentAddress.IsEnabled = !EstablishmentAddress.IsEnabled;
-                    EstablishmentPhoneNumber.IsEnabled = !EstablishmentPhoneNumber.IsEnabled;
-                    EstablishmentEmail.IsEnabled = !EstablishmentEmail.IsEnabled;
-                    EstablishmentPicture.IsEnabled = !EstablishmentPicture.IsEnabled;
-                    OpeningsHoursListView.IsEnabled = !OpeningsHoursListView.IsEnabled;
+                    myBusinessViewModel.TriggerEstablishmentUpdate();
+                    SetEstablishmentFieldsEnabled(!EstablishmentName.IsEnabled);
                     break;
                 case 2:
-                    PromotionName.IsEnabled = !PromotionName.IsEnabled;
-                    PromotionDescription.IsEnabled = !PromotionDescription.IsEnabled;
-                    PromotionPicture.IsEnabled = !PromotionPicture.IsEnabled;
-                    StartDatePromotionCalendarDatePicker.IsEnabled = !StartDatePromotionCalendarDatePicker.IsEnabled;
-                    EndDatePromotionCalendarDatePicker.IsEnabled = !EndDatePromotionCalendarDatePicker.IsEnabled;
-                    CouponSwitch.IsEnabled = !CouponSwitch.IsEnabled;
+                    myBusinessViewModel.TriggerPromotionUpdate();
+                    SetPromotionFieldsEnabled(!PromotionName.IsEnabled);
                     break;
                 case 3:
-                    EventName.IsEnabled = !EventName.IsEnabled;
-                    EventDescription.IsEnabled = !EventDescription.IsEnabled;
-                    EventPicture.IsEnabled = !EventPicture.IsEnabled;
-                    StartDateEventCalendarDatePicker.IsEnabled = !StartDateEventCalendarDatePicker.IsEnabled;
-                    EndDateEventCalendarDatePicker.IsEnabled = !EndDateEventCalendarDatePicker.IsEnabled;
+                    myBusinessViewModel.TriggerEventUpdate();
+                    SetEventFieldsEnabled(!EventName.IsEnabled);
                     break;
             }
+        }
+
+        private void SetEventFieldsEnabled(bool isEnabled)
+        {
+            EventName.IsEnabled = isEnabled;
+            EventDescription.IsEnabled = isEnabled;
+            EventPicture.IsEnabled = isEnabled;
+            StartDateEventCalendarDatePicker.IsEnabled = isEnabled;
+            EndDateEventCalendarDatePicker.IsEnabled = isEnabled;
+        }
+
+        private void SetPromotionFieldsEnabled(bool isEnabled)
+        {
+            PromotionName.IsEnabled = isEnabled;
+            PromotionDescription.IsEnabled = isEnabled;
+            PromotionPicture.IsEnabled = isEnabled;
+            StartDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
+            EndDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
+            CouponSwitch.IsEnabled = isEnabled;
+        }
+
+        private void SetEstablishmentFieldsEnabled(bool isEnabled)
+        {
+            EstablishmentName.IsEnabled = isEnabled;
+            EstablishmentAddress.IsEnabled = isEnabled;
+            EstablishmentPhoneNumber.IsEnabled = isEnabled;
+            EstablishmentEmail.IsEnabled = isEnabled;
+            EstablishmentPicture.IsEnabled = isEnabled;
+            OpeningsHoursListView.IsEnabled = isEnabled;
+        }
+
+        private void SetBusinessFieldsEnabled(bool isEnabled)
+        {
+            BusinessName.IsEnabled = isEnabled;
+            BusinessDescription.IsEnabled = isEnabled;
+            BusinessLink.IsEnabled = isEnabled;
+            BusinessPicture.IsEnabled = isEnabled;
+            CategoriesCombo.IsEnabled = isEnabled;
         }
 
         private void AppBarSave_click(object sender, RoutedEventArgs e)
@@ -82,6 +106,7 @@ namespace Windows_App.View
             switch (index)
             {
                 case 0:
+                    //We are editing the business itself
                     Business business = new Business()
                     {
                         Name = BusinessName.Text,
@@ -91,10 +116,22 @@ namespace Windows_App.View
                         LinkWebsite = BusinessLink.Text,
 
                     };
-                    myBusinessViewModel.SaveBusiness(business);
+
+                    myBusinessViewModel.SaveBusiness(business).ContinueWith(async t => {
+                        if(t.Result)
+                        {
+                            SetBusinessFieldsEnabled(false);
+                            //Request was succes
+                        } else
+                        {
+                            await ShowNotificationAsync("Er ging iets fout bij het bewerken, heb je alle velden ingevuld?");
+                            //Request failed
+                        }
+                        
+                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
                 case 1:
-
+                    //We are editing an establishment
                     List<OpeningHour> hours = new List<OpeningHour>();
                     var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
 
@@ -109,9 +146,23 @@ namespace Windows_App.View
                         AllOpeningHours = new List<OpeningHour>()
                         //TODO: opening hours
                     };
-                    myBusinessViewModel.SaveEstablishment(establishment);
+
+                    myBusinessViewModel.SaveEstablishment(establishment).ContinueWith(t=>
+                    {
+                        if (t.Result)
+                        {
+                            //Request was succes
+                            SetEstablishmentFieldsEnabled(false);
+                        }
+                        else
+                        {
+                            //Request failed
+                        }
+
+                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
                 case 2:
+                    //We are editing a promotion
                     Promotion promotion = new Promotion()
                     {
                         Name = PromotionName.Text,
@@ -119,11 +170,22 @@ namespace Windows_App.View
                         Picture = PromotionPicture.Text,
                         StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
-                        IsDiscountCoupon = CouponSwitch.IsEnabled
+                        IsDiscountCoupon = CouponSwitch.IsOn
                     };
-                    myBusinessViewModel.SavePromotion(promotion);
+                    myBusinessViewModel.SavePromotion(promotion).ContinueWith(t => {
+                        if (t.Result)
+                        {
+                            //Request was succes
+                            SetPromotionFieldsEnabled(false);
+                        }
+                        else
+                        {
+                            //Request failed
+                        }
+                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
                 case 3:
+                    //We are editing an event
                     Event @event = new Event()
                     {
                         Name = PromotionName.Text,
@@ -132,7 +194,17 @@ namespace Windows_App.View
                         StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
                     };
-                    myBusinessViewModel.SaveEvent(@event);
+                    myBusinessViewModel.SaveEvent(@event).ContinueWith(t => {
+                        if (t.Result)
+                        {
+                            //Request was succes
+                            SetEventFieldsEnabled(false);
+                        }
+                        else
+                        {
+                            //Request failed
+                        }
+                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     break;
             }
         }
@@ -191,19 +263,47 @@ namespace Windows_App.View
             {
                 //delete an business
                 case 0:
-                    myBusinessViewModel.DeleteBusiness();
+                    //They can't do this >:(
                     break;
                 //delete an establishment
                 case 1:
-                    myBusinessViewModel.DeleteEstablishment();
+                    myBusinessViewModel.DeleteEstablishment().ContinueWith(t => {
+                        if (t.Result)
+                        {
+                            //Request was succes
+
+                        }
+                        else
+                        {
+                            //Request failed
+                        }
+                    });
                     break;
                 //delete a promotion
                 case 2:
-                    myBusinessViewModel.DeletePromotion();
+                    myBusinessViewModel.DeletePromotion().ContinueWith(t => {
+                        if (t.Result)
+                        {
+                            //Request was succes
+                        }
+                        else
+                        {
+                            //Request failed
+                        }
+                    });
                     break;
                 //delete an event
                 case 3:
-                    myBusinessViewModel.DeleteEvent();
+                    myBusinessViewModel.DeleteEvent().ContinueWith(t => {
+                        if (t.Result)
+                        {
+                            //Request was succes
+                        }
+                        else
+                        {
+                            //Request failed
+                        }
+                    });
                     break;
             }
         }
@@ -219,5 +319,20 @@ namespace Windows_App.View
                 AddButton.IsEnabled = true;
             }
         }
+
+
+        private async System.Threading.Tasks.Task ShowNotificationAsync(string text) => await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            async () =>
+            {
+                MessageDialog dialog = new MessageDialog(text);
+                dialog.Commands.Add(new UICommand("Sluit", null));
+                dialog.DefaultCommandIndex = 1;
+                var cmd = await dialog.ShowAsync();
+
+                if (cmd.Label == "Sluit")
+                {
+                    // do something
+                }
+            });
     }
 }

@@ -30,7 +30,7 @@ namespace Windows_App.ViewModel
                 if (t.Result != null)
                 {
                     this.Business = t.Result;
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
+                    TriggerBusinessUpdate();
                 }
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
@@ -40,7 +40,7 @@ namespace Windows_App.ViewModel
         public void fillRightEstablishment (object tag)
         {
             Establishment = Business.Establishments.FirstOrDefault(esta => esta.Id == (int)tag);
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
+            TriggerEstablishmentUpdate();
         }
 
         public void FillRightPromotion(object tag)
@@ -49,7 +49,7 @@ namespace Windows_App.ViewModel
                            from item in sublist.Promotions
                            where item.Id == (int)tag
                            select item).FirstOrDefault();
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+            TriggerPromotionUpdate();
         }
 
         public void FillRightEvent(object tag)
@@ -58,39 +58,36 @@ namespace Windows_App.ViewModel
                          from item in sublist.Events
                      where item.Id == (int)tag
                          select item).FirstOrDefault();
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
+            TriggerEventUpdate();
         }
 
-        public void DeleteBusiness()
-        {
-            // DIT MOGEN ZE NIET DOEN !!! >:(
-        }
-
-        public void DeleteEstablishment()
+        public async Task<Boolean> DeleteEstablishment()
         {
             if(this.Establishment == null)
             {
-                return;
-            }
-            IDataSource.singleton.DeleteEstablishment(this.Establishment).ContinueWith(t =>
-            {
-                if (t.Result)
+                return false;
+            } 
+                return await IDataSource.singleton.DeleteEstablishment(this.Establishment).ContinueWith(t =>
                 {
-                    this.Business.Establishments.Remove(this.Establishment);
-                    this.Establishment = null;
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
-                }
-            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    if (t.Result)
+                    {
+                        this.Business.Establishments.Remove(this.Establishment);
+                        this.Establishment = null;
+                        TriggerEstablishmentUpdate();
+                        TriggerBusinessUpdate();
+                    }
+                    return t.Result;
+                }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+            
         }
 
-        public void DeletePromotion()
+        public async Task<Boolean> DeletePromotion()
         {
             if (this.Promotion == null)
             {
-                return;
+                return false;
             }
-            IDataSource.singleton.DeletePromotion(this.Promotion).ContinueWith(t =>
+            return await IDataSource.singleton.DeletePromotion(this.Promotion).ContinueWith(t =>
             {
                 if (t.Result)
                 {
@@ -99,19 +96,20 @@ namespace Windows_App.ViewModel
                         e.Promotions.Remove(this.Promotion);
                     });
                     this.Promotion = null;
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+                    TriggerBusinessUpdate();
+                    TriggerPromotionUpdate();
                 }
+                return t.Result;
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        public void DeleteEvent()
+        public async Task<Boolean> DeleteEvent()
         {
             if (this.Event == null)
             {
-                return;
+                return false;
             }
-            IDataSource.singleton.DeleteEvent(this.Event).ContinueWith(t =>
+            return await IDataSource.singleton.DeleteEvent(this.Event).ContinueWith(t =>
             {
                 if (t.Result)
                 {
@@ -120,75 +118,171 @@ namespace Windows_App.ViewModel
                         e.Events.Remove(this.Event);
                     });
                     this.Event = null;
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
+                    TriggerBusinessUpdate();
+                    TriggerEventUpdate();
                 }
+                return t.Result;
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
-        public void SaveBusiness(Business business)
+        public async Task<Boolean> SaveBusiness(Business business)
         {
             if(this.Business == null)
             {
-                return;
+                return false;
             }
             business.Id = this.Business.Id;
-            IDataSource.singleton.EditBusiness(business).ContinueWith(t =>
+            return await IDataSource.singleton.EditBusiness(business).ContinueWith(t =>
             {
                 if (t.Result)
                 {
-
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
+                    this.Business.Name = business.Name;
+                    this.Business.Description = business.Description;
+                    this.Business.Category = business.Category;
+                    this.Business.LinkWebsite = business.LinkWebsite;
+                    this.Business.Picture = business.Picture;
+                    TriggerBusinessUpdate();
                 }
+                return t.Result;
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
 
         }
 
-        public void SaveEstablishment(Establishment establishment)
+        public async Task<Boolean> SaveEstablishment(Establishment establishment)
         {
             if (this.Establishment == null)
             {
-                return;
+                return false;
             }
             establishment.Id = this.Establishment.Id;
-            IDataSource.singleton.EditEstablishment(establishment).ContinueWith(t =>
+            return await IDataSource.singleton.EditEstablishment(establishment).ContinueWith(t =>
             {
                 if (t.Result)
                 {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
+                    this.Establishment.Name = establishment.Name;
+                    this.Establishment.PhoneNumber = establishment.PhoneNumber;
+                    this.Establishment.Picture = establishment.Picture;
+                    this.Establishment.Address = establishment.Address;
+                    this.Establishment.AllOpeningHours = establishment.OpeningHours;
+                    this.Establishment.Email = establishment.Email;
+                    TriggerEstablishmentUpdate();
                 }
+                return t.Result;
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        public void SavePromotion(Promotion promotion)
+        public async Task<Boolean> SavePromotion(Promotion promotion)
         {
             if (this.Promotion == null)
             {
-                return;
+                return false;
             }
             promotion.Id = this.Promotion.Id;
-            IDataSource.singleton.EditPromotion(promotion).ContinueWith(t =>
+            return await IDataSource.singleton.EditPromotion(promotion).ContinueWith(t =>
             {
                 if (t.Result)
                 {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+                    this.Promotion.Name = promotion.Name;
+                    this.Promotion.Description = promotion.Description;
+                    this.Promotion.IsDiscountCoupon = promotion.IsDiscountCoupon;
+                    this.Promotion.StartDate = promotion.StartDate;
+                    this.Promotion.EndDate = promotion.EndDate;
+                    TriggerPromotionUpdate();
                 }
+                return t.Result;
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
-        public void SaveEvent(Event @event)
+        public async Task<Boolean> SaveEvent(Event @event)
         {
             if (this.Event == null)
             {
-                return;
+                return false;
             }
             @event.Id = this.Event.Id;
-            IDataSource.singleton.EditEvent(Event).ContinueWith(t =>
+            return await IDataSource.singleton.EditEvent(Event).ContinueWith(t =>
             {
                 if (t.Result)
                 {
-                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
+                    this.Event.Name = @event.Name;
+                    this.Event.Description = @event.Description;
+                    this.Event.StartDate = @event.StartDate;
+                    this.Event.EndDate = @event.EndDate;
+                    TriggerEventUpdate();
                 }
+                return t.Result;
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
+
+        public async Task<Boolean> AddEstablishment(Establishment establishment)
+        {
+            if(this.Business == null)
+            {
+                return false;
+            }
+
+            return await IDataSource.singleton.AddEstablishment(this.Business.Id,establishment).ContinueWith(t =>
+            {
+                if (t.Result)
+                {
+                    TriggerBusinessUpdate();
+                }
+                return t.Result;
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        public async Task<Boolean> AddPromotion(Promotion promotion)
+        {
+            if (this.Establishment == null)
+            {
+                return false;
+            }
+
+            return await IDataSource.singleton.AddPromotion(this.Establishment.Id, promotion).ContinueWith(t =>
+            {
+                if (t.Result)
+                {
+                    TriggerBusinessUpdate();
+                }
+                return t.Result;
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        public async Task<Boolean> AddEvent(Event @event)
+        {
+            if (this.Establishment == null)
+            {
+                return false;
+            }
+
+            return await IDataSource.singleton.AddEvent(this.Establishment.Id, @event).ContinueWith(t =>
+            {
+                if (t.Result)
+                {
+                    TriggerBusinessUpdate();
+                }
+                return t.Result;
+            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        public void TriggerBusinessUpdate()
+        {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
+        }
+
+        public void TriggerEstablishmentUpdate()
+        {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
+        }
+
+        public void TriggerEventUpdate()
+        {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
+        }
+
+        public void TriggerPromotionUpdate()
+        {
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+        }
+
     }
 }

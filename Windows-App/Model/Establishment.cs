@@ -17,7 +17,7 @@ namespace Windows_App.Model
         public string Email { get; set; }
         public string Picture { get; set; }
         [JsonProperty("OpeningHours")]
-        private List<OpeningHour> OpeningHours { get; set; }
+        public List<OpeningHour> OpeningHours { get; set; }
         
         public List<OpeningHour> AllOpeningHours
         {
