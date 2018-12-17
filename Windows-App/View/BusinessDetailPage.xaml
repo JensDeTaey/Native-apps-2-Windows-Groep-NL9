@@ -261,22 +261,22 @@
         <PivotItem Header="Algemeen">
             <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Visible">
                 <StackPanel HorizontalAlignment="Center" Margin="20,10,0,0">
-                    
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
-                        <Button Background="White" FontFamily="Segoe MDL2 Assets" Content="&#xEB51;" />
-                        <TextBlock Text="Volg dit bedrijf"/>
+                    <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Center" Text="{Binding Business.Category}" FontSize="13" Margin="0,-14.3,0,5"/>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button x:Name="SubscribeButton" Background="White" FontFamily="Segoe MDL2 Assets" Foreground="Red" Content="&#xEB51;" Click="ButtonSubscribe_Click" />
+                        <TextBlock x:Name="SubsribeText" Text="Volg dit bedrijf"/>
                     </StackPanel>
-                    
-                    
-                    <TextBlock Text="{Binding Business.Category}" FontSize="13" Margin="0,-14.3,0,5"/>
-                    <Image Source="{Binding Business.Picture}" Width="300"/>
-                    <TextBlock Text="{Binding Business.Description}"  TextWrapping="Wrap" FontSize="15"/>
 
-                    <StackPanel Orientation="Horizontal" >
-                        <TextBlock FontFamily="Segoe MDL2 Assets" 
+
+                    
+                    <Image HorizontalAlignment="Center" Source="{Binding Business.Picture}" Width="300"/>
+                    <TextBlock HorizontalAlignment="Center" Margin="0,24,0,0" Text="{Binding Business.Description}"  TextWrapping="Wrap" FontSize="15"/>
+
+                    <StackPanel  Margin="0,24,0,0" HorizontalAlignment="Center" Orientation="Horizontal" >
+                        <TextBlock Margin="0,0,10,0" HorizontalAlignment="Center" FontFamily="Segoe MDL2 Assets" 
                         Text="&#xE774;"/>
-                        <HyperlinkButton Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-10,0,0"/>
+                        <HyperlinkButton HorizontalAlignment="Center" Content="{Binding Business.LinkWebsite}"  NavigateUri="{Binding Business.LinkWebsite}" Margin="0,-10,0,0"/>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
