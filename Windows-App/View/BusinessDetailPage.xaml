@@ -332,8 +332,13 @@
                                 </ListView.ItemContainerStyle>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border  BorderThickness="2" BorderBrush="Black">
-                                            <StackPanel Padding="10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                                            <StackPanel Grid.Column="1" Padding="10">
                                                 <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
                                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                                                 <StackPanel Orientation="Horizontal">
@@ -343,10 +348,9 @@
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Is met kortingsbon:  "/>
                                                     <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
-                                                    <Button Content="Druk bon af" Click="Button_ClickAsync"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                        </Border>
+                                        </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
@@ -388,16 +392,21 @@
                                 </ListView.ItemContainerStyle>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Border BorderThickness="2" BorderBrush="Black">
-                                            <StackPanel Padding="10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                                            <StackPanel  Grid.Column="1" Padding="10">
                                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
                                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="Vindt plaats van: "/>
-                                                    <TextBlock Text="{Binding TimeValid}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                        </Border>
+                                        </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>

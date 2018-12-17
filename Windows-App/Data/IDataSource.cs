@@ -12,7 +12,7 @@ namespace Windows_App.Data
     abstract class IDataSource
     {
         //SINGLETON
-        public static IDataSource singleton = new OnlineDataSource();
+        public static IDataSource singleton = new MockDataSource();
 
         public AuthenticationBearer authenticationBearer;
 
