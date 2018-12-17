@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
-    <StackPanel>
+    <StackPanel HorizontalAlignment="Center">
         <TextBlock Text="Registreer" Style="{StaticResource TitleTextBlockStyle}"/>
             <TextBox x:Name="LastName" TextChanged="TextChanged" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
             <TextBox x:Name="FirstName" TextChanged="TextChanged" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
