@@ -31,15 +31,12 @@ namespace Windows_App.View
         private BusinessesViewModel businessViewModel;
         public BusinessesPage()
         {
-            this.InitializeComponent();
             businessViewModel = new BusinessesViewModel();
             this.DataContext = businessViewModel;
-           
+            this.InitializeComponent();
         }
 
-        //public Visibility NoBusinessesVisibility { get => businessViewModel.Businesses.Count <= 0? Visibility.Visible:Visibility.Collapsed; }
-
-        private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
+    private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
             Business selectedBusiness= e.ClickedItem as Business;
             PageLoadWithMultipleParameters pageLoad = new PageLoadWithMultipleParameters
@@ -50,9 +47,27 @@ namespace Windows_App.View
             Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
 
-        private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        private void ListFilterModifier_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
         {
             businessViewModel.FilterBusinesses(args.QueryText);
+        }
+
+        private void ListOrderModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboboxSender = (ComboBox)sender;
+            ComboBoxItem comboboxItemSender = (ComboBoxItem)comboboxSender.SelectedItem;
+            switch (comboboxItemSender.Content.ToString())
+            {
+                case "Aantal volgers aflopend":
+                    businessViewModel.SortBusinessesBySubscribers(false);
+                    break;
+                case "Aantal volgers oplopend":
+                    businessViewModel.SortBusinessesBySubscribers(true);
+                    break;
+                default:
+                    throw new Exception($"{comboboxItemSender.Content.ToString()} not defined in ListOrderModifier");
+            }
+           
         }
     }
 

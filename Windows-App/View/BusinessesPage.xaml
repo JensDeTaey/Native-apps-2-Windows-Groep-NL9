@@ -9,7 +9,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
     <Page.Resources>
-        <DataTemplate x:Key="SmallScreenTemplate">
+        <local:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <DataTemplate x:Key="SmallScreenListTemplate">
             <StackPanel Orientation="Vertical" Margin="0,10,0,40">
                 <StackPanel>
                     <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
@@ -20,7 +21,7 @@
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate x:Key="DesktopTemplate">
+        <DataTemplate x:Key="DesktopListTemplate">
             <Grid  Margin="0,10,0,40">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
@@ -35,7 +36,6 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
-
     </Page.Resources>
 
     <Grid>
@@ -46,7 +46,9 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
+                        <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource SmallScreenListTemplate}" />
+                        <Setter Target="SmallScreenListModifiers.Visibility" Value="Visible" />
+                        <Setter Target="DesktopListModifiers.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -54,7 +56,9 @@
                         <AdaptiveTrigger MinWindowWidth="1024" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
+                        <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource DesktopListTemplate}" />
+                        <Setter Target="SmallScreenListModifiers.Visibility" Value="Collapsed" />
+                        <Setter Target="DesktopListModifiers.Visibility" Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -64,14 +68,34 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid>
+        <!--List Modifiers-->
+        <StackPanel x:Name="SmallScreenListModifiers" Orientation="Vertical" Margin="20,10,10,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="400"/>
+                </Grid.ColumnDefinitions>
+                <SearchBox  PlaceholderText="Zoeken op naam of categorie" Height="35" Margin="0,23,0,0" QuerySubmitted="ListFilterModifier_QuerySubmitted"/>
+            </Grid>
+            <ComboBox Height="58" SelectedValuePath="Content" Header="Sorteren" Width="200" Margin="0,5,0,0"  SelectionChanged="ListOrderModifier_SelectionChanged">
+                <ComboBoxItem  IsSelected="True">Aantal volgers aflopend</ComboBoxItem>
+                <ComboBoxItem>Aantal volgers oplopend</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <Grid x:Name="DesktopListModifiers" Margin="20,10,20,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MaxWidth="500"/>
+                <ColumnDefinition Width="*" MaxWidth="50"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <SearchBox x:Name="SearchBox" PlaceholderText="Zoeken op naam of categorie" FocusOnKeyboardInput="True" Height="35" Margin="20,10,20,0" QuerySubmitted="SearchBox_QuerySubmitted"/>
+            <SearchBox  Grid.Column="0" PlaceholderText="Zoeken op naam of categorie" Height="35" Margin="0,23,0,0" QuerySubmitted="ListFilterModifier_QuerySubmitted" />
+            <ComboBox Grid.Column="2"  SelectedValuePath="Content"  Height="58" Header="Sorteren" Width="200" SelectionChanged="ListOrderModifier_SelectionChanged" >
+                <ComboBoxItem  IsSelected="True">Aantal volgers aflopend</ComboBoxItem>
+                <ComboBoxItem>Aantal volgers oplopend</ComboBoxItem>
+            </ComboBox>
         </Grid>
-        <TextBlock Grid.Row="1" Text="Er zijn geen ondernemingen gevonden" Visibility="{Binding Visibility}"/>
-        <ListView Grid.Row="2" x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}"   IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick"  />
+        <!--+++++++++++++++++-->
+        <TextBlock Grid.Row="1" Text="Er zijn geen ondernemingen gevonden" Visibility="{Binding HasNoItems, Mode=TwoWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <ListView Grid.Row="2" x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}"  IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick"  />
     </Grid>
 
 </Page>
