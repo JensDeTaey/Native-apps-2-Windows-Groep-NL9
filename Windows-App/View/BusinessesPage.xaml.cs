@@ -47,11 +47,6 @@ namespace Windows_App.View
             Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
 
-        private void ListFilterModifier_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            businessViewModel.FilterBusinesses(args.QueryText);
-        }
-
         private void ListOrderModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox comboboxSender = (ComboBox)sender;
@@ -68,6 +63,11 @@ namespace Windows_App.View
                     throw new Exception($"{comboboxItemSender.Content.ToString()} not defined in ListOrderModifier");
             }
            
+        }
+
+        private void ListFilterModifier_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            businessViewModel.FilterBusinesses(args.QueryText);
         }
     }
 

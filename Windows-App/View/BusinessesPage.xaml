@@ -49,8 +49,7 @@
                         <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource SmallScreenListTemplate}" />
                         <Setter Target="ScreenListModifiers.Orientation" Value="Vertical" />
                         <Setter Target="ScreenListModifiers.Margin" Value="20,8,20,20" />
-                        <Setter Target="ListFilterModifier.MaxWidth" Value="400" />
-                        <Setter Target="ListFilterModifier.Margin" Value="0,0,0,10" />
+                        <Setter Target="ListFilterModifier.Margin" Value="0,0,0,0" />
                         <Setter Target="ListOrderModifier.Margin" Value="3,5,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -62,8 +61,8 @@
                         <Setter Target="ListViewBusinesses.ItemTemplate" Value="{StaticResource DesktopListTemplate}" />
                         <Setter Target="ScreenListModifiers.Orientation" Value="Horizontal" />
                         <Setter Target="ScreenListModifiers.Margin" Value="20,8,20,20" />
-                        <Setter Target="ListFilterModifier.Width" Value="400" />
-                        <Setter Target="ListFilterModifier.Margin" Value="0,23,60,0" />
+                        <Setter Target="ListFilterModifier.Width" Value="300" />
+                        <Setter Target="ListFilterModifier.Margin" Value="0,23,30,0" />
                         <Setter Target="ListOrderModifier.Margin" Value="0,0,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -80,7 +79,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MaxWidth="400"/>
                 </Grid.ColumnDefinitions>
-                <AutoSuggestBox x:Name="ListFilterModifier" PlaceholderText="Zoeken op naam of categorie"  QuerySubmitted="ListFilterModifier_QuerySubmitted"/>
+                <AutoSuggestBox x:Name="ListFilterModifier" PlaceholderText="Zoeken op naam of categorie" QueryIcon="Find" QuerySubmitted="ListFilterModifier_QuerySubmitted"/>
             </Grid>
             <ComboBox x:Name="ListOrderModifier" SelectedValuePath="Content"  Header="Sorteren" Width="200" SelectionChanged="ListOrderModifier_SelectionChanged">
                 <ComboBoxItem  IsSelected="True">Aantal volgers aflopend</ComboBoxItem>
