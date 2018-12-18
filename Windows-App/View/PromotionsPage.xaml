@@ -112,7 +112,7 @@
             </ComboBox>
         </StackPanel>
         <!--+++++++++++++++++-->
-        <TextBlock Grid.Row="1" Text="Er zijn geen ondernemingen gevonden" Margin="20,0,20,5" Visibility="{Binding HasNoItems, Mode=TwoWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <TextBlock Grid.Row="1" Text="Er zijn geen promoties gevonden" Margin="20,0,20,5" Visibility="{Binding HasNoItems, Mode=TwoWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
         <ListView Grid.Row="2" x:Name="ListViewPromotions" ItemsSource="{Binding Promotions}" Margin="20,0,0,0" IsItemClickEnabled="True" ItemClick="ListViewPromotions_ItemClick"  />
     </Grid>
 </Page>
