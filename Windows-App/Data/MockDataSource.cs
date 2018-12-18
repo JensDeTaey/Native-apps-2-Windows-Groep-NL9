@@ -5,18 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows_App.Model;
+using Windows_App.ViewModel;
 
 namespace Windows_App.Data
 {
     class MockDataSource : IDataSource
     {
+        #region User Actions
         protected override Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password)
         {
             return Task<AuthenticationBearer>.Factory.StartNew(() => {
-                if(email.ToLower().Contains("business"))
+                if (email.ToLower().Contains("business"))
                 {
                     return DummyDataSource.BusinessUserAuthenticationBearer;
-                }else if (email.ToLower().Contains("test"))
+                }
+                else if (email.ToLower().Contains("test"))
                 {
                     //Make a certain user always fail login
                     return null;
@@ -27,7 +30,20 @@ namespace Windows_App.Data
                 }
             });
         }
+        public override Task<bool> Register(RegisterViewModel registerViewModel)
+        {
+            throw new NotImplementedException();
+        }
+        public override Task<ObservableCollection<Notification>> FetchNotifications()
+        {
+            throw new NotImplementedException();
+        }
 
+        public override Task<bool> ClearNotifications()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
 
         #region Main Page Getters
         public override Task<ObservableCollection<Business>> FetchBusinesses()
@@ -53,7 +69,9 @@ namespace Windows_App.Data
 
         public override Task<ObservableCollection<Business>> FetchSubscribedBusinesses()
         {
-            throw new NotImplementedException();
+            return Task<ObservableCollection<Business>>.Factory.StartNew(() => {
+                return new ObservableCollection<Business>(DummyDataSource.Businesses);
+            });
         }
         #endregion
 
@@ -67,7 +85,10 @@ namespace Windows_App.Data
 
         public override Task<Business> FetchMyBusiness()
         {
-            throw new NotImplementedException();
+            return Task<Business>.Factory.StartNew(() =>
+            {
+                return DummyDataSource.BusinessIkea;
+            });
         }
 
         public override Task<bool> EditBusiness(Business business)
@@ -135,6 +156,7 @@ namespace Windows_App.Data
         {
             throw new NotImplementedException();
         }
+
 
         #endregion
 

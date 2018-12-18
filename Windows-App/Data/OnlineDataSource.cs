@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows_App.Data;
 using Windows_App.Model;
+using Windows_App.ViewModel;
 
 namespace Windows_App
 {
@@ -35,9 +36,16 @@ namespace Windows_App
         }
 
 
+        public OnlineDataSource()
+        {
+            HttpClient = new HttpClient();
+        }
+        #endregion
+
+        #region User Actions
         protected override async Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
         {
-            
+
             using (var httpClient = new HttpClient())
             {
                 Collection<KeyValuePair<string, string>> postData = new Collection<KeyValuePair<string, string>>();
@@ -56,16 +64,40 @@ namespace Windows_App
                     return JsonConvert.DeserializeObject<AuthenticationBearer>(json);
                 }
             }
-            
+
         }
 
-
-        public OnlineDataSource()
+        public override async Task<bool> Register(RegisterViewModel registerViewModel)
         {
-            HttpClient = new HttpClient();
+            if (registerViewModel == null)
+            {
+                return false;
+            }
+
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Account/Register"));
+            var test = JsonConvert.SerializeObject(registerViewModel);
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(registerViewModel),
+                                    Encoding.UTF8,
+                                    "application/json");
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public async override Task<ObservableCollection<Notification>> FetchNotifications()
+        {
+            var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "Account/Notifications"));
+            var res = JsonConvert.DeserializeObject<ObservableCollection<Notification>>(json);
+            return res;
+        }
+
+        public async override Task<bool> ClearNotifications()
+        {
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Account/ClearNotifications"));
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
         #endregion
-        
+
         #region Main Pages Getters
 
         public override async Task<ObservableCollection<Business>> FetchBusinesses()
@@ -119,14 +151,14 @@ namespace Windows_App
 
         public override async Task<bool> SubscribeToBusiness(int businessId)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId + "/Subscribe"));
             var response = await HttpClient.SendAsync(requestMessage);
-            return response.StatusCode == System.Net.HttpStatusCode.Created;
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
 
         public override async Task<bool> UnsubscribeFromBusiness(int businessId)
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Businesses/" + businessId + "/Unsubscribe"));
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -217,6 +249,7 @@ namespace Windows_App
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
+
         #endregion
 
     }

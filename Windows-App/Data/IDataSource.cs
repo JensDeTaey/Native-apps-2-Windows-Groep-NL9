@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows_App.Model;
+using Windows_App.ViewModel;
 
 namespace Windows_App.Data
 {
@@ -19,6 +20,8 @@ namespace Windows_App.Data
         protected abstract Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password);
 
         #region User Actions
+        public abstract Task<bool> Register(RegisterViewModel registerViewModel);
+
         public Task<bool> LogIn(string email, string password)
         {
             //Call the authenticationBearer with username and password
@@ -40,6 +43,9 @@ namespace Windows_App.Data
             this.authenticationBearer = null;
         }
 
+        public abstract Task<ObservableCollection<Notification>> FetchNotifications();
+
+        public abstract Task<Boolean> ClearNotifications();
         #endregion
 
         #region Main Pages Getters

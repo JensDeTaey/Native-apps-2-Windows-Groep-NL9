@@ -14,6 +14,7 @@ namespace Windows_App.Model
         public string OpeningsHour { get; set; }
         public string ClosingsHour { get; set; }
 
+
         public string DayInDutch {
             get
             {

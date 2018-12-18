@@ -80,6 +80,7 @@ namespace Windows_App.View
             EndDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
             CouponSwitch.IsEnabled = isEnabled;
         }
+        
 
         private void SetEstablishmentFieldsEnabled(bool isEnabled)
         {
@@ -88,8 +89,30 @@ namespace Windows_App.View
             EstablishmentPhoneNumber.IsEnabled = isEnabled;
             EstablishmentEmail.IsEnabled = isEnabled;
             EstablishmentPicture.IsEnabled = isEnabled;
-            OpeningsHoursListView.IsEnabled = isEnabled;
+            EstablishmentMondayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentMondayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentTuesdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentTuesdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentWednesdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentWednesdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentThursdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentThursdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentFridayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentFridayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentSaturdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentSaturdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentSundayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentSundayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentMondayIsClosed.IsEnabled = isEnabled;
+            EstablishmentTuesdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentWednesdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentThursdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentFridayIsClosed.IsEnabled = isEnabled;
+            EstablishmentSaturdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentSundayIsClosed.IsEnabled = isEnabled;
         }
+
+       
 
         private void SetBusinessFieldsEnabled(bool isEnabled)
         {
@@ -97,7 +120,7 @@ namespace Windows_App.View
             BusinessDescription.IsEnabled = isEnabled;
             BusinessLink.IsEnabled = isEnabled;
             BusinessPicture.IsEnabled = isEnabled;
-            CategoriesCombo.IsEnabled = isEnabled;
+            BusinessCategory.IsEnabled = isEnabled;
         }
 
         private void AppBarSave_click(object sender, RoutedEventArgs e)
@@ -133,9 +156,62 @@ namespace Windows_App.View
                 case 1:
                     //We are editing an establishment
                     List<OpeningHour> hours = new List<OpeningHour>();
-                    var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
-
-
+                    //var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
+                    OpeningHour maandag = new OpeningHour() {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Monday,
+                        OpeningsHour = EstablishmentMondayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentMondayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentMondayIsClosed.IsChecked.Value
+                    };
+                    OpeningHour dinsdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Tuesday,
+                        OpeningsHour = EstablishmentTuesdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentTuesdayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentTuesdayIsClosed.IsChecked.Value
+                    };
+                    OpeningHour woensdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Wednesday,
+                        OpeningsHour = EstablishmentWednesdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentWednesdayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentWednesdayIsClosed.IsChecked.Value
+                    };
+                    OpeningHour donderdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Thursday,
+                        OpeningsHour = EstablishmentThursdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentThursdayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentThursdayIsClosed.IsChecked.Value
+                    };
+                    OpeningHour vrijdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Friday,
+                        OpeningsHour = EstablishmentFridayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentFridayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentFridayIsClosed.IsChecked.Value
+                    };
+                    OpeningHour zaterdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Saturday,
+                        OpeningsHour = EstablishmentSaturdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentSaturdayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentSaturdayIsClosed.IsChecked.Value
+                    };
+                    OpeningHour zondag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Sunday,
+                        OpeningsHour = EstablishmentSundayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentSundayClosingsHour.Time.ToString(),
+                        IsClosed = EstablishmentSundayIsClosed.IsChecked.Value
+                    };
+                    hours.Add(maandag);
+                    hours.Add(dinsdag);
+                    hours.Add(woensdag);
+                    hours.Add(donderdag);
+                    hours.Add(vrijdag);
+                    hours.Add(zaterdag);
+                    hours.Add(zondag);
                     Establishment establishment = new Establishment()
                     {
                         Name = EstablishmentName.Text,
@@ -143,25 +219,46 @@ namespace Windows_App.View
                         PhoneNumber = EstablishmentPhoneNumber.Text,
                         Email = EstablishmentEmail.Text,
                         Picture = EstablishmentPicture.Text,
-                        AllOpeningHours = new List<OpeningHour>()
-                        //TODO: opening hours
+                        AllOpeningHours = hours.Where(hour => !hour.IsClosed).ToList<OpeningHour>()
                     };
 
-                    myBusinessViewModel.SaveEstablishment(establishment).ContinueWith(t=>
+                    if(myBusinessViewModel.Establishment == null)
                     {
-                        if (t.Result)
+                        myBusinessViewModel.AddEstablishment(establishment).ContinueWith(t =>
                         {
-                            //Request was succes
-                            SetEstablishmentFieldsEnabled(false);
-                        }
-                        else
-                        {
-                            //Request failed
-                        }
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetEstablishmentFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
 
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else
+                    {
+                        myBusinessViewModel.SaveEstablishment(establishment).ContinueWith(t =>
+                        {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetEstablishmentFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+
+                   
                     break;
                 case 2:
+                    
                     //We are editing a promotion
                     Promotion promotion = new Promotion()
                     {
@@ -172,39 +269,82 @@ namespace Windows_App.View
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
                         IsDiscountCoupon = CouponSwitch.IsOn
                     };
-                    myBusinessViewModel.SavePromotion(promotion).ContinueWith(t => {
-                        if (t.Result)
-                        {
-                            //Request was succes
-                            SetPromotionFieldsEnabled(false);
-                        }
-                        else
-                        {
-                            //Request failed
-                        }
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    //adding a new promotion
+                    if (myBusinessViewModel.Promotion == null)
+                    {
+                        myBusinessViewModel.AddPromotion(promotion).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetPromotionFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else
+                    {
+                        myBusinessViewModel.SavePromotion(promotion).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetPromotionFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+
+
+                    
                     break;
                 case 3:
                     //We are editing an event
                     Event @event = new Event()
                     {
-                        Name = PromotionName.Text,
-                        Description = PromotionDescription.Text,
-                        Picture = PromotionPicture.Text,
-                        StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
+                        Name = EventName.Text,
+                        Description = EventDescription.Text,
+                        Picture = EventPicture.Text,
+                        StartDate = StartDateEventCalendarDatePicker.Date.Value,
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
                     };
-                    myBusinessViewModel.SaveEvent(@event).ContinueWith(t => {
-                        if (t.Result)
-                        {
-                            //Request was succes
-                            SetEventFieldsEnabled(false);
-                        }
-                        else
-                        {
-                            //Request failed
-                        }
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+
+                    //adding a new event
+                    if (myBusinessViewModel.Event == null)
+                    {
+                        myBusinessViewModel.AddEvent(@event).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetPromotionFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else
+                    {
+                        //edit an event
+                        myBusinessViewModel.SaveEvent(@event).ContinueWith(t => {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetEventFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    
                     break;
             }
         }
@@ -232,21 +372,16 @@ namespace Windows_App.View
                 
                 //add an establishment
                 case 1:
-                    //EstablishmentName.IsEnabled = true;
-                    //EstablishmentAddress.IsEnabled = true;
-                    //EstablishmentPhoneNumber.IsEnabled = true;
-                    //EstablishmentEmail.IsEnabled = true;
-                    //EstablishmentPicture.IsEnabled = true;
-                    //OpeningsHoursListView.IsEnabled = true;
-                    //EstablishmentName.Text = "";
-                    //EstablishmentAddress.Text = "";
-                    //EstablishmentPhoneNumber.Text = "";
-                    //EstablishmentEmail.Text = "";
-                    //EstablishmentPicture.Text = "";
-                    //OpeningsHoursListView.DataContext = null;
+                    SetEstablishmentFieldsEnabled(true);
+                    myBusinessViewModel.Establishment = null;
+                    myBusinessViewModel.TriggerEstablishmentUpdate();
+                   
+
+
                     break;
                 //add a promotion
                 case 2:
+                    
                     
                     break;
                 //add an event
@@ -306,6 +441,22 @@ namespace Windows_App.View
                     });
                     break;
             }
+        }
+
+        private void PromotionAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SetPromotionFieldsEnabled(true);
+            myBusinessViewModel.Promotion = null;
+            myBusinessViewModel.TriggerPromotionUpdate();
+            myBusinessViewModel.fillRightEstablishment(((Button)sender).Tag);
+        }
+
+        private void EventAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SetEventFieldsEnabled(true);
+            myBusinessViewModel.Event = null;
+            myBusinessViewModel.TriggerEventUpdate();
+            myBusinessViewModel.fillRightEstablishment(((Button)sender).Tag);
         }
 
         private void PivotMyBusiness_PivotItemLoading(Pivot sender, PivotItemEventArgs args)

@@ -111,6 +111,7 @@
     <Compile Include="Model\DaysOfWeekEnum.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Business.cs" />
+    <Compile Include="Model\Notification.cs" />
     <Compile Include="Model\OpeningHour.cs" />
     <Compile Include="Model\PageLoadWithMultipleParameters.cs" />
     <Compile Include="Model\Promotion.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
     <Compile Include="ViewModel\EventsViewModel.cs" />
     <Compile Include="ViewModel\MyBusinessViewModel.cs" />
+    <Compile Include="ViewModel\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\SubsribedBusinessesViewModel.cs" />
@@ -140,6 +142,9 @@
     </Compile>
     <Compile Include="View\MyBusinessPage.xaml.cs">
       <DependentUpon>MyBusinessPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PromotionsPage.xaml.cs">
       <DependentUpon>PromotionsPage.xaml</DependentUpon>
@@ -200,6 +205,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\NotificationsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PromotionsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -221,7 +230,7 @@
       <Version>12.0.1</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Pdf.UWP">
-      <Version>16.3.0.36</Version>
+      <Version>16.4.0.42</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

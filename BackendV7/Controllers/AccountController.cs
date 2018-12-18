@@ -16,6 +16,11 @@ using Microsoft.Owin.Security.OAuth;
 using BackendV7.Models;
 using BackendV7.Providers;
 using BackendV7.Results;
+using System.Linq;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using BackendV7.Models.Domein;
 
 namespace BackendV7.Controllers
 {
@@ -328,33 +333,101 @@ namespace BackendV7.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                UserName = model.Email,
+                Email = model.Email,
+                NotificationsClearedTime = DateTime.Now
+            };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-            Business business = null;
 
             if (model.IsBusinessAccount)
             {
-                business = new Business();
-                business.Name = model.BusinessName;
-                business.Description = model.Description;
-                business.Category = model.Category;
-                business.LinkWebsite = model.LinkWebsite;
-                business.PictureURL = model.Picture;
-                business.UserId = user.Id;
+                Business business = new Business
+                {
+                    Name = model.BusinessName,
+                    Description = model.Description,
+                    Category = model.Category,
+                    LinkWebsite = model.LinkWebsite,
+                    PictureURL = model.Picture,
+                    UserId = user.Id
+                };
+
+                var db = ApplicationDbContext.Create();
+                db.Businesses.Add(business);
+                db.SaveChanges();
+
             }
-
-            
-
-            
-
-            
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
-
             return Ok();
+        }
+
+        [Route("ClearNotifications")]
+        [HttpPost]
+        public IHttpActionResult ClearNotifications()
+        {
+            var db = ApplicationDbContext.Create();
+            var user = db.Users.Where(el => el.UserName == this.User.Identity.Name).FirstOrDefault();
+
+
+            if(user ==null)
+            {
+                return Unauthorized();
+            }
+
+            try
+            {
+                user.NotificationsClearedTime = DateTime.Now;
+                db.SaveChanges();
+                return Ok("Notifications cleared at " + user.NotificationsClearedTime);
+            } catch(Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+        [Route("Notifications")]
+        public IHttpActionResult GetNotifications()
+        {
+            var db = ApplicationDbContext.Create();
+            var user = db.Users
+                .Where(el => el.UserName == this.User.Identity.Name)
+                .Include("Subscriptions.Business.Establishments.Promotions")
+                .Include("Subscriptions.Business.Establishments.Events")
+                .FirstOrDefault();
+
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            try
+            {
+                var promotions = user.Subscriptions.Select(s => s.Business).SelectMany(b => b.Establishments).SelectMany(e => e.Promotions);
+                var events = user.Subscriptions.Select(s => s.Business).SelectMany(b => b.Establishments).SelectMany(e => e.Events);
+
+                List<Notification> notifications = new List<Notification>();
+                notifications.AddRange(promotions);
+                notifications.AddRange(events);
+
+                notifications.ForEach(n =>
+                {
+                    if (n.NotificationCreatedTime < user.NotificationsClearedTime)
+                        n.IsSeen = true;
+                });
+
+                return Ok(notifications.OrderBy(n => n.NotificationCreatedTime).Reverse());
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         // POST api/Account/RegisterExternal

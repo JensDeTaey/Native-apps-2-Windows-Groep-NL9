@@ -127,5 +127,9 @@ namespace Windows_App.ViewModel
             ));
         }
 
+        public Promotion getPromotion(object tag)
+        {
+            return Promotions.FirstOrDefault(promotion => promotion.Id == (int)tag);
+        }
     }
 }

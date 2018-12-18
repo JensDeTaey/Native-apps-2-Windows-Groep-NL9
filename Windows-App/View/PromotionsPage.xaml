@@ -22,7 +22,8 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Is met kortingsbon:  "/>
                         <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
-                    </StackPanel>
+                    <Button Margin="10,-7,0,0" Visibility="{Binding IsDiscountCoupon}" Content="Print kortingsbon" Tag="{Binding Id}" Background="Transparent" Click="HyperlinkButton_ClickAsync"/>
+                </StackPanel>
                 </StackPanel>
             
         </DataTemplate>
@@ -43,7 +44,8 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Is met kortingsbon:  "/>
                             <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
-                        </StackPanel>
+                        <Button Margin="10,-7,0,0" Visibility="{Binding IsDiscountCoupon}" Content="Print kortingsbon" Tag="{Binding Id}" Background="Transparent" Click="HyperlinkButton_ClickAsync"/>
+                    </StackPanel>
                     </StackPanel>
                 </Grid>
             </DataTemplate>

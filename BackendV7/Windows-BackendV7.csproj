@@ -285,8 +285,25 @@
     <Compile Include="Migrations\201812170147337_initial9.Designer.cs">
       <DependentUpon>201812170147337_initial9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812172337590_initial10.cs" />
+    <Compile Include="Migrations\201812172337590_initial10.Designer.cs">
+      <DependentUpon>201812172337590_initial10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812180408008_initial11.cs" />
+    <Compile Include="Migrations\201812180408008_initial11.Designer.cs">
+      <DependentUpon>201812180408008_initial11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812180412157_initial12.cs" />
+    <Compile Include="Migrations\201812180412157_initial12.Designer.cs">
+      <DependentUpon>201812180412157_initial12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812180418345_initial13.cs" />
+    <Compile Include="Migrations\201812180418345_initial13.Designer.cs">
+      <DependentUpon>201812180418345_initial13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domein\DummyData.cs" />
+    <Compile Include="Models\Domein\Notification.cs" />
     <Compile Include="Models\ViewModels\AccountBindingModels.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Domein\Business.cs" />
@@ -431,6 +448,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812170147337_initial9.resx">
       <DependentUpon>201812170147337_initial9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812172337590_initial10.resx">
+      <DependentUpon>201812172337590_initial10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812180408008_initial11.resx">
+      <DependentUpon>201812180408008_initial11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812180412157_initial12.resx">
+      <DependentUpon>201812180412157_initial12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812180418345_initial13.resx">
+      <DependentUpon>201812180418345_initial13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,14 +14,23 @@ namespace Windows_App.ViewModel
     public class SubsribedBusinessesViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Business> Businesses { get; set; }
-
+        public List<Promotion> Promotions { get; set; }
+        public List<Event> Events { get; set; }
         public SubsribedBusinessesViewModel()
         {
             Businesses = new ObservableCollection<Business>();
-            IDataSource.singleton.FetchBusinesses().ContinueWith(t =>
+            IDataSource.singleton.FetchSubscribedBusinesses().ContinueWith(t =>
             {
                 Businesses = t.Result;
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
+                Events = Businesses.SelectMany(b => b.Establishments).SelectMany(e => e.Events).ToList();
+                Promotions = Businesses.SelectMany(b => b.Establishments).SelectMany(e => e.Promotions).ToList();
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Businesses"));
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotions"));
+                    PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Events"));
+                }
+                
             }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
         }
 

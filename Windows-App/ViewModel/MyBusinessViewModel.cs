@@ -266,22 +266,38 @@ namespace Windows_App.ViewModel
 
         public void TriggerBusinessUpdate()
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
+            if(PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
+            }
+            
         }
 
         public void TriggerEstablishmentUpdate()
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Establishment"));
+            }
+            
         }
 
         public void TriggerEventUpdate()
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Event"));
+            }
+            
         }
 
         public void TriggerPromotionUpdate()
         {
-            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotion"));
+            }
+            
         }
 
     }
