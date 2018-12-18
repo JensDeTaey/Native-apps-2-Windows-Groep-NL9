@@ -7,16 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-   
+
 
     <ScrollViewer>
         <Pivot x:Name="PivotMyBusiness"   Title="Mijn bedrijf" PivotItemLoading="PivotMyBusiness_PivotItemLoading">
             <PivotItem x:Name="BusinessInfo" Header="Bedrijfsgegevens">
                 <StackPanel>
                     <TextBox x:Name="BusinessName" IsEnabled="False" Text="{Binding Business.Name}"  PlaceholderText="Naam van het bedrijf"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-                    <TextBox x:Name="BusinessDescription" IsEnabled="False" Text="{Binding Business.Description}" PlaceholderText="Beschrijving van het bedrijf" Margin="0,24,0,0" MaxLength="150" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-                    <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
-                    IsEnabled="False" />
+                    <TextBox x:Name="BusinessDescription" IsEnabled="False" Text="{Binding Business.Description}" TextWrapping="Wrap" PlaceholderText="Beschrijving van het bedrijf" Margin="0,24,0,0" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+                    <TextBox x:Name="BusinessCategory" IsEnabled="False" Text="{Binding Business.Category}" PlaceholderText="Categorie van het bedrijf" Margin="0,24,0,0" MaxLength="150" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
+
                     <TextBox x:Name="BusinessLink" Text="{Binding Business.LinkWebsite}" IsEnabled="False" Margin="0,24,0,0"  MaxLength="150" MinWidth="400" HorizontalAlignment="Left" />
                     <TextBox x:Name="BusinessPicture" Text="{Binding Business.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="100" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                 </StackPanel>
@@ -44,7 +44,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Grid.Column="0">
-                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" />
+                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" Background="Black" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -74,7 +74,7 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
-                                    
+
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="1" x:Name="EstablishmentMonday" Text="Maandag" Margin="0,0,0,10" Width="auto" />
                                 <TimePicker ClockIdentifier="24HourClock" Grid.Column="1" Grid.Row="1" IsEnabled="False" x:Name="EstablishmentMondayOpeningsHour"  Time="{Binding Establishment.AllOpeningHours[0].OpeningsHour}" Margin="10,0,10,10"/>
@@ -90,7 +90,7 @@
                                 <TextBlock Grid.Column="2" Grid.Row="2" Text="-" Margin="0,0,0,10"/>
                                 <TimePicker ClockIdentifier="24HourClock"  Grid.Column="3" Grid.Row="2" IsEnabled="False" x:Name="EstablishmentTuesdayClosingsHour"  Time="{Binding Establishment.AllOpeningHours[1].ClosingsHour}" Margin="10,0,10,10"/>
                                 <CheckBox x:Name="EstablishmentTuesdayIsClosed" Grid.Column="4" Grid.Row="2" IsChecked="{Binding Establishment.AllOpeningHours[1].IsClosed}" IsEnabled="False" Content="Gesloten"/>
-                                
+
                                 <TextBlock Grid.Column="0" Grid.Row="3" x:Name="EstablishmentWednesday" Text="Woensdag" Margin="0,0,0,10" Width="auto" />
                                 <TimePicker ClockIdentifier="24HourClock"  Grid.Column="1" Grid.Row="3" IsEnabled="False" x:Name="EstablishmentWednesdayOpeningsHour"  Time="{Binding Establishment.AllOpeningHours[2].OpeningsHour}" Margin="10,0,10,10"/>
                                 <TextBlock Grid.Column="2" Grid.Row="3" Text="-" Margin="0,0,0,10"/>

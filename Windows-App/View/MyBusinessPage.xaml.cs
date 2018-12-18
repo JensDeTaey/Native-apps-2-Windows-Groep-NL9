@@ -120,7 +120,7 @@ namespace Windows_App.View
             BusinessDescription.IsEnabled = isEnabled;
             BusinessLink.IsEnabled = isEnabled;
             BusinessPicture.IsEnabled = isEnabled;
-            CategoriesCombo.IsEnabled = isEnabled;
+            BusinessCategory.IsEnabled = isEnabled;
         }
 
         private void AppBarSave_click(object sender, RoutedEventArgs e)
