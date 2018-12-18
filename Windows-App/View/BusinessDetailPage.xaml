@@ -264,7 +264,7 @@
                     <TextBlock Margin="0,0,0,5" Text="{Binding Business.Name}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
                     <TextBlock HorizontalAlignment="Center" Text="{Binding Business.Category}" FontSize="13" Margin="0,-14.3,0,5"/>
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <Button x:Name="SubscribeButton" Background="White" FontFamily="Segoe MDL2 Assets" Foreground="Red" Content="&#xEB51;" Click="ButtonSubscribe_Click" />
+                        <Button x:Name="SubscribeButton" Background="Transparent" FontFamily="Segoe MDL2 Assets" Foreground="Red" Content="&#xEB51;" Click="ButtonSubscribe_Click" />
                         <TextBlock x:Name="SubsribeText" Text="Volg dit bedrijf"/>
                     </StackPanel>
 
