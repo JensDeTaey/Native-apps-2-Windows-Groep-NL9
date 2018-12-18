@@ -36,8 +36,8 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class PromotionsPage : Page
     {
-        private Promotions
-     promotionsViewModel;
+        private PromotionsViewModel promotionsViewModel;
+
         public PromotionsPage()
         {
             promotionsViewModel = new PromotionsViewModel();
