@@ -43,6 +43,9 @@ namespace Windows_App.Data
             this.authenticationBearer = null;
         }
 
+        public abstract Task<ObservableCollection<Notification>> FetchNotifications();
+
+        public abstract Task<Boolean> ClearNotifications();
         #endregion
 
         #region Main Pages Getters

@@ -11,13 +11,15 @@ namespace Windows_App.Data
 {
     class MockDataSource : IDataSource
     {
+        #region User Actions
         protected override Task<AuthenticationBearer> GetAuthenticationBearer(string email, string password)
         {
             return Task<AuthenticationBearer>.Factory.StartNew(() => {
-                if(email.ToLower().Contains("business"))
+                if (email.ToLower().Contains("business"))
                 {
                     return DummyDataSource.BusinessUserAuthenticationBearer;
-                }else if (email.ToLower().Contains("test"))
+                }
+                else if (email.ToLower().Contains("test"))
                 {
                     //Make a certain user always fail login
                     return null;
@@ -28,12 +30,20 @@ namespace Windows_App.Data
                 }
             });
         }
-
         public override Task<bool> Register(RegisterViewModel registerViewModel)
         {
             throw new NotImplementedException();
         }
+        public override Task<ObservableCollection<Notification>> FetchNotifications()
+        {
+            throw new NotImplementedException();
+        }
 
+        public override Task<bool> ClearNotifications()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
 
         #region Main Page Getters
         public override Task<ObservableCollection<Business>> FetchBusinesses()
@@ -141,6 +151,7 @@ namespace Windows_App.Data
         {
             throw new NotImplementedException();
         }
+
 
         #endregion
 

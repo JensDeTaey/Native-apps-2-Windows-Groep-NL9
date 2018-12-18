@@ -36,9 +36,16 @@ namespace Windows_App
         }
 
 
+        public OnlineDataSource()
+        {
+            HttpClient = new HttpClient();
+        }
+        #endregion
+
+        #region User Actions
         protected override async Task<AuthenticationBearer> GetAuthenticationBearer(string username, string password)
         {
-            
+
             using (var httpClient = new HttpClient())
             {
                 Collection<KeyValuePair<string, string>> postData = new Collection<KeyValuePair<string, string>>();
@@ -57,15 +64,8 @@ namespace Windows_App
                     return JsonConvert.DeserializeObject<AuthenticationBearer>(json);
                 }
             }
-            
+
         }
-
-
-        public OnlineDataSource()
-        {
-            HttpClient = new HttpClient();
-        }
-
 
         public override async Task<bool> Register(RegisterViewModel registerViewModel)
         {
@@ -79,6 +79,20 @@ namespace Windows_App
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(registerViewModel),
                                     Encoding.UTF8,
                                     "application/json");
+            var response = await HttpClient.SendAsync(requestMessage);
+            return response.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
+        public async override Task<ObservableCollection<Notification>> FetchNotifications()
+        {
+            var json = await HttpClient.GetStringAsync(new Uri(BaseUrl + "Account/Notifications"));
+            var res = JsonConvert.DeserializeObject<ObservableCollection<Notification>>(json);
+            return res;
+        }
+
+        public async override Task<bool> ClearNotifications()
+        {
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Account/ClearNotifications"));
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
@@ -235,6 +249,7 @@ namespace Windows_App
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }
+
         #endregion
 
     }

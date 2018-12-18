@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -17,6 +18,7 @@ namespace BackendV7.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public DateTime NotificationsClearedTime { get; set; }
     
         public List<Business> Businesses { get; set; }
 
