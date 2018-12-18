@@ -10,7 +10,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         
-        <DataTemplate x:Key="SmallScreenTemplate">
+        <!--EstablishmentsList-->
+        <DataTemplate x:Key="Establishments_SmallScreenTemplate">
             
                     <StackPanel Orientation="Vertical" >
                         <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="auto" Margin="0,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
@@ -75,7 +76,7 @@
             
         </DataTemplate>
 
-        <DataTemplate x:Key="MediumTemplate">
+        <DataTemplate x:Key="Establishments_MediumTemplate">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
                     <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
@@ -143,7 +144,7 @@
 
 
 
-        <DataTemplate x:Key="DesktopTemplate">
+        <DataTemplate x:Key="Establishments_DesktopTemplate">
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,40">
                     <Image Source="{Binding Picture}" HorizontalAlignment="Left" Width="450" Margin="0,0,10,0" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
@@ -207,23 +208,177 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-
-
-
                     </StackPanel>
-
                 </StackPanel>
             </StackPanel>
 
         </DataTemplate>
-        
+        <!--EstablishmentsList END-->
+
+        <!--PromotionsList-->
+        <DataTemplate x:Key="Promotions_SmallScreenTemplate">
+
+            <StackPanel Padding="5">
+
+                <ListView ItemsSource="{Binding Promotions}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="MinHeight" Value="25" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" MaxWidth="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                                <StackPanel Padding="10">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Geldig van: "/>
+                                        <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Is met kortingsbon:  "/>
+                                        <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
+                                        <Button Margin="10,-7,0,0" Visibility="{Binding IsDiscountCoupon}" Content="Print kortingsbon" Tag="{Binding Id}" Background="Transparent" Click="HyperlinkButton_ClickAsync"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="Promotions_DesktopTemplate">
+
+            <StackPanel Padding="5">
+
+                <ListView ItemsSource="{Binding Promotions}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="MinHeight" Value="25" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <ContentPresenter/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                                <StackPanel Grid.Column="1" Padding="10">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Geldig van: "/>
+                                        <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Is met kortingsbon:  "/>
+                                        <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
+                                        <Button Margin="10,-7,0,0" Visibility="{Binding IsDiscountCoupon}" Content="Print kortingsbon" Tag="{Binding Id}" Background="Transparent" Click="HyperlinkButton_ClickAsync"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </DataTemplate>
+        <!--PromotionsList END-->
+        <!--EventsList-->
+        <DataTemplate x:Key="Events_SmallScreenTemplate">
+            <StackPanel Padding="5">
+                    <ListView  ItemsSource="{Binding Events}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="MinHeight" Value="25" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <ContentPresenter/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" MinWidth="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                                    <StackPanel  Grid.Column="1" Padding="10">
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Vindt plaats van: "/>
+                                            <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="Events_DesktopTemplate">
+            <StackPanel Padding="5">
+                    <ListView  ItemsSource="{Binding Events}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="MinHeight" Value="25" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <ContentPresenter/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                                    <StackPanel  Grid.Column="1" Padding="10">
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Vindt plaats van: "/>
+                                            <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </DataTemplate>
+            <!--EventsList END-->
 
     </Page.Resources>
 
     
     <Pivot x:Name="PivotBusiness"   Title="{Binding Business.Name}">
-        
-
+       
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Small">
@@ -231,7 +386,9 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
+                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource Establishments_SmallScreenTemplate}" />
+                        <Setter Target="PromotionsList.ItemTemplate" Value="{StaticResource Promotions_SmallScreenTemplate}" />
+                        <Setter Target="EventsList.ItemTemplate" Value="{StaticResource Events_SmallScreenTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Medium">
@@ -239,7 +396,9 @@
                         <AdaptiveTrigger MinWindowWidth="1024" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource MediumTemplate}" />
+                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource Establishments_MediumTemplate}" />
+                        <Setter Target="PromotionsList.ItemTemplate" Value="{StaticResource Promotions_DesktopTemplate}" />
+                        <Setter Target="EventsList.ItemTemplate" Value="{StaticResource Events_DesktopTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -247,7 +406,9 @@
                         <AdaptiveTrigger MinWindowWidth="1500" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
+                        <Setter Target="listViewEstablishments.ItemTemplate" Value="{StaticResource Establishments_DesktopTemplate}" />
+                        <Setter Target="PromotionsList.ItemTemplate" Value="{StaticResource Promotions_DesktopTemplate}" />
+                        <Setter Target="EventsList.ItemTemplate" Value="{StaticResource Events_DesktopTemplate}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -306,9 +467,10 @@
             </ScrollViewer>
         </PivotItem>
         <PivotItem Header="Promotie">
-            <ListView x:Name="listViewEstablishmentsWithPromotions" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
+            <ListView x:Name="PromotionsList" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
+                        <Setter Property="MinHeight" Value="25" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate>
@@ -318,59 +480,13 @@
                         </Setter>
                     </Style>
                 </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-
-                        <StackPanel Padding="5">
-
-                            <ListView ItemsSource="{Binding Promotions}">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="MinHeight" Value="25" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate>
-                                                    <ContentPresenter/>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                                            <StackPanel Grid.Column="1" Padding="10">
-                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
-                                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Geldig van: "/>
-                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Is met kortingsbon:  "/>
-                                                    <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
-                                                    <Button Margin="10,-7,0,0" Visibility="{Binding IsDiscountCoupon}" Content="Print kortingsbon" Tag="{Binding Id}" Background="Transparent" Click="HyperlinkButton_ClickAsync"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </ListView>
-            
         </PivotItem>
         <PivotItem Header="Evenement">
-            <ListView x:Name="listViewEstablishmentsWithEvents" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
+            <ListView x:Name="EventsList" ItemsSource="{Binding Business.Establishments}" HorizontalAlignment="Left"  >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
+                        <Setter Property="MinHeight" Value="25" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate>
@@ -380,46 +496,6 @@
                         </Setter>
                     </Style>
                 </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-
-                        <StackPanel Padding="5">
-                            <ListView  ItemsSource="{Binding Events}">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="MinHeight" Value="25" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate>
-                                                    <ContentPresenter/>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
-                                            <StackPanel  Grid.Column="1" Padding="10">
-                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
-                                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Vindt plaats van: "/>
-                                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </ListView>
         </PivotItem>
     </Pivot>
