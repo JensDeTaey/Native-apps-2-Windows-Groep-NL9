@@ -38,6 +38,12 @@ Open the Nuget Package Manager Console and type this:
 Update-Database
 ```
 
+If the package manger doesn't recognize this command, run this command:
+
+```
+Install-Package EntityFramework
+
+
 If all goes correct, there shouldn't be any errors and the database is filled with some business and establishments to explore!
 
 (Don't forget to set the solution as startup project and select both frontend and backend to start up when starting the solution)
