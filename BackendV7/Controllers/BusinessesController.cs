@@ -235,6 +235,7 @@ namespace BackendV7.Controllers
         public IHttpActionResult GetSubscribedBusinesses()
         {
             var user = db.Users
+                .Where(u => u.UserName == User.Identity.Name)
                 .Include("Subscriptions.Business.Subscriptions")
                 .Include("Subscriptions.Business.Establishments.Events")
                 .Include("Subscriptions.Business.Establishments.Promotions")
