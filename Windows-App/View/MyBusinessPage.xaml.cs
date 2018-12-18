@@ -80,15 +80,7 @@ namespace Windows_App.View
             EndDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
             CouponSwitch.IsEnabled = isEnabled;
         }
-        private void SetPromotionFieldsEmpty()
-        {
-            PromotionName.Text = "";
-            PromotionDescription.Text = "";
-            PromotionPicture.Text = "";
-            //StartDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
-            //EndDatePromotionCalendarDatePicker.IsEnabled = isEnabled;
-            //CouponSwitch.IsEnabled = isEnabled;
-        }
+        
 
         private void SetEstablishmentFieldsEnabled(bool isEnabled)
         {
@@ -97,18 +89,24 @@ namespace Windows_App.View
             EstablishmentPhoneNumber.IsEnabled = isEnabled;
             EstablishmentEmail.IsEnabled = isEnabled;
             EstablishmentPicture.IsEnabled = isEnabled;
-            OpeningsHoursListView.IsEnabled = isEnabled;
-        }
-
-        private void SetEstablishmentFieldsEmpty()
-        {
-            EstablishmentName.Text = "";
-            EstablishmentAddress.Text = "";
-            EstablishmentPhoneNumber.Text = "";
-            EstablishmentEmail.Text = "";
-            EstablishmentPicture.Text = "";
+            EstablishmentMondayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentMondayClosingsHour.IsEnabled = IsEnabled;
+            EstablishmentTuesdayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentTuesdayClosingsHour.IsEnabled = IsEnabled;
+            EstablishmentWednesdayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentWednesdayClosingsHour.IsEnabled = IsEnabled;
+            EstablishmentThursdayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentThursdayClosingsHour.IsEnabled = IsEnabled;
+            EstablishmentFridayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentFridayClosingsHour.IsEnabled = IsEnabled;
+            EstablishmentSaturdayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentSaturdayClosingsHour.IsEnabled = IsEnabled;
+            EstablishmentSundayOpeningsHour.IsEnabled = IsEnabled;
+            EstablishmentSundayClosingsHour.IsEnabled = IsEnabled;
             //OpeningsHoursListView.IsEnabled = isEnabled;
         }
+
+       
 
         private void SetBusinessFieldsEnabled(bool isEnabled)
         {
@@ -152,9 +150,55 @@ namespace Windows_App.View
                 case 1:
                     //We are editing an establishment
                     List<OpeningHour> hours = new List<OpeningHour>();
-                    var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
-
-
+                    //var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
+                    OpeningHour maandag = new OpeningHour() {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Monday,
+                        OpeningsHour = EstablishmentMondayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentMondayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    OpeningHour dinsdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Tuesday,
+                        OpeningsHour = EstablishmentTuesdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentTuesdayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    OpeningHour woensdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Wednesday,
+                        OpeningsHour = EstablishmentWednesdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentWednesdayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    OpeningHour donderdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Thursday,
+                        OpeningsHour = EstablishmentThursdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentThursdayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    OpeningHour vrijdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Friday,
+                        OpeningsHour = EstablishmentFridayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentFridayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    OpeningHour zaterdag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Saturday,
+                        OpeningsHour = EstablishmentSaturdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentSaturdayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    OpeningHour zondag = new OpeningHour()
+                    {
+                        Day = DaysOfWeek.DaysOfWeekEnum.Sunday,
+                        OpeningsHour = EstablishmentSundayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
+                        ClosingsHour = EstablishmentSundayClosingsHour.SelectedTime.Value.ToString("HH:mm")
+                    };
+                    hours.Add(maandag);
+                    hours.Add(dinsdag);
+                    hours.Add(woensdag);
+                    hours.Add(donderdag);
+                    hours.Add(vrijdag);
+                    hours.Add(zaterdag);
+                    hours.Add(zondag);
                     Establishment establishment = new Establishment()
                     {
                         Name = EstablishmentName.Text,
@@ -162,8 +206,7 @@ namespace Windows_App.View
                         PhoneNumber = EstablishmentPhoneNumber.Text,
                         Email = EstablishmentEmail.Text,
                         Picture = EstablishmentPicture.Text,
-                        AllOpeningHours = new List<OpeningHour>()
-                        //TODO: opening hours
+                        AllOpeningHours = hours,
                     };
 
                     myBusinessViewModel.SaveEstablishment(establishment).ContinueWith(t=>
@@ -229,10 +272,10 @@ namespace Windows_App.View
                     //We are editing an event
                     Event @event = new Event()
                     {
-                        Name = PromotionName.Text,
-                        Description = PromotionDescription.Text,
-                        Picture = PromotionPicture.Text,
-                        StartDate = StartDatePromotionCalendarDatePicker.Date.Value,
+                        Name = EventName.Text,
+                        Description = EventDescription.Text,
+                        Picture = EventPicture.Text,
+                        StartDate = StartDateEventCalendarDatePicker.Date.Value,
                         EndDate = EndDateEventCalendarDatePicker.Date.Value,
                     };
 
@@ -248,6 +291,7 @@ namespace Windows_App.View
                             else
                             {
                                 //Request failed
+
                             }
                         }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
                     }
@@ -295,7 +339,7 @@ namespace Windows_App.View
                 //add an establishment
                 case 1:
                     SetEstablishmentFieldsEnabled(true);
-                    SetEstablishmentFieldsEmpty();
+                    
 
                     break;
                 //add a promotion
