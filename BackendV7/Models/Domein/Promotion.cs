@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BackendV7
 {
-   public class Promotion : Notification
+    public class Promotion : Notification
     {
         [Key]
         public int Id { get; set; }

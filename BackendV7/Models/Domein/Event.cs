@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BackendV7
 {
-   public class Event : Notification
+    public class Event : Notification
     {
         [Key]
         public int Id { get; set; }
