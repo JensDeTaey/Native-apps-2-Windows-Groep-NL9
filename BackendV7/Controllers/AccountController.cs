@@ -338,7 +338,7 @@ namespace BackendV7.Controllers
                 LastName = model.LastName,
                 UserName = model.Email,
                 Email = model.Email,
-                NotificationsClearedTime = DateTime.Now
+                NotificationsClearedTime = DateTime.Parse("01/01/1800")
             };
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
