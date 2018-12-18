@@ -28,7 +28,7 @@ namespace Windows_App.Model
         {
             get
             {
-                return String.Format("{0} - {1}", StartDate.ToString("MM/dd/yyyy"), EndDate.ToString("MM/dd/yyyy"));
+                return String.Format("{0} - {1}", StartDate.ToString("dd/MM/yyyy"), EndDate.ToString("dd/MM/yyyy"));
             }
         }
         public string NeedCoupon
