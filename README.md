@@ -42,7 +42,9 @@ If the package manger doesn't recognize this command, run this command:
 
 ```
 Install-Package EntityFramework
+```
 
+After that  you can run the 'Update-Database' Command again
 
 If all goes correct, there shouldn't be any errors and the database is filled with some business and establishments to explore!
 
