@@ -40,6 +40,8 @@ Update-Database
 
 If all goes correct, there shouldn't be any errors and the database is filled with some business and establishments to explore!
 
+(Don't forget to set the solution as startup project and select both frontend and backend to start up when starting the solution)
+
 
 ## Built With
 
