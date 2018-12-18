@@ -18,7 +18,7 @@
                     <ComboBox x:Name="CategoriesCombo" Header="Categorie"  Margin="0,24,0,0" Width="296" 
                     IsEnabled="False" />
                     <TextBox x:Name="BusinessLink" Text="{Binding Business.LinkWebsite}" IsEnabled="False" Margin="0,24,0,0"  MaxLength="150" MinWidth="400" HorizontalAlignment="Left" />
-                    <TextBox x:Name="BusinessPicture" Text="{Binding Business.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                    <TextBox x:Name="BusinessPicture" Text="{Binding Business.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="100" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                 </StackPanel>
             </PivotItem>
 
@@ -51,10 +51,10 @@
                         </ListView>
                         <StackPanel HorizontalAlignment="Center" Grid.Column="1">
                             <TextBox x:Name="EstablishmentName"  PlaceholderText="Naam van de vestiging" IsEnabled="False" Text="{Binding Establishment.Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
-                            <TextBox x:Name="EstablishmentAddress" PlaceholderText="Adres van de vestiging" IsEnabled="False" Text="{Binding Establishment.Address}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
-                            <TextBox x:Name="EstablishmentPhoneNumber" PlaceholderText="Telefoonnummer van de vestiging" IsEnabled="False" Text="{Binding Establishment.PhoneNumber}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
-                            <TextBox x:Name="EstablishmentEmail" PlaceholderText="Email van de vestiging" IsEnabled="False" Text="{Binding Establishment.Email}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
-                            <TextBox x:Name="EstablishmentPicture" PlaceholderText="Foto link voor de vestiging" IsEnabled="False" Text="{Binding Establishment.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
+                            <TextBox x:Name="EstablishmentAddress" PlaceholderText="Adres van de vestiging" IsEnabled="False" Text="{Binding Establishment.Address}" Margin="0,24,0,0"  Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
+                            <TextBox x:Name="EstablishmentPhoneNumber" PlaceholderText="Telefoonnummer van de vestiging" IsEnabled="False" Text="{Binding Establishment.PhoneNumber}" Margin="0,24,0,0" MaxLength="20" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
+                            <TextBox x:Name="EstablishmentEmail" PlaceholderText="Email van de vestiging" IsEnabled="False" Text="{Binding Establishment.Email}" Margin="0,24,0,0"  Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
+                            <TextBox x:Name="EstablishmentPicture" PlaceholderText="Foto link voor de vestiging" IsEnabled="False" Text="{Binding Establishment.Picture}" Margin="0,24,0,0" MaxLength="100" Width="400" HorizontalAlignment="Center" InputScope="EmailNameOrAddress"/>
                             <TextBlock Padding="0,24,0,10" Text="Openingsuren:"/>
 
                             <Grid>
@@ -221,7 +221,7 @@
                             <StackPanel>
                                 <TextBox x:Name="PromotionName" PlaceholderText="Naam promotie" IsEnabled="False" Text="{Binding Promotion.Name}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <TextBox x:Name="PromotionDescription" PlaceholderText="Beschrijving van de promotie" IsEnabled="False" Text="{Binding Promotion.Description}" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                <TextBox x:Name="PromotionPicture" PlaceholderText="Eventuele foto van een promotie" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="PromotionPicture" PlaceholderText="Eventuele foto van een promotie" IsEnabled="False" Text="{Binding Promotion.Picture}" Margin="0,24,0,0" MaxLength="100" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
                                     <CalendarDatePicker Margin="0,0,50,0" Date="{Binding Promotion.StartDate, Mode=TwoWay}" IsEnabled="False"  x:Name="StartDatePromotionCalendarDatePicker" Header="Start datum"/>
                                     <CalendarDatePicker Date="{Binding Promotion.EndDate, Mode=TwoWay}" IsEnabled="False" x:Name="EndDatePromotionCalendarDatePicker" Header="Eind datum"/>
@@ -292,7 +292,7 @@
                             <StackPanel>
                                 <TextBox x:Name="EventName" PlaceholderText="Naam voor een event" Text="{Binding Event.Name}" IsEnabled="False" Margin="0,24,0,0" MaxLength="40"  TextWrapping="Wrap" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <TextBox x:Name="EventDescription" PlaceholderText="Beschrijving voor een event" Text="{Binding Event.Description}" IsEnabled="False" Margin="0,24,0,0" TextWrapping="Wrap"  Width="400" Height="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                <TextBox x:Name="EventPicture" PlaceholderText="Foto link voor een event" Text="{Binding Event.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="60" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
+                                <TextBox x:Name="EventPicture" PlaceholderText="Foto link voor een event" Text="{Binding Event.Picture}" IsEnabled="False" Margin="0,24,0,0" MaxLength="100" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
                                 <StackPanel Margin="0,24,0,0" Orientation="Horizontal">
                                     <CalendarDatePicker  Margin="0,0,50,0" IsEnabled="False" Date="{Binding Event.StartDate, Mode=TwoWay}"  x:Name="StartDateEventCalendarDatePicker" Header="Start datum"/>
                                     <CalendarDatePicker Date="{Binding Event.EndDate, Mode=TwoWay}" IsEnabled="False" x:Name="EndDateEventCalendarDatePicker" Header="Eind datum"/>

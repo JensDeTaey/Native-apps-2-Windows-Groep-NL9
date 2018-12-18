@@ -26,6 +26,7 @@ namespace Windows_App
                  NavPageBusinessesControl,
                  NavPagePromotionsControl,
                  NavPageEventsContentControl,
+                 NavPageSubscribesContentControl,
                  NavRegister,
                  NavMyBusiness,
                  NavRegister,
@@ -48,6 +49,7 @@ namespace Windows_App
             NavRegister.Visibility = Visibility.Collapsed;
             NavLogin.Visibility = Visibility.Collapsed;
             NavLogout.Visibility = Visibility.Collapsed;
+            NavPageSubscribesContentControl.Visibility = Visibility.Collapsed;
 
             switch (authenticatedStatus)
             {
@@ -57,10 +59,12 @@ namespace Windows_App
                     break;
                 case AuthenticatedStatusEnum.LOGGEDIN:
                     NavLogout.Visibility = Visibility.Visible;
+                    NavPageSubscribesContentControl.Visibility = Visibility.Visible;
                     break;
                 case AuthenticatedStatusEnum.BUSINESSOWNER:
                     NavMyBusiness.Visibility = Visibility.Visible;
                     NavLogout.Visibility = Visibility.Visible;
+                    NavPageSubscribesContentControl.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -72,6 +76,7 @@ namespace Windows_App
         }
 
         //Collapse of the Navigation
+        
         private void NavCollapseButton_Click(object sender, RoutedEventArgs e)
         {
             PageSplitView.IsPaneOpen = !PageSplitView.IsPaneOpen;
@@ -95,6 +100,12 @@ namespace Windows_App
         private void NavPageEventsContentControl_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(typeof(EventsPage));
+            NavigationContentControlActivated(sender);
+        }
+
+        private void NavPageSubscribesContentControl_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(SubscribedBusinessesPage));
             NavigationContentControlActivated(sender);
         }
         #endregion

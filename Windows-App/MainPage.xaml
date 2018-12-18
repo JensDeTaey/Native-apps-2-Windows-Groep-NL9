@@ -155,6 +155,18 @@
                             <TextBlock Text="Evenementen"  VerticalAlignment="Center" Margin="10,0,0,0"/>
                         </StackPanel>
                     </Button>
+                    <Button x:Name="NavPageSubscribesContentControl" Style="{StaticResource NavigationButtonStyle}" Click="NavPageSubscribesContentControl_Click" >
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock
+                            FontFamily="Segoe MDL2 Assets"
+                            Text="&#xEB52;"
+                            Foreground="Red"
+                            Width="50"
+                            TextAlignment="Center" 
+                            VerticalAlignment="Center"/>
+                            <TextBlock Text="Geaboneerde bedrijven"  VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </Button>
 
                 </StackPanel>
                 <StackPanel x:Name="UserControlsStackpanel" Grid.Row="2" Orientation="Horizontal" >
