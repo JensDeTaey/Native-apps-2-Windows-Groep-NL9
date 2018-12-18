@@ -35,7 +35,8 @@ namespace Windows_App.View
         
         public RegisterPage()
         {
-          
+            this.InitializeComponent();
+
             CheckRequirements();
             UserSwitch_Toggled(null, null);
         }
@@ -126,6 +127,7 @@ namespace Windows_App.View
                 || (UserSwitch.IsOn && (
                     BusinessName.Text.Equals("")
                     || BusinessDescription.Text.Equals("")
+                    || BusinessCategorie.Text.Equals("")
                     || BusinessLink.Text.Equals("")
                     || BusinessPicture.Text.Equals(""))
                     )
