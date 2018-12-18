@@ -1,8 +1,9 @@
-﻿using Syncfusion.Pdf;
+﻿
+using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf.Parsing;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -28,6 +29,7 @@ using Windows_App.Data;
 using Windows_App.Model;
 using Windows_App.ViewModel;
 using static Windows_App.Model.PageLoadWithMultipleParameters;
+using Point = Windows.Foundation.Point;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -133,42 +135,11 @@ namespace Windows_App.View
         private async void Button_ClickAsync(object sender, RoutedEventArgs e)
         {
             //Creates an empty PDF document instance
-            PdfDocument document = new PdfDocument();
-
-            //Adding new page to the PDF document
-            PdfPage page = document.Pages.Add();
-
-            //Creates new PDF font
-            PdfStandardFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 12);
-
-            //Drawing text to the PDF document
-            page.Graphics.DrawString("Kortingsbon", font, PdfBrushes.Black, 10, 10);
-
-            //Create PDF graphics for the page
-
-            PdfGraphics graphics = page.Graphics;
-
+           
             //Load the image from the disk.
            
 
-            //PdfBitmap image = new PdfBitmap("qrcode.png");
-
-            //Draw the image
-
-            //graphics.DrawImage(image, 0, 0);
-
-            MemoryStream stream = new MemoryStream();
-            
-            //Saves the PDF document to stream
-            await document.SaveAsync(stream);
-
-            //Close the document
-
-            document.Close(true);
-
-            //Save the stream as PDF document file in local machine
-
-            Save(stream, "KortingsBon.pdf");
+           
         }
 
         async void Save(Stream stream, string filename)
@@ -200,7 +171,7 @@ namespace Windows_App.View
                 fileStream.Dispose();
             }
         }
-
+        
         private void ButtonSubscribe_Click(object sender, RoutedEventArgs e)
         {
 
@@ -220,6 +191,64 @@ namespace Windows_App.View
            }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
             
         }
+        private async void HyperlinkButton_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            //Create a new PDF document.
+            PdfDocument document = new PdfDocument();
+            //Add a page to the document.
+            PdfPage page = document.Pages.Add();
+            //Create PDF graphics for the page.
+            PdfGraphics graphics = page.Graphics;
+            //Set the standard font.
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
+            //Draw the text.
+            Promotion promotion = viewModel.getPromotion(((Button)sender).Tag);
+            graphics.DrawString("Kortingsbon te gebruiken bij volgende bezoek voor promotie: " + "\n" + promotion.Name + "\n" + promotion.Description, font, PdfBrushes.Black, new PointF(0, 0));
+
+
+            //Save the PDF document to stream.
+            MemoryStream stream = new MemoryStream();
+            await document.SaveAsync(stream);
+            //Close the document.
+
+            //Save the stream as PDF document file in local machine. Refer to PDF/UWP section for respected code samples.
+
+            document.Close(true);
+
+            SavePdf(stream, "KortingsBon.pdf");
+        }
+
+        public async void SavePdf(Stream stream, string filename)
+        {
+
+            stream.Position = 0;
+
+            StorageFile stFile;
+            if (!(Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")))
+            {
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.DefaultFileExtension = ".pdf";
+                savePicker.SuggestedFileName = "Kortingsbon";
+                savePicker.FileTypeChoices.Add("Adobe PDF Document", new List<string>() { ".pdf" });
+                stFile = await savePicker.PickSaveFileAsync();
+            }
+            else
+            {
+                StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+                stFile = await local.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            }
+            if (stFile != null)
+            {
+                Windows.Storage.Streams.IRandomAccessStream fileStream = await stFile.OpenAsync(FileAccessMode.ReadWrite);
+                Stream st = fileStream.AsStreamForWrite();
+                st.Write((stream as MemoryStream).ToArray(), 0, (int)stream.Length);
+                st.Flush();
+                st.Dispose();
+                fileStream.Dispose();
+            }
+        }
+
+    
 
         private void ShowRightSubscriptionRate()
         {

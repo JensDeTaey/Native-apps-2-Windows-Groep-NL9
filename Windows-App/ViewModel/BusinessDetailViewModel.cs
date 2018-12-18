@@ -77,6 +77,14 @@ namespace Windows_App.ViewModel
             PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Business"));
         }
 
+        public Promotion getPromotion(object tag)
+        {
+            return (from sublist in Business.Establishments
+                         from item in sublist.Promotions
+                         where item.Id == (int)tag
+                         select item).FirstOrDefault();
+        }
+
     }
 }
 

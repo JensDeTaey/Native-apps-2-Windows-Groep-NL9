@@ -2,8 +2,10 @@
 using Syncfusion.Pdf.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,11 +35,13 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class PromotionsPage : Page
     {
+        private PromotionsViewModel viewModel;
         public PromotionsPage()
         {
+           
             this.InitializeComponent();
-
-            this.DataContext = new PromotionsViewModel();
+            viewModel = new PromotionsViewModel();
+            this.DataContext = viewModel;
 
             (this.DataContext as PromotionsViewModel).LoadData().ContinueWith( t =>
             {
@@ -59,42 +63,27 @@ namespace Windows_App.View
 
         private async void HyperlinkButton_ClickAsync(object sender, RoutedEventArgs e)
         {
-            //Creates an empty PDF document instance
+            //Create a new PDF document.
             PdfDocument document = new PdfDocument();
-
-            //Adding new page to the PDF document
+            //Add a page to the document.
             PdfPage page = document.Pages.Add();
-
-            //Creates new PDF font
-            PdfStandardFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 12);
-
-            //Drawing text to the PDF document
-            page.Graphics.DrawString("Kortingsbon", font, PdfBrushes.Black, 10, 10);
-
-            //Create PDF graphics for the page
-
+            //Create PDF graphics for the page.
             PdfGraphics graphics = page.Graphics;
+            //Set the standard font.
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 14);
+            //Draw the text.
+            Promotion promotion = viewModel.getPromotion(((Button)sender).Tag);
+            graphics.DrawString("Kortingsbon te gebruiken bij volgende bezoek voor promotie: " + "\n" + promotion.Name + "\n" + promotion.Description, font, PdfBrushes.Black, new PointF(0, 0));
 
-            //Load the image from the disk.
-            MemoryStream stream1 = new MemoryStream();
-           // stream1.AsInputStream()
 
-           // PdfBitmap image = new PdfBitmap("efzefezfzf");
-
-            //Draw the image
-
-            //graphics.DrawImage(image, 0, 0);
-
+            //Save the PDF document to stream.
             MemoryStream stream = new MemoryStream();
-            
-            //Saves the PDF document to stream
             await document.SaveAsync(stream);
-
-            //Close the document
-
+            //Close the document.
+            
+            //Save the stream as PDF document file in local machine. Refer to PDF/UWP section for respected code samples.
+            
             document.Close(true);
-
-            //Save the stream as PDF document file in local machine
 
             Save(stream, "KortingsBon.pdf");   
     }
