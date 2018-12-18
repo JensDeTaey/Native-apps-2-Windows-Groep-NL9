@@ -9,6 +9,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <DataTemplate x:Key="SmallScreenTemplate">
             <StackPanel Padding="10">
                 <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" MaxWidth="350" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
@@ -50,6 +51,10 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ListViewEvents.ItemTemplate" Value="{StaticResource SmallScreenTemplate}" />
+                        <Setter Target="ScreenListModifiers.Orientation" Value="Vertical" />
+                        <Setter Target="ScreenListModifiers.Margin" Value="20,8,20,20" />
+                        <Setter Target="ListFilterModifier.Margin" Value="0,0,0,0" />
+                        <Setter Target="ListOrderModifier.Margin" Value="3,5,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Desktop">
@@ -58,14 +63,38 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ListViewEvents.ItemTemplate" Value="{StaticResource DesktopTemplate}" />
+                        <Setter Target="ScreenListModifiers.Orientation" Value="Horizontal" />
+                        <Setter Target="ScreenListModifiers.Margin" Value="20,8,20,20" />
+                        <Setter Target="ListFilterModifier.Width" Value="300" />
+                        <Setter Target="ListFilterModifier.Margin" Value="0,23,30,0" />
+                        <Setter Target="ListOrderModifier.Margin" Value="0,0,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="ListViewEvents" ItemsSource="{Binding Events}" IsItemClickEnabled="True" ItemClick="ListViewEvents_ItemClick" >
-        </ListView>
+        <!--List Modifiers-->
+        <StackPanel x:Name="ScreenListModifiers">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="400"/>
+                </Grid.ColumnDefinitions>
+                <AutoSuggestBox x:Name="ListFilterModifier" PlaceholderText="Zoeken op naam of beschrijving" QueryIcon="Find" QuerySubmitted="ListFilterModifier_QuerySubmitted"/>
+            </Grid>
+            <ComboBox x:Name="ListOrderModifier" SelectedValuePath="Content"  Header="Sorteren" Width="200" SelectionChanged="ListOrderModifier_SelectionChanged">
+                <ComboBoxItem IsSelected="True">Startdatum vroege eerst</ComboBoxItem>
+                <ComboBoxItem>Startdatum late eerst</ComboBoxItem>
+                <ComboBoxItem>Einddatum vroege eerst</ComboBoxItem>
+                <ComboBoxItem>Einddatum late eerst</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <!--+++++++++++++++++-->
+        <TextBlock Grid.Row="1" Text="Er zijn geen ondernemingen gevonden" Margin="20,0,20,5" Visibility="{Binding HasNoItems, Mode=TwoWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <ListView Grid.Row="2" x:Name="ListViewEvents" ItemsSource="{Binding Events}" Margin="20,0,0,0" IsItemClickEnabled="True" ItemClick="ListViewEvents_ItemClick"/>
+
     </Grid>
 </Page>
