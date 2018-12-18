@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="Windows_App.View.NotificationsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Windows_App.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <StackPanel>
+            <CollectionViewSource x:Name="ContactsCVS" IsSourceGrouped="True"/>
+
+            <ListView ItemsSource="{x:Bind Contacts}"/>
+            <ListView.ItemsPanel/>
+            <ItemsPanelTemplate/>
+            <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
+            <ItemsPanelTemplate />
+            <ListView.ItemsPanel/>
+            <ListView/>
+        </StackPanel>
+    </Page.Resources>
+
+</Page>

@@ -160,50 +160,50 @@ namespace Windows_App.View
                     //var source = OpeningsHoursListView.ItemsSource as List<OpeningHour>;
                     OpeningHour maandag = new OpeningHour() {
                         Day = DaysOfWeek.DaysOfWeekEnum.Monday,
-                        OpeningsHour = EstablishmentMondayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentMondayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentMondayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentMondayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentMondayIsClosed.IsChecked.Value
                     };
                     OpeningHour dinsdag = new OpeningHour()
                     {
                         Day = DaysOfWeek.DaysOfWeekEnum.Tuesday,
-                        OpeningsHour = EstablishmentTuesdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentTuesdayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentTuesdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentTuesdayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentTuesdayIsClosed.IsChecked.Value
                     };
                     OpeningHour woensdag = new OpeningHour()
                     {
                         Day = DaysOfWeek.DaysOfWeekEnum.Wednesday,
-                        OpeningsHour = EstablishmentWednesdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentWednesdayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentWednesdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentWednesdayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentWednesdayIsClosed.IsChecked.Value
                     };
                     OpeningHour donderdag = new OpeningHour()
                     {
                         Day = DaysOfWeek.DaysOfWeekEnum.Thursday,
-                        OpeningsHour = EstablishmentThursdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentThursdayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentThursdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentThursdayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentThursdayIsClosed.IsChecked.Value
                     };
                     OpeningHour vrijdag = new OpeningHour()
                     {
                         Day = DaysOfWeek.DaysOfWeekEnum.Friday,
-                        OpeningsHour = EstablishmentFridayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentFridayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentFridayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentFridayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentFridayIsClosed.IsChecked.Value
                     };
                     OpeningHour zaterdag = new OpeningHour()
                     {
                         Day = DaysOfWeek.DaysOfWeekEnum.Saturday,
-                        OpeningsHour = EstablishmentSaturdayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentSaturdayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentSaturdayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentSaturdayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentSaturdayIsClosed.IsChecked.Value
                     };
                     OpeningHour zondag = new OpeningHour()
                     {
                         Day = DaysOfWeek.DaysOfWeekEnum.Sunday,
-                        OpeningsHour = EstablishmentSundayOpeningsHour.SelectedTime.Value.ToString("HH:mm"),
-                        ClosingsHour = EstablishmentSundayClosingsHour.SelectedTime.Value.ToString("HH:mm"),
+                        OpeningsHour = EstablishmentSundayOpeningsHour.Time.ToString(),
+                        ClosingsHour = EstablishmentSundayClosingsHour.Time.ToString(),
                         IsClosed = EstablishmentSundayIsClosed.IsChecked.Value
                     };
                     hours.Add(maandag);
