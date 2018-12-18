@@ -135,7 +135,7 @@ namespace Windows_App.View
                         Name = BusinessName.Text,
                         Description = BusinessDescription.Text,
                         Picture = BusinessPicture.Text,
-                        Category = "haha yes", //Todo
+                        Category = BusinessCategory.Text,
                         LinkWebsite = BusinessLink.Text,
 
                     };
