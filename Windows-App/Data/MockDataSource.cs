@@ -69,7 +69,9 @@ namespace Windows_App.Data
 
         public override Task<ObservableCollection<Business>> FetchSubscribedBusinesses()
         {
-            throw new NotImplementedException();
+            return Task<ObservableCollection<Business>>.Factory.StartNew(() => {
+                return new ObservableCollection<Business>(DummyDataSource.Businesses);
+            });
         }
         #endregion
 

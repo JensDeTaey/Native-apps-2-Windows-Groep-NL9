@@ -38,7 +38,7 @@
 
     </Page.Resources>
 
-    <Grid>
+    <Pivot Title="Geabonneerde bedrijven info">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Small">
@@ -59,9 +59,92 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <ListView x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}" IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick" />
-    </Grid>
+        <PivotItem Header="Bedrijven">
+            <ScrollViewer>
+            <StackPanel>
+                <ListView Grid.Row="0" Grid.Column="0" x:Name="ListViewBusinesses" ItemsSource="{Binding Businesses}" IsItemClickEnabled="True" ItemClick="ListViewBusinesses_ItemClick" />
+            </StackPanel>
+            </ScrollViewer>
+
+        </PivotItem>
+        <PivotItem Header="Promoties">
+            <ListView ItemsSource="{Binding Promotions}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                            <StackPanel Grid.Column="1" Padding="10">
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Geldig van: "/>
+                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Is met kortingsbon:  "/>
+                                    <TextBlock Text="{Binding NeedCoupon}" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </PivotItem>
+        <PivotItem Header="Evenementen">
+            <ListView ItemsSource="{Binding Events}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Picture}" HorizontalAlignment="Left" Width="300" Margin="10,10,10,10" VerticalAlignment="Top"  RenderTransformOrigin="0.188,0.488"/>
+                            <StackPanel  Grid.Column="1" Padding="10">
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Vindt plaats van: "/>
+                                    <TextBlock Text="{Binding TimeValid}" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+                
+            
+        </PivotItem>
+        
+    </Pivot>
+
+
+   
 </Page>
