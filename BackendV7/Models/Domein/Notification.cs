@@ -7,6 +7,7 @@ using System.Web;
 
 namespace BackendV7.Models.Domein
 {
+ 
     public abstract class Notification
     {
         public abstract string GetTitle();
@@ -14,6 +15,7 @@ namespace BackendV7.Models.Domein
         public abstract int GetEstablishmentId();
         public abstract int GetBusinessId();
         public abstract string GetAddedByBusinessName();
+        public abstract string GetEstablishmentName();
         public abstract string GetNotificationType();
         public abstract DateTime GetCreatedTime();
 
@@ -47,6 +49,12 @@ namespace BackendV7.Models.Domein
             }
         }
 
+        public string NotificationEstablishmentName {
+            get {
+                return GetEstablishmentName();
+            }
+        }
+
         public string NotificationType {
             get {
                 return GetNotificationType();
@@ -58,6 +66,9 @@ namespace BackendV7.Models.Domein
                 return GetCreatedTime();
             }
         }
+
+        [NotMapped]
+        public bool IsSeen { get; set; } = false;
 
 
     }

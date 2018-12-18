@@ -71,6 +71,11 @@ namespace BackendV7
             return Name;
         }
 
+        public override string GetEstablishmentName()
+        {
+            return Establishment == null ? "" : Establishment.Name;
+        }
+
 
     }
 

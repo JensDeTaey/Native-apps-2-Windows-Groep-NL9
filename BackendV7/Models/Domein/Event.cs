@@ -63,6 +63,11 @@ namespace BackendV7
             return Establishment == null ? -1 : Establishment.Id;
         }
 
+        public override string GetEstablishmentName()
+        {
+            return Establishment == null ? "" : Establishment.Name;
+        }
+
         public override string GetNotificationType()
         {
             return "EVENT";

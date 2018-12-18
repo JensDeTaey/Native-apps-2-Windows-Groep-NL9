@@ -92,7 +92,7 @@ namespace Windows_App
 
         public async override Task<bool> ClearNotifications()
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Delete, new Uri(BaseUrl + "Account/ClearNotifications"));
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, new Uri(BaseUrl + "Account/ClearNotifications"));
             var response = await HttpClient.SendAsync(requestMessage);
             return response.StatusCode == System.Net.HttpStatusCode.OK;
         }

@@ -173,7 +173,8 @@ namespace BackendV7.Controllers
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
                     PictureURL = model.Picture,
-                    EstablishmentId = establishment.Id
+                    EstablishmentId = establishment.Id,
+                    Created = DateTime.Now
                 };
                 db.Events.Add(createdEvent);
                 db.SaveChanges();
@@ -226,7 +227,8 @@ namespace BackendV7.Controllers
                     EndDate = model.EndDate,
                     PictureURL = model.Picture,
                     EstablishmentId = establishment.Id,
-                    IsDiscountCoupon = model.IsDiscountCoupon
+                    IsDiscountCoupon = model.IsDiscountCoupon,
+                    Created = DateTime.Now
                 };
                 db.Promotions.Add(createdPromotion);
                 db.SaveChanges();
