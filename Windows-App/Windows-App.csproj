@@ -123,6 +123,7 @@
     <Compile Include="ViewModel\BusinessesViewModel.cs" />
     <Compile Include="ViewModel\EventsViewModel.cs" />
     <Compile Include="ViewModel\MyBusinessViewModel.cs" />
+    <Compile Include="ViewModel\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\PromotionsViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\SubsribedBusinessesViewModel.cs" />
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="View\MyBusinessPage.xaml.cs">
       <DependentUpon>MyBusinessPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NotificationsPage.xaml.cs">
+      <DependentUpon>NotificationsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PromotionsPage.xaml.cs">
       <DependentUpon>PromotionsPage.xaml</DependentUpon>
@@ -197,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MyBusinessPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NotificationsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

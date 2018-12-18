@@ -50,6 +50,7 @@ namespace Windows_App
             NavLogin.Visibility = Visibility.Collapsed;
             NavLogout.Visibility = Visibility.Collapsed;
             NavPageSubscribesContentControl.Visibility = Visibility.Collapsed;
+            NavNotifications.Visibility = Visibility.Collapsed;
 
             switch (authenticatedStatus)
             {
@@ -60,11 +61,13 @@ namespace Windows_App
                 case AuthenticatedStatusEnum.LOGGEDIN:
                     NavLogout.Visibility = Visibility.Visible;
                     NavPageSubscribesContentControl.Visibility = Visibility.Visible;
+                    NavNotifications.Visibility = Visibility.Visible;
                     break;
                 case AuthenticatedStatusEnum.BUSINESSOWNER:
                     NavMyBusiness.Visibility = Visibility.Visible;
                     NavLogout.Visibility = Visibility.Visible;
                     NavPageSubscribesContentControl.Visibility = Visibility.Visible;
+                    NavNotifications.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
@@ -130,6 +133,10 @@ namespace Windows_App
         {
             AuthenticationHandler.Instance.LogOut();
         }
+        private void NavNotifications_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(NotificationsPage));
+        }
         #endregion
 
 
@@ -168,5 +175,7 @@ namespace Windows_App
             }
         }
         #endregion
+
+        
     }
 }

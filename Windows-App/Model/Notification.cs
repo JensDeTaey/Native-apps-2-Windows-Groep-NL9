@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Windows_App.Model
 {
-    class Notification
+    public class Notification
     {
         public string NotifcationTitle { get; set; }
 
@@ -18,11 +18,45 @@ namespace Windows_App.Model
 
         public string NotificationBusinessName { get; set; }
 
+        public string NotificationEstablishmentName { get; set; }
+
         public string NotificationType { get; set; }
 
         public DateTime NotificationCreatedTime { get; set; }
 
         public string Picture { get; set; }
+
+        public bool IsSeen { get; set; }
+
+
+        public string FirstLine {
+            get {
+                string prefix = "";
+                switch(NotificationType)
+                {
+                    case "EVENT":
+                        prefix = "Nieuw event: ";
+                        break;
+                    case "PROMOTION":
+                        prefix = "Nieuwe promotie: ";
+                        break;
+                }
+               
+                return prefix + NotifcationTitle;
+            }
+        }
+
+        public string SecondLine {
+            get {
+                return NotificationDescription;
+            }
+        }
+
+        public string ThirdLine {
+            get {
+                return NotificationCreatedTime.ToString() + " - " + NotificationBusinessName + " - " + NotificationEstablishmentName;
+            }
+        }
 
     }
 }

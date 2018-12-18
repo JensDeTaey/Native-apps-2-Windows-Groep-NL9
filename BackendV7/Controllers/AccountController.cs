@@ -416,8 +416,13 @@ namespace BackendV7.Controllers
                 notifications.AddRange(promotions);
                 notifications.AddRange(events);
 
+                notifications.ForEach(n =>
+                {
+                    if (n.NotificationCreatedTime < user.NotificationsClearedTime)
+                        n.IsSeen = true;
+                });
 
-                return Ok(notifications.Where(n => n.NotificationCreatedTime > user.NotificationsClearedTime).OrderBy(n => n.NotificationCreatedTime));
+                return Ok(notifications.OrderBy(n => n.NotificationCreatedTime).Reverse());
             }
             catch (Exception e)
             {
