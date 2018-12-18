@@ -89,28 +89,27 @@ namespace Windows_App.View
             EstablishmentPhoneNumber.IsEnabled = isEnabled;
             EstablishmentEmail.IsEnabled = isEnabled;
             EstablishmentPicture.IsEnabled = isEnabled;
-            EstablishmentMondayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentMondayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentTuesdayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentTuesdayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentWednesdayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentWednesdayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentThursdayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentThursdayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentFridayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentFridayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentSaturdayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentSaturdayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentSundayOpeningsHour.IsEnabled = IsEnabled;
-            EstablishmentSundayClosingsHour.IsEnabled = IsEnabled;
-            EstablishmentMondayIsClosed.IsEnabled = IsEnabled;
-            EstablishmentTuesdayIsClosed.IsEnabled = IsEnabled;
-            EstablishmentWednesdayIsClosed.IsEnabled = IsEnabled;
-            EstablishmentThursdayIsClosed.IsEnabled = IsEnabled;
-            EstablishmentFridayIsClosed.IsEnabled = IsEnabled;
-            EstablishmentSaturdayIsClosed.IsEnabled = IsEnabled;
-            EstablishmentSundayIsClosed.IsEnabled = IsEnabled;
-            //OpeningsHoursListView.IsEnabled = isEnabled;
+            EstablishmentMondayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentMondayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentTuesdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentTuesdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentWednesdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentWednesdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentThursdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentThursdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentFridayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentFridayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentSaturdayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentSaturdayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentSundayOpeningsHour.IsEnabled = isEnabled;
+            EstablishmentSundayClosingsHour.IsEnabled = isEnabled;
+            EstablishmentMondayIsClosed.IsEnabled = isEnabled;
+            EstablishmentTuesdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentWednesdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentThursdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentFridayIsClosed.IsEnabled = isEnabled;
+            EstablishmentSaturdayIsClosed.IsEnabled = isEnabled;
+            EstablishmentSundayIsClosed.IsEnabled = isEnabled;
         }
 
        
@@ -223,19 +222,40 @@ namespace Windows_App.View
                         AllOpeningHours = hours.Where(hour => !hour.IsClosed).ToList<OpeningHour>()
                     };
 
-                    myBusinessViewModel.SaveEstablishment(establishment).ContinueWith(t=>
+                    if(myBusinessViewModel.Establishment == null)
                     {
-                        if (t.Result)
+                        myBusinessViewModel.AddEstablishment(establishment).ContinueWith(t =>
                         {
-                            //Request was succes
-                            SetEstablishmentFieldsEnabled(false);
-                        }
-                        else
-                        {
-                            //Request failed
-                        }
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetEstablishmentFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
 
-                    }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+                    else
+                    {
+                        myBusinessViewModel.SaveEstablishment(establishment).ContinueWith(t =>
+                        {
+                            if (t.Result)
+                            {
+                                //Request was succes
+                                SetEstablishmentFieldsEnabled(false);
+                            }
+                            else
+                            {
+                                //Request failed
+                            }
+
+                        }, CancellationToken.None, TaskContinuationOptions.None, TaskScheduler.FromCurrentSynchronizationContext());
+                    }
+
+                   
                     break;
                 case 2:
                     
@@ -353,7 +373,10 @@ namespace Windows_App.View
                 //add an establishment
                 case 1:
                     SetEstablishmentFieldsEnabled(true);
-                    
+                    myBusinessViewModel.Establishment = null;
+                    myBusinessViewModel.TriggerEstablishmentUpdate();
+                   
+
 
                     break;
                 //add a promotion
