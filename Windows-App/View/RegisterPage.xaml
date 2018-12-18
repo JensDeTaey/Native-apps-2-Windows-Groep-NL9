@@ -9,8 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <ScrollViewer>
-    <StackPanel HorizontalAlignment="Center">
-        <TextBlock Text="Registreer" Style="{StaticResource TitleTextBlockStyle}"/>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Registreer" Style="{StaticResource TitleTextBlockStyle}"/>
             <TextBox x:Name="LastName" TextChanged="TextChanged" Header= "Achternaam" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
             <TextBox x:Name="FirstName" TextChanged="TextChanged" Header= "Voornaam" Margin="0,24,0,0" MaxLength="40" MinWidth="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
             <TextBox x:Name="EmailAdress" TextChanged="TextChanged" Header= "E-mailadres" Margin="0,24,0,0" MaxLength="40" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
@@ -21,38 +21,13 @@
             <TextBox x:Name="BusinessName" TextChanged="TextChanged" Header="Bedrijfsnaam"  Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
             <TextBox x:Name="BusinessDescription"  TextChanged="TextChanged" Margin="0,24,0,0" Header="Geef een beschrijving van je bedrijf" MaxLength="150" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
             <TextBox x:Name="BusinessCategorie"  TextChanged="TextChanged" Margin="0,24,0,0" Header="Geef een Categorie van je bedrijf" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress" />
-           
+
             <TextBox x:Name="BusinessLink" Margin="0,24,0,0" Header="Link naar de website van je bedrijf" Width="400" HorizontalAlignment="Left" />
             <TextBox x:Name="BusinessPicture" TextChanged="TextChanged" Header= "Link naar logo" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
                 <Button x:Name="RegistreerButton" Content="Registreer" Margin="0,24" Click="Registreer_Click" />
             </StackPanel>
-    </StackPanel>
+        </StackPanel>
     </ScrollViewer>
-
-    <!--ScrollViewer>
-    <Pivot x:Name="PivotRegistreer"   Title="Registreer" >
-
-
-
-        <PivotItem Header="Bedrijfsgegevens">
-            
-
-        </PivotItem>
-
-        <PivotItem Header="Vestiging toevoegen">
-            
-        </PivotItem>
-        <Pivot.RightHeader>
-            <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
-                
-                
-                <AppBarButton Icon="Delete"/>
-                <AppBarSeparator/>
-                <AppBarButton Icon="Save"/>
-            </CommandBar>
-        </Pivot.RightHeader>
-    </Pivot>
-    </-->
 
 </Page>

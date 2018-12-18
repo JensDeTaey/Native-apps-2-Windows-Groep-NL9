@@ -121,41 +121,6 @@
                                 <TimePicker ClockIdentifier="24HourClock"  Grid.Column="3" Grid.Row="7" IsEnabled="False" x:Name="EstablishmentSundayClosingsHour"  Time="{Binding Establishment.AllOpeningHours[6].ClosingsHour}" Margin="10,0,10,10"/>
                                 <CheckBox x:Name="EstablishmentSundayIsClosed" Grid.Column="4" Grid.Row="7" IsChecked="{Binding Establishment.AllOpeningHours[6].IsClosed}" IsEnabled="False" Content="Gesloten"/>
                             </Grid>
-
-
-                            <!--ListView x:Name="OpeningsHoursListView" IsEnabled="False" ItemsSource="{Binding Establishment.AllOpeningHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <ListView.ItemContainerStyle>
-                                    <Style TargetType="ListViewItem">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate>
-                                                    <ContentPresenter/>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="75"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="auto"/>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Grid.Column="0" x:Name="EstablishmentDay" Text="{Binding Day}" Margin="0,0,0,0" Width="auto" />
-                                            <TextBox  Grid.Column="1" x:Name="EstablishmentOpeningsHour"  Text="{Binding OpeningsHour}" Margin="10,0,10,0" MaxLength="40" Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                            <TextBlock Grid.Column="2" Text="-"/>
-                                            <TextBox  Grid.Column="3" x:Name="EstablishmentClosingsHour"  Text="{Binding ClosingsHour}" Margin="10,0,10,0" MaxLength="40"  Width="auto" HorizontalAlignment="Left" InputScope="EmailNameOrAddress"/>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </-->
                         </StackPanel>
                     </Grid>
                 </StackPanel>
