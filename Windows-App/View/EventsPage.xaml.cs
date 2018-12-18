@@ -26,10 +26,12 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class EventsPage : Page
     {
+        private EventsViewModel eventsViewModel;
         public EventsPage()
         {
+            eventsViewModel = new EventsViewModel();
+            DataContext = eventsViewModel;
             this.InitializeComponent();
-            DataContext = new EventsViewModel();
         }
 
         private void ListViewEvents_ItemClick(object sender, ItemClickEventArgs e)
@@ -41,6 +43,34 @@ namespace Windows_App.View
                 Pivot = PivotOptions.EVENT
             };
             Frame.Navigate(typeof(BusinessDetailPage), payload, new DrillInNavigationTransitionInfo());
+        }
+
+        private void ListOrderModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboboxSender = (ComboBox)sender;
+            ComboBoxItem comboboxItemSender = (ComboBoxItem)comboboxSender.SelectedItem;
+            switch (comboboxItemSender.Content.ToString())
+            {
+                case "Startdatum vroege eerst":
+                    eventsViewModel.SortEventsByStartDate(false);
+                    break;
+                case "Startdatum late eerst":
+                    eventsViewModel.SortEventsByStartDate(true);
+                    break;
+                case "Einddatum vroege eerst":
+                    eventsViewModel.SortEventsByEndDate(false);
+                    break;
+                case "Einddatum late eerst":
+                    eventsViewModel.SortEventsByEndDate(true);
+                    break;
+                default:
+                    throw new Exception($"{comboboxItemSender.Content.ToString()} not defined in ListOrderModifier");
+            }
+        }
+
+        private void ListFilterModifier_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+           eventsViewModel.FilterEvents(args.QueryText);
         }
     }
 }

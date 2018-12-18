@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,14 +28,15 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class BusinessesPage : Page
     {
+        private BusinessesViewModel businessViewModel;
         public BusinessesPage()
         {
+            businessViewModel = new BusinessesViewModel();
+            this.DataContext = businessViewModel;
             this.InitializeComponent();
-            this.DataContext = new BusinessesViewModel();
-            
         }
 
-        private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
+    private void ListViewBusinesses_ItemClick(object sender, ItemClickEventArgs e)
         {
             Business selectedBusiness= e.ClickedItem as Business;
             PageLoadWithMultipleParameters pageLoad = new PageLoadWithMultipleParameters
@@ -44,5 +46,29 @@ namespace Windows_App.View
             };
             Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
+
+        private void ListOrderModifier_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboboxSender = (ComboBox)sender;
+            ComboBoxItem comboboxItemSender = (ComboBoxItem)comboboxSender.SelectedItem;
+            switch (comboboxItemSender.Content.ToString())
+            {
+                case "Aantal volgers aflopend":
+                    businessViewModel.SortBusinessesBySubscribers(false);
+                    break;
+                case "Aantal volgers oplopend":
+                    businessViewModel.SortBusinessesBySubscribers(true);
+                    break;
+                default:
+                    throw new Exception($"{comboboxItemSender.Content.ToString()} not defined in ListOrderModifier");
+            }
+           
+        }
+
+        private void ListFilterModifier_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            businessViewModel.FilterBusinesses(args.QueryText);
+        }
     }
+
 }
