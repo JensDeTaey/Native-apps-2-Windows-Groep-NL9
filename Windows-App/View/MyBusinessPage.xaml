@@ -44,7 +44,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Grid.Column="0">
-                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click" Background="Black" />
+                                        <Button Width="150" Tag="{Binding Id}" Content="{Binding Name}"  Click="Establishment_click"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

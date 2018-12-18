@@ -32,17 +32,10 @@ namespace Windows_App.View
     /// </summary>
     public sealed partial class RegisterPage : Page
     {
-        ObservableCollection<string> Categories = new ObservableCollection<string>();
+        
         public RegisterPage()
         {
-            this.InitializeComponent();
-            Categories.Add("Interieur");
-            Categories.Add("Kledingzaak");
-            Categories.Add("Eten");
-            Categories.Add("Meubels");
-            Categories.Add("Supermarkt");
-            Categories.Add("Alleszaak");
-
+          
             CheckRequirements();
             UserSwitch_Toggled(null, null);
         }
@@ -59,7 +52,7 @@ namespace Windows_App.View
                 IsBusinessAccount = UserSwitch.IsOn,
                 BusinessName = BusinessName.Text,
                 Description = BusinessDescription.Text,
-                Category = CategoriesCombo.SelectedValue == null?"": CategoriesCombo.SelectedValue.ToString(),
+                Category = BusinessCategorie.Text,
                 LinkWebsite = BusinessLink.Text,
                 Picture = BusinessPicture.Text
             };
@@ -92,7 +85,7 @@ namespace Windows_App.View
             UserSwitch.IsEnabled = v;
             BusinessName.IsEnabled = v;
             BusinessDescription.IsEnabled = v;
-            CategoriesCombo.IsEnabled = v;
+            BusinessCategorie.IsEnabled = v;
             BusinessLink.IsEnabled = v;
             BusinessPicture.IsEnabled = v;
 
@@ -106,7 +99,7 @@ namespace Windows_App.View
             {
                 BusinessName.Visibility = Visibility.Collapsed;
                 BusinessDescription.Visibility = Visibility.Collapsed;
-                CategoriesCombo.Visibility = Visibility.Collapsed;
+                BusinessCategorie.Visibility = Visibility.Collapsed;
                 BusinessLink.Visibility = Visibility.Collapsed;
                 BusinessPicture.Visibility = Visibility.Collapsed;
             }
@@ -114,7 +107,7 @@ namespace Windows_App.View
             {
                 BusinessName.Visibility = Visibility.Visible;
                 BusinessDescription.Visibility = Visibility.Visible;
-                CategoriesCombo.Visibility = Visibility.Visible;
+                BusinessCategorie.Visibility = Visibility.Visible;
                 BusinessLink.Visibility = Visibility.Visible;
                 BusinessPicture.Visibility = Visibility.Visible;
             }
