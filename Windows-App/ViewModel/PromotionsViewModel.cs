@@ -16,7 +16,12 @@ namespace Windows_App.ViewModel
         public ObservableCollection<Promotion> Promotions { get; set; }
         public PromotionsViewModel()
         {
-            IDataSource.singleton.FetchPromotions().ContinueWith(t =>
+            
+        }
+
+        public Task LoadData()
+        {
+            return IDataSource.singleton.FetchPromotions().ContinueWith(t =>
             {
                 this.Promotions = t.Result;
                 PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Promotions"));
