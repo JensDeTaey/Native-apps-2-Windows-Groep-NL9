@@ -32,19 +32,23 @@ If you would like to use the backend with the SQL database, you will first have 
 
 Set BackendV7 as startup project in the solution
 
-Open the Nuget Package Manager Console and type this:
+Open the Nuget Package Manager Console and type these commands:
+
+```
+Enable-Migrations
+```
 
 ```
 Update-Database
 ```
 
-If the package manger doesn't recognize this command, run this command:
+If the package manager doesn't recognize these command, run this command:
 
 ```
 Install-Package EntityFramework
 ```
 
-After that  you can run the 'Update-Database' Command again
+After that  you can run the 2 preceeding commands again.
 
 If all goes correct, there shouldn't be any errors and the database is filled with some business and establishments to explore!
 
