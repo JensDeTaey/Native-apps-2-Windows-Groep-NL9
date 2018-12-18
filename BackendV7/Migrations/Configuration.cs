@@ -16,8 +16,8 @@ namespace BackendV7.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
+            context.Businesses.AddRange(DummyData.Businesses);
 
-            //context.Businesses.AddRange(DummyData.Businesses);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

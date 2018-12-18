@@ -56,7 +56,8 @@ namespace BackendV7.Models.Domein
             EndDate = new DateTime(2018, 12, 11),
             PictureURL = "https://i.imgur.com/G7BsRWu.png",
             IsDiscountCoupon = false,
-            EstablishmentId = 2
+            EstablishmentId = 2,
+            Created = DateTime.Now
         };
 
         public static Event EventIkeaAntwerpen1 { get; } = new Event()
@@ -67,7 +68,8 @@ namespace BackendV7.Models.Domein
             StartDate = new DateTime(2018, 11, 11),
             EndDate = new DateTime(2018, 11, 15),
             PictureURL = "https://i.imgur.com/H7w1911.png",
-            EstablishmentId = 2
+            EstablishmentId = 2,
+            Created = DateTime.Now
         };
 
 
@@ -90,7 +92,8 @@ namespace BackendV7.Models.Domein
             EndDate = new DateTime(2018, 12, 27),
             PictureURL = "https://i.imgur.com/smt3LaH.png",
             IsDiscountCoupon = false,
-            EstablishmentId = 1
+            EstablishmentId = 1,
+            Created = DateTime.Now
         };
         public static Event EventIkeaGent1 { get; } = new Event()
         {
@@ -100,7 +103,8 @@ namespace BackendV7.Models.Domein
             StartDate = new DateTime(2018, 12, 8),
             EndDate = new DateTime(2019, 01, 05),
             PictureURL = "https://i.imgur.com/NBqqO9M.png",
-            EstablishmentId = 1
+            EstablishmentId = 1,
+            Created = DateTime.Now
         };
         public static Event EventIkeaGent2 { get; } = new Event()
         {
@@ -110,7 +114,8 @@ namespace BackendV7.Models.Domein
             StartDate = new DateTime(2018, 11, 08),
             EndDate = new DateTime(2019, 01, 21),
             PictureURL = "https://i.imgur.com/x2UaTs8.png",
-            EstablishmentId = 1
+            EstablishmentId = 1,
+            Created = DateTime.Now
         };
 
         public static List<Promotion> PromotionsIkeaGent { get; } = new List<Promotion>()
@@ -149,8 +154,7 @@ namespace BackendV7.Models.Domein
             Email = "IkeaGent@Ikea.com",
             //OpeningHours = OpeningHoursIkea,
             Promotions = PromotionsIkeaGent,
-            Events = EventsIkeaGent,
-            BusinessId = 1
+            Events = EventsIkeaGent
         };
 
         public static List<Establishment> EstablishmentsIkea { get; } = new List<Establishment>()
@@ -179,7 +183,8 @@ namespace BackendV7.Models.Domein
             EndDate = new DateTime(2018, 10, 01),
             PictureURL = "https://i.imgur.com/SF81evT.png",
             IsDiscountCoupon = false,
-            EstablishmentId = 3
+            EstablishmentId = 3,
+            Created = DateTime.Now
         };
         public static Event EventInno { get; } = new Event()
         {
@@ -189,7 +194,8 @@ namespace BackendV7.Models.Domein
             StartDate = new DateTime(2018, 12, 11),
             EndDate = new DateTime(2018, 12, 31),
             PictureURL = "https://i.imgur.com/fjnQTOE.png",
-            EstablishmentId = 3
+            EstablishmentId = 3,
+            Created = DateTime.Now
         };
         public static List<Promotion> PromotionsInno { get; } = new List<Promotion>()
         {
@@ -306,7 +312,8 @@ namespace BackendV7.Models.Domein
                 Description = "Deze week grote kortingen tot 50% op kleding!",
                 StartDate  = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,12,11),
-                IsDiscountCoupon = true
+                IsDiscountCoupon = true,
+            Created = DateTime.Now
             },
 
             new Promotion()
@@ -316,7 +323,8 @@ namespace BackendV7.Models.Domein
                 Description = "Deze week grote kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,12,11),
-                IsDiscountCoupon = false
+                IsDiscountCoupon = false,
+            Created = DateTime.Now
             },
 
             new Promotion()
@@ -326,7 +334,8 @@ namespace BackendV7.Models.Domein
                 Description = "Deze week grote kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,12,11),
-                IsDiscountCoupon = false
+                IsDiscountCoupon = false,
+            Created = DateTime.Now
             },
 
             new Promotion()
@@ -336,7 +345,8 @@ namespace BackendV7.Models.Domein
                 Description = "Deze week grote kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,12,11),
-                IsDiscountCoupon = false
+                IsDiscountCoupon = false,
+            Created = DateTime.Now
             },
 
             new Promotion()
@@ -346,7 +356,8 @@ namespace BackendV7.Models.Domein
                 Description = "Deze week 2+1 gratis op het gehele gameassortiment!!",
                 StartDate  = new DateTime(2018,12,12),
                 EndDate = new DateTime(2018,12,16),
-                IsDiscountCoupon = false
+                IsDiscountCoupon = false,
+            Created = DateTime.Now
             },
 
             new Promotion()
@@ -356,7 +367,8 @@ namespace BackendV7.Models.Domein
                 Description = "Deze week grote kortingen tot 50% op alles!",
                 StartDate  = new DateTime(2018,11,11),
                 EndDate = new DateTime(2018,12,11),
-                IsDiscountCoupon = true
+                IsDiscountCoupon = true,
+            Created = DateTime.Now
             }
 
         };
@@ -372,7 +384,8 @@ namespace BackendV7.Models.Domein
                 Name = "Opendeurdag in Inno",
                 Description = "Deze week grote Opendeurdag kortingen tot 50% op kleding!",
                 StartDate  = new DateTime(2018,11,11),
-                EndDate = new DateTime(2018,12,11)
+                EndDate = new DateTime(2018,12,11),
+            Created = DateTime.Now
             },
 
             new Event()
@@ -381,7 +394,8 @@ namespace BackendV7.Models.Domein
                 Name = "Opendeurdag in Action",
                 Description = "Deze week grote Opendeurdag met kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
-                EndDate = new DateTime(2018,12,11)
+                EndDate = new DateTime(2018,12,11),
+            Created = DateTime.Now
             },
 
             new Event()
@@ -390,7 +404,8 @@ namespace BackendV7.Models.Domein
                 Name = "Opendeurdag in GameMania",
                 Description = "Deze week grote Opendeurdag met kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
-                EndDate = new DateTime(2018,12,11)
+                EndDate = new DateTime(2018,12,11),
+            Created = DateTime.Now
             },
 
             new Event()
@@ -399,7 +414,8 @@ namespace BackendV7.Models.Domein
                 Name = "Opendeurdag in HEMA",
                 Description = "Deze week grote Opendeurdag met kortingen tot 70% op alles!",
                 StartDate  = new DateTime(2018,11,11),
-                EndDate = new DateTime(2018,12,11)
+                EndDate = new DateTime(2018,12,11),
+            Created = DateTime.Now
             },
 
             new Event()
@@ -408,7 +424,8 @@ namespace BackendV7.Models.Domein
                 Name = "Opendeurdag in Media Markt",
                 Description = "Deze week Opendeurdag 2+1 gratis op het gehele gameassortiment!!",
                 StartDate  = new DateTime(2018,12,12),
-                EndDate = new DateTime(2018,12,16)
+                EndDate = new DateTime(2018,12,16),
+            Created = DateTime.Now
             },
 
             new Event()
@@ -417,7 +434,8 @@ namespace BackendV7.Models.Domein
                 Name = "Opendeurdag in Xenos",
                 Description = "Deze week grote Opendeurdag tot 50% op alles!",
                 StartDate  = new DateTime(2018,11,11),
-                EndDate = new DateTime(2018,12,11)
+                EndDate = new DateTime(2018,12,11),
+            Created = DateTime.Now
             }
         };
 
