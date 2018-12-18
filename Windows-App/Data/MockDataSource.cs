@@ -83,7 +83,10 @@ namespace Windows_App.Data
 
         public override Task<Business> FetchMyBusiness()
         {
-            throw new NotImplementedException();
+            return Task<Business>.Factory.StartNew(() =>
+            {
+                return DummyDataSource.BusinessIkea;
+            });
         }
 
         public override Task<bool> EditBusiness(Business business)
