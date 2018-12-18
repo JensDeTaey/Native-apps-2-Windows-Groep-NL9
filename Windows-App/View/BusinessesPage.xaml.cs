@@ -47,7 +47,7 @@ namespace Windows_App.View
             Frame.Navigate(typeof(BusinessDetailPage), pageLoad, new DrillInNavigationTransitionInfo());
         }
 
-        private void ListFilterModifier_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        private void ListFilterModifier_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             businessViewModel.FilterBusinesses(args.QueryText);
         }
